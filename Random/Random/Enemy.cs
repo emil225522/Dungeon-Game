@@ -20,7 +20,7 @@ namespace Randomz
         public Animation animation;
         public Rectangle hitBox;
         public Random rnd;
-        public int hp = 40;
+        public int hp = 50;
         public bool isHurt;
         public sbyte isHurtTimer;
 
@@ -54,7 +54,15 @@ namespace Randomz
                 isHurtTimer++;
 
             velocity *= 0.3f;
-            position += velocity;
+            if (IsCollidingMovingX(tiles) == false)
+            {
+                position.X += velocity.X;
+            }
+            if (IsCollidingMovingY(tiles) == false)
+            {
+                position.Y += velocity.Y;
+            }
+
             if (isHurtTimer > 30)
             {
                 isHurtTimer = 0;
@@ -101,8 +109,6 @@ namespace Randomz
                     direction = Direction.Down;
                 }
             }
-
-           
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -124,6 +130,28 @@ namespace Randomz
                 }
             }
                 return false;
+        }
+        public bool IsCollidingMovingX(List<Tile> tiles)
+        {
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (new Rectangle((int)position.X + (int)velocity.X,(int)position.Y,texture.Width,texture.Height).Intersects(tiles[i].hitBox) && tiles[i].type > 1)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool IsCollidingMovingY(List<Tile> tiles)
+        {
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (new Rectangle((int)position.X, (int)position.Y + (int)velocity.Y, texture.Width, texture.Height).Intersects(tiles[i].hitBox) && tiles[i].type > 1)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

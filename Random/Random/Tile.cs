@@ -31,10 +31,7 @@ namespace Randomz
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (isSelected)
-             spriteBatch.Draw(texture, position, Color.Red);
-            else
-                spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, position, Color.White);
         }
     }
 }

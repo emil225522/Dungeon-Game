@@ -126,7 +126,7 @@ namespace Randomz
                 }
                 for (int i = 0; i < enemies.Count; i++)
                 {
-                    if (attackRect.Intersects(enemies[i].hitBox))
+                    if (attackRect.Intersects(enemies[i].hitBox) && enemies[i].isHurt == false)
                     {
                         enemies[i].hp -= 20;
                         enemies[i].isHurt = true;
