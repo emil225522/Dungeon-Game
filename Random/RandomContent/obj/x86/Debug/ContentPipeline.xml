@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\grass.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\grass.xnb</Output>
       <Time>2015-04-24T10:39:36+02:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\bush.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\bush.xnb</Output>
       <Time>2015-05-15T01:06:10.0670768+02:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\walls\Corner1.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner1.xnb</Output>
       <Time>2015-06-18T18:56:14.1558853+02:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\walls\Corner2.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner2.xnb</Output>
       <Time>2015-06-18T18:56:14.1748981+02:00</Time>
     </Item>
     <Item>
@@ -43,7 +43,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\walls\Corner3.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner3.xnb</Output>
       <Time>2015-06-18T18:56:14.1769014+02:00</Time>
     </Item>
     <Item>
@@ -52,7 +52,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\walls\Corner4.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner4.xnb</Output>
       <Time>2015-06-18T18:56:14.1538849+02:00</Time>
     </Item>
     <Item>
@@ -61,7 +61,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\walls\wall1.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\wall1.xnb</Output>
       <Time>2015-06-18T18:56:02.0078126+02:00</Time>
     </Item>
     <Item>
@@ -70,7 +70,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\walls\wall2.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\wall2.xnb</Output>
       <Time>2015-06-18T18:56:02.0318283+02:00</Time>
     </Item>
     <Item>
@@ -79,7 +79,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\walls\wall3.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\wall3.xnb</Output>
       <Time>2015-06-18T18:56:02.0548441+02:00</Time>
     </Item>
     <Item>
@@ -88,7 +88,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\walls\wall4.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\wall4.xnb</Output>
       <Time>2015-06-18T18:56:01.8807277+02:00</Time>
     </Item>
     <Item>
@@ -97,7 +97,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\doors\doorLeft.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\doors\doorLeft.xnb</Output>
       <Time>2015-06-18T19:15:35.4872062+02:00</Time>
     </Item>
     <Item>
@@ -106,7 +106,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\doors\doorRight.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\doors\doorRight.xnb</Output>
       <Time>2015-06-18T19:15:35.4892069+02:00</Time>
     </Item>
     <Item>
@@ -115,7 +115,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\doors\doorUp.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\doors\doorUp.xnb</Output>
       <Time>2015-06-18T19:15:35.4842044+02:00</Time>
     </Item>
     <Item>
@@ -124,17 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\doors\doorDown.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\doors\doorDown.xnb</Output>
       <Time>2015-06-18T19:15:35.4862054+02:00</Time>
-    </Item>
-    <Item>
-      <Source>font1.spritefont</Source>
-      <Name>font1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\font1.xnb</Output>
-      <Time>2015-06-17T15:59:27.942518+02:00</Time>
     </Item>
     <Item>
       <Source>floor1.png</Source>
@@ -142,7 +133,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\floor1.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\floor1.xnb</Output>
       <Time>2015-06-02T17:34:10.3478969+02:00</Time>
     </Item>
     <Item>
@@ -151,7 +142,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\enemy.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\enemy.xnb</Output>
       <Time>2015-06-17T16:24:25.382695+02:00</Time>
     </Item>
     <Item>
@@ -160,7 +151,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\hearth.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\hearth.xnb</Output>
       <Time>2015-06-19T00:16:27.4755657+02:00</Time>
     </Item>
     <Item>
@@ -169,26 +160,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\bat.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\bat.xnb</Output>
       <Time>2015-06-19T13:15:19.7896766+02:00</Time>
-    </Item>
-    <Item>
-      <Source>attackLeft.png</Source>
-      <Name>attackLeft</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackLeft.xnb</Output>
-      <Time>2015-06-20T21:39:31.4787671+02:00</Time>
-    </Item>
-    <Item>
-      <Source>linkup11.png</Source>
-      <Name>linkup11</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\linkup11.xnb</Output>
-      <Time>2015-06-19T21:34:07.4387369+02:00</Time>
     </Item>
     <Item>
       <Source>linkRight.png</Source>
@@ -196,8 +169,26 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\linkRight.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\linkRight.xnb</Output>
       <Time>2015-06-19T22:57:18.9206793+02:00</Time>
+    </Item>
+    <Item>
+      <Source>attackRight.png</Source>
+      <Name>attackRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attackRight.xnb</Output>
+      <Time>2015-06-20T20:02:24.430144+02:00</Time>
+    </Item>
+    <Item>
+      <Source>linkup11.png</Source>
+      <Name>linkup11</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\linkup11.xnb</Output>
+      <Time>2015-06-19T21:34:07.4387369+02:00</Time>
     </Item>
     <Item>
       <Source>linkLeft.png</Source>
@@ -205,7 +196,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\linkLeft.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\linkLeft.xnb</Output>
       <Time>2015-06-19T22:55:59.3549762+02:00</Time>
     </Item>
     <Item>
@@ -214,17 +205,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\linkDown.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\linkDown.xnb</Output>
       <Time>2015-06-19T21:58:13.5825294+02:00</Time>
     </Item>
     <Item>
-      <Source>attackRight.png</Source>
-      <Name>attackRight</Name>
+      <Source>attackLeft.png</Source>
+      <Name>attackLeft</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackRight.xnb</Output>
-      <Time>2015-06-20T20:02:24.430144+02:00</Time>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attackLeft.xnb</Output>
+      <Time>2015-06-20T21:39:31.4787671+02:00</Time>
     </Item>
     <Item>
       <Source>attacks.png</Source>
@@ -232,7 +223,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attacks.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attacks.xnb</Output>
       <Time>2015-06-20T16:50:40.4723148+02:00</Time>
     </Item>
     <Item>
@@ -241,7 +232,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackDown.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attackDown.xnb</Output>
       <Time>2015-06-20T20:44:16.8455926+02:00</Time>
     </Item>
     <Item>
@@ -250,8 +241,26 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackUp.xnb</Output>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attackUp.xnb</Output>
       <Time>2015-06-20T22:52:23.2492086+02:00</Time>
+    </Item>
+    <Item>
+      <Source>font1.spritefont</Source>
+      <Name>font1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\font1.xnb</Output>
+      <Time>2015-06-17T15:59:27.942518+02:00</Time>
+    </Item>
+    <Item>
+      <Source>ad.PNG</Source>
+      <Name>ad</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\ad.xnb</Output>
+      <Time>2015-06-20T23:33:10.5875439+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -259,10 +268,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Emil\Google Drive\Random\Random\RandomContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Emil\Google Drive\Random\Random\Random\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Emil\Google Drive\Random\Random\RandomContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Emil\Desktop\Random\DungeonGame\Random\RandomContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Emil\Desktop\Random\DungeonGame\Random\RandomContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

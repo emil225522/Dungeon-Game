@@ -112,16 +112,16 @@ namespace Randomz
                 switch (direction)
                 {
                     case Direction.Left:
-                        attackRect = new Rectangle((int)position.X - 30, (int)position.Y + 18, 50, 50);
+                        attackRect = new Rectangle((int)position.X - 30, (int)position.Y + 5, 50, 60);
                         break;
                     case Direction.Right:
-                        attackRect = new Rectangle((int)position.X + 30, (int)position.Y + 18, 50, 50);
+                        attackRect = new Rectangle((int)position.X + 30, (int)position.Y + 5, 50, 60);
                         break;
                     case Direction.Up:
-                        attackRect = new Rectangle((int)position.X + 25, (int)position.Y - 25, 50, 50);
+                        attackRect = new Rectangle((int)position.X +5, (int)position.Y - 10, 75, 50);
                         break;
                     case Direction.Down:
-                        attackRect = new Rectangle((int)position.X + 25, (int)position.Y + 12, 50, 50);
+                        attackRect = new Rectangle((int)position.X -20, (int)position.Y + 50, 50, 50);
                         break;
                 }
                 for (int i = 0; i < enemies.Count; i++)
@@ -148,7 +148,7 @@ namespace Randomz
             {
                 velocity = new Vector2();
                 counter++;
-                if (counter > 60)
+                if (counter > 12)
                 {
                     counter = 0;
                     attackRect = new Rectangle(0, 0, 0, 0);
@@ -252,8 +252,6 @@ namespace Randomz
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(hearthTex, attackRect, Color.Black);
-
             Color color;
             if (isHurt)
                 color = Color.Red;
