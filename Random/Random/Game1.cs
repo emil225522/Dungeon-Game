@@ -22,6 +22,7 @@ namespace Randomz
         List<Tile> tiles = new List<Tile>();
         Texture2D blackBarTex;
         Texture2D hearthTex;
+        Texture2D batTex;
         Player player;
         Camera camera;
         SpriteFont font1;
@@ -63,16 +64,14 @@ namespace Randomz
             generation.Generate(Content,tiles);
             player = new Player(new Vector2(100,300),Content);
             blackBarTex = Content.Load<Texture2D>("blackBar");
+            batTex = Content.Load<Texture2D>("enemy");
             animation = new Animation(Content, "attacks", 50, 6, true);
             hearthTex = Content.Load<Texture2D>("hearth");
-            for (int i = 0; i < 5; i++)
-            {
-                enemies.Add(new Enemy(Content.Load<Texture2D>("enemy"), new Vector2(300,200), rnd.Next(), new Animation(Content,"bat",100,2,true)));
-            }
+           
             font1 = Content.Load<SpriteFont>("font1");
 
             camera = new Camera(GraphicsDevice.Viewport, player);
-
+            EnterRoom();
             camera.transform = Matrix.CreateScale(new Vector3(1, 1, 0)) *
                 Matrix.CreateTranslation(new Vector3(000, 150, 0));
 
@@ -162,6 +161,17 @@ namespace Randomz
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+        public void EnterRoom()
+        {
+            enemies.Clear();
+            player.health = 3;
+
+            for (int i = 0; i < 5; i++)
+            {
+                enemies.Add(new Enemy(Content.Load<Texture2D>("enemy"), new Vector2(300, 200), rnd.Next(), new Animation(Content, "bat", 100, 2, true)));
+            }
+
         }
     }
 }

@@ -49,13 +49,25 @@ namespace Randomz
         public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies, Game1 game1,ContentManager Content)
         {
             if (position.X < -50)
+            {
                 position.X = 50 * 17;
-            if (position.X >  (50 * 18))
+                game1.EnterRoom();
+            }
+            if (position.X > (50 * 18))
+            {
                 position.X = -50;
+                game1.EnterRoom();
+            }
             if (position.Y < -50)
-                position.Y = 50* 11;
-            if (position.Y > 50* 12)
+            {
+                position.Y = 50 * 11;
+                game1.EnterRoom();
+            }
+            if (position.Y > 50 * 12)
+            {
                 position.Y = -50;
+                game1.EnterRoom();
+            }
             animation.PlayAnim(gameTime);
             velocity = velocity*FRICTION;
             if (Math.Abs(velocity.X) < 0.2f)
