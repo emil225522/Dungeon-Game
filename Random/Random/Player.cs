@@ -28,7 +28,6 @@ namespace Randomz
         public float health;
         public bool isHurt;
         public sbyte isHurtTimer;
-        Texture2D hearthTex;
 
         public enum Direction
         {
@@ -39,12 +38,11 @@ namespace Randomz
         };
         Direction direction;
         public sbyte state = 1;
-        public Player(Vector2 position, Texture2D hearthTex, ContentManager Content)
+        public Player(Vector2 position, ContentManager Content)
         {
             this.position = position;
             speed = 1.4f;
             direction = Direction.Down;
-            this.hearthTex = hearthTex;
             health = 3;
             animation = new Animation(Content, "linkRight", 150, 2, true);
         }
@@ -52,6 +50,12 @@ namespace Randomz
         {
             if (position.X < -50)
                 position.X = 50 * 17;
+            if (position.X >  (50 * 18))
+                position.X = -50;
+            if (position.Y < -50)
+                position.Y = 50* 11;
+            if (position.Y > 50* 12)
+                position.Y = -50;
             animation.PlayAnim(gameTime);
             velocity = velocity*FRICTION;
             if (Math.Abs(velocity.X) < 0.2f)
@@ -266,10 +270,7 @@ namespace Randomz
                 animation.Draw(spriteBatch, new Vector2(position.X - 30, position.Y - 5), color);
             else
                 animation.Draw(spriteBatch, new Vector2(position.X, position.Y), color);
-            for (int i = 0; i < health; i++)
-            {
-                spriteBatch.Draw(hearthTex, new Vector2(200*i/5 + 500, -100),Color.White);
-            }
+           
         }
         public bool IsColliding(List<Enemy> enemies)
         {

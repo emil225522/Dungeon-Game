@@ -20,6 +20,8 @@ namespace Randomz
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<Tile> tiles = new List<Tile>();
+        Texture2D blackBarTex;
+        Texture2D hearthTex;
         Player player;
         Camera camera;
         SpriteFont font1;
@@ -59,8 +61,10 @@ namespace Randomz
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Generation generation = new Generation();
             generation.Generate(Content,tiles);
-            player = new Player(new Vector2(100,300), Content.Load<Texture2D>("hearth"),Content);
+            player = new Player(new Vector2(100,300),Content);
+            blackBarTex = Content.Load<Texture2D>("blackBar");
             animation = new Animation(Content, "attacks", 50, 6, true);
+            hearthTex = Content.Load<Texture2D>("hearth");
             for (int i = 0; i < 5; i++)
             {
                 enemies.Add(new Enemy(Content.Load<Texture2D>("enemy"), new Vector2(300,200), rnd.Next(), new Animation(Content,"bat",100,2,true)));
@@ -145,8 +149,13 @@ namespace Randomz
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
             _frameCounter.Update(deltaTime);
+            spriteBatch.Draw(blackBarTex, new Vector2(0,-150), Color.White);
 
             var fps = string.Format("FPS: {0} {1}", _frameCounter.AverageFramesPerSecond, player.velocity);
+            for (int i = 0; i < player.health; i++)
+            {
+                spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 500, -100), Color.White);
+            }
 
             spriteBatch.DrawString(font1, fps, new Vector2(1,-150), Color.White);
             spriteBatch.End();
