@@ -20,16 +20,17 @@ namespace Randomz
         Random rnd = new Random();
         ContentManager Content;
 
-        public Room(int numberOfEnemies,ContentManager Content)
+        public Room(int numberOfEnemies, ContentManager Content, Dictionary<String, int>[] spawn)
         {
             this.numberOfEnemies = numberOfEnemies;
             generation.Generate(Content,tiles);
             this.Content = Content;
             for (int i = 0; i < numberOfEnemies; i++)
             {
-                enemies.Add(new Enemy(Content.Load<Texture2D>("enemy"), new Vector2(300, 200), rnd.Next(), new Animation(Content, "bat", 100, 2, true)));
+                enemies.Add(createMob("bat"));
             }
         }
+
         public void Update(GameTime gameTime,Player player)
         {
             foreach (Tile t in tiles)
@@ -38,21 +39,30 @@ namespace Randomz
             }
             foreach (Enemy e in enemies)
                 e.Update(tiles, gameTime);
-            //player.Update(gameTime, tiles, enemies, Content);
+            player.Update(gameTime, tiles, enemies, Content);
         }
+
         public void Draw(SpriteBatch spriteBatch,Player player)
         {
-            foreach (Enemy e in enemies)
-            {
-                e.Draw(spriteBatch);
-            }
-            player.Draw(spriteBatch);
             foreach (Tile t in tiles)
             {
                 t.Draw(spriteBatch);
             }
-            
+            foreach (Enemy e in enemies) {
+                e.Draw(spriteBatch);
+            }
+            player.Draw(spriteBatch);
         }
 
+        private Enemy createMob(String mob)
+        {
+            switch(mob)
+            {
+                case "bat":
+                    return new Bat(Content, rnd.Next(), new Vector2(rnd.Next(100,700), rnd.Next(100, 500)));
+                default:
+                    return null;
+            }
+        }
     }
 }

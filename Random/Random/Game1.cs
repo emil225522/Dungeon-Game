@@ -68,7 +68,7 @@ namespace Randomz
             batTex = Content.Load<Texture2D>("enemy");
             animation = new Animation(Content, "attacks", 50, 6, true);
             hearthTex = Content.Load<Texture2D>("hearth");
-            rooms.Add(new Room(10,Content));
+            rooms.Add(new Room(10, Content, null));
            
             font1 = Content.Load<SpriteFont>("font1");
 
@@ -103,7 +103,7 @@ namespace Randomz
             // TODO: Add your update logic here
             foreach (Room r in rooms)
             {
-                r.Update(gameTime,player);
+                r.Update(gameTime, player);
             }
             camera.Update(gameTime);
             base.Update(gameTime);
@@ -124,10 +124,8 @@ namespace Randomz
 
             foreach (Room r in rooms)
             {
-                r.Draw(spriteBatch,player);
+                r.Draw(spriteBatch, player);
             }
-            player.Draw(spriteBatch);
-            player.Update();
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
             _frameCounter.Update(deltaTime);
