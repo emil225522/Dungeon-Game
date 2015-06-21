@@ -81,7 +81,7 @@ namespace Randomz
         {
             for (int i = 0; i < tiles.Count; i++)
             {
-                if (getNextFrameHitBox(true).Intersects(tiles[i].hitBox) && tiles[i].type > 1)
+                if (GetNextFrameHitBox(true).Intersects(tiles[i].hitBox) && tiles[i].type > 1)
                 {
                     return true;
                 }
@@ -93,7 +93,7 @@ namespace Randomz
         {
             for (int i = 0; i < tiles.Count; i++)
             {
-                if (getNextFrameHitBox(false).Intersects(tiles[i].hitBox) && tiles[i].type > 1)
+                if (GetNextFrameHitBox(false).Intersects(tiles[i].hitBox) && tiles[i].type > 1)
                 {
                     return true;
                 }
@@ -101,7 +101,7 @@ namespace Randomz
             return false;
         }
 
-        private Rectangle getNextFrameHitBox(bool isX) 
+        private Rectangle GetNextFrameHitBox(bool isX) 
         {
             if(isX)
                 return new Rectangle((int)position.X + (int)velocity.X, (int)position.Y, animation.frameWidth, animation.frameHeight);

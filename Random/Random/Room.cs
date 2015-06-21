@@ -13,22 +13,21 @@ namespace Randomz
 {
     class Room
     {
-        int numberOfEnemies;
         Generation generation = new Generation();
         List<Tile> tiles = new List<Tile>();
         List<Enemy> enemies = new List<Enemy>();
         Random rnd = new Random();
         ContentManager Content;
 
-        public Room(int numberOfEnemies, ContentManager Content, Dictionary<String, int>[] spawn)
+        public Room(ContentManager Content, List<Tuple<String, int>> spawn)
         {
-            this.numberOfEnemies = numberOfEnemies;
             generation.Generate(Content,tiles);
             this.Content = Content;
 
-            for (int i = 0; i < numberOfEnemies; i++)
+            for(int i = 0; i < spawn.Count; i++)
             {
-                enemies.Add(createMob("bat"));
+                for (int j = 0; j < spawn[i].Item2; j++)
+                    enemies.Add(CreateMob(spawn[i].Item1));
             }
         }
 
@@ -56,7 +55,7 @@ namespace Randomz
             player.Draw(spriteBatch);
         }
 
-        private Enemy createMob(String mob)
+        private Enemy CreateMob(String mob)
         {
             switch(mob)
             {
