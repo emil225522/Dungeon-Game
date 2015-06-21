@@ -20,7 +20,9 @@ namespace Randomz
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<Room> rooms = new List<Room>();
+        List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
         Room currentRoom;
+        int currentRoomIndex;
         Texture2D blackBarTex;
         Texture2D hearthTex;
         Player player;
@@ -65,7 +67,6 @@ namespace Randomz
 
             player = new Player(new Vector2(100, 300), Content);
 
-            List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
             spawn.Add(new Tuple<string,int>("bat", 10));
 
             rooms.Add(new Room(Content, spawn));
@@ -98,6 +99,32 @@ namespace Randomz
             if (ks.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+
+            if (player.position.X < -50)
+            {
+                currentRoom = rooms[currentRoomIndex -1];
+                currentRoomIndex--;
+                player.position.X = 50 * 17;
+            }
+            if (player.position.X > (50 * 18))
+            {
+                spawn.Add(new Tuple<string, int>("bat", 1 + currentRoomIndex));
+                rooms.Add(new Room(Content, spawn));
+                spawn.Clear();
+                currentRoomIndex++;
+                currentRoom = rooms[rooms.Count - 1];
+
+                player.position.X = -50;
+            }
+            if (player.position.Y < -50)
+            {
+                player.position.Y = 50 * 11;
+            }
+            if (player.position.Y > 50 * 12)
+            {
+                player.position.Y = -50;
+            }
+
             currentRoom.Update(gameTime, player);
             camera.Update(gameTime);
             base.Update(gameTime);
@@ -119,7 +146,7 @@ namespace Randomz
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
 
-            var fps = string.Format("FPS: {0} {1}", _frameCounter.AverageFramesPerSecond, player.velocity);
+            var fps = string.Format("FPS: {0} {1} {2} ", _frameCounter.AverageFramesPerSecond, player.velocity, currentRoomIndex);
 
             currentRoom.Draw(spriteBatch,player);
             animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
