@@ -25,6 +25,7 @@ namespace Randomz
             this.numberOfEnemies = numberOfEnemies;
             generation.Generate(Content,tiles);
             this.Content = Content;
+
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 enemies.Add(new Enemy(Content.Load<Texture2D>("enemy"), new Vector2(300, 200), rnd.Next(), new Animation(Content, "bat", 100, 2, true)));
@@ -42,8 +43,6 @@ namespace Randomz
         }
         public void Draw(SpriteBatch spriteBatch,Player player)
         {
-
-
             foreach (Tile t in tiles)
             {
                 t.Draw(spriteBatch);
