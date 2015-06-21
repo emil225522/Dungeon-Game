@@ -109,7 +109,7 @@ namespace Randomz
             {
                 if (oldKs.IsKeyUp(Keys.Down))
                     animation = new Animation(Content, "linkDown", 150, 2, true);
-                velocity.Y += speed;  
+                velocity.Y += speed;
                 direction = Direction.Down;
             }
             Random rnd = new Random();

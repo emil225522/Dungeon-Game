@@ -20,6 +20,7 @@ namespace Randomz
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<Tile> tiles = new List<Tile>();
+        List<Room> rooms = new List<Room>();
         Texture2D blackBarTex;
         Texture2D hearthTex;
         Texture2D batTex;
@@ -67,6 +68,7 @@ namespace Randomz
             batTex = Content.Load<Texture2D>("enemy");
             animation = new Animation(Content, "attacks", 50, 6, true);
             hearthTex = Content.Load<Texture2D>("hearth");
+            rooms.Add(new Room(10));
            
             font1 = Content.Load<SpriteFont>("font1");
 
