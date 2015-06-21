@@ -13,6 +13,7 @@ namespace Randomz {
         public Bat(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "bat", 100, 2, true), seed, 1.5F, 50)
         {
+            direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
 
         public override void Update(List<Tile> tiles, GameTime gameTime)
