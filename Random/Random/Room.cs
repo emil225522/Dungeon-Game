@@ -25,6 +25,7 @@ namespace Randomz
             this.numberOfEnemies = numberOfEnemies;
             generation.Generate(Content,tiles);
             this.Content = Content;
+
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 enemies.Add(createMob("bat"));
@@ -45,6 +46,13 @@ namespace Randomz
         public void Draw(SpriteBatch spriteBatch,Player player)
         {
             foreach (Tile t in tiles)
+<<<<<<< HEAD
+=======
+            {
+                t.Draw(spriteBatch);
+            }
+            foreach (Enemy e in enemies)
+>>>>>>> 797a5ff0ea6bcd35c5e43cdee0d9719fb4e666e9
             {
                 t.Draw(spriteBatch);
             }
@@ -52,6 +60,7 @@ namespace Randomz
                 e.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
+<<<<<<< HEAD
         }
 
         private Enemy createMob(String mob)
@@ -63,6 +72,9 @@ namespace Randomz
                 default:
                     return null;
             }
+=======
+            
+>>>>>>> 797a5ff0ea6bcd35c5e43cdee0d9719fb4e666e9
         }
     }
 }

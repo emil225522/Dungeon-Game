@@ -43,7 +43,7 @@ namespace Randomz
             this.position = position;
             speed = 1.4f;
             direction = Direction.Down;
-            health = 3;
+            health = 7;
             animation = new Animation(Content, "linkRight", 150, 2, true);
         }
         public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content)

@@ -19,8 +19,8 @@ namespace Randomz
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Tile> tiles = new List<Tile>();
         List<Room> rooms = new List<Room>();
+        Room currentRoom;
         Texture2D blackBarTex;
         Texture2D hearthTex;
         Texture2D batTex;
@@ -62,13 +62,14 @@ namespace Randomz
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Generation generation = new Generation();
-            generation.Generate(Content,tiles);
             player = new Player(new Vector2(100,300),Content);
             blackBarTex = Content.Load<Texture2D>("blackBar");
             batTex = Content.Load<Texture2D>("enemy");
             animation = new Animation(Content, "attacks", 50, 6, true);
             hearthTex = Content.Load<Texture2D>("hearth");
-            rooms.Add(new Room(10, Content, null));
+
+            rooms.Add(new Room(10,Content));
+            currentRoom = rooms[0];
            
             font1 = Content.Load<SpriteFont>("font1");
 
@@ -101,10 +102,7 @@ namespace Randomz
             if (ks.IsKeyDown(Keys.Escape))
                 this.Exit();
             // TODO: Add your update logic here
-            foreach (Room r in rooms)
-            {
-                r.Update(gameTime, player);
-            }
+            currentRoom.Update(gameTime, player);
             camera.Update(gameTime);
             base.Update(gameTime);
         }
@@ -122,10 +120,7 @@ namespace Randomz
                    camera.transform);
             animation.PlayAnim(gameTime);
 
-            foreach (Room r in rooms)
-            {
-                r.Draw(spriteBatch, player);
-            }
+            currentRoom.Draw(spriteBatch,player);
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
             _frameCounter.Update(deltaTime);
@@ -146,7 +141,7 @@ namespace Randomz
         public void EnterRoom()
         {
             enemies.Clear();
-            player.health = 3;
+            player.health = 7;
 
            
 
