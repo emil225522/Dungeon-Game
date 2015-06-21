@@ -19,7 +19,6 @@ namespace Randomz
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Tile> tiles = new List<Tile>();
         List<Room> rooms = new List<Room>();
         Texture2D blackBarTex;
         Texture2D hearthTex;
@@ -62,7 +61,6 @@ namespace Randomz
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Generation generation = new Generation();
-            generation.Generate(Content,tiles);
             player = new Player(new Vector2(100,300),Content);
             blackBarTex = Content.Load<Texture2D>("blackBar");
             batTex = Content.Load<Texture2D>("enemy");
@@ -126,8 +124,11 @@ namespace Randomz
             {
                 r.Draw(spriteBatch,player);
             }
-            player.Draw(spriteBatch);
-            player.Update();
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                rooms[i].Draw(spriteBatch,player);
+            }
+            //player.Draw(spriteBatch);
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
             _frameCounter.Update(deltaTime);

@@ -38,19 +38,21 @@ namespace Randomz
             }
             foreach (Enemy e in enemies)
                 e.Update(tiles, gameTime);
-            //player.Update(gameTime, tiles, enemies, Content);
+            player.Update(gameTime, tiles, enemies, Content);
         }
         public void Draw(SpriteBatch spriteBatch,Player player)
         {
+
+
+            foreach (Tile t in tiles)
+            {
+                t.Draw(spriteBatch);
+            }
             foreach (Enemy e in enemies)
             {
                 e.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
-            foreach (Tile t in tiles)
-            {
-                t.Draw(spriteBatch);
-            }
             
         }
 
