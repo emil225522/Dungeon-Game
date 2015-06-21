@@ -61,7 +61,6 @@ namespace Randomz
                 width = tileNo.Count();
                 for (int x = 0; x < width; x++)
                 {
-                    //Console.WriteLine(tileNo[x]);
                     try
                     {
                         if (tileNo[x] != "" || tileNo[x] != " ")

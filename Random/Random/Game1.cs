@@ -68,7 +68,7 @@ namespace Randomz
             batTex = Content.Load<Texture2D>("enemy");
             animation = new Animation(Content, "attacks", 50, 6, true);
             hearthTex = Content.Load<Texture2D>("hearth");
-            rooms.Add(new Room(10));
+            rooms.Add(new Room(10,Content));
            
             font1 = Content.Load<SpriteFont>("font1");
 
@@ -101,13 +101,10 @@ namespace Randomz
             if (ks.IsKeyDown(Keys.Escape))
                 this.Exit();
             // TODO: Add your update logic here
-            List<Tile> addTiles = new List<Tile>();
-
-            foreach (Tile t in tiles)
-                t.Update();
-            foreach(Enemy e in enemies)
-                e.Update(tiles,gameTime);
-            player.Update(gameTime,tiles,enemies,this,Content);
+            foreach (Room r in rooms)
+            {
+                r.Update(gameTime,player);
+            }
             camera.Update(gameTime);
             base.Update(gameTime);
         }
@@ -119,34 +116,18 @@ namespace Randomz
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
             spriteBatch.Begin(SpriteSortMode.Deferred,
                    BlendState.AlphaBlend,
                    null, null, null, null,
                    camera.transform);
             animation.PlayAnim(gameTime);
 
-            foreach (Tile t in tiles)
+            foreach (Room r in rooms)
             {
-                if (t.position.X < player.position.X + 1000)
-                {
-                    if (t.position.X > player.position.X - 1000)
-                    {
-                        if (t.position.Y < player.position.Y + 1000)
-                        {
-                            if (player.position.Y - t.position.Y < 1000)
-                            {
-                                t.Draw(spriteBatch);
-                            }
-                        }
-                    }
-                }
+                r.Draw(spriteBatch,player);
             }
             player.Draw(spriteBatch);
-            foreach (Enemy e in enemies)
-            {
-                e.Draw(spriteBatch);
-            }
+            player.Update();
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
             _frameCounter.Update(deltaTime);
@@ -169,10 +150,7 @@ namespace Randomz
             enemies.Clear();
             player.health = 3;
 
-            for (int i = 0; i < 5; i++)
-            {
-                enemies.Add(new Enemy(Content.Load<Texture2D>("enemy"), new Vector2(300, 200), rnd.Next(), new Animation(Content, "bat", 100, 2, true)));
-            }
+           
 
         }
     }
