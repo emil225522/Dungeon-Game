@@ -254,15 +254,6 @@
       <Time>2015-06-17T15:59:27.942518+02:00</Time>
     </Item>
     <Item>
-      <Source>ad.PNG</Source>
-      <Name>ad</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\ad.xnb</Output>
-      <Time>2015-06-20T23:33:10.5875439+02:00</Time>
-    </Item>
-    <Item>
       <Source>skeletonEnemy.png</Source>
       <Name>skeletonEnemy</Name>
       <Importer>TextureImporter</Importer>

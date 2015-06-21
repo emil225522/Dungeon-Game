@@ -23,7 +23,11 @@ namespace Randomz
         {
             generation.Generate(Content,tiles);
             this.Content = Content;
-
+            for (int i = 0; i < tiles.Count; i++)
+			{
+                if (rnd.Next(-5,5) == 2)
+                tiles.Add(new Tile(Content.Load<Texture2D>("bush"), tiles[i].position, 1));
+			}
             for(int i = 0; i < spawn.Count; i++)
             {
                 for (int j = 0; j < spawn[i].Item2; j++)

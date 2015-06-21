@@ -218,13 +218,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ad.PNG">
-      <Name>ad</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="skeletonEnemy.png">
       <Name>skeletonEnemy</Name>
       <Importer>TextureImporter</Importer>
