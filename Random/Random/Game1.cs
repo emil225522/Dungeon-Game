@@ -146,7 +146,7 @@ namespace Randomz
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
 
-            var fps = string.Format("FPS: {0} {1} {2} ", _frameCounter.AverageFramesPerSecond, player.velocity, currentRoomIndex);
+            var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, player.velocity, currentRoomIndex);
 
             currentRoom.Draw(spriteBatch,player);
             animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
