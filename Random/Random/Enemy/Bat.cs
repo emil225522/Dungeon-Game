@@ -19,10 +19,10 @@ namespace Randomz {
         {
             base.Update(tiles, gameTime);
             velocity *= 0.3f;
-            if (IsCollidingMovingX(tiles) == false) {
+            if (!IsCollidingMovingX(tiles)) {
                 position.X += velocity.X;
             }
-            if (IsCollidingMovingY(tiles) == false) {
+            if (!IsCollidingMovingY(tiles)) {
                 position.Y += velocity.Y;
             }
 
@@ -31,12 +31,12 @@ namespace Randomz {
                 isHurt = false;
             }
             walktimer++;
-            if (walktimer > rnd.Next(50, 200) && (IsColliding(tiles) == false)) {
+            if (walktimer > rnd.Next(50, 200) && !IsColliding(tiles)) {
                 walktimer = 0;
                 direction = (Direction)values.GetValue(rnd.Next(values.Length));
             }
 
-            if (IsColliding(tiles) == false) {
+            if (!IsColliding(tiles)) {
                 if (direction == Direction.Down)
                     position.Y += speed;
                 else if (direction == Direction.Left)

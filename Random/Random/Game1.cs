@@ -23,13 +23,11 @@ namespace Randomz
         Room currentRoom;
         Texture2D blackBarTex;
         Texture2D hearthTex;
-        Texture2D batTex;
         Player player;
         Camera camera;
         SpriteFont font1;
         public FrameCounter _frameCounter = new FrameCounter();
         Random rnd = new Random();
-        List<Enemy> enemies = new List<Enemy>();
         Animation animation;
 
         public Game1()
@@ -37,7 +35,7 @@ namespace Randomz
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 50*14;
-            graphics.PreferredBackBufferWidth = 50 * 17;
+            graphics.PreferredBackBufferWidth = 50*17;
         }
 
         /// <summary>
@@ -48,7 +46,6 @@ namespace Randomz
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
 
             base.Initialize();
         }
@@ -61,24 +58,23 @@ namespace Randomz
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Generation generation = new Generation();
-            player = new Player(new Vector2(100,300),Content);
             blackBarTex = Content.Load<Texture2D>("blackBar");
-            batTex = Content.Load<Texture2D>("enemy");
-            animation = new Animation(Content, "attacks", 50, 6, true);
             hearthTex = Content.Load<Texture2D>("hearth");
-
-            rooms.Add(new Room(10, Content, null));
-            currentRoom = rooms[0];
-           
             font1 = Content.Load<SpriteFont>("font1");
+            animation = new Animation(Content, "attacks", 50, 6, true);
+
+            player = new Player(new Vector2(100, 300), Content);
+
+            List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
+            spawn.Add(new Tuple<string,int>("bat", 10));
+
+            rooms.Add(new Room(Content, spawn));
+            currentRoom = rooms[0];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
             EnterRoom();
             camera.transform = Matrix.CreateScale(new Vector3(1, 1, 0)) *
                 Matrix.CreateTranslation(new Vector3(000, 150, 0));
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -101,7 +97,7 @@ namespace Randomz
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Escape))
                 this.Exit();
-            // TODO: Add your update logic here
+
             currentRoom.Update(gameTime, player);
             camera.Update(gameTime);
             base.Update(gameTime);
@@ -118,33 +114,28 @@ namespace Randomz
                    BlendState.AlphaBlend,
                    null, null, null, null,
                    camera.transform);
-            animation.PlayAnim(gameTime);
 
-            currentRoom.Draw(spriteBatch,player);
+            animation.PlayAnim(gameTime);
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
             _frameCounter.Update(deltaTime);
-            spriteBatch.Draw(blackBarTex, new Vector2(0,-150), Color.White);
 
             var fps = string.Format("FPS: {0} {1}", _frameCounter.AverageFramesPerSecond, player.velocity);
+
+            currentRoom.Draw(spriteBatch,player);
+            animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
+            spriteBatch.Draw(blackBarTex, new Vector2(0,-150), Color.White);
+
             for (int i = 0; i < player.health; i++)
-            {
                 spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 500, -100), Color.White);
-            }
 
             spriteBatch.DrawString(font1, fps, new Vector2(1,-150), Color.White);
             spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
         public void EnterRoom()
         {
-            enemies.Clear();
             player.health = 7;
-
-           
-
         }
     }
 }
