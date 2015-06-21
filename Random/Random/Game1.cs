@@ -68,7 +68,7 @@ namespace Randomz
             animation = new Animation(Content, "attacks", 50, 6, true);
             hearthTex = Content.Load<Texture2D>("hearth");
 
-            rooms.Add(new Room(10,Content));
+            rooms.Add(new Room(10, Content, null));
             currentRoom = rooms[0];
            
             font1 = Content.Load<SpriteFont>("font1");
