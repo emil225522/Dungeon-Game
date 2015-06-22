@@ -14,7 +14,7 @@ namespace Randomz
 {
     public class Generation
     {
-        public void Generate(ContentManager Content,List<Tile> tiles)
+        public void Generate(ContentManager Content,List<Tile> tiles, string mapName)
         {
             #region textures
             Texture2D grassTexture = Content.Load<Texture2D>("grass");
@@ -39,7 +39,7 @@ namespace Randomz
             Random rnd = new Random();
 
             int[,] map;
-            string mapData = "dunmap1" + ".txt";
+            string mapData = mapName + ".txt";
             int width = 0;
             int height = File.ReadLines(mapData).Count();
 

@@ -69,7 +69,7 @@ namespace Randomz
 
             spawn.Add(new Tuple<string,int>("bat", 10));
 
-            rooms.Add(new Room(Content, spawn));
+            rooms.Add(new Room(Content, spawn,currentRoomIndex));
             currentRoom = rooms[0];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
@@ -115,11 +115,12 @@ namespace Randomz
                 }
                 catch
                 {
-                    spawn.Add(new Tuple<string, int>("bat", 1 + currentRoomIndex));
-                    rooms.Add(new Room(Content, spawn));
-                    spawn.Clear();
-                    currentRoom = rooms[currentRoomIndex + 1];
                     currentRoomIndex++;
+                    spawn.Add(new Tuple<string, int>("bat", 1 + currentRoomIndex));
+                    rooms.Add(new Room(Content, spawn,currentRoomIndex));
+                    spawn.Clear();
+                    currentRoom = rooms[currentRoomIndex];
+
                 }
                
 

@@ -19,13 +19,16 @@ namespace Randomz
         Random rnd = new Random();
         ContentManager Content;
 
-        public Room(ContentManager Content, List<Tuple<String, int>> spawn)
+        public Room(ContentManager Content, List<Tuple<String, int>> spawn, int currentRoomIndex)
         {
-            generation.Generate(Content,tiles);
+            if (currentRoomIndex == 0)
+                generation.Generate(Content, tiles, "dunmap2");
+            else
+            generation.Generate(Content,tiles, "dunmap1");
             this.Content = Content;
             for (int i = 0; i < tiles.Count; i++)
 			{
-                if (rnd.Next(-5,5) == 2)
+                if (rnd.Next(-5,5) == 2 && tiles[i].type == 1)
                 tiles.Add(new Tile(Content.Load<Texture2D>("bush"), tiles[i].position, 1));
 			}
             for(int i = 0; i < spawn.Count; i++)
