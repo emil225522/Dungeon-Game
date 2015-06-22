@@ -16,6 +16,7 @@ namespace Randomz
         Generation generation = new Generation();
         List<Tile> tiles = new List<Tile>();
         List<Enemy> enemies = new List<Enemy>();
+        List<Projectile> blubbaball = new List<Projectile>();
         Random rnd = new Random();
         ContentManager Content;
 
@@ -40,6 +41,10 @@ namespace Randomz
 
         public void Update(GameTime gameTime,Player player)
         {
+            foreach (Projectile p in blubbaball)
+            {
+                p.Update();
+            }
             foreach (Tile t in tiles)
             {
                 t.Update();
@@ -54,6 +59,10 @@ namespace Randomz
             foreach (Tile t in tiles)
             {
                 t.Draw(spriteBatch);
+            }
+            foreach (Projectile p in blubbaball)
+            {
+                p.Draw(spriteBatch);
             }
             foreach (Enemy e in enemies)
             {

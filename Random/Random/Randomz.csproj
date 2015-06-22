@@ -112,6 +112,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Enemy\Bluba.cs" />
     <Compile Include="Enemy\Enemy.cs" />
+    <Compile Include="Enemy\Projectile.cs" />
     <Compile Include="FrameCounter.cs" />
     <Compile Include="Generation.cs" />
     <Compile Include="Player.cs" />
