@@ -46,3 +46,10 @@ Temporary Items
 .apdisk
 *.exe
 *.pdb
+
+Random/RandomContent/obj/**
+Random/RandomContent/bin/**
+Random/Random/obj/**
+Random/Random/bin/**
+!Random/Random/bin/x86/Debug/*.txt
+!*/

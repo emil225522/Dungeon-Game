@@ -69,7 +69,7 @@ namespace Randomz
 
             spawn.Add(new Tuple<string,int>("bluba", 10));
 
-            rooms.Add(new Room(Content, spawn,currentRoomIndex));
+            CreateRoom(-1, 0);
             currentRoom = rooms[0];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
@@ -98,42 +98,6 @@ namespace Randomz
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Escape))
                 this.Exit();
-
-
-            if (player.position.X < -50)
-            {
-                currentRoom = rooms[currentRoomIndex -1];
-                currentRoomIndex--;
-                player.position.X = 50 * 17;
-            }
-            if (player.position.X > (50 * 18))
-            {
-                try
-                {
-                    currentRoom = rooms[currentRoomIndex + 1];
-                    currentRoomIndex++;
-                }
-                catch
-                {
-                    currentRoomIndex++;
-                    spawn.Add(new Tuple<string, int>("bat", 1 + currentRoomIndex));
-                    rooms.Add(new Room(Content, spawn,currentRoomIndex));
-                    spawn.Clear();
-                    currentRoom = rooms[currentRoomIndex];
-
-                }
-               
-
-                player.position.X = -50;
-            }
-            if (player.position.Y < -50)
-            {
-                player.position.Y = 50 * 11;
-            }
-            if (player.position.Y > 50 * 12)
-            {
-                player.position.Y = -50;
-            }
 
             currentRoom.Update(gameTime, player);
             camera.Update(gameTime);
@@ -170,9 +134,27 @@ namespace Randomz
 
             base.Draw(gameTime);
         }
+
         public void EnterRoom()
         {
             player.health = 7;
         }
+
+        public void SetCurrentRoom(int index)
+        {
+            currentRoom = rooms[index];
+        }
+
+        public int CreateRoom(int side, int index) 
+        {
+            int[] doors = { Room.NO_ROOM_CREATED, Room.NO_ROOM_CREATED, Room.NO_ROOM_CREATED, Room.NO_ROOM_CREATED };
+            if (side != -1)
+                doors[side] = index;
+            spawn.Add(new Tuple<string, int>("bat", index+1));
+            rooms.Add(new Room(this, Content, spawn, rooms.Count, doors));
+            spawn.Clear();
+            return rooms.Count-1;
+        }
+
     }
 }

@@ -25,8 +25,9 @@ Content\attackLeft.xnb
 Content\attacks.xnb
 Content\attackDown.xnb
 Content\attackUp.xnb
-Content\font1.xnb
 Content\skeletonEnemy.xnb
-Content\BlackBar.xnb
 Content\slimeEnemy.xnb
+Content\BlackBar.xnb
 Content\shootingEnemy.xnb
+Content\font1.xnb
+Content\blubaball.xnb

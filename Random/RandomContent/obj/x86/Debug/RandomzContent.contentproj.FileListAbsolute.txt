@@ -1,3 +1,0 @@
-C:\Users\Emil\Google Drive\Random\Random\RandomContent\obj\x86\Debug\RandomzContent.contentprojResolveAssemblyReference.cache
-C:\Users\emil.jonsson1\Google Drive\Random\Random\RandomContent\obj\x86\Debug\RandomzContent.contentprojResolveAssemblyReference.cache
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\RandomContent\obj\x86\Debug\RandomzContent.contentprojResolveAssemblyReference.cache
