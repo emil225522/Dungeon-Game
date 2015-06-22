@@ -19,10 +19,9 @@ namespace Randomz
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Room> rooms = new List<Room>();
+        Dictionary<Vector2, Room> rooms = new Dictionary<Vector2, Room>();
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
         Room currentRoom;
-        int currentRoomIndex;
         Texture2D blackBarTex;
         Texture2D hearthTex;
         Player player;
@@ -69,8 +68,8 @@ namespace Randomz
 
             spawn.Add(new Tuple<string,int>("bluba", 10));
 
-            CreateRoom(-1, 0);
-            currentRoom = rooms[0];
+            CreateRoom(new Vector2(0, 0));
+            currentRoom = rooms[new Vector2(0, 0)];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
             EnterRoom();
@@ -115,12 +114,11 @@ namespace Randomz
                    BlendState.AlphaBlend,
                    null, null, null, null,
                    camera.transform);
-
             animation.PlayAnim(gameTime);
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
 
-            var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, player.velocity, currentRoomIndex);
+            var fps = string.Format("FPS: {0} {1}", _frameCounter.AverageFramesPerSecond, player.velocity);
 
             currentRoom.Draw(spriteBatch,player);
             animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
@@ -140,20 +138,21 @@ namespace Randomz
             player.health = 7;
         }
 
-        public void SetCurrentRoom(int index)
+        public bool RoomExists(Vector2 pos) 
         {
-            currentRoom = rooms[index];
+            return rooms.ContainsKey(pos);
         }
 
-        public int CreateRoom(int side, int index) 
+        public void SetCurrentRoom(Vector2 position)
         {
-            int[] doors = { Room.NO_ROOM_CREATED, Room.NO_ROOM_CREATED, Room.NO_ROOM_CREATED, Room.NO_ROOM_CREATED };
-            if (side != -1)
-                doors[side] = index;
-            spawn.Add(new Tuple<string, int>("bat", index+1));
-            rooms.Add(new Room(this, Content, spawn, rooms.Count, doors));
-            spawn.Clear();
-            return rooms.Count-1;
+            currentRoom = rooms[position];
+        }
+
+        public void CreateRoom(Vector2 position) 
+        {
+            spawn.Add(new Tuple<string, int>("bat", 10));
+            rooms.Add(position, new Room(this, Content, spawn, position));
+            spawn.Clear();    
         }
 
     }
