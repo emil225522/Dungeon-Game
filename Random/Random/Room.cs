@@ -64,7 +64,7 @@ namespace Randomz
             switch(mob)
             {
                 case "bat":
-                    return new Bat(Content, rnd.Next(), new Vector2(rnd.Next(100,700), rnd.Next(100, 500)));
+                    return new Bat(Content, rnd.Next(), new Vector2(rnd.Next(100,700), rnd.Next(100, 450)));
                 default:
                     return null;
             }

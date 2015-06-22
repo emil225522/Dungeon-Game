@@ -108,11 +108,20 @@ namespace Randomz
             }
             if (player.position.X > (50 * 18))
             {
-                spawn.Add(new Tuple<string, int>("bat", 1 + currentRoomIndex));
-                rooms.Add(new Room(Content, spawn));
-                spawn.Clear();
-                currentRoomIndex++;
-                currentRoom = rooms[rooms.Count - 1];
+                try
+                {
+                    currentRoom = rooms[currentRoomIndex + 1];
+                    currentRoomIndex++;
+                }
+                catch
+                {
+                    spawn.Add(new Tuple<string, int>("bat", 1 + currentRoomIndex));
+                    rooms.Add(new Room(Content, spawn));
+                    spawn.Clear();
+                    currentRoom = rooms[currentRoomIndex + 1];
+                    currentRoomIndex++;
+                }
+               
 
                 player.position.X = -50;
             }
