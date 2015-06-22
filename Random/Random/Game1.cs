@@ -22,7 +22,6 @@ namespace Randomz
         Dictionary<Vector2, Room> rooms = new Dictionary<Vector2, Room>();
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
         Room currentRoom;
-        Vector2 currentRoomPosition;
         Texture2D blackBarTex;
         Texture2D hearthTex;
         Player player;
@@ -147,7 +146,6 @@ namespace Randomz
         public void SetCurrentRoom(Vector2 position)
         {
             currentRoom = rooms[position];
-            currentRoomPosition = position;
         }
 
         public void CreateRoom(Vector2 position) 

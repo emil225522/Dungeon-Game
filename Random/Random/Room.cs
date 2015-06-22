@@ -56,22 +56,22 @@ namespace Randomz
         public void Update(GameTime gameTime,Player player)
         {
             if (player.position.X < -50) {
-                ExistOrCreate(Doors.Left, (int)Doors.Right);
+                ExistOrCreate(Doors.Left);
                 player.position.X = 50 * 18;
             }
 
             if (player.position.X > (50 * 18)) {
-                ExistOrCreate(Doors.Right, (int)Doors.Left);
+                ExistOrCreate(Doors.Right);
                 player.position.X = -50;
             }
 
             if (player.position.Y < -50) {
-                ExistOrCreate(Doors.Down, (int)Doors.Up);
+                ExistOrCreate(Doors.Down);
                 player.position.Y = 50 * 11;
             }
 
             if (player.position.Y > 50 * 11) {
-                ExistOrCreate(Doors.Up, (int)Doors.Down);
+                ExistOrCreate(Doors.Up);
                 player.position.Y = -50;
             }
             foreach (Projectile p in blubbaball) {
@@ -116,7 +116,7 @@ namespace Randomz
             }
         }
 
-        private void ExistOrCreate(Doors side, int otherSide){
+        private void ExistOrCreate(Doors side){
             Vector2 nextRoom = new Vector2(roomPosition.X, roomPosition.Y);
             switch (side) {
                 case Doors.Down:
