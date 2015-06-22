@@ -67,7 +67,7 @@ namespace Randomz
 
             player = new Player(new Vector2(100, 300), Content);
 
-            spawn.Add(new Tuple<string,int>("bat", 10));
+            spawn.Add(new Tuple<string,int>("bluba", 10));
 
             rooms.Add(new Room(Content, spawn,currentRoomIndex));
             currentRoom = rooms[0];

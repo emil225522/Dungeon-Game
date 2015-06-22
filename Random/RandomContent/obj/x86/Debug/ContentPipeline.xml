@@ -263,15 +263,6 @@
       <Time>2015-06-21T02:19:46.8204539+02:00</Time>
     </Item>
     <Item>
-      <Source>shootEnemy.png</Source>
-      <Name>shootEnemy</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootEnemy.xnb</Output>
-      <Time>2015-06-21T03:06:51.844575+02:00</Time>
-    </Item>
-    <Item>
       <Source>BlackBar.PNG</Source>
       <Name>BlackBar</Name>
       <Importer>TextureImporter</Importer>
@@ -279,6 +270,24 @@
       <Options>None</Options>
       <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\BlackBar.xnb</Output>
       <Time>2015-06-21T14:08:22.5941228+02:00</Time>
+    </Item>
+    <Item>
+      <Source>slimeEnemy.png</Source>
+      <Name>slimeEnemy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\slimeEnemy.xnb</Output>
+      <Time>2015-06-21T03:06:51.844575+02:00</Time>
+    </Item>
+    <Item>
+      <Source>shootingEnemy.png</Source>
+      <Name>shootingEnemy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemy.xnb</Output>
+      <Time>2015-06-22T15:50:01.9307314+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

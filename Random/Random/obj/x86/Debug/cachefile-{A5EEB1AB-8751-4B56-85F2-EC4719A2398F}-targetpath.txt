@@ -27,5 +27,6 @@ Content\attackDown.xnb
 Content\attackUp.xnb
 Content\font1.xnb
 Content\skeletonEnemy.xnb
-Content\shootEnemy.xnb
 Content\BlackBar.xnb
+Content\slimeEnemy.xnb
+Content\shootingEnemy.xnb

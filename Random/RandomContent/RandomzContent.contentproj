@@ -225,8 +225,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="shootEnemy.png">
-      <Name>shootEnemy</Name>
+    <Compile Include="slimeEnemy.png">
+      <Name>slimeEnemy</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -234,6 +234,13 @@
   <ItemGroup>
     <Compile Include="BlackBar.PNG">
       <Name>BlackBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="shootingEnemy.png">
+      <Name>shootingEnemy</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

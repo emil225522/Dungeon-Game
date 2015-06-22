@@ -85,5 +85,6 @@ C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\obj\x86\Debug\Microsoft.X
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\obj\x86\Debug\Randomz.exe
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\obj\x86\Debug\Randomz.pdb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\skeletonEnemy.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootEnemy.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\BlackBar.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\slimeEnemy.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemy.xnb
