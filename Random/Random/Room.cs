@@ -13,8 +13,6 @@ namespace Randomz
 {
     class Room
     {
-        public const int NO_DOOR_IN_ROOM = -1;
-        public const int NO_ROOM_CREATED = -2;
 
         public enum Doors {
             Left,
@@ -27,21 +25,18 @@ namespace Randomz
         List<Tile> tiles = new List<Tile>();
         List<Enemy> enemies = new List<Enemy>();
         List<Projectile> blubbaball = new List<Projectile>();
-        int[] doors;
         Random rnd = new Random();
         ContentManager Content;
         Game1 game;
-        int roomIndex;
+        Vector2 roomPosition;
 
-        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, int roomIndex, int[] doors)
+        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition)
         {
             this.game = game;
             this.Content = Content;
-            this.doors = doors;
-            this.roomIndex = roomIndex;
+            this.roomPosition = roomPosition;
 
-            if (roomIndex == 0) {
-                doors[(int)Doors.Left] = NO_DOOR_IN_ROOM;
+            if (roomPosition == new Vector2(0,0)) {
                 generation.Generate(Content, tiles, "dunmap2");
             } else
                 generation.Generate(Content, tiles, "dunmap1");
@@ -61,22 +56,22 @@ namespace Randomz
         public void Update(GameTime gameTime,Player player)
         {
             if (player.position.X < -50) {
-                ExistOrCreate((int)Doors.Left, (int)Doors.Right);
+                ExistOrCreate(Doors.Left, (int)Doors.Right);
                 player.position.X = 50 * 18;
             }
 
             if (player.position.X > (50 * 18)) {
-                ExistOrCreate((int)Doors.Right, (int)Doors.Left);
+                ExistOrCreate(Doors.Right, (int)Doors.Left);
                 player.position.X = -50;
             }
 
             if (player.position.Y < -50) {
-                ExistOrCreate((int)Doors.Down, (int)Doors.Up);
+                ExistOrCreate(Doors.Down, (int)Doors.Up);
                 player.position.Y = 50 * 11;
             }
 
             if (player.position.Y > 50 * 11) {
-                ExistOrCreate((int)Doors.Up, (int)Doors.Down);
+                ExistOrCreate(Doors.Up, (int)Doors.Down);
                 player.position.Y = -50;
             }
             foreach (Projectile p in blubbaball) {
@@ -121,11 +116,26 @@ namespace Randomz
             }
         }
 
-        private void ExistOrCreate(int side, int otherSide){
-            if (doors[side] == NO_ROOM_CREATED) {
-                doors[side] = game.CreateRoom(otherSide, roomIndex);
+        private void ExistOrCreate(Doors side, int otherSide){
+            Vector2 nextRoom = new Vector2(roomPosition.X, roomPosition.Y);
+            switch (side) {
+                case Doors.Down:
+                    nextRoom.Y--;
+                    break;
+                case Doors.Up:
+                    nextRoom.Y++;
+                    break;
+                case Doors.Left:
+                    nextRoom.X--;
+                    break;
+                case Doors.Right:
+                    nextRoom.X++;
+                    break;
             }
-            game.SetCurrentRoom(doors[side]);
+
+            if (!game.RoomExists(nextRoom))
+                game.CreateRoom(nextRoom);
+            game.SetCurrentRoom(nextRoom);
         }
     }
 }
