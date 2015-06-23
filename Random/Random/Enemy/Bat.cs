@@ -16,9 +16,9 @@ namespace Randomz {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
 
-        public override void Update(List<Tile> tiles, GameTime gameTime)
+        public override void Update(List<Tile> tiles, GameTime gameTime, Room room)
         {
-            base.Update(tiles, gameTime);
+            base.Update(tiles, gameTime, room);
             velocity *= 0.3f;
             if (!IsCollidingMovingX(tiles)) {
                 position.X += velocity.X;

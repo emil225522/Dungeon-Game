@@ -23,7 +23,7 @@ namespace Randomz
         Generation generation = new Generation();
         List<Tile> tiles = new List<Tile>();
         List<Enemy> enemies = new List<Enemy>();
-        List<Projectile> blubbaball = new List<Projectile>();
+        public List<Projectile> blubaBall = new List<Projectile>();
         Random rnd = new Random();
         ContentManager Content;
         Game1 game;
@@ -35,10 +35,9 @@ namespace Randomz
             this.Content = Content;
             this.roomPosition = roomPosition;
             this.doors = doors;
-            //if (roomPosition == new Vector2(0,0)) {
-            //    generation.Generate(Content, tiles, "dunmap2");
-            //} else
+
                 generation.Generate(Content, tiles, "dunmap1");
+                #region CreateDoorOrWall
                 if (doors[0] > 0)
                     tiles.Add(new Tile(generation.doorLeft, new Vector2(0, 250), 1));
                 else
@@ -58,8 +57,9 @@ namespace Randomz
                     tiles.Add(new Tile(generation.doorDown, new Vector2(400, 500), 1));
                 else
                     tiles.Add(new Tile(generation.wallDown, new Vector2(400, 500), 3));
+                #endregion
 
-            for (int i = 0; i < tiles.Count; i++)
+                for (int i = 0; i < tiles.Count; i++)
 			{
                 if (rnd.Next(-5,5) == 2 && tiles[i].type == 1)
                 tiles.Add(new Tile(Content.Load<Texture2D>("bush"), tiles[i].position, 1));
@@ -92,7 +92,8 @@ namespace Randomz
                 ExistOrCreate(Doors.Up);
                 player.position.Y = -50;
             }
-            foreach (Projectile p in blubbaball) {
+            foreach (Projectile p in blubaBall)
+            {
                 p.Update();
             }
             foreach (Tile t in tiles)
@@ -100,7 +101,7 @@ namespace Randomz
                 t.Update();
             }
             foreach (Enemy e in enemies)
-                e.Update(tiles, gameTime);
+                e.Update(tiles, gameTime,this);
             player.Update(gameTime, tiles, enemies, Content);
         }
 
@@ -110,7 +111,7 @@ namespace Randomz
             {
                 t.Draw(spriteBatch);
             }
-            foreach (Projectile p in blubbaball)
+            foreach (Projectile p in blubaBall)
             {
                 p.Draw(spriteBatch);
             }
@@ -128,7 +129,7 @@ namespace Randomz
                 case "bat":
                     return new Bat(Content, rnd.Next(), new Vector2(rnd.Next(100,700), rnd.Next(100, 450)));
                 case "bluba":
-                    return new Bluba(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                    return new Bluba(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),Content.Load<Texture2D>("blubaball"));
                 default:
                     return null;
             }

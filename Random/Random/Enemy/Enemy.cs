@@ -46,7 +46,7 @@ namespace Randomz
             this.hp = hp;
         }
 
-        public virtual void Update(List<Tile> tiles, GameTime gameTime)
+        public virtual void Update(List<Tile> tiles, GameTime gameTime, Room room)
         {
             animation.PlayAnim(gameTime);
             hitBox = new Rectangle((int)position.X, (int)position.Y, animation.frameWidth, animation.frameHeight);

@@ -10,15 +10,17 @@ namespace Randomz
 {
     class Bluba : Enemy
     {
-        public Bluba(ContentManager Content, int seed, Vector2 position)
+        Texture2D balltexture;
+        public Bluba(ContentManager Content, int seed, Vector2 position,Texture2D balltexture)
             : base(position, new Animation(Content, "shootingEnemy", 100, 2, true), seed, 1.5F, 50)
         {
+            this.balltexture = balltexture;
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
 
-        public override void Update(List<Tile> tiles, GameTime gameTime)
+        public override void Update(List<Tile> tiles, GameTime gameTime, Room room)
         {
-            base.Update(tiles, gameTime);
+            base.Update(tiles, gameTime,room);
             velocity *= 0.3f;
             if (!IsCollidingMovingX(tiles))
             {
@@ -37,6 +39,17 @@ namespace Randomz
             walktimer++;
             if (walktimer > rnd.Next(50, 200) && !IsColliding(tiles))
             {
+                Vector2 ballVelocity = new Vector2();
+                if (direction == Direction.Down)
+                    ballVelocity = new Vector2(0, 4);
+                else if (direction == Direction.Left)
+                    ballVelocity = new Vector2(-4, 0);
+                else if (direction == Direction.Right)
+                    ballVelocity = new Vector2(4, 0);
+                else if (direction == Direction.Up)
+                    ballVelocity = new Vector2(0, -4);
+
+                room.blubaBall.Add(new Projectile(balltexture, position, ballVelocity));
                 walktimer = 0;
                 direction = (Direction)values.GetValue(rnd.Next(values.Length));
             }

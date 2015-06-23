@@ -16,21 +16,24 @@ namespace Randomz
     {
         public Vector2 velocity;
         public Vector2 position;
-        public Animation animation;
+        //public Animation animation; may be used later on
+        public Texture2D texture;
+        float rotation;
 
-        public Projectile(Animation animation, Vector2 position, Vector2 velocity)
+        public Projectile(Texture2D texture, Vector2 position, Vector2 velocity)
         {
-            this.animation = animation;
+            this.texture = texture;
             this.position = position;
             this.velocity = velocity;
         }
         public void Update()
         {
             position += velocity;
+            rotation-= 0.2f;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            animation.Draw(spriteBatch, position, Color.White);
+            spriteBatch.Draw(texture, position, null, Color.White, rotation,new Vector2(texture.Width/2,texture.Height/2), 1.0f, SpriteEffects.None, 0f);
         }
     }
 }

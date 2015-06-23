@@ -21,6 +21,7 @@ namespace Randomz
         SpriteBatch spriteBatch;
         Dictionary<Vector2, Room> rooms = new Dictionary<Vector2, Room>();
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
+        List<Projectile> blubbaball = new List<Projectile>();
         Room currentRoom;
         Texture2D blackBarTex;
         Texture2D hearthTex;
@@ -95,6 +96,10 @@ namespace Randomz
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Escape))
                 this.Exit();
+            foreach (Projectile p in blubbaball)
+            {
+                p.Update();
+            }
 
             currentRoom.Update(gameTime, player);
             camera.Update(gameTime);
