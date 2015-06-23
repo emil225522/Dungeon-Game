@@ -19,7 +19,7 @@ namespace Randomz
             Right,
             Down
         }
-
+        int[] doors;
         Generation generation = new Generation();
         List<Tile> tiles = new List<Tile>();
         List<Enemy> enemies = new List<Enemy>();
@@ -29,16 +29,35 @@ namespace Randomz
         Game1 game;
         Vector2 roomPosition;
 
-        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition)
+        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors)
         {
             this.game = game;
             this.Content = Content;
             this.roomPosition = roomPosition;
-
-            if (roomPosition == new Vector2(0,0)) {
-                generation.Generate(Content, tiles, "dunmap2");
-            } else
+            this.doors = doors;
+            //if (roomPosition == new Vector2(0,0)) {
+            //    generation.Generate(Content, tiles, "dunmap2");
+            //} else
                 generation.Generate(Content, tiles, "dunmap1");
+                if (doors[0] > 0)
+                    tiles.Add(new Tile(generation.doorLeft, new Vector2(0, 250), 1));
+                else
+                    tiles.Add(new Tile(generation.wallLeft, new Vector2(0, 250), 3));
+
+                if (doors[1] > 0)
+                    tiles.Add(new Tile(generation.doorUp, new Vector2(400, 0), 1));
+                else
+                    tiles.Add(new Tile(generation.wallUp, new Vector2(400, 0), 3));
+
+                if (doors[2] > 0)
+                    tiles.Add(new Tile(generation.doorRight, new Vector2(800, 250), 1));
+                else
+                    tiles.Add(new Tile(generation.wallRight, new Vector2(800, 250), 3));
+
+                if (doors[3] > 0)
+                    tiles.Add(new Tile(generation.doorDown, new Vector2(400, 500), 1));
+                else
+                    tiles.Add(new Tile(generation.wallDown, new Vector2(400, 500), 3));
 
             for (int i = 0; i < tiles.Count; i++)
 			{
@@ -69,7 +88,7 @@ namespace Randomz
                 player.position.Y = 50 * 11;
             }
 
-            if (player.position.Y > 50 * 11) {
+            if (player.position.Y > (50 * 11)) {
                 ExistOrCreate(Doors.Up);
                 player.position.Y = -50;
             }

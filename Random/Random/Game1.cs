@@ -145,7 +145,7 @@ namespace Randomz
         public void CreateRoom(Vector2 position) 
         {
             spawn.Add(new Tuple<string, int>("bat", 10));
-            rooms.Add(position, new Room(this, Content, spawn, position));
+            rooms.Add(position, new Room(this, Content, spawn, position, new int[4] {rnd.Next(0,3),rnd.Next(0,3),rnd.Next(0,3),rnd.Next(0,3)}));
             spawn.Clear();    
         }
 

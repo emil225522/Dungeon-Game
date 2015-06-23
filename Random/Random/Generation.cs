@@ -14,27 +14,46 @@ namespace Randomz
 {
     public class Generation
     {
+        Texture2D grassTexture;
+
+        public Texture2D wallDown;
+        public Texture2D wallUp;
+        public Texture2D wallRight; 
+        public Texture2D wallLeft;
+
+
+        public Texture2D doorDown;
+        public Texture2D doorUp;
+        public Texture2D doorRight;
+        public Texture2D doorLeft;
+        public Texture2D groundTile1;
+
+        Texture2D cornerDown; 
+        Texture2D cornerUp;
+        Texture2D cornerRight; 
+        Texture2D cornerLeft; 
+
         public void Generate(ContentManager Content,List<Tile> tiles, string mapName)
         {
             #region textures
-            Texture2D grassTexture = Content.Load<Texture2D>("grass");
+            grassTexture = Content.Load<Texture2D>("grass");
 
-            Texture2D wallDown = Content.Load<Texture2D>("walls/wall1");
-            Texture2D wallUp = Content.Load<Texture2D>("walls/wall4");
-            Texture2D wallRight = Content.Load<Texture2D>("walls/wall2");
-            Texture2D wallLeft = Content.Load<Texture2D>("walls/wall3");
+            wallDown = Content.Load<Texture2D>("walls/wall1");
+            wallUp = Content.Load<Texture2D>("walls/wall4");
+            wallRight = Content.Load<Texture2D>("walls/wall2");
+            wallLeft = Content.Load<Texture2D>("walls/wall3");
 
-            Texture2D cornerDown = Content.Load<Texture2D>("walls/corner4");
-            Texture2D cornerUp = Content.Load<Texture2D>("walls/corner1");
-            Texture2D cornerRight = Content.Load<Texture2D>("walls/corner3");
-            Texture2D cornerLeft = Content.Load<Texture2D>("walls/corner2");
+            cornerDown = Content.Load<Texture2D>("walls/corner4");
+            cornerUp = Content.Load<Texture2D>("walls/corner1");
+            cornerRight = Content.Load<Texture2D>("walls/corner3");
+            cornerLeft = Content.Load<Texture2D>("walls/corner2");
 
-            Texture2D doorDown = Content.Load<Texture2D>("doors/doorDown");
-            Texture2D doorUp = Content.Load<Texture2D>("doors/doorUp");
-            Texture2D doorRight = Content.Load<Texture2D>("doors/doorRight");
-            Texture2D doorLeft = Content.Load<Texture2D>("doors/doorLeft");
+            doorDown = Content.Load<Texture2D>("doors/doorDown");
+            doorUp = Content.Load<Texture2D>("doors/doorUp");
+            doorRight = Content.Load<Texture2D>("doors/doorRight");
+            doorLeft = Content.Load<Texture2D>("doors/doorLeft");
 
-            Texture2D groundTile1 = Content.Load<Texture2D>("floor1");
+            groundTile1 = Content.Load<Texture2D>("floor1");
             #endregion
             Random rnd = new Random();
 
