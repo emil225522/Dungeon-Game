@@ -29,7 +29,6 @@ namespace Randomz
         SpriteFont font1;
         public FrameCounter _frameCounter = new FrameCounter();
         Random rnd = new Random();
-        Animation animation;
 
         public Game1()
         {
@@ -62,7 +61,6 @@ namespace Randomz
             blackBarTex = Content.Load<Texture2D>("blackBar");
             hearthTex = Content.Load<Texture2D>("hearth");
             font1 = Content.Load<SpriteFont>("font1");
-            animation = new Animation(Content, "attacks", 50, 6, true);
 
             player = new Player(new Vector2(100, 300), Content);
 
@@ -114,14 +112,12 @@ namespace Randomz
                    BlendState.AlphaBlend,
                    null, null, null, null,
                    camera.transform);
-            animation.PlayAnim(gameTime);
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
 
             var fps = string.Format("FPS: {0} {1}", _frameCounter.AverageFramesPerSecond, player.velocity);
 
             currentRoom.Draw(spriteBatch,player);
-            animation.Draw(spriteBatch,new Vector2(200,200),Color.White);
             spriteBatch.Draw(blackBarTex, new Vector2(0,-150), Color.White);
 
             for (int i = 0; i < player.health; i++)
