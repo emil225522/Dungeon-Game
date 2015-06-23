@@ -13,7 +13,6 @@ namespace Randomz
 {
     class Room
     {
-
         public enum Doors {
             Left,
             Up,
@@ -116,9 +115,11 @@ namespace Randomz
             }
         }
 
-        private void ExistOrCreate(Doors side){
+        private void ExistOrCreate(Doors side)
+        {
             Vector2 nextRoom = new Vector2(roomPosition.X, roomPosition.Y);
-            switch (side) {
+            switch (side)
+            {
                 case Doors.Down:
                     nextRoom.Y--;
                     break;
@@ -135,6 +136,7 @@ namespace Randomz
 
             if (!game.RoomExists(nextRoom))
                 game.CreateRoom(nextRoom);
+
             game.SetCurrentRoom(nextRoom);
         }
     }

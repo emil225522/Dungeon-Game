@@ -127,3 +127,4 @@ D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Randomz.csprojR
 D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Randomz.exe
 D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Randomz.pdb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\blubaball.xnb

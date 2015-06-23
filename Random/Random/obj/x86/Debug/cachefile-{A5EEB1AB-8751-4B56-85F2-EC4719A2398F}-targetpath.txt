@@ -29,5 +29,5 @@ Content\skeletonEnemy.xnb
 Content\slimeEnemy.xnb
 Content\BlackBar.xnb
 Content\shootingEnemy.xnb
-Content\font1.xnb
 Content\blubaball.xnb
+Content\font1.xnb

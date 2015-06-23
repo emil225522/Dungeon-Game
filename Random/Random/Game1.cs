@@ -72,7 +72,7 @@ namespace Randomz
             currentRoom = rooms[new Vector2(0, 0)];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
-            EnterRoom();
+
             camera.transform = Matrix.CreateScale(new Vector3(1, 1, 0)) *
                 Matrix.CreateTranslation(new Vector3(000, 150, 0));
         }
@@ -132,12 +132,6 @@ namespace Randomz
 
             base.Draw(gameTime);
         }
-
-        public void EnterRoom()
-        {
-            player.health = 7;
-        }
-
         public bool RoomExists(Vector2 pos) 
         {
             return rooms.ContainsKey(pos);

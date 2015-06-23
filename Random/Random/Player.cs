@@ -144,7 +144,7 @@ namespace Randomz
             {
                 velocity = new Vector2();
                 counter++;
-                if (counter > 12)
+                if (counter > 15)
                 {
                     counter = 0;
                     attackRect = new Rectangle(0, 0, 0, 0);
