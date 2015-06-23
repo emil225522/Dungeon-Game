@@ -28,6 +28,7 @@ Content\attackUp.xnb
 Content\skeletonEnemy.xnb
 Content\slimeEnemy.xnb
 Content\BlackBar.xnb
-Content\shootingEnemy.xnb
 Content\blubaball.xnb
 Content\font1.xnb
+Content\shootingEnemyUp.xnb
+Content\shootingEnemyDown.xnb

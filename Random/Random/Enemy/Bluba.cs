@@ -12,7 +12,7 @@ namespace Randomz
     {
         Texture2D balltexture;
         public Bluba(ContentManager Content, int seed, Vector2 position,Texture2D balltexture)
-            : base(position, new Animation(Content, "shootingEnemy", 100, 2, true), seed, 1.5F, 50)
+            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed, 1.5F, 50)
         {
             this.balltexture = balltexture;
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
@@ -37,7 +37,7 @@ namespace Randomz
                 isHurt = false;
             }
             walktimer++;
-            if (walktimer > rnd.Next(50, 200) && !IsColliding(tiles))
+            if (walktimer > rnd.Next(200, 400) && !IsColliding(tiles))
             {
                 Vector2 ballVelocity = new Vector2();
                 if (direction == Direction.Down)

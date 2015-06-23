@@ -156,21 +156,24 @@ namespace Randomz
 
             if (!game.RoomExists(nextRoom))
             {
-                switch(side)
+                int[] doors = {0};
+                switch (side)
                 {
                     case Doors.Left:
-                game.CreateRoom(nextRoom, new int[] {rnd.Next(0,2),rnd.Next(0,2),1,rnd.Next(0,2) });
-                break;
+                        doors = new int[] { rnd.Next(0, 2), rnd.Next(0, 2), 1, rnd.Next(0, 2) };
+                        break;
                     case Doors.Up:
-                game.CreateRoom(nextRoom, new int[] { rnd.Next(0, 2), 1, rnd.Next(0, 2), rnd.Next(0,2) });
-                break;
+                        doors = new int[] { rnd.Next(0, 2), 1, rnd.Next(0, 2), rnd.Next(0, 2) };
+                        break;
                     case Doors.Right:
-                game.CreateRoom(nextRoom, new int[] { 1, rnd.Next(0, 2), rnd.Next(0,2), rnd.Next(0, 2) });
-                break;
+                        doors = new int[] { 1, rnd.Next(0, 2), rnd.Next(0, 2), rnd.Next(0, 2) };
+                        break;
                     case Doors.Down:
-                game.CreateRoom(nextRoom, new int[] { rnd.Next(0, 2), rnd.Next(0,2), rnd.Next(0,2), 1 });
-                break;
-            }
+                        doors = new int[] { rnd.Next(0, 2), rnd.Next(0, 2), rnd.Next(0, 2), 1 };
+                        break;
+
+                }
+                game.CreateRoom(nextRoom, doors);
             }
 
             game.SetCurrentRoom(nextRoom);

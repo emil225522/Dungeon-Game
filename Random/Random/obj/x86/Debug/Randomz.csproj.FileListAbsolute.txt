@@ -87,7 +87,6 @@ C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\obj\x86\Debug\Randomz.pdb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\skeletonEnemy.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\BlackBar.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\slimeEnemy.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemy.xnb
 D:\Development\C#\Repos\Dungeon-Game\Random\Random\bin\x86\Debug\Content\grass.xnb
 D:\Development\C#\Repos\Dungeon-Game\Random\Random\bin\x86\Debug\Content\bush.xnb
 D:\Development\C#\Repos\Dungeon-Game\Random\Random\bin\x86\Debug\Content\walls\Corner1.xnb
@@ -128,3 +127,5 @@ D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Microsoft.Xna.F
 D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Randomz.exe
 D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Randomz.pdb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\blubaball.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemyUp.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemyDown.xnb
