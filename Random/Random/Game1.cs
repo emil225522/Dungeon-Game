@@ -68,7 +68,7 @@ namespace Randomz
 
             spawn.Add(new Tuple<string,int>("bluba", 10));
 
-            CreateRoom(new Vector2(0, 0));
+            CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0});
             currentRoom = rooms[new Vector2(0, 0)];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
@@ -142,10 +142,10 @@ namespace Randomz
             currentRoom = rooms[position];
         }
 
-        public void CreateRoom(Vector2 position) 
+        public void CreateRoom(Vector2 position, int[] doors) 
         {
             spawn.Add(new Tuple<string, int>("bat", 10));
-            rooms.Add(position, new Room(this, Content, spawn, position, new int[4] {rnd.Next(0,3),rnd.Next(0,3),rnd.Next(0,3),rnd.Next(0,3)}));
+            rooms.Add(position, new Room(this, Content, spawn, position, doors));
             spawn.Clear();    
         }
 
