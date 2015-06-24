@@ -61,14 +61,14 @@ namespace Randomz
                 elapsed = 0;
             }
         }
-        public void Draw(SpriteBatch spriteBatch,Vector2 position, Color color, SpriteEffects spriteffects)
+        public void Draw(SpriteBatch spriteBatch,Vector2 position, Color color, float rotation)
         {
-            spriteBatch.Draw(animation, position, sourceRect, color, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(animation, position, sourceRect, color, rotation, new Vector2(frameWidth / 2, frameHeight / 2), 1f, SpriteEffects.None, 1f);
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
         {
-            spriteBatch.Draw(animation, position, sourceRect, color, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(animation, position, sourceRect, color, 0f, new Vector2(0), 1f, SpriteEffects.None, 1f);
         }
     }
 }

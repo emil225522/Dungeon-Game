@@ -96,7 +96,23 @@ namespace Randomz
                 color = Color.Red;
             else
                 color = Color.White;
-            animation.Draw(spriteBatch, position, color);
+            float rotation = 0f;
+            switch (direction)
+            {
+                case Direction.Down:
+                    rotation = (float)Math.PI;
+                    break;
+                case Direction.Left:
+                    rotation = 3*(float)Math.PI / 2;
+                    break;
+                case Direction.Right:
+                    rotation = (float)Math.PI / 2;
+                    break;
+                case Direction.Up:
+                    rotation = 0;
+                    break;
+            }
+            animation.Draw(spriteBatch, position, color, rotation);
         }
 
     }
