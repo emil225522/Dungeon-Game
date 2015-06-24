@@ -98,7 +98,7 @@ namespace Randomz
             }
             foreach (Tile t in tiles)
             {
-                t.Update();
+                t.Update();-
             }
             foreach (Enemy e in enemies)
                 e.Update(tiles, gameTime,this);
@@ -110,6 +110,15 @@ namespace Randomz
             foreach (Tile t in tiles)
             {
                 t.Draw(spriteBatch);
+            }
+            for (int i = 0; i < blubaBall.Count; i++)
+            {
+                if (blubaBall[i].hitBox.Intersects(player.hitBox))
+                {
+                    player.health--;
+                    blubaBall.RemoveAt(i);
+                    player.isHurt = true;
+                }
             }
             foreach (Projectile p in blubaBall)
             {

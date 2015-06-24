@@ -17,6 +17,7 @@ namespace Randomz
         public Vector2 velocity;
         public Vector2 position;
         //public Animation animation; may be used later on
+        public Rectangle hitBox;
         public Texture2D texture;
         float rotation;
 
@@ -28,6 +29,7 @@ namespace Randomz
         }
         public void Update()
         {
+            hitBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
             position += velocity;
             rotation-= 0.2f;
         }
