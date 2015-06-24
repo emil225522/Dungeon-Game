@@ -61,7 +61,12 @@ namespace Randomz
                 elapsed = 0;
             }
         }
-        public void Draw(SpriteBatch spriteBatch,Vector2 position, Color color)
+        public void Draw(SpriteBatch spriteBatch,Vector2 position, Color color, SpriteEffects spriteffects)
+        {
+            spriteBatch.Draw(animation, position, sourceRect, color, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
         {
             spriteBatch.Draw(animation, position, sourceRect, color, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
         }
