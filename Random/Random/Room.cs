@@ -19,7 +19,7 @@ namespace Randomz
             Right,
             Down
         }
-        int[] doors;
+        public int[] doors;
         Generation generation = new Generation();
         List<Tile> tiles = new List<Tile>();
         List<Enemy> enemies = new List<Enemy>();
@@ -73,22 +73,26 @@ namespace Randomz
 
         public void Update(GameTime gameTime,Player player)
         {
-            if (player.position.X < -50) {
+            if (player.position.X < -50) 
+            {
                 ExistOrCreate(Doors.Left);
                 player.position.X = 50 * 18;
             }
 
-            if (player.position.X > (50 * 18)) {
+            if (player.position.X > (50 * 18))
+            {
                 ExistOrCreate(Doors.Right);
                 player.position.X = -50;
             }
 
-            if (player.position.Y < -50) {
+            if (player.position.Y < -50) 
+            {
                 ExistOrCreate(Doors.Down);
                 player.position.Y = 50 * 11;
             }
 
-            if (player.position.Y > (50 * 11)) {
+            if (player.position.Y > (50 * 11)) 
+            {
                 ExistOrCreate(Doors.Up);
                 player.position.Y = -50;
             }
@@ -98,7 +102,7 @@ namespace Randomz
             }
             foreach (Tile t in tiles)
             {
-                t.Update();-
+                t.Update();
             }
             foreach (Enemy e in enemies)
                 e.Update(tiles, gameTime,this);
@@ -182,7 +186,7 @@ namespace Randomz
                         break;
 
                 }
-                game.CreateRoom(nextRoom, doors);
+                game.CreateRoom(nextRoom, doors,true);
             }
 
             game.SetCurrentRoom(nextRoom);
