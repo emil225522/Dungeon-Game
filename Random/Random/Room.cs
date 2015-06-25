@@ -39,24 +39,24 @@ namespace Randomz
                 generation.Generate(Content, tiles, "dunmap1");
                 #region CreateDoorOrWall
                 if (doors[0] > 0)
-                    tiles.Add(new Tile(generation.doorLeft, new Vector2(0, 250), 1));
+                    tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 1));
                 else
-                    tiles.Add(new Tile(generation.wallLeft, new Vector2(0, 250), 3));
+                    tiles.Add(new Tile(generation.wallLeft, new Vector2(50, 300), 3));
 
                 if (doors[1] > 0)
-                    tiles.Add(new Tile(generation.doorUp, new Vector2(400, 0), 1));
+                    tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 1));
                 else
-                    tiles.Add(new Tile(generation.wallUp, new Vector2(400, 0), 3));
+                    tiles.Add(new Tile(generation.wallUp, new Vector2(450, 50), 3));
 
                 if (doors[2] > 0)
-                    tiles.Add(new Tile(generation.doorRight, new Vector2(800, 250), 1));
+                    tiles.Add(new Tile(generation.doorRight, new Vector2(850, 300), 1));
                 else
-                    tiles.Add(new Tile(generation.wallRight, new Vector2(800, 250), 3));
+                    tiles.Add(new Tile(generation.wallRight, new Vector2(850, 300), 3));
 
                 if (doors[3] > 0)
-                    tiles.Add(new Tile(generation.doorDown, new Vector2(400, 500), 1));
+                    tiles.Add(new Tile(generation.doorDown, new Vector2(450, 550), 1));
                 else
-                    tiles.Add(new Tile(generation.wallDown, new Vector2(400, 500), 3));
+                    tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
                 #endregion
 
                 for (int i = 0; i < tiles.Count; i++)
@@ -73,7 +73,7 @@ namespace Randomz
 
         public void Update(GameTime gameTime,Player player)
         {
-            if (player.position.X < -50) 
+            if (player.position.X < 0) 
             {
                 ExistOrCreate(Doors.Left);
                 player.position.X = 50 * 18;
@@ -82,10 +82,10 @@ namespace Randomz
             if (player.position.X > (50 * 18))
             {
                 ExistOrCreate(Doors.Right);
-                player.position.X = -50;
+                player.position.X = 0;
             }
 
-            if (player.position.Y < -50) 
+            if (player.position.Y < -20) 
             {
                 ExistOrCreate(Doors.Down);
                 player.position.Y = 50 * 11;
@@ -94,7 +94,7 @@ namespace Randomz
             if (player.position.Y > (50 * 11)) 
             {
                 ExistOrCreate(Doors.Up);
-                player.position.Y = -50;
+                player.position.Y = -20;
             }
             foreach (Projectile p in blubaBall)
             {

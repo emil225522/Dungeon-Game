@@ -73,7 +73,7 @@ namespace Randomz
             camera = new Camera(GraphicsDevice.Viewport, player);
 
             camera.transform = Matrix.CreateScale(new Vector3(1, 1, 0)) *
-                Matrix.CreateTranslation(new Vector3(000, 150, 0));
+                Matrix.CreateTranslation(new Vector3(-50,100, 0));
         }
 
         /// <summary>
@@ -124,12 +124,12 @@ namespace Randomz
             var fps = string.Format("FPS: {0} {1}", _frameCounter.AverageFramesPerSecond, player.velocity);
 
             currentRoom.Draw(spriteBatch,player);
-            spriteBatch.Draw(blackBarTex, new Vector2(0,-150), Color.White);
+            spriteBatch.Draw(blackBarTex, new Vector2(50,-100), Color.White);
 
             for (int i = 0; i < player.health; i++)
-                spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 500, -100), Color.White);
+                spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 50, -50), Color.White);
 
-            spriteBatch.DrawString(font1, fps, new Vector2(1,-150), Color.White);
+            spriteBatch.DrawString(font1, fps, new Vector2(51,-100), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
