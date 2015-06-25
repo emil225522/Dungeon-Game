@@ -186,7 +186,7 @@ namespace Randomz
                         break;
 
                 }
-                game.CreateRoom(nextRoom, doors,true);
+                game.CreateRoom(nextRoom, doors);
             }
 
             game.SetCurrentRoom(nextRoom);
