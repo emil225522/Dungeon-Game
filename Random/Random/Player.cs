@@ -17,6 +17,7 @@ namespace Randomz
         public Vector2 position;
         const float FRICTION = 0.68f;
         public Vector2 velocity;
+        public int numberOfKeys;
         public Animation animation;
         public float speed;
         KeyboardState oldKs = Keyboard.GetState();
@@ -136,7 +137,11 @@ namespace Randomz
                             enemies[i].velocity.Y = 150;
                         if (enemies[i].hp < 1)
                         {
-                            drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position));
+                            int random = rnd.Next(10);
+                            if (random == 1)
+                                drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position,1));
+                            if (random == 2)
+                                drops.Add(new Drop(Content.Load<Texture2D>("key"), enemies[i].position, 2));
                             enemies.RemoveAt(i);
                         }
                     }
@@ -146,7 +151,10 @@ namespace Randomz
             {
                 if (drops[i].hitBox.Intersects(hitBox))
                 {
-                    health++;
+                    if (drops[i].type == 1)
+                        health++;
+                    else if (drops[i].type == 2)
+                        numberOfKeys++;
                     drops.RemoveAt(i);
                 }
             }

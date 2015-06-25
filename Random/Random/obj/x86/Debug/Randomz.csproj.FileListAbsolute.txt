@@ -129,3 +129,4 @@ D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Randomz.pdb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\blubaball.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemyUp.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemyDown.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\key.xnb

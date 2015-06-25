@@ -17,11 +17,13 @@ namespace Randomz
         public Texture2D texture;
         public Vector2 position;
         public Rectangle hitBox;
+        public sbyte type;
 
-        public Drop(Texture2D texture, Vector2 position)
+        public Drop(Texture2D texture, Vector2 position, sbyte type)
         {
             this.texture = texture;
             this.position = position;
+            this.type = type;
         }
         public void Update(GameTime gameTime)
         {
