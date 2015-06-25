@@ -22,6 +22,7 @@ namespace Randomz
         public int[] doors;
         Generation generation = new Generation();
         List<Tile> tiles = new List<Tile>();
+        List<Drop> drops = new List<Drop>();
         List<Enemy> enemies = new List<Enemy>();
         public List<Projectile> blubaBall = new List<Projectile>();
         Random rnd = new Random();
@@ -104,9 +105,13 @@ namespace Randomz
             {
                 t.Update();
             }
+            foreach (Drop d in drops)
+            {
+                d.Update(gameTime);
+            }
             foreach (Enemy e in enemies)
                 e.Update(tiles, gameTime,this);
-            player.Update(gameTime, tiles, enemies, Content);
+            player.Update(gameTime, tiles, enemies, Content,drops);
         }
 
         public void Draw(SpriteBatch spriteBatch,Player player)
@@ -123,6 +128,10 @@ namespace Randomz
                     blubaBall.RemoveAt(i);
                     player.isHurt = true;
                 }
+            }
+            foreach (Drop d in drops)
+            {
+                d.Draw(spriteBatch);
             }
             foreach (Projectile p in blubaBall)
             {

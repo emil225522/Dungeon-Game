@@ -11,6 +11,9 @@ namespace Randomz
     class Bluba : Enemy
     {
         Texture2D balltexture;
+        int timeBetweenAttack;
+        bool isAttacking;
+        int attackingTimer;
         public Bluba(ContentManager Content, int seed, Vector2 position,Texture2D balltexture)
             : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed, 1.5F, 50)
         {
@@ -36,56 +39,75 @@ namespace Randomz
                 isHurtTimer = 0;
                 isHurt = false;
             }
+            timeBetweenAttack++;
+            if (timeBetweenAttack > 60)
+            {
+                timeBetweenAttack = 0;
+                isAttacking = true;
+            }
+
+            if (isAttacking)
+            {
+                attackingTimer++;
+                if (attackingTimer > 30)
+                {
+                    attackingTimer = 0;
+                    isAttacking = false;
+                    Vector2 ballVelocity = new Vector2();
+                    if (direction == Direction.Down)
+                        ballVelocity = new Vector2(0, 4);
+                    else if (direction == Direction.Left)
+                        ballVelocity = new Vector2(-4, 0);
+                    else if (direction == Direction.Right)
+                        ballVelocity = new Vector2(4, 0);
+                    else if (direction == Direction.Up)
+                        ballVelocity = new Vector2(0, -4);
+
+                    room.blubaBall.Add(new Projectile(balltexture, position, ballVelocity));
+                }
+            }
             walktimer++;
             if (walktimer > rnd.Next(200, 400) && !IsColliding(tiles))
             {
-                Vector2 ballVelocity = new Vector2();
-                if (direction == Direction.Down)
-                    ballVelocity = new Vector2(0, 4);
-                else if (direction == Direction.Left)
-                    ballVelocity = new Vector2(-4, 0);
-                else if (direction == Direction.Right)
-                    ballVelocity = new Vector2(4, 0);
-                else if (direction == Direction.Up)
-                    ballVelocity = new Vector2(0, -4);
-
-                room.blubaBall.Add(new Projectile(balltexture, position, ballVelocity));
                 walktimer = 0;
                 direction = (Direction)values.GetValue(rnd.Next(values.Length));
             }
 
-            if (!IsColliding(tiles))
+            if (!isAttacking)
             {
-                if (direction == Direction.Down)
-                    position.Y += speed;
-                else if (direction == Direction.Left)
-                    position.X -= speed;
-                else if (direction == Direction.Right)
-                    position.X += speed;
-                else if (direction == Direction.Up)
-                    position.Y -= speed;
-            }
-            else
-            {
-                if (direction == Direction.Down)
+                if (!IsColliding(tiles))
                 {
-                    position.Y -= speed * 4;
-                    direction = Direction.Up;
+                    if (direction == Direction.Down)
+                        position.Y += speed;
+                    else if (direction == Direction.Left)
+                        position.X -= speed;
+                    else if (direction == Direction.Right)
+                        position.X += speed;
+                    else if (direction == Direction.Up)
+                        position.Y -= speed;
                 }
-                else if (direction == Direction.Left)
+                else
                 {
-                    position.X += speed * 4;
-                    direction = Direction.Right;
-                }
-                else if (direction == Direction.Right)
-                {
-                    position.X -= speed * 4;
-                    direction = Direction.Left;
-                }
-                else if (direction == Direction.Up)
-                {
-                    position.Y += speed * 4;
-                    direction = Direction.Down;
+                    if (direction == Direction.Down)
+                    {
+                        position.Y -= speed * 4;
+                        direction = Direction.Up;
+                    }
+                    else if (direction == Direction.Left)
+                    {
+                        position.X += speed * 4;
+                        direction = Direction.Right;
+                    }
+                    else if (direction == Direction.Right)
+                    {
+                        position.X -= speed * 4;
+                        direction = Direction.Left;
+                    }
+                    else if (direction == Direction.Up)
+                    {
+                        position.Y += speed * 4;
+                        direction = Direction.Down;
+                    }
                 }
             }
         }

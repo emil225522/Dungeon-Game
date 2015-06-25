@@ -111,6 +111,7 @@
     <Compile Include="Enemy\Bat.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Enemy\Bluba.cs" />
+    <Compile Include="Drop.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="Enemy\Projectile.cs" />
     <Compile Include="FrameCounter.cs" />

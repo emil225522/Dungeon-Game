@@ -46,7 +46,7 @@ namespace Randomz
             health = 7;
             animation = new Animation(Content, "linkRight", 150, 2, true);
         }
-        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content)
+        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, List<Drop> drops)
         {
             animation.PlayAnim(gameTime);
             velocity = velocity*FRICTION;
@@ -135,11 +135,21 @@ namespace Randomz
                         else if (direction == Direction.Down)
                             enemies[i].velocity.Y = 150;
                         if (enemies[i].hp < 1)
+                        {
+                            drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position));
                             enemies.RemoveAt(i);
+                        }
                     }
                 }
             }
-            
+            for (int i = 0; i < drops.Count; i++)
+            {
+                if (drops[i].hitBox.Intersects(hitBox))
+                {
+                    health++;
+                    drops.RemoveAt(i);
+                }
+            }
             if (isAttacking)
             {
                 velocity = new Vector2();
