@@ -65,7 +65,7 @@ namespace Randomz
 
             player = new Player(new Vector2(100, 300), Content);
 
-            spawn.Add(new Tuple<string,int>("bluba", 3));
+            spawn.Add(new Tuple<string,int>("bats", 0));
 
             CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0});
             currentRoom = rooms[new Vector2(0, 0)];
@@ -144,60 +144,34 @@ namespace Randomz
             currentRoom = rooms[position];
         }
 
+        public int[] CheckDoor(Vector2 roomPosition, int doorFrom, int doorToo, int[] doors)
+        {
+            if (rooms.ContainsKey(roomPosition))
+            {
+                Room roomNextdoor = rooms[roomPosition];
+
+                if (roomNextdoor.doors[doorFrom] == 1)
+                    doors[doorToo] = 1;
+                else
+                    doors[doorToo] = 0;
+                return doors;
+            }
+            return doors;
+        }
+
         public void CreateRoom(Vector2 position, int[] doors)
         {
-            spawn.Add(new Tuple<string, int>("bat", 10));
+           
+            if (Math.Abs((int)position.X + (int)position.Y) < 6)
+                spawn.Add(new Tuple<string, int>("bat", 2 * Math.Abs((int)position.X + (int)position.Y)));
+            else
+                spawn.Add(new Tuple<string, int>("bluba", 2 * Math.Abs((int)position.X + (int)position.Y)));
+            //create a door where needded
+            doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);
+            doors = CheckDoor(new Vector2(position.X - 1, position.Y), 2, 0, doors);
+            doors = CheckDoor(new Vector2(position.X, position.Y + 1), 1, 3, doors);
+            doors = CheckDoor(new Vector2(position.X, position.Y - 1), 3, 1, doors);
 
-            if (rooms.ContainsKey(new Vector2(position.X + 1, position.Y)))
-            {
-                Room roomRight;
-                if (rooms.TryGetValue(new Vector2(position.X + 1, position.Y), out roomRight))
-                    Console.Write("");
-
-                if (roomRight.doors[0] == 1)
-                    doors[2] = 1;
-                else
-                    doors[2] = 0;
-
-            }
-
-            if (rooms.ContainsKey(new Vector2(position.X - 1, position.Y)))
-            {
-                Room roomLeft;
-                if (rooms.TryGetValue(new Vector2(position.X - 1, position.Y), out roomLeft))
-                    Console.Write("");
-
-                if (roomLeft.doors[2] == 1)
-                    doors[0] = 1;
-                else
-                    doors[0] = 0;
-
-            }
-
-            if (rooms.ContainsKey(new Vector2(position.X, position.Y + 1)))
-            {
-                Room roomDown;
-                if (rooms.TryGetValue(new Vector2(position.X, position.Y + 1), out roomDown))
-                    Console.Write("");
-
-                if (roomDown.doors[1] == 1)
-                    doors[3] = 1;
-                else
-                    doors[3] = 0;
-
-            }
-            if (rooms.ContainsKey(new Vector2(position.X, position.Y - 1)))
-            {
-                Room roomUp;
-                if (rooms.TryGetValue(new Vector2(position.X, position.Y - 1), out roomUp))
-                    Console.Write("");
-
-                if (roomUp.doors[3] == 1)
-                    doors[1] = 1;
-                else
-                    doors[1] = 0;
-
-            }
             rooms.Add(position, new Room(this, Content, spawn, position, doors));
             spawn.Clear();
         }
