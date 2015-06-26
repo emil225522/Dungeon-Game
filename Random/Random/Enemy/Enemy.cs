@@ -60,7 +60,7 @@ namespace Randomz
             if (isHurt)
                 color = Color.Red;
             else
-                color = Color.Black;
+                color = Color.White;
             animation.Draw(spriteBatch,position, color);
             
         }

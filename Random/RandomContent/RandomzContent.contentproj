@@ -253,13 +253,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="shootingEnemyDown.png">
-      <Name>shootingEnemyDown</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="key.png">
       <Name>key</Name>
       <Importer>TextureImporter</Importer>
