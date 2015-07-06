@@ -40,7 +40,7 @@ namespace Randomz
                 isHurt = false;
             }
             timeBetweenAttack++;
-            if (timeBetweenAttack > 60)
+            if (timeBetweenAttack > rnd.Next(40,70))
             {
                 timeBetweenAttack = 0;
                 isAttacking = true;
