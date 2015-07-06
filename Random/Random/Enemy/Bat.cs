@@ -20,24 +20,7 @@ namespace Randomz
         public override void Update(List<Tile> tiles, GameTime gameTime, Room room)
         {
             base.Update(tiles, gameTime, room);
-            velocity *= 0.3f;
-            if (!IsCollidingMovingX(tiles)) {
-                position.X += velocity.X;
-            }
-            if (!IsCollidingMovingY(tiles)) {
-                position.Y += velocity.Y;
-            }
-
-            if (isHurtTimer > 30) {
-                isHurtTimer = 0;
-                isHurt = false;
-            }
-            walktimer++;
-            if (walktimer > rnd.Next(50, 200) && !IsColliding(tiles)) {
-                walktimer = 0;
-                direction = (Direction)values.GetValue(rnd.Next(values.Length));
-            }
-
+           
             if (!IsColliding(tiles)) {
                 if (direction == Direction.Down)
                     position.Y += speed;
@@ -62,6 +45,10 @@ namespace Randomz
                     direction = Direction.Down;
                 }
             }
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            animation.Draw(spriteBatch, position, Color.Black);
         }
 
     }

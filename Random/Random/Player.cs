@@ -27,6 +27,7 @@ namespace Randomz
         public Rectangle hitBox;
 
         public float health;
+        public float maxHealth;
         public bool isHurt;
         public sbyte isHurtTimer;
 
@@ -44,7 +45,8 @@ namespace Randomz
             this.position = position;
             speed = 1.4f;
             direction = Direction.Down;
-            health = 7;
+            maxHealth = 7;
+            health = maxHealth;
             animation = new Animation(Content, "linkRight", 150, 2, true);
         }
         public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, List<Drop> drops)
@@ -137,7 +139,7 @@ namespace Randomz
                             enemies[i].velocity.Y = 150;
                         if (enemies[i].hp < 1)
                         {
-                            int random = rnd.Next(10);
+                            int random = 1;
                             if (random == 1)
                                 drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position,1));
                             if (random == 2)
@@ -151,7 +153,7 @@ namespace Randomz
             {
                 if (drops[i].hitBox.Intersects(hitBox))
                 {
-                    if (drops[i].type == 1)
+                    if (drops[i].type == 1 && health < maxHealth)
                         health++;
                     else if (drops[i].type == 2)
                         numberOfKeys++;

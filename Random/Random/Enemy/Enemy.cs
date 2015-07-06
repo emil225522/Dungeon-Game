@@ -52,6 +52,30 @@ namespace Randomz
             hitBox = new Rectangle((int)position.X, (int)position.Y, animation.frameWidth, animation.frameHeight);
             if (isHurt == true)
                 isHurtTimer++;
+
+
+
+            velocity *= 0.3f;
+            if (!IsCollidingMovingX(tiles))
+            {
+                position.X += velocity.X;
+            }
+            if (!IsCollidingMovingY(tiles))
+            {
+                position.Y += velocity.Y;
+            }
+
+            if (isHurtTimer > 30)
+            {
+                isHurtTimer = 0;
+                isHurt = false;
+            }
+            walktimer++;
+            if (walktimer > rnd.Next(50, 200) && !IsColliding(tiles))
+            {
+                walktimer = 0;
+                direction = (Direction)values.GetValue(rnd.Next(values.Length));
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
