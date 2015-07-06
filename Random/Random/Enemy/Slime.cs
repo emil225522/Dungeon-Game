@@ -23,20 +23,60 @@ namespace Randomz
           {
               base.Update(tiles, gameTime, room);
               jumptimer++;
-              if (!isjumping && jumptimer > 4)
+              if (!isjumping)
               {
-                  jumptimer = 0;
                   isjumping = true;
                   ypos = position.Y;
-                  yvel--;
+                  yvel = -7;
+              }
+              if (jumptimer > 1)
+              {
+                  position.Y += yvel;
               }
               if (isjumping)
               {
                   if (position.Y < ypos)
-                      velocity.Y += 1.2f;
+                      yvel+= 0.5f;
                   else
                       isjumping = false;
               }
+
+              if (!IsColliding(tiles))
+              {
+                  if (direction == Direction.Down)
+                      position.Y += speed;
+                  else if (direction == Direction.Left)
+                      position.X -= speed;
+                  else if (direction == Direction.Right)
+                      position.X += speed;
+                  else if (direction == Direction.Up)
+                      position.Y -= speed;
+              }
+              else
+              {
+                  if (direction == Direction.Down)
+                  {
+                      position.Y -= speed * 4;
+                      direction = Direction.Up;
+                  }
+                  else if (direction == Direction.Left)
+                  {
+                      position.X += speed * 4;
+                      direction = Direction.Right;
+                  }
+                  else if (direction == Direction.Right)
+                  {
+                      position.X -= speed * 4;
+                      direction = Direction.Left;
+                  }
+                  else if (direction == Direction.Up)
+                  {
+                      position.Y += speed * 4;
+                      direction = Direction.Down;
+                  }
+              }
+
+
           }
           public override void Draw(SpriteBatch spriteBatch)
           {
