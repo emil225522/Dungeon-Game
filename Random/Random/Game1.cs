@@ -126,6 +126,8 @@ namespace Randomz
             currentRoom.Draw(spriteBatch,player);
             spriteBatch.Draw(blackBarTex, new Vector2(50,-100), Color.White);
             spriteBatch.DrawString(font1, "Keys: " + player.numberOfKeys, new Vector2(750, -100), Color.White);
+            spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
+            spriteBatch.DrawString(font1, "Level " + player.level, new Vector2(750, -20), Color.White);
             for (int i = 0; i < player.health; i++)
                 spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 50, -50), Color.White);
 

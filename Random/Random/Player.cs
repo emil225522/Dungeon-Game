@@ -31,6 +31,10 @@ namespace Randomz
         public bool isHurt;
         public sbyte isHurtTimer;
 
+        public int xp;
+        public float xpNeeded;
+        public int level;
+
         public enum Direction
         {
             Up,
@@ -47,6 +51,8 @@ namespace Randomz
             direction = Direction.Down;
             maxHealth = 7;
             health = maxHealth;
+            level = 1;
+            xpNeeded = 200;
             animation = new Animation(Content, "linkRight", 150, 2, true);
         }
         public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, List<Drop> drops)
@@ -58,7 +64,12 @@ namespace Randomz
             if (Math.Abs(velocity.Y) < 0.2f)
                 velocity.Y = 0;
 
-           
+            if (xp >= xpNeeded)
+            {
+                level++;
+                xpNeeded *= 1.4f;
+                xp = 0;
+            }
             KeyboardState ks = Keyboard.GetState();
             hitBox = new Rectangle((int)position.X + 10, (int)position.Y + 55, 37, 15);
 
@@ -139,12 +150,13 @@ namespace Randomz
                             enemies[i].velocity.Y = 150;
                         if (enemies[i].hp < 1)
                         {
-                            int random = 1;
+                            int random = rnd.Next(10);
                             if (random == 1)
                                 drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position,1));
                             if (random == 2)
                                 drops.Add(new Drop(Content.Load<Texture2D>("key"), enemies[i].position, 2));
                             enemies.RemoveAt(i);
+                            xp += rnd.Next(20, 40);
                         }
                     }
                 }
@@ -179,7 +191,7 @@ namespace Randomz
                         animation = new Animation(Content, "linkup11", 50, 2, false);
                 }
             }
-            if (IsColliding(enemies)&& isHurt == false)
+            if (IsColliding(enemies)&& isHurt == false && !EnemiesIsHurt(enemies))
             {
                 isHurt = true;
                 health--;
@@ -284,6 +296,7 @@ namespace Randomz
                 animation.Draw(spriteBatch, new Vector2(position.X, position.Y), color);
            
         }
+
         public bool IsColliding(List<Enemy> enemies)
         {
             for (int i = 0; i < enemies.Count; i++)
@@ -293,6 +306,15 @@ namespace Randomz
                     return true;
                 }
             }
+            return false;
+        }
+        public bool EnemiesIsHurt(List<Enemy> enemies)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+			{
+			    if (enemies[i].isHurt)
+                    return true;
+			}
             return false;
         }
     }

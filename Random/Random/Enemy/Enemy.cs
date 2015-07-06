@@ -55,24 +55,24 @@ namespace Randomz
 
 
 
-            velocity *= 0.3f;
-            if (!IsCollidingMovingX(tiles))
+             velocity *= 0.3f;
+            if (!IsCollidingMovingX(tiles)) 
             {
                 position.X += velocity.X;
             }
-            if (!IsCollidingMovingY(tiles))
+
+            if (!IsCollidingMovingY(tiles)) 
             {
                 position.Y += velocity.Y;
             }
 
-            if (isHurtTimer > 30)
+            if (isHurtTimer > 30) 
             {
                 isHurtTimer = 0;
                 isHurt = false;
             }
             walktimer++;
-            if (walktimer > rnd.Next(50, 200) && !IsColliding(tiles))
-            {
+            if (walktimer > rnd.Next(50, 200) && !IsColliding(tiles)) {
                 walktimer = 0;
                 direction = (Direction)values.GetValue(rnd.Next(values.Length));
             }

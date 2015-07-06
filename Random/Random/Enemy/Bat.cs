@@ -48,7 +48,12 @@ namespace Randomz
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            animation.Draw(spriteBatch, position, Color.Black);
+            Color color;
+            if (isHurt)
+                color = Color.Red;
+            else
+                color = Color.Black;
+            animation.Draw(spriteBatch, position, color);
         }
 
     }
