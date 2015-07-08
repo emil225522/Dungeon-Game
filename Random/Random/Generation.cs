@@ -99,13 +99,13 @@ namespace Randomz
 
 
                             else if (tileNo[x] == ("10"))
-                                tiles.Add(new Tile(doorLeft, new Vector2(x * 50, y * 50), 1));
+                                tiles.Add(new Tile(doorLeft, new Vector2(x * 50, y * 50), 2));
                             else if (tileNo[x] == ("13"))
-                                tiles.Add(new Tile(doorUp, new Vector2(x * 50, y * 50), 1));
+                                tiles.Add(new Tile(doorUp, new Vector2(x * 50, y * 50), 2));
                             else if (tileNo[x] == ("14"))
-                                tiles.Add(new Tile(doorDown, new Vector2(x * 50, y * 50), 1));
+                                tiles.Add(new Tile(doorDown, new Vector2(x * 50, y * 50), 2));
                             else if (tileNo[x] == ("9"))
-                                tiles.Add(new Tile(doorRight, new Vector2(x * 50, y * 50), 1));
+                                tiles.Add(new Tile(doorRight, new Vector2(x * 50, y * 50), 2));
 
 
                             else if (tileNo[x] == ("1"))

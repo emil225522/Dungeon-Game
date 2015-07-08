@@ -35,6 +35,8 @@ namespace Randomz
         public float xpNeeded;
         public int level;
 
+        int saveTick;
+
         public enum Direction
         {
             Up,
@@ -49,14 +51,42 @@ namespace Randomz
             this.position = position;
             speed = 1.4f;
             direction = Direction.Down;
-            maxHealth = 7;
-            health = maxHealth;
-            level = 1;
+            maxHealth = 5;
+            StreamReader streamReader = new StreamReader("gameinfo.txt");
+            level = int.Parse(streamReader.ReadLine());
+            xp = int.Parse(streamReader.ReadLine());
+            numberOfKeys = int.Parse(streamReader.ReadLine());
+            health = int.Parse(streamReader.ReadLine());
+            maxHealth = int.Parse(streamReader.ReadLine());
+            xpNeeded = int.Parse(streamReader.ReadLine());
+            streamReader.Close();
             xpNeeded = 200;
             animation = new Animation(Content, "linkRight", 150, 2, true);
         }
         public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, List<Drop> drops)
         {
+            saveTick++;
+            if (saveTick > 100)
+            {
+                saveTick = 0;
+                using (StreamWriter writer =
+            new StreamWriter("gameinfo.txt"))
+                {
+                    writer.Write(level);
+                    writer.WriteLine();
+                    writer.Write(xp);
+                    writer.WriteLine();
+                    writer.Write(numberOfKeys);
+                    writer.WriteLine();
+                    writer.Write(health);
+                    writer.WriteLine();
+                    writer.Write(maxHealth);
+                    writer.WriteLine();
+                    writer.Write(xpNeeded);
+                }
+
+            }
+
             animation.PlayAnim(gameTime);
             velocity = velocity*FRICTION;
             if (Math.Abs(velocity.X) < 0.2f)
@@ -108,7 +138,7 @@ namespace Randomz
             }
             Random rnd = new Random();
 
-            if (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space))
+            if (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space) && !isAttacking)
             {
                 if (direction == Direction.Right)
                 animation = new Animation(Content,"attackRight",30,3,false);
@@ -176,7 +206,7 @@ namespace Randomz
             {
                 velocity = new Vector2();
                 counter++;
-                if (counter > 15)
+                if (counter > 18)
                 {
                     counter = 0;
                     attackRect = new Rectangle(0, 0, 0, 0);
@@ -198,7 +228,7 @@ namespace Randomz
             }
             if (isHurt == true)
                 isHurtTimer++;
-            if (isHurtTimer > 120)
+            if (isHurtTimer > 100)
             {
                 isHurtTimer = 0;
                 isHurt = false;
