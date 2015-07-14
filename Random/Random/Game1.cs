@@ -161,7 +161,7 @@ namespace Randomz
             if (Math.Abs((int)position.X + (int)position.Y) < 6)
                 spawn.Add(new Tuple<string, int>("bat", 2 * Math.Abs((int)position.X + (int)position.Y)));
             else
-                spawn.Add(new Tuple<string, int>("bluba", 2 * Math.Abs((int)position.X + (int)position.Y)));
+                spawn.Add(new Tuple<string, int>("bluba", Math.Abs((int)position.X + (int)position.Y)) );
             //create a door where needded
             doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);
             doors = CheckDoor(new Vector2(position.X - 1, position.Y), 2, 0, doors);

@@ -49,7 +49,7 @@ namespace Randomz
             if (isAttacking)
             {
                 attackingTimer++;
-                if (attackingTimer > 30)
+                if (attackingTimer > 60)
                 {
                     attackingTimer = 0;
                     isAttacking = false;
