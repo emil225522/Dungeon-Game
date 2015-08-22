@@ -21,6 +21,7 @@ namespace Randomz
         List<Tile> tiles = new List<Tile>();
         List<Drop> drops = new List<Drop>();
         List<Enemy> enemies = new List<Enemy>();
+        List<Ghost> ghosts = new List<Ghost>();
         public List<Projectile> blubaBall = new List<Projectile>();
         Random rnd = new Random();
         ContentManager Content;
@@ -37,22 +38,22 @@ namespace Randomz
                 generation.Generate(Content, tiles, "dunmap1");
                 #region CreateDoorOrWall
                 if (doors[0] > 0)
-                    tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 1));
+                    tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 2));
                 else
                     tiles.Add(new Tile(generation.wallLeft, new Vector2(50, 300), 3));
 
                 if (doors[1] > 0)
-                    tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 1));
+                    tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 2));
                 else
                     tiles.Add(new Tile(generation.wallUp, new Vector2(450, 50), 3));
 
                 if (doors[2] > 0)
-                    tiles.Add(new Tile(generation.doorRight, new Vector2(850, 300), 1));
+                    tiles.Add(new Tile(generation.doorRight, new Vector2(850, 300), 2));
                 else
                     tiles.Add(new Tile(generation.wallRight, new Vector2(850, 300), 3));
 
                 if (doors[3] > 0)
-                    tiles.Add(new Tile(generation.doorDown, new Vector2(450, 550), 1));
+                    tiles.Add(new Tile(generation.doorDown, new Vector2(450, 550), 2));
                 else
                     tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
                 #endregion
@@ -60,7 +61,7 @@ namespace Randomz
                 for (int i = 0; i < tiles.Count; i++)
 			{
                 if (rnd.Next(-5,5) == 2 && tiles[i].type == 1)
-                tiles.Add(new Tile(Content.Load<Texture2D>("bush"), tiles[i].position, 1));
+                tiles.Add(new Tile(Content.Load<Texture2D>("rock"), tiles[i].position, 3));
 			}
             for(int i = 0; i < spawn.Count; i++)
             {

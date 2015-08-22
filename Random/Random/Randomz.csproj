@@ -113,6 +113,7 @@
     <Compile Include="Enemy\Bluba.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="Enemy\Enemy.cs" />
+    <Compile Include="Enemy\Ghost.cs" />
     <Compile Include="Enemy\Projectile.cs" />
     <Compile Include="Enemy\Slime.cs" />
     <Compile Include="FrameCounter.cs" />

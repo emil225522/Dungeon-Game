@@ -51,7 +51,6 @@ C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attacks.xn
 C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackDown.xnb
 C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackUp.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\grass.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\bush.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner1.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner2.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner3.xnb
@@ -129,3 +128,4 @@ D:\Development\C#\Repos\Dungeon-Game\Random\Random\obj\x86\Debug\Randomz.pdb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\blubaball.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemyUp.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\key.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\rock.xnb

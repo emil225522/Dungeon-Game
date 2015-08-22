@@ -25,6 +25,8 @@ namespace Randomz
         public Vector2 position;
         public Vector2 velocity;
         public Rectangle hitBox;
+        public int deathTimer;
+        public bool isdead = false;
         public int hp;
         public bool isHurt;
         public sbyte isHurtTimer;
@@ -52,8 +54,6 @@ namespace Randomz
             hitBox = new Rectangle((int)position.X, (int)position.Y, animation.frameWidth, animation.frameHeight);
             if (isHurt == true)
                 isHurtTimer++;
-
-
 
              velocity *= 0.3f;
             if (!IsCollidingMovingX(tiles)) 
