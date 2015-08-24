@@ -24,89 +24,92 @@ namespace Randomz
         public override void Update(List<Tile> tiles, GameTime gameTime, Room room)
         {
             base.Update(tiles, gameTime,room);
-            velocity *= 0.3f;
-            if (!IsCollidingMovingX(tiles))
+            if (!isdead)
             {
-                position.X += velocity.X;
-            }
-            if (!IsCollidingMovingY(tiles))
-            {
-                position.Y += velocity.Y;
-            }
-
-            if (isHurtTimer > 30)
-            {
-                isHurtTimer = 0;
-                isHurt = false;
-            }
-            timeBetweenAttack++;
-            if (timeBetweenAttack > rnd.Next(40,70))
-            {
-                timeBetweenAttack = 0;
-                isAttacking = true;
-            }
-
-            if (isAttacking)
-            {
-                attackingTimer++;
-                if (attackingTimer > 60)
+                velocity *= 0.3f;
+                if (!IsCollidingMovingX(tiles))
                 {
-                    attackingTimer = 0;
-                    isAttacking = false;
-                    Vector2 ballVelocity = new Vector2();
-                    if (direction == Direction.Down)
-                        ballVelocity = new Vector2(0, 4);
-                    else if (direction == Direction.Left)
-                        ballVelocity = new Vector2(-4, 0);
-                    else if (direction == Direction.Right)
-                        ballVelocity = new Vector2(4, 0);
-                    else if (direction == Direction.Up)
-                        ballVelocity = new Vector2(0, -4);
-
-                    room.blubaBall.Add(new Projectile(balltexture, position, ballVelocity));
+                    position.X += velocity.X;
                 }
-            }
-            walktimer++;
-            if (walktimer > rnd.Next(200, 400) && !IsColliding(tiles))
-            {
-                walktimer = 0;
-                direction = (Direction)values.GetValue(rnd.Next(values.Length));
-            }
-
-            if (!isAttacking)
-            {
-                if (!IsColliding(tiles))
+                if (!IsCollidingMovingY(tiles))
                 {
-                    if (direction == Direction.Down)
-                        position.Y += speed;
-                    else if (direction == Direction.Left)
-                        position.X -= speed;
-                    else if (direction == Direction.Right)
-                        position.X += speed;
-                    else if (direction == Direction.Up)
-                        position.Y -= speed;
+                    position.Y += velocity.Y;
                 }
-                else
+
+                if (isHurtTimer > 30)
                 {
-                    if (direction == Direction.Down)
+                    isHurtTimer = 0;
+                    isHurt = false;
+                }
+                timeBetweenAttack++;
+                if (timeBetweenAttack > rnd.Next(40, 70))
+                {
+                    timeBetweenAttack = 0;
+                    isAttacking = true;
+                }
+
+                if (isAttacking)
+                {
+                    attackingTimer++;
+                    if (attackingTimer > 60)
                     {
-                        position.Y -= speed * 4;
-                        direction = Direction.Up;
+                        attackingTimer = 0;
+                        isAttacking = false;
+                        Vector2 ballVelocity = new Vector2();
+                        if (direction == Direction.Down)
+                            ballVelocity = new Vector2(0, 4);
+                        else if (direction == Direction.Left)
+                            ballVelocity = new Vector2(-4, 0);
+                        else if (direction == Direction.Right)
+                            ballVelocity = new Vector2(4, 0);
+                        else if (direction == Direction.Up)
+                            ballVelocity = new Vector2(0, -4);
+
+                        room.blubaBall.Add(new Projectile(balltexture, position, ballVelocity));
                     }
-                    else if (direction == Direction.Left)
+                }
+                walktimer++;
+                if (walktimer > rnd.Next(200, 400) && !IsColliding(tiles))
+                {
+                    walktimer = 0;
+                    direction = (Direction)values.GetValue(rnd.Next(values.Length));
+                }
+
+                if (!isAttacking)
+                {
+                    if (!IsColliding(tiles))
                     {
-                        position.X += speed * 4;
-                        direction = Direction.Right;
+                        if (direction == Direction.Down)
+                            position.Y += speed;
+                        else if (direction == Direction.Left)
+                            position.X -= speed;
+                        else if (direction == Direction.Right)
+                            position.X += speed;
+                        else if (direction == Direction.Up)
+                            position.Y -= speed;
                     }
-                    else if (direction == Direction.Right)
+                    else
                     {
-                        position.X -= speed * 4;
-                        direction = Direction.Left;
-                    }
-                    else if (direction == Direction.Up)
-                    {
-                        position.Y += speed * 4;
-                        direction = Direction.Down;
+                        if (direction == Direction.Down)
+                        {
+                            position.Y -= speed * 4;
+                            direction = Direction.Up;
+                        }
+                        else if (direction == Direction.Left)
+                        {
+                            position.X += speed * 4;
+                            direction = Direction.Right;
+                        }
+                        else if (direction == Direction.Right)
+                        {
+                            position.X -= speed * 4;
+                            direction = Direction.Left;
+                        }
+                        else if (direction == Direction.Up)
+                        {
+                            position.Y += speed * 4;
+                            direction = Direction.Down;
+                        }
                     }
                 }
             }

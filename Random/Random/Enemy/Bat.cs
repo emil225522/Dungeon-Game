@@ -20,7 +20,6 @@ namespace Randomz
         public override void Update(List<Tile> tiles, GameTime gameTime, Room room)
         {
             base.Update(tiles, gameTime, room);
-           
             if (!IsColliding(tiles)) {
                 if (direction == Direction.Down)
                     position.Y += speed;
@@ -30,7 +29,9 @@ namespace Randomz
                     position.X += speed;
                 else if (direction == Direction.Up)
                     position.Y -= speed;
-            } else {
+            }
+            else 
+            {
                 if (direction == Direction.Down) {
                     position.Y -= speed * 4;
                     direction = Direction.Up;

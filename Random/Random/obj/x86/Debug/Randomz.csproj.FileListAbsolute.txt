@@ -129,3 +129,4 @@ C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\blu
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\shootingEnemyUp.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\key.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\rock.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\ghost.xnb

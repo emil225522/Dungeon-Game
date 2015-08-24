@@ -25,9 +25,16 @@ namespace Randomz
               jumptimer++;
               if (!isjumping)
               {
-                  isjumping = true;
-                  ypos = position.Y;
-                  yvel = -7;
+                  if (rnd.Next(100) == 5)
+                  {
+                      isjumping = true;
+                      ypos = position.Y;
+                      yvel = -7;
+                  }
+                  else
+                  {
+                      yvel = 0; 
+                  }
               }
               if (jumptimer > 1)
               {
@@ -40,39 +47,42 @@ namespace Randomz
                   else
                       isjumping = false;
               }
+              if (isjumping == false)
+              {
 
-              if (!IsColliding(tiles))
-              {
-                  if (direction == Direction.Down)
-                      position.Y += speed;
-                  else if (direction == Direction.Left)
-                      position.X -= speed;
-                  else if (direction == Direction.Right)
-                      position.X += speed;
-                  else if (direction == Direction.Up)
-                      position.Y -= speed;
-              }
-              else
-              {
-                  if (direction == Direction.Down)
+                  if (!IsColliding(tiles))
                   {
-                      position.Y -= speed * 4;
-                      direction = Direction.Up;
+                      if (direction == Direction.Down)
+                          position.Y += speed;
+                      else if (direction == Direction.Left)
+                          position.X -= speed;
+                      else if (direction == Direction.Right)
+                          position.X += speed;
+                      else if (direction == Direction.Up)
+                          position.Y -= speed;
                   }
-                  else if (direction == Direction.Left)
+                  else
                   {
-                      position.X += speed * 4;
-                      direction = Direction.Right;
-                  }
-                  else if (direction == Direction.Right)
-                  {
-                      position.X -= speed * 4;
-                      direction = Direction.Left;
-                  }
-                  else if (direction == Direction.Up)
-                  {
-                      position.Y += speed * 4;
-                      direction = Direction.Down;
+                      if (direction == Direction.Down)
+                      {
+                          position.Y -= speed * 4;
+                          direction = Direction.Up;
+                      }
+                      else if (direction == Direction.Left)
+                      {
+                          position.X += speed * 4;
+                          direction = Direction.Right;
+                      }
+                      else if (direction == Direction.Right)
+                      {
+                          position.X -= speed * 4;
+                          direction = Direction.Left;
+                      }
+                      else if (direction == Direction.Up)
+                      {
+                          position.Y += speed * 4;
+                          direction = Direction.Down;
+                      }
                   }
               }
 

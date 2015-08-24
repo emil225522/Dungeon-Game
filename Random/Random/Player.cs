@@ -185,7 +185,7 @@ namespace Randomz
                                 drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position,1));
                             if (random == 2)
                                 drops.Add(new Drop(Content.Load<Texture2D>("key"), enemies[i].position, 2));
-                            enemies.RemoveAt(i);
+                            enemies[i].isdead = true;
                             xp += rnd.Next(20, 40);
                         }
                     }

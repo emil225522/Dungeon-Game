@@ -16,14 +16,22 @@ namespace Randomz
     {
         Animation animation;
         Vector2 position;
+        int deathtimer;
+        public bool isdead;
         public Ghost(Animation animation, Vector2 position)
         {
             this.position = position;
             this.animation = animation;
+
         }
         public void Update(GameTime gameTime)
         {
             animation.PlayAnim(gameTime);
+            deathtimer++;
+            if (deathtimer > 10)
+            {
+                isdead = true;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {

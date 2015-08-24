@@ -95,6 +95,23 @@ namespace Randomz
                 ExistOrCreate(Doors.Up);
                 player.position.Y = -20;
             }
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].isdead)
+                {
+                    ghosts.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), enemies[i].position));
+                    enemies.RemoveAt(i);
+                }
+            }
+            for (int i = 0; i < ghosts.Count; i++)
+            {
+                if (ghosts[i].isdead)
+                    ghosts.RemoveAt(i);
+            }
+            foreach (Ghost g in ghosts)
+            {
+                g.Update(gameTime);
+            }
             foreach (Projectile p in blubaBall)
             {
                 p.Update();
@@ -107,12 +124,14 @@ namespace Randomz
             {
                 d.Update(gameTime);
             }
-            foreach (Enemy e in enemies)
-                e.Update(tiles, gameTime,this);
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].Update(tiles, gameTime, this);
+            }
             player.Update(gameTime, tiles, enemies, Content,drops);
         }
 
-        public void Draw(SpriteBatch spriteBatch,Player player)
+        public void Draw(SpriteBatch spriteBatch,Player player,GameTime gameTime)
         {
             foreach (Tile t in tiles)
             {
@@ -126,6 +145,10 @@ namespace Randomz
                     blubaBall.RemoveAt(i);
                     player.isHurt = true;
                 }
+            }
+            foreach (Ghost g in ghosts)
+            {
+                g.Draw(spriteBatch);
             }
             foreach (Drop d in drops)
             {
