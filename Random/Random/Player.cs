@@ -22,14 +22,14 @@ namespace Randomz
         public float speed;
         KeyboardState oldKs = Keyboard.GetState();
         public bool isAttacking;
-        int counter;
+        private int counter;
         public Rectangle attackRect;
         public Rectangle hitBox;
 
         public float health;
         public float maxHealth;
         public bool isHurt;
-        public sbyte isHurtTimer;
+        private sbyte isHurtTimer;
 
         public int xp;
         public float xpNeeded;
@@ -62,6 +62,15 @@ namespace Randomz
             streamReader.Close();
             xpNeeded = 200;
             animation = new Animation(Content, "linkRight", 150, 2, true);
+
+            animation = new Animation(Content, "linkLeft", 150, 2, true);
+
+            animation = new Animation(Content, "linkRight", 150, 2, true);
+
+            animation = new Animation(Content, "linkup11", 150, 2, true);
+
+            animation = new Animation(Content, "linkDown", 150, 2, true);
+
         }
         public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, List<Drop> drops)
         {
@@ -84,7 +93,6 @@ namespace Randomz
                     writer.WriteLine();
                     writer.Write(xpNeeded);
                 }
-
             }
 
             animation.PlayAnim(gameTime);
