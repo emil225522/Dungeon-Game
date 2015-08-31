@@ -16,6 +16,7 @@ namespace Randomz
         public Texture2D texture;
         public Vector2 position;
         public Rectangle hitBox;
+        public bool isDeleted;
         public sbyte type;
         public bool isSelected;
         public Tile(Texture2D texture, Vector2 position, sbyte type)
@@ -25,11 +26,11 @@ namespace Randomz
             this.type = type;
             hitBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
-        public void Update()
+        public virtual void Update(GameTime gameTime,Player player)
         {
             hitBox = new Rectangle((int)position.X,(int)position.Y,texture.Width,texture.Height);
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);
         }

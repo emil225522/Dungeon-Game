@@ -113,12 +113,15 @@
     <Compile Include="Enemy\Bluba.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="Bomb.cs" />
+    <Compile Include="Enemy\BlubaTower.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="Enemy\Ghost.cs" />
     <Compile Include="Enemy\Projectile.cs" />
     <Compile Include="Enemy\Slime.cs" />
+    <Compile Include="Explosion.cs" />
     <Compile Include="FrameCounter.cs" />
     <Compile Include="Generation.cs" />
+    <Compile Include="LockedDoor.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

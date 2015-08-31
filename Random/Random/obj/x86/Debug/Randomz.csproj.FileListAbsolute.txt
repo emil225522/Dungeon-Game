@@ -50,7 +50,6 @@ C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackRigh
 C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attacks.xnb
 C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackDown.xnb
 C:\Users\Emil\Google Drive\Random\Random\Random\bin\x86\Debug\Content\attackUp.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\grass.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner1.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner2.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\walls\Corner3.xnb
@@ -64,18 +63,8 @@ C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\doo
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\doors\doorUp.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\doors\doorDown.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\floor1.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\enemy.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\hearth.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\bat.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\linkRight.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attackRight.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\linkup11.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\linkLeft.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\linkDown.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attackLeft.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attacks.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attackDown.xnb
-C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\attackUp.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\font1.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Randomz.exe
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Randomz.pdb
@@ -130,3 +119,18 @@ C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\sho
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\key.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\rock.xnb
 C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\ghost.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\attackDown.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\attackUp.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\attackleft.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\attackright.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\runRight.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\runLeft.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\runUp.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\runDown.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\bomb.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\explosion.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\bombDrop.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\player\runDown - Copy.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\tower.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\towerUnder.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\Random\Random\bin\x86\Debug\Content\LockedDoorRight.xnb
