@@ -14,7 +14,6 @@ namespace Randomz
 {
     public class Generation
     {
-        Texture2D grassTexture;
 
         public Texture2D wallDown;
         public Texture2D wallUp;
@@ -36,8 +35,6 @@ namespace Randomz
         public void Generate(ContentManager Content,List<Tile> tiles, string mapName)
         {
             #region textures
-            grassTexture = Content.Load<Texture2D>("grass");
-
             wallDown = Content.Load<Texture2D>("walls/wall1");
             wallUp = Content.Load<Texture2D>("walls/wall4");
             wallRight = Content.Load<Texture2D>("walls/wall2");

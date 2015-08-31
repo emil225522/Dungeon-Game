@@ -15,13 +15,13 @@ namespace Randomz
         float yvel;
         bool isjumping;
           public Slime(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "slimeEnemy", 100, 2, true), seed, 1.5F, 50)
+            : base(position, new Animation(Content, "slimeEnemy", 100, 2, true), seed, 1.5F, 50,1)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
-          public override void Update(List<Tile> tiles, GameTime gameTime, Room room)
+          public override void Update(List<Tile> tiles, GameTime gameTime, Room room,Player player)
           {
-              base.Update(tiles, gameTime, room);
+              base.Update(tiles, gameTime, room,player);
               jumptimer++;
               if (!isjumping)
               {
