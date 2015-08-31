@@ -14,16 +14,16 @@ namespace Randomz
         int timeBetweenAttack;
         bool isAttacking;
         int attackingTimer;
-        public Bluba(ContentManager Content, int seed, Vector2 position,Texture2D balltexture)
-            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed, 1.5F, 50)
+        public Bluba(ContentManager Content, int seed, Vector2 position)
+            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed, 1.5F, 50,1)
         {
-            this.balltexture = balltexture;
+            balltexture = Content.Load<Texture2D>("blubaball");
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
 
-        public override void Update(List<Tile> tiles, GameTime gameTime, Room room)
+        public override void Update(List<Tile> tiles, GameTime gameTime, Room room,Player player)
         {
-            base.Update(tiles, gameTime,room);
+            base.Update(tiles, gameTime,room,player);
             if (!isdead)
             {
                 velocity *= 0.3f;

@@ -18,13 +18,18 @@ namespace Randomz
         const float FRICTION = 0.68f;
         public Vector2 velocity;
         public int numberOfKeys;
-        public Animation animation;
+        public int numberOfBombs;
+        public Animation animationLeft;
+        public Animation animationRight;
+        public Animation animationUp;
+        public Animation animationDown;
         public float speed;
         KeyboardState oldKs = Keyboard.GetState();
         public bool isAttacking;
         private int counter;
         public Rectangle attackRect;
         public Rectangle hitBox;
+        private bool animationIsLooping;
 
         public float health;
         public float maxHealth;
@@ -32,8 +37,13 @@ namespace Randomz
         private sbyte isHurtTimer;
 
         public int xp;
-        public float xpNeeded;
+        public int xpNeeded;
         public int level;
+
+        public Animation attackRight;
+        public Animation attackDown; 
+        public Animation attackLeft;
+        public Animation attackUp;
 
         int saveTick;
 
@@ -59,21 +69,24 @@ namespace Randomz
             health = int.Parse(streamReader.ReadLine());
             maxHealth = int.Parse(streamReader.ReadLine());
             xpNeeded = int.Parse(streamReader.ReadLine());
+            numberOfBombs = int.Parse(streamReader.ReadLine());
             streamReader.Close();
-            xpNeeded = 200;
-            animation = new Animation(Content, "linkRight", 150, 2, true);
+            animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
+            animationRight = new Animation(Content, "player/runRight", 110, 6, true);
 
-            animation = new Animation(Content, "linkLeft", 150, 2, true);
+            animationUp = new Animation(Content, "player/runUp", 110, 8, true);
 
-            animation = new Animation(Content, "linkRight", 150, 2, true);
+            animationDown = new Animation(Content, "player/runDown", 110, 7, true);
 
-            animation = new Animation(Content, "linkup11", 150, 2, true);
-
-            animation = new Animation(Content, "linkDown", 150, 2, true);
+            attackRight = new Animation(Content, "player/attackright", 50, 5, false);
+            attackDown = new Animation(Content, "player/attackDown", 50, 6, false);
+            attackLeft = new Animation(Content, "player/attackleft", 50, 5, false);
+            attackUp = new Animation(Content, "player/attackUp", 50, 5, false);
 
         }
-        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, List<Drop> drops)
+        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, List<Drop> drops, List<Bomb> bombs)
         {
+           
             saveTick++;
             if (saveTick > 100)
             {
@@ -92,84 +105,131 @@ namespace Randomz
                     writer.Write(maxHealth);
                     writer.WriteLine();
                     writer.Write(xpNeeded);
+                    writer.WriteLine();
+                    writer.Write(numberOfBombs);
                 }
             }
 
-            animation.PlayAnim(gameTime);
+   
             velocity = velocity*FRICTION;
-            if (Math.Abs(velocity.X) < 0.2f)
+            if (Math.Abs(velocity.X) < 0.1f)
                 velocity.X = 0;
-            if (Math.Abs(velocity.Y) < 0.2f)
+            if (Math.Abs(velocity.Y) < 0.1f)
                 velocity.Y = 0;
 
             if (xp >= xpNeeded)
             {
                 level++;
-                xpNeeded *= 1.4f;
+                xpNeeded *= (int)1.4f;
                 xp = 0;
             }
             KeyboardState ks = Keyboard.GetState();
             hitBox = new Rectangle((int)position.X + 10, (int)position.Y + 55, 37, 15);
-
-            if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down))
-                animation.looping = false;
-
-
-            if (ks.IsKeyDown(Keys.Left))
+            if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter) && numberOfBombs > 0)
             {
-                if (oldKs.IsKeyUp(Keys.Left))
-                    animation = new Animation(Content, "linkLeft", 150, 2, true);
-                velocity.X -= speed;
-                direction = Direction.Left;
+                numberOfBombs--;
+                Vector2 bombPosition = new Vector2();
+                if (direction == Direction.Down)
+                {
+                    bombPosition = new Vector2(position.X - 8,position.Y + 60);
+                }
+                if (direction == Direction.Left)
+                {
+                    bombPosition = new Vector2(position.X - 50,position.Y + 15);
+                }
+                if (direction == Direction.Right)
+                {
+                    bombPosition = new Vector2(position.X + 20,position.Y + 20);
+                }
+                if (direction == Direction.Up)
+                {
+                    bombPosition = new Vector2(position.X - 8,position.Y - 30);
+                }
+                    bombs.Add(new Bomb(new Animation(Content, "bomb", 500, 4, false), bombPosition));
             }
-            if (ks.IsKeyDown(Keys.Right))
+            if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down) && (!isAttacking))
             {
-                velocity.X += speed;
-                if (oldKs.IsKeyUp(Keys.Right))
-                    animation = new Animation(Content, "linkRight", 150, 2, true);
-                direction = Direction.Right;
+                animationIsLooping = false;
+                animationDown.currentFrame = 0;
+                animationUp.currentFrame = 0;
+                animationLeft.currentFrame = 0;
+                animationRight.currentFrame = 0;
             }
-            if (ks.IsKeyDown(Keys.Up))
+            else
+                animationIsLooping = true;
+
+            animationDown.looping = animationIsLooping;
+            animationUp.looping = animationIsLooping;
+            animationRight.looping = animationIsLooping;
+            animationLeft.looping = animationIsLooping;
+
+            if (!isAttacking)
             {
-                if (oldKs.IsKeyUp(Keys.Up))
-                        animation = new Animation(Content, "linkup11", 150, 2, true);
-                velocity.Y -= speed;
-                direction = Direction.Up;
-            }
-            
-            if (ks.IsKeyDown(Keys.Down))
-            {
-                if (oldKs.IsKeyUp(Keys.Down))
-                    animation = new Animation(Content, "linkDown", 150, 2, true);
-                velocity.Y += speed;
-                direction = Direction.Down;
+                if (ks.IsKeyDown(Keys.Left))
+                {
+
+                    velocity.X -= speed;
+                    direction = Direction.Left;
+                }
+                if (ks.IsKeyDown(Keys.Right))
+                {
+                    velocity.X += speed;
+
+                    direction = Direction.Right;
+                }
+                if (ks.IsKeyDown(Keys.Up))
+                {
+
+                    velocity.Y -= speed;
+                    direction = Direction.Up;
+                }
+
+                if (ks.IsKeyDown(Keys.Down))
+                {
+
+                    velocity.Y += speed;
+                    direction = Direction.Down;
+                }
             }
             Random rnd = new Random();
-
+            
             if (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space) && !isAttacking)
             {
                 if (direction == Direction.Right)
-                animation = new Animation(Content,"attackRight",30,3,false);
+                {
+                    animationRight = attackRight;
+                    animationRight.currentFrame = 0;
+                }
                 else if (direction == Direction.Left)
-                    animation = new Animation(Content, "attackLeft", 30, 3, false);
+                {
+                    animationLeft = attackLeft;
+                    animationLeft.currentFrame = 0;
+                }
                 else if (direction == Direction.Down)
-                    animation = new Animation(Content, "attackDown", 30, 3, false);
+                {
+                    animationDown = attackDown;
+                    animationDown.currentFrame = 0;
+                }
+
                 else if (direction == Direction.Up)
-                    animation = new Animation(Content, "attackUp", 30, 3, false);
+                {
+                    animationUp = attackUp;
+                    animationUp.currentFrame = 0;
+                }
                 isAttacking = true;
                 switch (direction)
                 {
                     case Direction.Left:
-                        attackRect = new Rectangle((int)position.X - 30, (int)position.Y + 5, 50, 60);
+                        attackRect = new Rectangle((int)position.X - 30, (int)position.Y + 20, 50, 65);
                         break;
                     case Direction.Right:
-                        attackRect = new Rectangle((int)position.X + 30, (int)position.Y + 5, 50, 60);
+                        attackRect = new Rectangle((int)position.X + 10, (int)position.Y + 20, 50, 65);
                         break;
                     case Direction.Up:
-                        attackRect = new Rectangle((int)position.X +5, (int)position.Y - 10, 75, 50);
+                        attackRect = new Rectangle((int)position.X -15, (int)position.Y - 5, 75, 50);
                         break;
                     case Direction.Down:
-                        attackRect = new Rectangle((int)position.X -20, (int)position.Y + 50, 50, 50);
+                        attackRect = new Rectangle((int)position.X -15, (int)position.Y + 50, 70, 50);
                         break;
                 }
                 for (int i = 0; i < enemies.Count; i++)
@@ -178,21 +238,26 @@ namespace Randomz
                     {
                         enemies[i].hp -= 20;
                         enemies[i].isHurt = true;
-                        if (direction == Direction.Right)
-                            enemies[i].velocity.X = 150;
-                        else if (direction == Direction.Left)
-                            enemies[i].velocity.X = -150;
-                        else if (direction == Direction.Up)
-                            enemies[i].velocity.Y = -150;
-                        else if (direction == Direction.Down)
-                            enemies[i].velocity.Y = 150;
+                        if (enemies[i].type == 1)
+                        {
+                            if (direction == Direction.Right)
+                                enemies[i].velocity.X = 30;
+                            else if (direction == Direction.Left)
+                                enemies[i].velocity.X = -30;
+                            else if (direction == Direction.Up)
+                                enemies[i].velocity.Y = -30;
+                            else if (direction == Direction.Down)
+                                enemies[i].velocity.Y = 30;
+                        }
                         if (enemies[i].hp < 1)
                         {
                             int random = rnd.Next(10);
                             if (random == 1)
-                                drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position,1));
+                                drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position, 1));
                             if (random == 2)
                                 drops.Add(new Drop(Content.Load<Texture2D>("key"), enemies[i].position, 2));
+                            if (random == 3)
+                                drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemies[i].position, 3));
                             enemies[i].isdead = true;
                             xp += rnd.Next(20, 40);
                         }
@@ -207,6 +272,8 @@ namespace Randomz
                         health++;
                     else if (drops[i].type == 2)
                         numberOfKeys++;
+                    else if (drops[i].type == 3)
+                        numberOfBombs+= rnd.Next(1,4);
                     drops.RemoveAt(i);
                 }
             }
@@ -220,13 +287,13 @@ namespace Randomz
                     attackRect = new Rectangle(0, 0, 0, 0);
                     isAttacking = false;
                     if (direction == Direction.Down)
-                        animation = new Animation(Content, "linkDown", 50, 2, false);
+                        animationDown = new Animation(Content, "player/runDown", 110, 7, false);
                     else if (direction == Direction.Left)
-                        animation = new Animation(Content, "linkLeft", 50, 2, false);
+                        animationLeft = new Animation(Content, "player/runLeft", 110, 6, false);
                     else if (direction == Direction.Right)
-                        animation = new Animation(Content, "linkRight", 50, 2, false);
+                        animationRight = new Animation(Content, "player/runRight", 110, 6, false);
                     else if (direction == Direction.Up)
-                        animation = new Animation(Content, "linkup11", 50, 2, false);
+                        animationUp = new Animation(Content, "player/runUp", 110, 8, false);
                 }
             }
             if (IsColliding(enemies)&& isHurt == false && !EnemiesIsHurt(enemies))
@@ -314,6 +381,22 @@ namespace Randomz
             }
             #endregion
             oldKs = ks;
+
+            switch (direction)
+            {
+                case Direction.Down:
+                    animationDown.PlayAnim(gameTime);
+                    break;
+                case Direction.Left:
+                    animationLeft.PlayAnim(gameTime);
+                    break;
+                case Direction.Right:
+                    animationRight.PlayAnim(gameTime);
+                    break;
+                case Direction.Up:
+                    animationUp.PlayAnim(gameTime);
+                    break;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -323,16 +406,25 @@ namespace Randomz
                 color = Color.Red;
             else
                 color = Color.White;
-            if (animation.asset == "attackLeft")
-            animation.Draw(spriteBatch,new Vector2(position.X - 30,position.Y),color);
 
-            else if (animation.asset == "attackDown")
-                animation.Draw(spriteBatch, new Vector2(position.X - 40, position.Y + 30), color);
-            else if (animation.asset == "attackUp")
-                animation.Draw(spriteBatch, new Vector2(position.X - 30, position.Y - 5), color);
-            else
-                animation.Draw(spriteBatch, new Vector2(position.X, position.Y), color);
-           
+            if (direction == Direction.Left)
+            {
+                if (isAttacking)
+                    animationLeft.Draw(spriteBatch, new Vector2(position.X - 30,position.Y), color);
+                else
+                    animationLeft.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+            }
+            if (direction == Direction.Right)
+            {
+                if (isAttacking)
+                    animationRight.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+                else
+                    animationRight.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+            }
+                if (direction == Direction.Up)
+                    animationUp.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+            if (direction == Direction.Down)
+                animationDown.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
         }
 
         public bool IsColliding(List<Enemy> enemies)

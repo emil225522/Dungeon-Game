@@ -120,6 +120,7 @@ namespace Randomz
             currentRoom.Draw(spriteBatch,player,gameTime);
             spriteBatch.Draw(blackBarTex, new Vector2(50,-100), Color.White);
             spriteBatch.DrawString(font1, "Keys: " + player.numberOfKeys, new Vector2(750, -100), Color.White);
+            spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(750, 10), Color.White);
             spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
             spriteBatch.DrawString(font1, "Level " + player.level, new Vector2(750, -20), Color.White);
             for (int i = 0; i < player.health; i++)
@@ -157,11 +158,13 @@ namespace Randomz
 
         public void CreateRoom(Vector2 position, int[] doors)
         {
-           
-            if (Math.Abs((int)position.X + (int)position.Y) < 6)
+
+            if (Math.Abs((int)position.X + (int)position.Y) < 6 && position.X != 0)
+                spawn.Add(new Tuple<string, int>("blubaTower", Math.Abs((int)position.X + (int)position.Y)));
+            else if (position.X == 0)
                 spawn.Add(new Tuple<string, int>("bat", 2 * Math.Abs((int)position.X + (int)position.Y)));
             else
-                spawn.Add(new Tuple<string, int>("bluba", Math.Abs((int)position.X + (int)position.Y)) );
+                spawn.Add(new Tuple<string, int>("bluba", Math.Abs((int)position.X + (int)position.Y)));
             //create a door where needded
             doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);
             doors = CheckDoor(new Vector2(position.X - 1, position.Y), 2, 0, doors);

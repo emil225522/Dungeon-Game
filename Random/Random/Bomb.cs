@@ -14,28 +14,28 @@ namespace Randomz
 {
     class Bomb
     {
-        public Texture2D texture;
+        public Animation animation;
         public Vector2 position;
-        public Rectangle hitBox;
+        public bool willExplode;
         int bombTick;
-        public sbyte type;
 
-        public Bomb(Texture2D texture,Vector2 position)
+        public Bomb(Animation animation,Vector2 position)
         {
-            this.texture = texture;
             this.position = position;
+            this.animation = animation;
         }
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             bombTick++;
-            if (bombTick > 10)
+            animation.PlayAnim(gameTime);
+            if (bombTick > 120)
             {
-
+                willExplode = true;
             }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            animation.Draw(spriteBatch,position,Color.White);
         }
     }
 }
