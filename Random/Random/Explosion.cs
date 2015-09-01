@@ -16,7 +16,7 @@ namespace Randomz
     {
         public Vector2 Position { get; set; }
         public Animation Animation { get; set; }
-        public Rectangle HitBox { get; set; }
+        public Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); }}
 
         public Explosion(Vector2 position, Animation animation)
         {
@@ -25,7 +25,6 @@ namespace Randomz
         }
         public void Update(GameTime gameTime)
         {
-            HitBox = new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight);
             Animation.PlayAnim(gameTime);
            
         }

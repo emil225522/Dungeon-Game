@@ -26,7 +26,7 @@ namespace Randomz
             this.type = type;
             hitBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
-        public virtual void Update(GameTime gameTime,Player player)
+        internal virtual void Update(GameTime gameTime,Player player)
         {
             hitBox = new Rectangle((int)position.X,(int)position.Y,texture.Width,texture.Height);
         }

@@ -41,7 +41,11 @@ namespace Randomz
             generation.Generate(Content, tiles, "dunmap1");
             #region CreateDoorOrWall
             if (doors[0] > 0)
+            {
+                
                 tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 2));
+                tiles.Add(new LockedDoor(new Vector2(55, 300), Content));
+            }
             else
                 tiles.Add(new Tile(generation.wallLeft, new Vector2(50, 300), 3));
 
@@ -61,7 +65,7 @@ namespace Randomz
                 tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
             #endregion
 
-            tiles.Add(new Tile(Content.Load<Texture2D>("LockedDoorRight"), new Vector2(850, 300), 5));
+            tiles.Add(new LockedDoor(new Vector2(850,300),Content));
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
@@ -130,6 +134,11 @@ namespace Randomz
             {
                 if (explosions[i].Animation.currentFrame == 3)
                     explosions.RemoveAt(i);
+            }
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (tiles[i].isDeleted)
+                    tiles.RemoveAt(i);
             }
             for (int i = 0; i < explosions.Count; i++)
             {

@@ -12,29 +12,31 @@ namespace Randomz
     {
         public Texture2D tex;
         public Animation animation;
+        public Rectangle OwnHitBox { get { return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); } }
         public int test;
 
-        public LockedDoor(Texture2D texture, Vector2 position,ContentManager Content)
+        public LockedDoor(Vector2 position,ContentManager Content)
             :base (Content.Load<Texture2D>("bat"),new Vector2(500),3)
         {
+            texture = Content.Load<Texture2D>("LockedDoorRight");
             this.position = position;
         }
-        public override void Update(GameTime gameTime, Player player)
+        internal override void Update(GameTime gameTime, Player player)
         {
-            base.Update(gameTime,player);
+
             if (player.hitBox.Intersects(hitBox))
                 test++;
+            else test = 0;
             if (test > 20 && player.numberOfKeys > 0)
             {
                 isDeleted = true;
                 player.numberOfKeys--;
             }
-
+            base.Update(gameTime, player);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            animation.Draw(spriteBatch, position, Color.White);
-            spriteBatch.Draw(tex,position,Color.White);
+            spriteBatch.Draw(texture,position,Color.White);
         }
     }
 }
