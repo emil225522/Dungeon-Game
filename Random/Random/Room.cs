@@ -44,28 +44,36 @@ namespace Randomz
             {
                 
                 tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 2));
-                tiles.Add(new LockedDoor(new Vector2(55, 300), Content));
+                tiles.Add(new LockedDoor(new Vector2(50, 300), Content,0));
             }
             else
                 tiles.Add(new Tile(generation.wallLeft, new Vector2(50, 300), 3));
 
             if (doors[1] > 0)
+            {
                 tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 2));
+                tiles.Add(new LockedDoor(new Vector2(450, 50), Content,1));
+            }
             else
                 tiles.Add(new Tile(generation.wallUp, new Vector2(450, 50), 3));
 
             if (doors[2] > 0)
+            {
                 tiles.Add(new Tile(generation.doorRight, new Vector2(850, 300), 2));
+                tiles.Add(new LockedDoor(new Vector2(850, 300), Content,2));
+            }
             else
                 tiles.Add(new Tile(generation.wallRight, new Vector2(850, 300), 3));
 
             if (doors[3] > 0)
+            {
                 tiles.Add(new Tile(generation.doorDown, new Vector2(450, 550), 2));
+                tiles.Add(new LockedDoor(new Vector2(450, 550), Content,3));
+            }
             else
                 tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
             #endregion
-
-            tiles.Add(new LockedDoor(new Vector2(850,300),Content));
+            //tiles.Add(new LockedDoor(new Vector2(850,300),Content));
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
