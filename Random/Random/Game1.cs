@@ -66,7 +66,7 @@ namespace Randomz
 
             spawn.Add(new Tuple<string,int>("slime", 3));
 
-            CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0});
+            CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},0);
             currentRoom = rooms[new Vector2(0, 0)];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
@@ -156,7 +156,7 @@ namespace Randomz
             return doors;
         }
 
-        public void CreateRoom(Vector2 position, int[] doors)
+        public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom)
         {
 
             if (Math.Abs((int)position.X + (int)position.Y) < 6 && position.X != 0)
@@ -171,7 +171,7 @@ namespace Randomz
             doors = CheckDoor(new Vector2(position.X, position.Y + 1), 1, 3, doors);
             doors = CheckDoor(new Vector2(position.X, position.Y - 1), 3, 1, doors);
 
-            rooms.Add(position, new Room(this, Content, spawn, position, doors));
+            rooms.Add(position, new Room(this, Content, spawn, position, doors, fromRoom));
             spawn.Clear();
         }
 

@@ -32,7 +32,7 @@ namespace Randomz
         Game1 game;
         Vector2 roomPosition;
 
-        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors)
+        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom)
         {
             this.game = game;
             this.Content = Content;
@@ -43,6 +43,7 @@ namespace Randomz
             if (doors[0] > 0)
             {
                 tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 2));
+                if (fromRoom != 2)
                 tiles.Add(new LockedDoor(new Vector2(50, 300), Content,5));
             }
             else
@@ -51,6 +52,7 @@ namespace Randomz
             if (doors[1] > 0)
             {
                 tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 2));
+                if (fromRoom != 1)
                 tiles.Add(new LockedDoor(new Vector2(450, 50), Content,6));
             }
             else
@@ -59,6 +61,7 @@ namespace Randomz
             if (doors[2] > 0)
             {
                 tiles.Add(new Tile(generation.doorRight, new Vector2(850, 300), 2));
+                if (fromRoom != 0)
                 tiles.Add(new LockedDoor(new Vector2(850, 300), Content,7));
             }
             else
@@ -67,6 +70,7 @@ namespace Randomz
             if (doors[3] > 0)
             {
                 tiles.Add(new Tile(generation.doorDown, new Vector2(450, 550), 2));
+                if (fromRoom != 3)
                 tiles.Add(new LockedDoor(new Vector2(450, 550), Content,8));
             }
             else
@@ -272,23 +276,28 @@ namespace Randomz
             if (!game.RoomExists(nextRoom))
             {
                 int[] doors = {0};
+                sbyte fromRoom = 0;
                 switch (side)
                 {
                     case Doors.Left:
+                        fromRoom = 0;
                         doors = new int[] { rnd.Next(0, 2), rnd.Next(0, 2), 1, rnd.Next(0, 2) };
                         break;
                     case Doors.Up:
+                        fromRoom = 1;
                         doors = new int[] { rnd.Next(0, 2), 1, rnd.Next(0, 2), rnd.Next(0, 2) };
                         break;
                     case Doors.Right:
+                        fromRoom = 2;
                         doors = new int[] { 1, rnd.Next(0, 2), rnd.Next(0, 2), rnd.Next(0, 2) };
                         break;
                     case Doors.Down:
+                        fromRoom = 3;
                         doors = new int[] { rnd.Next(0, 2), rnd.Next(0, 2), rnd.Next(0, 2), 1 };
                         break;
 
                 }
-                game.CreateRoom(nextRoom, doors);
+                game.CreateRoom(nextRoom, doors, fromRoom);
             }
 
             game.SetCurrentRoom(nextRoom);
