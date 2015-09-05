@@ -52,7 +52,7 @@ namespace Randomz
             if (doors[1] > 0)
             {
                 tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 2));
-                tiles.Add(new LockedDoor(new Vector2(450, 50), Content,1));
+                tiles.Add(new LockedDoor(new Vector2(450, 100), Content,1));
             }
             else
                 tiles.Add(new Tile(generation.wallUp, new Vector2(450, 50), 3));
@@ -73,7 +73,7 @@ namespace Randomz
             else
                 tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
             #endregion
-            //tiles.Add(new LockedDoor(new Vector2(850,300),Content));
+
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)

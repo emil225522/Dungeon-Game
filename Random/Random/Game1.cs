@@ -62,7 +62,7 @@ namespace Randomz
             hearthTex = Content.Load<Texture2D>("hearth");
             font1 = Content.Load<SpriteFont>("font1");
 
-            player = new Player(new Vector2(100, 300), Content);
+            player = new Player(new Vector2(200, 300), Content);
 
             spawn.Add(new Tuple<string,int>("slime", 3));
 

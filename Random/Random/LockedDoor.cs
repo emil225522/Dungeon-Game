@@ -39,15 +39,17 @@ namespace Randomz
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (type == 0)
-                rotation = 1;
-            else if (type == 1)
-                rotation = 2;
-            else if (type == 2)
-                rotation = 3;
-            else if (type == 3)
-                rotation = 4;
-                spriteBatch.Draw(texture,position,new Rectangle((int)position.X,(int)position.Y,50,50),Color.White,0,new Vector2(),1,SpriteEffects.FlipHorizontally,1);
+            SpriteEffects eff = SpriteEffects.None;
+            if (Type == 0)
+                eff = SpriteEffects.FlipHorizontally;
+            else if (Type == 1)
+                rotation = 4.7f;
+            else if (Type == 2)
+                eff = SpriteEffects.None;
+            else if (Type == 3)
+                eff = SpriteEffects.FlipVertically;
+
+                spriteBatch.Draw(texture, position, null, Color.White,rotation, new Vector2(), 1, eff, 1);
         }
     }
 }
