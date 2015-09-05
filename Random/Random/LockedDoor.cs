@@ -37,10 +37,10 @@ namespace Randomz
         {
             float offsetY = 0;
             SpriteEffects eff = SpriteEffects.None;
-            if (type == 0 || type == 3)
+            if (type == 5 || type == 8)
                 eff = SpriteEffects.FlipHorizontally;
             
-            if (type == 1 || type == 3) {
+            if (type == 6 || type == 8) {
                 rotation = -(float)Math.PI / 2;
                 offsetY = 50;
             }
