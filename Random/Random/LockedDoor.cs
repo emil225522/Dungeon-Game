@@ -10,19 +10,15 @@ namespace Randomz
 {
     class LockedDoor : Tile
     {
-        public Texture2D tex;
         public Animation animation;
         public Rectangle OwnHitBox { get { return new Rectangle((int)position.X, (int)position.Y-2, 63, 58); } }
         public int test;
         public float rotation;
-        public sbyte Type { get; set; }
 
         public LockedDoor(Vector2 position,ContentManager Content,sbyte type)
-            :base (Content.Load<Texture2D>("bat"),new Vector2(500),3)
+            : base(Content.Load<Texture2D>("LockedDoorRight"), position, type)
         {
-            texture = Content.Load<Texture2D>("LockedDoorRight");
             this.position = position;
-            Type = type;
         }
         internal override void Update(GameTime gameTime, Player player)
         {
@@ -39,17 +35,17 @@ namespace Randomz
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            float offsetY = 0;
             SpriteEffects eff = SpriteEffects.None;
-            if (Type == 0)
+            if (type == 0 || type == 3)
                 eff = SpriteEffects.FlipHorizontally;
-            else if (Type == 1)
-                rotation = 4.7f;
-            else if (Type == 2)
-                eff = SpriteEffects.None;
-            else if (Type == 3)
-                eff = SpriteEffects.FlipVertically;
+            
+            if (type == 1 || type == 3) {
+                rotation = -(float)Math.PI / 2;
+                offsetY = 50;
+            }
 
-                spriteBatch.Draw(texture, position, null, Color.White,rotation, new Vector2(), 1, eff, 1);
+            spriteBatch.Draw(texture, new Vector2(position.X, position.Y + offsetY), null, Color.White,rotation, new Vector2(), 1, eff, 1);
         }
     }
 }
