@@ -120,6 +120,7 @@
     <Compile Include="Enemy\Slime.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="FrameCounter.cs" />
+    <Compile Include="GameObject.cs" />
     <Compile Include="Generation.cs" />
     <Compile Include="LockedDoor.cs" />
     <Compile Include="Player.cs" />

@@ -66,7 +66,7 @@ namespace Randomz
 
             spawn.Add(new Tuple<string,int>("slime", 3));
 
-            CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},0);
+            CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3);
             currentRoom = rooms[new Vector2(0, 0)];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
