@@ -30,9 +30,9 @@ namespace Randomz
         {
             hitBox = new Rectangle((int)position.X,(int)position.Y,texture.Width,texture.Height);
         }
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, position, color);
         }
     }
 }

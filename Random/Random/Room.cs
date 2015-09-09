@@ -25,8 +25,10 @@ namespace Randomz
         List<Enemy> enemies = new List<Enemy>();
         List<Ghost> ghosts = new List<Ghost>();
         List<Bomb> bombs = new List<Bomb>();
+        Random random = new Random();
         List<Explosion> explosions = new List<Explosion>();
         public List<Projectile> blubaBall = new List<Projectile>();
+        Color color = Color.White;
         Random rnd = new Random();
         ContentManager Content;
         Game1 game;
@@ -38,6 +40,15 @@ namespace Randomz
             this.Content = Content;
             this.roomPosition = roomPosition;
             this.doors = doors;
+            int randomValue = random.Next(1, 5);
+            if (randomValue == 1)
+                color = Color.Red;
+            else if (randomValue == 2)
+                color = Color.Turquoise;
+            else if (randomValue == 3)
+                color = Color.Yellow;
+            else if (randomValue == 4)
+                color = new Color(random.Next(1, 255), random.Next(1, 255), random.Next(1, 255));
             generation.Generate(Content, tiles, "dunmap1");
             #region CreateDoorOrWall
             if (doors[0] > 0)
@@ -198,7 +209,7 @@ namespace Randomz
         {
             foreach (Tile t in tiles)
             {
-                t.Draw(spriteBatch);
+                t.Draw(spriteBatch,color);
             }
             foreach (Explosion e in explosions)
                 e.Draw(spriteBatch);
@@ -234,7 +245,7 @@ namespace Randomz
             }
             player.Draw(spriteBatch);
             foreach (LockedDoor l in lockedDoors)
-                l.Draw(spriteBatch);
+                l.Draw(spriteBatch,color);
         }
 
         private Enemy CreateMob(String mob)

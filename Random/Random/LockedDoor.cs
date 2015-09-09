@@ -33,7 +33,7 @@ namespace Randomz
             }
             base.Update(gameTime, player);
         }
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch,Color color)
         {
             float offsetY = 0;
             SpriteEffects eff = SpriteEffects.None;
@@ -45,7 +45,7 @@ namespace Randomz
                 offsetY = 50;
             }
 
-            spriteBatch.Draw(texture, new Vector2(position.X, position.Y + offsetY), null, Color.White,rotation, new Vector2(), 1, eff, 1);
+            spriteBatch.Draw(texture, new Vector2(position.X, position.Y + offsetY), null, color,rotation, new Vector2(), 1, eff, 1);
         }
     }
 }
