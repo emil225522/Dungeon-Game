@@ -17,33 +17,37 @@ namespace Randomz
         public Vector2 position;
         const float FRICTION = 0.68f;
         public Vector2 velocity;
-        public int numberOfKeys;
-        public int numberOfBombs;
-        public Animation animationLeft;
-        public Animation animationRight;
-        public Animation animationUp;
-        public Animation animationDown;
-        public float speed;
+
+
+       
         KeyboardState oldKs = Keyboard.GetState();
-        public bool isAttacking;
-        private int counter;
         public Rectangle attackRect;
         public Rectangle hitBox;
         private bool animationIsLooping;
 
         public float health;
         public float maxHealth;
-        public bool isHurt;
+        public float speed;
         private sbyte isHurtTimer;
 
+        public bool isHurt;
+        public bool isAttacking;
+
+        private int counter;
         public int xp;
         public int xpNeeded;
         public int level;
+        public int numberOfKeys;
+        public int numberOfBombs;
 
         public Animation attackRight;
         public Animation attackDown; 
         public Animation attackLeft;
         public Animation attackUp;
+        public Animation animationLeft;
+        public Animation animationRight;
+        public Animation animationUp;
+        public Animation animationDown;
 
         int saveTick;
 
@@ -421,8 +425,8 @@ namespace Randomz
                 else
                     animationRight.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
             }
-                if (direction == Direction.Up)
-                    animationUp.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+            if (direction == Direction.Up)
+                animationUp.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
             if (direction == Direction.Down)
                 animationDown.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
         }
