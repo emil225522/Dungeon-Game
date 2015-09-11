@@ -158,7 +158,7 @@ namespace DungeonGame
                 currentAnimation.currentFrame = 0;
             }
             else
-                currentAnimation.looping = animationIsLooping;
+                currentAnimation.looping = true;
 
 
 
