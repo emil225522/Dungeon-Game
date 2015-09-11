@@ -1,0 +1,90 @@
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\DungeonGame.csprojResolveAssemblyReference.cache
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\doors\doorDown.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\doors\doorLeft.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\doors\doorRight.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\doors\doorUp.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\attackDown.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\attackleft.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\attackright.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\attackUp.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runDown - Copy.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runDown.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runLeft.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runRight.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runUp.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\Corner1.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\Corner2.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\Corner3.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\Corner4.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\wall1.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\wall2.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\wall3.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\wall4.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\bat.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\BlackBar.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\blubaball.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\bomb.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\bombDrop.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\explosion.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\floor1.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\ghost.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\hearth.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\key.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\LockedDoorRight.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\rock.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\shootingEnemyUp.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\skeletonEnemy.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\slimeEnemy.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\tower.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\towerUnder.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\font1.xnb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\DungeonGame.exe
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\DungeonGame.pdb
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\DungeonGame.exe
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\DungeonGame.pdb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\doors\doorDown.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\doors\doorLeft.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\doors\doorRight.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\doors\doorUp.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\attackDown.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\attackleft.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\attackright.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\attackUp.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runDown - Copy.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runDown.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runLeft.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runRight.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\runUp.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\Corner1.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\Corner2.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\Corner3.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\Corner4.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\wall1.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\wall2.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\wall3.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\walls\wall4.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\bat.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\BlackBar.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\blubaball.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\bomb.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\bombDrop.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\explosion.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\floor1.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\ghost.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\hearth.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\key.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\LockedDoorRight.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\rock.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\shootingEnemyUp.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\skeletonEnemy.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\slimeEnemy.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\tower.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\towerUnder.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\font1.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\DungeonGame.exe
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\DungeonGame.pdb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\DungeonGame.csprojResolveAssemblyReference.cache
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\DungeonGame.exe
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\DungeonGame.pdb

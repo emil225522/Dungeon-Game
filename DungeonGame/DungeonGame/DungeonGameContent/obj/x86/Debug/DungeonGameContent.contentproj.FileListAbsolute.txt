@@ -1,0 +1,2 @@
+c:\users\emil\documents\visual studio 2013\Projects\DungeonGame\DungeonGame\DungeonGameContent\obj\x86\Debug\DungeonGameContent.contentprojResolveAssemblyReference.cache
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGameContent\obj\x86\Debug\DungeonGameContent.contentprojResolveAssemblyReference.cache
