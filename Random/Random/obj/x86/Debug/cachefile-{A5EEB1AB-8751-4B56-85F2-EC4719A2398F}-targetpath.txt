@@ -1,5 +1,3 @@
-Content\font1.xnb
-Content\rock.xnb
 Content\walls\Corner1.xnb
 Content\walls\Corner2.xnb
 Content\walls\Corner3.xnb
@@ -15,23 +13,25 @@ Content\doors\doorDown.xnb
 Content\floor1.xnb
 Content\hearth.xnb
 Content\bat.xnb
-Content\player\attackDown.xnb
-Content\player\attackUp.xnb
 Content\skeletonEnemy.xnb
 Content\slimeEnemy.xnb
 Content\BlackBar.xnb
-Content\shootingEnemyUp.xnb
 Content\blubaball.xnb
+Content\font1.xnb
+Content\shootingEnemyUp.xnb
 Content\key.xnb
+Content\rock.xnb
 Content\ghost.xnb
+Content\player\attackDown.xnb
+Content\player\attackUp.xnb
 Content\player\attackleft.xnb
-Content\explosion.xnb
 Content\player\attackright.xnb
 Content\player\runRight.xnb
 Content\player\runLeft.xnb
 Content\player\runUp.xnb
 Content\player\runDown.xnb
 Content\bomb.xnb
+Content\explosion.xnb
 Content\bombDrop.xnb
 Content\player\runDown - Copy.xnb
 Content\tower.xnb

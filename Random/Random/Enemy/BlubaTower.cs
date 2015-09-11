@@ -17,7 +17,7 @@ namespace Randomz
         int attackingTimer;
         float rotation;
         public BlubaTower(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "tower", 100, 1, true), seed, 1.5F, 100,3)
+            : base(position, new Animation(Content, "tower", 100, 1, true), seed, 1.5f, 120,3)
         {
             balltexture = Content.Load<Texture2D>("blubaball");
             underLayer = Content.Load<Texture2D>("towerUnder");
@@ -72,7 +72,7 @@ namespace Randomz
             else
                 color = Color.White;
            
-            spriteBatch.Draw(underLayer, new Vector2(position.X- underLayer.Width/2,position.Y- underLayer.Height/2), Color.White);
+            spriteBatch.Draw(underLayer, new Rectangle(hitBox.X - 25,hitBox.Y - 25,underLayer.Width,underLayer.Height), Color.White);
             animation.Draw(spriteBatch, position, color, rotation);
         }
 
