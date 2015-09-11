@@ -48,6 +48,7 @@ namespace DungeonGame
         public Animation animationRight;
         public Animation animationUp;
         public Animation animationDown;
+        public Animation currentAnimation;
 
         int saveTick;
 
@@ -75,12 +76,12 @@ namespace DungeonGame
             xpNeeded = int.Parse(streamReader.ReadLine());
             numberOfBombs = int.Parse(streamReader.ReadLine());
             streamReader.Close();
+
             animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
             animationRight = new Animation(Content, "player/runRight", 110, 6, true);
-
             animationUp = new Animation(Content, "player/runUp", 110, 8, true);
-
             animationDown = new Animation(Content, "player/runDown", 110, 7, true);
+            currentAnimation = new Animation(Content, "player/runDown", 110, 7, true);
 
             attackRight = new Animation(Content, "player/attackright", 50, 5, false);
             attackDown = new Animation(Content, "player/attackDown", 50, 6, false);
@@ -154,18 +155,12 @@ namespace DungeonGame
             if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down) && (!isAttacking))
             {
                 animationIsLooping = false;
-                animationDown.currentFrame = 0;
-                animationUp.currentFrame = 0;
-                animationLeft.currentFrame = 0;
-                animationRight.currentFrame = 0;
+                currentAnimation.currentFrame = 0;
             }
             else
-                animationIsLooping = true;
+                currentAnimation.looping = animationIsLooping;
 
-            animationDown.looping = animationIsLooping;
-            animationUp.looping = animationIsLooping;
-            animationRight.looping = animationIsLooping;
-            animationLeft.looping = animationIsLooping;
+
 
             if (!isAttacking)
             {
@@ -196,30 +191,36 @@ namespace DungeonGame
                 }
             }
             Random rnd = new Random();
-            
+            if (!isAttacking)
+            {
+                if (direction == Direction.Down)
+                    currentAnimation = animationDown;
+                else if (direction == Direction.Up)
+                    currentAnimation = animationUp;
+                else if (direction == Direction.Left)
+                    currentAnimation = animationLeft;
+                else if (direction == Direction.Right)
+                    currentAnimation = animationRight;
+            }
             if (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space) && !isAttacking)
             {
                 if (direction == Direction.Right)
                 {
-                    animationRight = attackRight;
-                    animationRight.currentFrame = 0;
+                    currentAnimation = attackRight;
                 }
                 else if (direction == Direction.Left)
                 {
-                    animationLeft = attackLeft;
-                    animationLeft.currentFrame = 0;
+                    currentAnimation = attackLeft;
                 }
                 else if (direction == Direction.Down)
                 {
-                    animationDown = attackDown;
-                    animationDown.currentFrame = 0;
+                    currentAnimation = attackDown;
                 }
-
                 else if (direction == Direction.Up)
                 {
-                    animationUp = attackUp;
-                    animationUp.currentFrame = 0;
+                    currentAnimation = attackUp;
                 }
+                currentAnimation.currentFrame = 0;
                 isAttacking = true;
                 switch (direction)
                 {
@@ -291,13 +292,13 @@ namespace DungeonGame
                     attackRect = new Rectangle(0, 0, 0, 0);
                     isAttacking = false;
                     if (direction == Direction.Down)
-                        animationDown = new Animation(Content, "player/runDown", 110, 7, false);
+                        currentAnimation = new Animation(Content, "player/runDown", 110, 7, false);
                     else if (direction == Direction.Left)
-                        animationLeft = new Animation(Content, "player/runLeft", 110, 6, false);
+                        currentAnimation = new Animation(Content, "player/runLeft", 110, 6, false);
                     else if (direction == Direction.Right)
-                        animationRight = new Animation(Content, "player/runRight", 110, 6, false);
+                        currentAnimation = new Animation(Content, "player/runRight", 110, 6, false);
                     else if (direction == Direction.Up)
-                        animationUp = new Animation(Content, "player/runUp", 110, 8, false);
+                        currentAnimation = new Animation(Content, "player/runUp", 110, 8, false);
                 }
             }
             if (IsColliding(enemies)&& isHurt == false && !EnemiesIsHurt(enemies))
@@ -386,21 +387,7 @@ namespace DungeonGame
             #endregion
             oldKs = ks;
 
-            switch (direction)
-            {
-                case Direction.Down:
-                    animationDown.PlayAnim(gameTime);
-                    break;
-                case Direction.Left:
-                    animationLeft.PlayAnim(gameTime);
-                    break;
-                case Direction.Right:
-                    animationRight.PlayAnim(gameTime);
-                    break;
-                case Direction.Up:
-                    animationUp.PlayAnim(gameTime);
-                    break;
-            }
+            currentAnimation.PlayAnim(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -410,25 +397,15 @@ namespace DungeonGame
                 color = Color.Red;
             else
                 color = Color.White;
-
             if (direction == Direction.Left)
             {
                 if (isAttacking)
-                    animationLeft.Draw(spriteBatch, new Vector2(position.X - 30,position.Y), color);
+                    currentAnimation.Draw(spriteBatch, new Vector2(position.X - 30, position.Y), color);
                 else
-                    animationLeft.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+                    currentAnimation.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
             }
-            if (direction == Direction.Right)
-            {
-                if (isAttacking)
-                    animationRight.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
-                else
-                    animationRight.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
-            }
-            if (direction == Direction.Up)
-                animationUp.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
-            if (direction == Direction.Down)
-                animationDown.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+            else
+                currentAnimation.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
         }
 
         public bool IsColliding(List<Enemy> enemies)
