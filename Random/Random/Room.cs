@@ -19,6 +19,7 @@ namespace Randomz
         }
         public int[] doors;
         Generation generation = new Generation();
+        List<GameObject> gameObject = new List<GameObject>();
         List<Tile> tiles = new List<Tile>();
         List<LockedDoor> lockedDoors = new List<LockedDoor>();
         List<Drop> drops = new List<Drop>();
@@ -166,8 +167,6 @@ namespace Randomz
                 explosions[i].Update(gameTime);
                 for (int j = 0; j < tiles.Count; j++)
                 {
-
-
                     if (explosions[i].HitBox.Intersects(tiles[j].hitBox))
                         if (tiles[j].type == 4)
                             tiles.RemoveAt(j);
