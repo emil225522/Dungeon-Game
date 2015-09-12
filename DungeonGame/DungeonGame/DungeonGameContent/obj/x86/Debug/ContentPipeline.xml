@@ -352,6 +352,15 @@
       <Output>C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\font1.xnb</Output>
       <Time>2015-09-11T19:38:30.4432118+02:00</Time>
     </Item>
+    <Item>
+      <Source>dark.png</Source>
+      <Name>dark</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\dark.xnb</Output>
+      <Time>2015-09-12T11:05:37.039042+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

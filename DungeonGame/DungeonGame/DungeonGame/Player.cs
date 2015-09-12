@@ -31,6 +31,7 @@ namespace DungeonGame
 
         public bool isHurt;
         public bool isAttacking;
+        public bool currentRoomDark;
 
         private int counter;
         public int xp;
@@ -68,58 +69,64 @@ namespace DungeonGame
             speed = 1.4f;
             direction = Direction.Down;
             maxHealth = 5;
-            StreamReader streamReader = new StreamReader("gameinfo.txt");
-            level = int.Parse(streamReader.ReadLine());
-            xp = int.Parse(streamReader.ReadLine());
-            numberOfKeys = int.Parse(streamReader.ReadLine());
-            health = int.Parse(streamReader.ReadLine());
-            maxHealth = int.Parse(streamReader.ReadLine());
-            xpNeeded = int.Parse(streamReader.ReadLine());
-            numberOfBombs = int.Parse(streamReader.ReadLine());
-            streamReader.Close();
+            #region LoadContent
+            {
+                StreamReader streamReader = new StreamReader("gameinfo.txt");
+                level = int.Parse(streamReader.ReadLine());
+                xp = int.Parse(streamReader.ReadLine());
+                numberOfKeys = int.Parse(streamReader.ReadLine());
+                health = int.Parse(streamReader.ReadLine());
+                maxHealth = int.Parse(streamReader.ReadLine());
+                xpNeeded = int.Parse(streamReader.ReadLine());
+                numberOfBombs = int.Parse(streamReader.ReadLine());
+                streamReader.Close();
 
-            tex = Content.Load<Texture2D>("floor1");
+                tex = Content.Load<Texture2D>("dark");
 
-            animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
-            animationRight = new Animation(Content, "player/runRight", 110, 6, true);
-            animationUp = new Animation(Content, "player/runUp", 110, 8, true);
-            animationDown = new Animation(Content, "player/runDown", 110, 7, true);
-            currentAnimation = new Animation(Content, "player/runDown", 110, 7, true);
+                animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
+                animationRight = new Animation(Content, "player/runRight", 110, 6, true);
+                animationUp = new Animation(Content, "player/runUp", 110, 8, true);
+                animationDown = new Animation(Content, "player/runDown", 110, 7, true);
+                currentAnimation = new Animation(Content, "player/runDown", 110, 7, true);
 
-            attackRight = new Animation(Content, "player/attackright", 50, 5, false);
-            attackDown = new Animation(Content, "player/attackDown", 50, 6, false);
-            attackLeft = new Animation(Content, "player/attackleft", 50, 5, false);
-            attackUp = new Animation(Content, "player/attackUp", 50, 5, false);
+                attackRight = new Animation(Content, "player/attackright", 50, 5, false);
+                attackDown = new Animation(Content, "player/attackDown", 50, 6, false);
+                attackLeft = new Animation(Content, "player/attackleft", 50, 5, false);
+                attackUp = new Animation(Content, "player/attackUp", 50, 5, false);
+            }
+            #endregion
 
         }
-        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, List<Drop> drops, List<Bomb> bombs)
+        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, Room room)
         {
-           
-            saveTick++;
-            if (saveTick > 200)
+            #region AutoSave
             {
-                saveTick = 0;
-                using (StreamWriter writer =
-            new StreamWriter("gameinfo.txt"))
+                saveTick++;
+                if (saveTick > 200)
                 {
-                    writer.Write(level);
-                    writer.WriteLine();
-                    writer.Write(xp);
-                    writer.WriteLine();
-                    writer.Write(numberOfKeys);
-                    writer.WriteLine();
-                    writer.Write(health);
-                    writer.WriteLine();
-                    writer.Write(maxHealth);
-                    writer.WriteLine();
-                    writer.Write(xpNeeded);
-                    writer.WriteLine();
-                    writer.Write(numberOfBombs);
+                    saveTick = 0;
+                    using (StreamWriter writer =
+                new StreamWriter("gameinfo.txt"))
+                    {
+                        writer.Write(level);
+                        writer.WriteLine();
+                        writer.Write(xp);
+                        writer.WriteLine();
+                        writer.Write(numberOfKeys);
+                        writer.WriteLine();
+                        writer.Write(health);
+                        writer.WriteLine();
+                        writer.Write(maxHealth);
+                        writer.WriteLine();
+                        writer.Write(xpNeeded);
+                        writer.WriteLine();
+                        writer.Write(numberOfBombs);
+                    }
                 }
             }
-
-   
-            velocity = velocity*FRICTION;
+            #endregion
+           
+            velocity = velocity * FRICTION;
             if (Math.Abs(velocity.X) < 0.1f)
                 velocity.X = 0;
             if (Math.Abs(velocity.Y) < 0.1f)
@@ -139,21 +146,21 @@ namespace DungeonGame
                 Vector2 bombPosition = new Vector2();
                 if (direction == Direction.Down)
                 {
-                    bombPosition = new Vector2(position.X - 8,position.Y + 60);
+                    bombPosition = new Vector2(position.X - 8, position.Y + 60);
                 }
                 if (direction == Direction.Left)
                 {
-                    bombPosition = new Vector2(position.X - 50,position.Y + 15);
+                    bombPosition = new Vector2(position.X - 50, position.Y + 15);
                 }
                 if (direction == Direction.Right)
                 {
-                    bombPosition = new Vector2(position.X + 20,position.Y + 20);
+                    bombPosition = new Vector2(position.X + 20, position.Y + 20);
                 }
                 if (direction == Direction.Up)
                 {
-                    bombPosition = new Vector2(position.X - 8,position.Y - 30);
+                    bombPosition = new Vector2(position.X - 8, position.Y - 30);
                 }
-                    bombs.Add(new Bomb(new Animation(Content, "bomb", 500, 4, false), bombPosition));
+                room.bombs.Add(new Bomb(new Animation(Content, "bomb", 500, 4, false), bombPosition));
             }
             if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down) && (!isAttacking))
             {
@@ -162,8 +169,6 @@ namespace DungeonGame
             }
             else
                 currentAnimation.looping = true;
-
-
 
             if (!isAttacking)
             {
@@ -234,10 +239,10 @@ namespace DungeonGame
                         attackRect = new Rectangle((int)position.X + 10, (int)position.Y + 20, 50, 65);
                         break;
                     case Direction.Up:
-                        attackRect = new Rectangle((int)position.X -15, (int)position.Y - 5, 75, 50);
+                        attackRect = new Rectangle((int)position.X - 15, (int)position.Y - 5, 75, 50);
                         break;
                     case Direction.Down:
-                        attackRect = new Rectangle((int)position.X -15, (int)position.Y + 50, 70, 50);
+                        attackRect = new Rectangle((int)position.X - 15, (int)position.Y + 50, 70, 50);
                         break;
                 }
                 for (int i = 0; i < enemies.Count; i++)
@@ -261,28 +266,28 @@ namespace DungeonGame
                         {
                             int random = rnd.Next(10);
                             if (random == 1)
-                                drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position, 1));
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position, 1));
                             if (random == 2)
-                                drops.Add(new Drop(Content.Load<Texture2D>("key"), enemies[i].position, 2));
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("key"), enemies[i].position, 2));
                             if (random == 3)
-                                drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemies[i].position, 3));
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemies[i].position, 3));
                             enemies[i].isdead = true;
                             xp += rnd.Next(20, 40);
                         }
                     }
                 }
             }
-            for (int i = 0; i < drops.Count; i++)
+            for (int i = 0; i < room.drops.Count; i++)
             {
-                if (drops[i].hitBox.Intersects(hitBox))
+                if (room.drops[i].hitBox.Intersects(hitBox))
                 {
-                    if (drops[i].type == 1 && health < maxHealth)
+                    if (room.drops[i].type == 1 && health < maxHealth)
                         health++;
-                    else if (drops[i].type == 2)
+                    else if (room.drops[i].type == 2)
                         numberOfKeys++;
-                    else if (drops[i].type == 3)
-                        numberOfBombs+= rnd.Next(1,4);
-                    drops.RemoveAt(i);
+                    else if (room.drops[i].type == 3)
+                        numberOfBombs += rnd.Next(1, 4);
+                    room.drops.RemoveAt(i);
                 }
             }
             if (isAttacking)
@@ -304,7 +309,7 @@ namespace DungeonGame
                         currentAnimation = new Animation(Content, "player/runUp", 110, 8, false);
                 }
             }
-            if (IsColliding(enemies)&& isHurt == false && !EnemiesIsHurt(enemies))
+            if (IsColliding(enemies) && isHurt == false && !EnemiesIsHurt(enemies))
             {
                 isHurt = true;
                 health--;
@@ -357,7 +362,7 @@ namespace DungeonGame
 
                                     if (velocity.Y > 0)
                                     {
-                                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55 -2, 37, 15).Intersects(tiles[i].hitBox))
+                                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55 - 2, 37, 15).Intersects(tiles[i].hitBox))
                                         {
                                             position.X -= velocity.X;
                                             velocity.X = 0;
@@ -391,15 +396,21 @@ namespace DungeonGame
             oldKs = ks;
 
             currentAnimation.PlayAnim(gameTime);
+            if (room.isDark)
+                currentRoomDark = true;
+            else
+                currentRoomDark = false;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (currentRoomDark)
+                spriteBatch.Draw(tex, new Vector2(position.X - 970, position.Y - 950), Color.Black * 0.6f);
             Color color;
             if (isHurt)
             {
                 timer++;
-                if (timer > 5)
+                if (timer > 8)
                 {
                     timer = 0;
                     color = Color.White;
@@ -407,7 +418,6 @@ namespace DungeonGame
                 else
                 {
                     color = Color.Red;
-
                 }
             }
             else
@@ -415,7 +425,7 @@ namespace DungeonGame
                 color = Color.White;
             }
 
-           if (direction == Direction.Left)
+            if (direction == Direction.Left)
             {
                 if (isAttacking)
                     currentAnimation.Draw(spriteBatch, new Vector2(position.X - 30, position.Y), color);
@@ -424,7 +434,7 @@ namespace DungeonGame
             }
             else
                 currentAnimation.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
-           spriteBatch.Draw(tex, attackRect, Color.Black);
+          
         }
 
         public bool IsColliding(List<Enemy> enemies)
