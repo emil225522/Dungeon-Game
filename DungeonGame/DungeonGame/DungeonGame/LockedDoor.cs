@@ -10,7 +10,7 @@ namespace DungeonGame
 {
     class LockedDoor : Tile
     {
-        public Animation animation;
+        //public Animation animation;
         public Rectangle OwnHitBox { get { return new Rectangle((int)position.X, (int)position.Y-4, 63, 58); } }
         public int test;
         public float rotation;

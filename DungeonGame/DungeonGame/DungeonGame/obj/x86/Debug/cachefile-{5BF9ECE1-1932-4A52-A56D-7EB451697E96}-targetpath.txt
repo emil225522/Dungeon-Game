@@ -38,3 +38,4 @@ Content\tower.xnb
 Content\towerUnder.xnb
 Content\font1.xnb
 Content\dark.xnb
+Content\fly.xnb

@@ -21,7 +21,6 @@ namespace DungeonGame
         KeyboardState oldKs = Keyboard.GetState();
         public Rectangle attackRect;
         public Rectangle hitBox;
-        private bool animationIsLooping;
 
         public float health;
         public float maxHealth;
@@ -164,7 +163,6 @@ namespace DungeonGame
             }
             if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down) && (!isAttacking))
             {
-                animationIsLooping = false;
                 currentAnimation.currentFrame = 0;
             }
             else

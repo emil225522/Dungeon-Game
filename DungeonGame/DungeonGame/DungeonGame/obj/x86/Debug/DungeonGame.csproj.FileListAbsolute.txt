@@ -89,3 +89,4 @@ C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\obj
 C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\DungeonGame.exe
 C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\obj\x86\Debug\DungeonGame.pdb
 C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\dark.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\fly.xnb
