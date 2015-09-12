@@ -22,14 +22,15 @@ namespace DungeonGame
         List<GameObject> gameObject = new List<GameObject>();
         List<Tile> tiles = new List<Tile>();
         List<LockedDoor> lockedDoors = new List<LockedDoor>();
-        List<Drop> drops = new List<Drop>();
-        List<Enemy> enemies = new List<Enemy>();
+        public List<Drop> drops = new List<Drop>();
+        public List<Enemy> enemies = new List<Enemy>();
         List<Ghost> ghosts = new List<Ghost>();
-        List<Bomb> bombs = new List<Bomb>();
+        public List<Bomb> bombs = new List<Bomb>();
         Random random = new Random();
         List<Explosion> explosions = new List<Explosion>();
         public List<Projectile> blubaBall = new List<Projectile>();
         Color color = Color.White;
+        public bool isDark;
         Random rnd = new Random();
         ContentManager Content;
         Game1 game;
@@ -49,6 +50,8 @@ namespace DungeonGame
             else if (randomValue == 3)
                 color = Color.Yellow;
             else if (randomValue == 4)
+                if (rnd.Next(2) == 1)
+                    isDark = true;
                 color = new Color(random.Next(1, 255), random.Next(1, 255), random.Next(1, 255));
             generation.Generate(Content, tiles, "map");
             #region CreateDoorOrWall
@@ -201,7 +204,7 @@ namespace DungeonGame
             {
                 enemies[i].Update(tiles, gameTime, this,player);
             }
-            player.Update(gameTime, tiles, enemies, Content,drops, bombs);
+            player.Update(gameTime, tiles, enemies, Content,this);
         }
 
         public void Draw(SpriteBatch spriteBatch,Player player,GameTime gameTime)
