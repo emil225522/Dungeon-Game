@@ -50,9 +50,9 @@ namespace DungeonGame
             else if (randomValue == 3)
                 color = Color.Yellow;
             else if (randomValue == 4)
-                if (rnd.Next(2) == 1)
+                if (rnd.Next(1,2) == 1)
                     isDark = true;
-                color = new Color(random.Next(1, 255), random.Next(1, 255), random.Next(1, 255));
+                color = new Color(random.Next(60, 255), random.Next(60, 255), random.Next(60, 255));
             generation.Generate(Content, tiles, "map");
             #region CreateDoorOrWall
             if (doors[0] > 0)
@@ -262,6 +262,8 @@ namespace DungeonGame
                     return new BlubaTower(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 case "slime":
                     return new Slime(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                case "fly":
+                    return new Fly(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 default:
                     return null;
             }
