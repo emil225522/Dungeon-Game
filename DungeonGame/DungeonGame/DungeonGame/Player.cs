@@ -18,8 +18,6 @@ namespace DungeonGame
         const float FRICTION = 0.68f;
         public Vector2 velocity;
 
-
-       
         KeyboardState oldKs = Keyboard.GetState();
         public Rectangle attackRect;
         public Rectangle hitBox;
@@ -29,6 +27,7 @@ namespace DungeonGame
         public float maxHealth;
         public float speed;
         private sbyte isHurtTimer;
+        private sbyte timer = 0;
 
         public bool isHurt;
         public bool isAttacking;
@@ -49,6 +48,8 @@ namespace DungeonGame
         public Animation animationUp;
         public Animation animationDown;
         public Animation currentAnimation;
+
+        Texture2D tex;
 
         int saveTick;
 
@@ -77,6 +78,8 @@ namespace DungeonGame
             numberOfBombs = int.Parse(streamReader.ReadLine());
             streamReader.Close();
 
+            tex = Content.Load<Texture2D>("floor1");
+
             animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
             animationRight = new Animation(Content, "player/runRight", 110, 6, true);
             animationUp = new Animation(Content, "player/runUp", 110, 8, true);
@@ -93,7 +96,7 @@ namespace DungeonGame
         {
            
             saveTick++;
-            if (saveTick > 100)
+            if (saveTick > 200)
             {
                 saveTick = 0;
                 using (StreamWriter writer =
@@ -308,7 +311,7 @@ namespace DungeonGame
             }
             if (isHurt == true)
                 isHurtTimer++;
-            if (isHurtTimer > 100)
+            if (isHurtTimer > 45)
             {
                 isHurtTimer = 0;
                 isHurt = false;
@@ -394,10 +397,25 @@ namespace DungeonGame
         {
             Color color;
             if (isHurt)
-                color = Color.Red;
+            {
+                timer++;
+                if (timer > 5)
+                {
+                    timer = 0;
+                    color = Color.White;
+                }
+                else
+                {
+                    color = Color.Red;
+
+                }
+            }
             else
+            {
                 color = Color.White;
-            if (direction == Direction.Left)
+            }
+
+           if (direction == Direction.Left)
             {
                 if (isAttacking)
                     currentAnimation.Draw(spriteBatch, new Vector2(position.X - 30, position.Y), color);
@@ -406,6 +424,7 @@ namespace DungeonGame
             }
             else
                 currentAnimation.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+           spriteBatch.Draw(tex, attackRect, Color.Black);
         }
 
         public bool IsColliding(List<Enemy> enemies)
