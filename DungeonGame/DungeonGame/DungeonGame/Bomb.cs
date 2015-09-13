@@ -27,7 +27,7 @@ namespace DungeonGame
         {
             bombTick++;
             animation.PlayAnim(gameTime);
-            if (bombTick > 120)
+            if (bombTick > 90)
             {
                 willExplode = true;
             }

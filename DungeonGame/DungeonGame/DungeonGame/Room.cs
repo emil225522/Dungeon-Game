@@ -151,7 +151,7 @@ namespace DungeonGame
             {
                 if (bombs[i].willExplode)
                 {
-                    explosions.Add(new Explosion(new Vector2(bombs[i].position.X- 65,bombs[i].position.Y- 65), new Animation(Content, "explosion", 200, 4, false)));
+                    explosions.Add(new Explosion(new Vector2(bombs[i].position.X- 65,bombs[i].position.Y- 65), new Animation(Content, "explosion", 130, 4, false)));
                     bombs.RemoveAt(i);
                 }
             }
@@ -173,6 +173,11 @@ namespace DungeonGame
                     if (explosions[i].HitBox.Intersects(tiles[j].hitBox))
                         if (tiles[j].type == 4)
                             tiles.RemoveAt(j);
+                }
+                for (int j = 0; j < enemies.Count; j++)
+                {
+                    if (explosions[i].HitBox.Intersects(enemies[j].hitBox))
+                        enemies[j].hp -= 55;
                 }
             }
             for (int i = 0; i < ghosts.Count; i++)

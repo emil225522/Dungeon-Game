@@ -159,7 +159,7 @@ namespace DungeonGame
                 {
                     bombPosition = new Vector2(position.X - 8, position.Y - 30);
                 }
-                room.bombs.Add(new Bomb(new Animation(Content, "bomb", 500, 4, false), bombPosition));
+                room.bombs.Add(new Bomb(new Animation(Content, "bomb", 400, 4, false), bombPosition));
             }
             if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down) && (!isAttacking))
             {
@@ -325,69 +325,57 @@ namespace DungeonGame
             {
                 if (tiles[i].type > 2)
                 {
-                    if (tiles[i].position.X < position.X + 500)
+                    if (velocity.X > 0)
                     {
-                        if (tiles[i].position.X > position.X - 500)
+                        if (new Rectangle((int)position.X - 2, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
                         {
-                            if (tiles[i].position.Y < position.Y + 400)
-                            {
-                                if (position.Y - tiles[i].position.Y < 500)
-                                {
-                                    if (velocity.X > 0)
-                                    {
-                                        if (new Rectangle((int)position.X - 2, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
-                                        {
-                                            position.Y -= velocity.Y;
-                                            velocity.Y = 0;
-                                        }
-                                    }
-                                    else if (velocity.X < 0)
-                                    {
-                                        if (new Rectangle((int)position.X + 2, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
-                                        {
-                                            position.Y -= velocity.Y;
-                                            velocity.Y = 0;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (new Rectangle((int)position.X, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
-                                        {
-                                            position.Y -= velocity.Y;
-                                            velocity.Y = 0;
-                                        }
-                                    }
-
-                                    if (velocity.Y > 0)
-                                    {
-                                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55 - 2, 37, 15).Intersects(tiles[i].hitBox))
-                                        {
-                                            position.X -= velocity.X;
-                                            velocity.X = 0;
-                                        }
-                                    }
-                                    else if (velocity.Y < 0)
-                                    {
-                                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55 + 2, 37, 15).Intersects(tiles[i].hitBox))
-                                        {
-                                            position.X -= velocity.X;
-                                            velocity.X = 0;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
-                                        {
-                                            position.X -= velocity.X;
-                                            velocity.X = 0;
-                                        }
-                                    }
-
-
-                                }
-                            }
+                            position.Y -= velocity.Y;
+                            velocity.Y = 0;
                         }
                     }
+                    else if (velocity.X < 0)
+                    {
+                        if (new Rectangle((int)position.X + 2, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
+                        {
+                            position.Y -= velocity.Y;
+                            velocity.Y = 0;
+                        }
+                    }
+                    else
+                    {
+                        if (new Rectangle((int)position.X, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
+                        {
+                            position.Y -= velocity.Y;
+                            velocity.Y = 0;
+                        }
+                    }
+
+                    if (velocity.Y > 0)
+                    {
+                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55 - 2, 37, 15).Intersects(tiles[i].hitBox))
+                        {
+                            position.X -= velocity.X;
+                            velocity.X = 0;
+                        }
+                    }
+                    else if (velocity.Y < 0)
+                    {
+                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55 + 2, 37, 15).Intersects(tiles[i].hitBox))
+                        {
+                            position.X -= velocity.X;
+                            velocity.X = 0;
+                        }
+                    }
+                    else
+                    {
+                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
+                        {
+                            position.X -= velocity.X;
+                            velocity.X = 0;
+                        }
+                    }
+
+
                 }
             }
             #endregion

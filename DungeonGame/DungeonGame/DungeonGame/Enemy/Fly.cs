@@ -12,19 +12,25 @@ namespace DungeonGame
     {
         float angle;
         float angleDirection;
+        bool goingLeft;
         Vector2 circelingPlace;
         public Fly(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "fly", 100, 2, true), seed, 1.5F, 50, 1)
+            : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
             circelingPlace = new Vector2(rnd.Next(50, 500), rnd.Next(50, 500));
-            angleDirection = (float)rnd.NextDouble();
+            angleDirection = (float)rnd.Next(200, 500) / 10000;
+            if (rnd.Next(2) == 1)
+                goingLeft = true;
         }
 
         public override void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
         {
             base.Update(tiles, gameTime, room, player);
+            if (goingLeft)
                 angle -= angleDirection;
+            else
+                angle += angleDirection;
             position = new Vector2((float)(Math.Cos(angle)) * 60 + circelingPlace.X, (float)(Math.Sin(angle)) * 60 + circelingPlace.Y);
 
             if (!IsColliding(tiles))

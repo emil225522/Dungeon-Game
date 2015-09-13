@@ -52,6 +52,8 @@ namespace DungeonGame
         public virtual void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
         {
             animation.PlayAnim(gameTime);
+            if (hp < 1)
+                isdead = true;
             hitBox = new Rectangle((int)position.X, (int)position.Y, animation.frameWidth, animation.frameHeight);
             if (isHurt == true)
                 isHurtTimer++;
