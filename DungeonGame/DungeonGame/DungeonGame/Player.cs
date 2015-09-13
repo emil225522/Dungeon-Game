@@ -163,7 +163,11 @@ namespace DungeonGame
             }
             if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down) && (!isAttacking))
             {
-                currentAnimation.currentFrame = 0;
+                //makes sure the animation part where the player stops is when he is standing
+                if (currentAnimation.asset == "player/runRight")
+                    currentAnimation.currentFrame = 2;
+                else
+                    currentAnimation.currentFrame = 3;
             }
             else
                 currentAnimation.looping = true;

@@ -269,6 +269,8 @@ namespace DungeonGame
                     return new Slime(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 case "fly":
                     return new Fly(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                case "swordEnemy":
+                    return new SwordEnemy(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 default:
                     return null;
             }

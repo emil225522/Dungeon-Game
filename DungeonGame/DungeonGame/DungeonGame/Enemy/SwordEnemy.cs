@@ -11,7 +11,7 @@ namespace DungeonGame
     class SwordEnemy : Enemy
     {
         public SwordEnemy(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "bat", 100, 2, true), seed, 1.5F, 50, 1)
+            : base(position, new Animation(Content, "swordEnemy", 100, 1, true), seed, 1.5F, 75, 1)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
@@ -19,40 +19,12 @@ namespace DungeonGame
         public override void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
         {
             base.Update(tiles, gameTime, room, player);
-            if (!IsColliding(tiles))
-            {
-                if (direction == Direction.Down)
-                    position.Y += speed;
-                else if (direction == Direction.Left)
-                    position.X -= speed;
-                else if (direction == Direction.Right)
-                    position.X += speed;
-                else if (direction == Direction.Up)
-                    position.Y -= speed;
-            }
-            else
-            {
-                if (direction == Direction.Down)
-                {
-                    position.Y -= speed * 4;
-                    direction = Direction.Up;
-                }
-                else if (direction == Direction.Left)
-                {
-                    position.X += speed * 4;
-                    direction = Direction.Right;
-                }
-                else if (direction == Direction.Right)
-                {
-                    position.X -= speed * 4;
-                    direction = Direction.Left;
-                }
-                else if (direction == Direction.Up)
-                {
-                    position.Y += speed * 4;
-                    direction = Direction.Down;
-                }
-            }
+            float XDistance = position.X - player.position.X - 40;
+            float YDistance = position.Y - player.position.Y - 40;
+            //sets the velocity to that with the right angle thanks to this function
+            velocity.X -= 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
+            velocity.Y -= 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
+
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -60,7 +32,7 @@ namespace DungeonGame
             if (isHurt)
                 color = Color.Red;
             else
-                color = Color.Black;
+                color = Color.White;
             animation.Draw(spriteBatch, position, color);
         }
 
