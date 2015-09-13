@@ -13,6 +13,7 @@ namespace DungeonGame
         float angle;
         float angleDirection;
         bool goingLeft;
+        Color normalColor;
         Vector2 circelingPlace;
         public Fly(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1)
@@ -22,6 +23,7 @@ namespace DungeonGame
             angleDirection = (float)rnd.Next(200, 500) / 10000;
             if (rnd.Next(2) == 1)
                 goingLeft = true;
+            normalColor = new Color(rnd.Next(50, 255), rnd.Next(50, 255), rnd.Next(50, 255));
         }
 
         public override void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
@@ -57,7 +59,7 @@ namespace DungeonGame
             if (isHurt)
                 color = Color.Red;
             else
-                color = Color.White;
+                color = normalColor;
             animation.Draw(spriteBatch, position, color);
         }
 
