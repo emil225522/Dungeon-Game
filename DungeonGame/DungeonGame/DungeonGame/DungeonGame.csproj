@@ -85,6 +85,7 @@
     <Compile Include="Enemy\Ghost.cs" />
     <Compile Include="Enemy\Projectile.cs" />
     <Compile Include="Enemy\Slime.cs" />
+    <Compile Include="Enemy\SwordEnemy.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="FrameCounter.cs" />
     <Compile Include="GameObject.cs" />
