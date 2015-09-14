@@ -31,6 +31,7 @@ namespace DungeonGame
         public sbyte isHurtTimer;
         public int walktimer;
         public sbyte type;
+        public sbyte state;
 
         protected Animation animation;
         protected Random rnd;

@@ -251,9 +251,12 @@ namespace DungeonGame
                 {
                     if (attackRect.Intersects(enemies[i].hitBox) && enemies[i].isHurt == false)
                     {
-                        enemies[i].hp -= 20;
-                        enemies[i].isHurt = true;
-                        if (enemies[i].type == 1)
+                        if (enemies[i].state == 0)
+                        {
+                            enemies[i].hp -= 20;
+                            enemies[i].isHurt = true;
+                        }
+                            if (enemies[i].type == 1)
                         {
                             if (direction == Direction.Right)
                                 enemies[i].velocity.X = 30;
