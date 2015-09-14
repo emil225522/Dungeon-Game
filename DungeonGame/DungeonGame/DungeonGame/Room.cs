@@ -34,7 +34,7 @@ namespace DungeonGame
         Random rnd = new Random();
         ContentManager Content;
         Game1 game;
-        Vector2 roomPosition;
+        public Vector2 roomPosition;
 
         public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom)
         {

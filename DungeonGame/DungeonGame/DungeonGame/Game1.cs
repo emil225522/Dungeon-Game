@@ -28,6 +28,7 @@ namespace DungeonGame
         SpriteFont font1;
         public FrameCounter _frameCounter = new FrameCounter();
         Random rnd = new Random();
+        Texture2D mapTexture;
 
         public Game1()
         {
@@ -60,7 +61,7 @@ namespace DungeonGame
             blackBarTex = Content.Load<Texture2D>("blackBar");
             hearthTex = Content.Load<Texture2D>("hearth");
             font1 = Content.Load<SpriteFont>("font1");
-
+            mapTexture = Content.Load<Texture2D>("towerUnder");
             player = new Player(new Vector2(200, 300), Content);
 
             spawn.Add(new Tuple<string,int>("slime", 3));
@@ -122,6 +123,15 @@ namespace DungeonGame
             spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(750, 10), Color.White);
             spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
             spriteBatch.DrawString(font1, "Level " + player.level, new Vector2(750, -20), Color.White);
+
+            foreach(KeyValuePair<Vector2,Room> room in rooms)
+            {
+                if (currentRoom == room.Value)
+                    spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X *17 + 200, (int)room.Key.Y *11 + 200,15,10), Color.BlueViolet);
+                else
+                    spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.LightGreen);
+            }
+            
             for (int i = 0; i < player.health; i++)
                 spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 50, -50), Color.White);
 
