@@ -55,7 +55,7 @@ namespace DungeonGame
                 color = new Color(random.Next(60, 255), random.Next(60, 255), random.Next(60, 255));
             generation.Generate(Content, tiles, "map");
             #region CreateDoorOrWall
-            if (doors[0] > 0)
+            if (doors[0] == 1)
             {
                 tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 2));
                 if (fromRoom != 2)
@@ -64,7 +64,7 @@ namespace DungeonGame
             else
                 tiles.Add(new Tile(generation.wallLeft, new Vector2(50, 300), 3));
 
-            if (doors[1] > 0)
+            if (doors[1] == 1)
             {
                 tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 2));
                 if (fromRoom != 1)
@@ -73,7 +73,7 @@ namespace DungeonGame
             else
                 tiles.Add(new Tile(generation.wallUp, new Vector2(450, 50), 3));
 
-            if (doors[2] > 0)
+            if (doors[2] == 1)
             {
                 tiles.Add(new Tile(generation.doorRight, new Vector2(850, 300), 2));
                 if (fromRoom != 0)
@@ -82,7 +82,7 @@ namespace DungeonGame
             else
                 tiles.Add(new Tile(generation.wallRight, new Vector2(850, 300), 3));
 
-            if (doors[3] > 0)
+            if (doors[3] == 1)
             {
                 tiles.Add(new Tile(generation.doorDown, new Vector2(450, 550), 2));
                 if (fromRoom != 3)
@@ -297,31 +297,31 @@ namespace DungeonGame
 
             if (!game.RoomExists(nextRoom))
             {
-                int[] doors = {0};
+                int[] doors = { 0 };
                 sbyte fromRoom = 0;
+                sbyte i = 3;
                 switch (side)
                 {
                     case Doors.Left:
                         fromRoom = 0;
-                        doors = new int[] { rnd.Next(0, 2), rnd.Next(0, 2), 1, rnd.Next(0, 2) };
+                        doors = new int[] { rnd.Next(0, i), rnd.Next(0, i), 1, rnd.Next(0, i) };
                         break;
                     case Doors.Up:
                         fromRoom = 1;
-                        doors = new int[] { rnd.Next(0, 2), 1, rnd.Next(0, 2), rnd.Next(0, 2) };
+                        doors = new int[] { rnd.Next(0, i), 1, rnd.Next(0,i), rnd.Next(0, i) };
                         break;
                     case Doors.Right:
                         fromRoom = 2;
-                        doors = new int[] { 1, rnd.Next(0, 2), rnd.Next(0, 2), rnd.Next(0, 2) };
+                        doors = new int[] { 1, rnd.Next(0, i), rnd.Next(0, i), rnd.Next(0, i) };
                         break;
                     case Doors.Down:
                         fromRoom = 3;
-                        doors = new int[] { rnd.Next(0, 2), rnd.Next(0, 2), rnd.Next(0, 2), 1 };
+                        doors = new int[] { rnd.Next(0, i), rnd.Next(0, i), rnd.Next(0, i), 1 };
                         break;
 
                 }
                 game.CreateRoom(nextRoom, doors, fromRoom);
             }
-
             game.SetCurrentRoom(nextRoom);
         }
     }

@@ -398,7 +398,7 @@ namespace DungeonGame
         public void Draw(SpriteBatch spriteBatch)
         {
             if (currentRoomDark)
-                spriteBatch.Draw(tex, new Vector2(position.X - 970, position.Y - 950), Color.Black * 0.6f);
+                spriteBatch.Draw(tex, new Rectangle((int)position.X - 1870, (int)position.Y - 1950,4000,4000), Color.Black * 0.19f);
             Color color;
             if (isHurt)
             {
