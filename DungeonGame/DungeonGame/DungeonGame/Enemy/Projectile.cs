@@ -24,7 +24,7 @@ namespace DungeonGame
         {
             Position += Velocity;
             rotation -= 0.2f;
-            if (HitBox.Intersects(room.player.hitBox))
+            if (HitBox.Intersects(room.player.HitBox))
             {
                 room.player.isHurt = true;
                 //Room.gameObjectsToRemove.Add(this);

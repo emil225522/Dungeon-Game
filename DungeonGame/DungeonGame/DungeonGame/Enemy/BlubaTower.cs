@@ -45,8 +45,8 @@ namespace DungeonGame
                 }
                 Vector2 ballVelocity = new Vector2();
                 //calculate the distance between the two objects
-                float XDistance = position.X - player.position.X - 40;
-                float YDistance = position.Y - player.position.Y - 40;
+                float XDistance = position.X - player.Position.X - 40;
+                float YDistance = position.Y - player.Position.Y - 40;
                 //sets the velocity to that with the right angle thanks to this function
                 ballVelocity.X -= 5 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
                 ballVelocity.Y -= 5 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));

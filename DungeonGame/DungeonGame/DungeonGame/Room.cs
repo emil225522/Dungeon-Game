@@ -22,10 +22,8 @@ namespace DungeonGame
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjects = new List<GameObject>();
         List<Tile> tiles = new List<Tile>();
-        List<LockedDoor> lockedDoors = new List<LockedDoor>();
         public List<Drop> drops = new List<Drop>();
         public List<Enemy> enemies = new List<Enemy>();
-        public List<Bomb> bombs = new List<Bomb>();
         Random random = new Random();
         Color color = Color.White;
         public bool isDark;
@@ -107,28 +105,28 @@ namespace DungeonGame
         {
             this.player = player;
             #region doorfunction
-            if (player.position.X < 0) 
+            if (player.Position.X < 0) 
             {
                 ExistOrCreate(Doors.Left);
-                player.position.X = 50 * 18;
+                player.Position = new Vector2(50 * 18,player.Position.Y);
             }
 
-            if (player.position.X > (50 * 18))
+            if (player.Position.X > (50 * 18))
             {
                 ExistOrCreate(Doors.Right);
-                player.position.X = 0;
+                player.Position = new Vector2(0,player.Position.Y);
             }
 
-            if (player.position.Y < -20) 
+            if (player.Position.Y < -20) 
             {
                 ExistOrCreate(Doors.Down);
-                player.position.Y = 50 * 11;
+                player.Position = new Vector2(player.Position.X,50 * 11);
             }
 
-            if (player.position.Y > (50 * 11)) 
+            if (player.Position.Y > (50 * 11)) 
             {
                 ExistOrCreate(Doors.Up);
-                player.position.Y = -20;
+                player.Position = new Vector2(player.Position.X,-20);
             }
             #endregion
             for (int i = 0; i < enemies.Count; i++)
@@ -183,8 +181,6 @@ namespace DungeonGame
             foreach (GameObject g in gameObjects)
                 g.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            foreach (LockedDoor l in lockedDoors)
-                l.Draw(spriteBatch,color);
         }
 
         private Enemy CreateMob(String mob)

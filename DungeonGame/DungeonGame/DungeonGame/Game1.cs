@@ -115,7 +115,7 @@ namespace DungeonGame
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
 
-            var fps = string.Format("FPS: {0} {1}", _frameCounter.AverageFramesPerSecond, player.velocity);
+            var fps = string.Format("FPS: {0} {1}", _frameCounter.AverageFramesPerSecond, player.Velocity);
 
             currentRoom.Draw(spriteBatch,player,gameTime);
             spriteBatch.Draw(blackBarTex, new Vector2(50,-100), Color.White);

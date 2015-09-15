@@ -23,7 +23,7 @@ namespace DungeonGame
         internal override void Update(GameTime gameTime, Player player)
         {
 
-            if (player.hitBox.Intersects(OwnHitBox))
+            if (player.HitBox.Intersects(OwnHitBox))
                 test++;
             else test = 0;
             if (test > 20 && player.numberOfKeys > 0)

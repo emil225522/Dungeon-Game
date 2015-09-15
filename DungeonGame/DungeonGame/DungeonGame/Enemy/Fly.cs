@@ -29,8 +29,8 @@ namespace DungeonGame
         public override void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
         {
             base.Update(tiles, gameTime, room, player);
-                float XDistance = position.X - player.position.X - 40;
-                float YDistance = position.Y - player.position.Y - 40;
+                float XDistance = position.X - player.Position.X - 40;
+                float YDistance = position.Y - player.Position.Y - 40;
                 //sets the velocity to that with the right angle thanks to this function
                 circelingPlace.X -= 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
                 circelingPlace.Y -= 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));

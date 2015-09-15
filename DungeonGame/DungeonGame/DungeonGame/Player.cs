@@ -14,18 +14,19 @@ namespace DungeonGame
 {
     class Player
     {
-        public Vector2 position;
+        #region Variables
+        public Vector2 Position {get; set;}
         const float FRICTION = 0.68f;
-        public Vector2 velocity;
+        public Vector2 Velocity {get; set;}
 
         KeyboardState oldKs = Keyboard.GetState();
-        public Rectangle attackRect;
-        public Rectangle hitBox;
+        Rectangle attackRect;
+        public Rectangle HitBox { get { return new Rectangle((int)Position.X + 10, (int)Position.Y + 55, 37, 15); } }
 
-        public float health;
-        public float maxHealth;
-        public float speed;
-        private sbyte isHurtTimer;
+        public float health {get; set;}
+        public float maxHealth{get; set;}
+        public float speed {get; set;} 
+        private sbyte isHurtTimer ;
         private sbyte timer = 0;
 
         public bool isHurt;
@@ -36,18 +37,18 @@ namespace DungeonGame
         public int xp;
         public int xpNeeded;
         public int level;
-        public int numberOfKeys;
-        public int numberOfBombs;
+        public int numberOfKeys {get; set;}
+        public int numberOfBombs {get; set;}
 
-        public Animation attackRight;
-        public Animation attackDown; 
-        public Animation attackLeft;
-        public Animation attackUp;
-        public Animation animationLeft;
-        public Animation animationRight;
-        public Animation animationUp;
-        public Animation animationDown;
-        public Animation currentAnimation;
+        private Animation attackRight;
+        private Animation attackDown;
+        private Animation attackLeft;
+        private Animation attackUp;
+        private Animation animationLeft;
+        private Animation animationRight;
+        private Animation animationUp;
+        private Animation animationDown;
+        public Animation currentAnimation {get; set;};
 
         Texture2D tex;
 
@@ -62,9 +63,10 @@ namespace DungeonGame
         };
         Direction direction;
         public sbyte state = 1;
+        #endregion
         public Player(Vector2 position, ContentManager Content)
         {
-            this.position = position;
+            this.Position = position;
             speed = 1.4f;
             direction = Direction.Down;
             maxHealth = 5;
@@ -125,11 +127,11 @@ namespace DungeonGame
             }
             #endregion
            
-            velocity = velocity * FRICTION;
-            if (Math.Abs(velocity.X) < 0.1f)
-                velocity.X = 0;
-            if (Math.Abs(velocity.Y) < 0.1f)
-                velocity.Y = 0;
+            Velocity = Velocity * FRICTION;
+            if (Math.Abs(Velocity.X) < 0.1f)
+                Velocity = new Vector2(0,Velocity.Y);
+            if (Math.Abs(Velocity.Y) < 0.1f)
+                Velocity = new Vector2(Velocity.X, 0);
 
             if (xp >= xpNeeded)
             {
@@ -138,26 +140,25 @@ namespace DungeonGame
                 xp = 0;
             }
             KeyboardState ks = Keyboard.GetState();
-            hitBox = new Rectangle((int)position.X + 10, (int)position.Y + 55, 37, 15);
             if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter) && numberOfBombs > 0)
             {
                 numberOfBombs--;
                 Vector2 bombPosition = new Vector2();
                 if (direction == Direction.Down)
                 {
-                    bombPosition = new Vector2(position.X - 8, position.Y + 60);
+                    bombPosition = new Vector2(Position.X - 8, Position.Y + 60);
                 }
                 if (direction == Direction.Left)
                 {
-                    bombPosition = new Vector2(position.X - 50, position.Y + 15);
+                    bombPosition = new Vector2(Position.X - 50, Position.Y + 15);
                 }
                 if (direction == Direction.Right)
                 {
-                    bombPosition = new Vector2(position.X + 20, position.Y + 20);
+                    bombPosition = new Vector2(Position.X + 20, Position.Y + 20);
                 }
                 if (direction == Direction.Up)
                 {
-                    bombPosition = new Vector2(position.X - 8, position.Y - 30);
+                    bombPosition = new Vector2(Position.X - 8, Position.Y - 30);
                 }
                 gameObjects.Add(new Bomb(new Animation(Content, "bomb", 400, 4, false), bombPosition,Content));
             }
@@ -177,26 +178,26 @@ namespace DungeonGame
                 if (ks.IsKeyDown(Keys.Left))
                 {
 
-                    velocity.X -= speed;
+                    Velocity -= new Vector2(speed,0);
                     direction = Direction.Left;
                 }
                 if (ks.IsKeyDown(Keys.Right))
                 {
-                    velocity.X += speed;
+                    Velocity += new Vector2(speed,0);
 
                     direction = Direction.Right;
                 }
                 if (ks.IsKeyDown(Keys.Up))
                 {
 
-                    velocity.Y -= speed;
+                    Velocity -= new Vector2(0,speed);
                     direction = Direction.Up;
                 }
 
                 if (ks.IsKeyDown(Keys.Down))
                 {
 
-                    velocity.Y += speed;
+                    Velocity += new Vector2(0,speed);
                     direction = Direction.Down;
                 }
             }
@@ -235,16 +236,16 @@ namespace DungeonGame
                 switch (direction)
                 {
                     case Direction.Left:
-                        attackRect = new Rectangle((int)position.X - 30, (int)position.Y + 20, 50, 65);
+                        attackRect = new Rectangle((int)Position.X - 30, (int)Position.Y + 20, 50, 65);
                         break;
                     case Direction.Right:
-                        attackRect = new Rectangle((int)position.X + 10, (int)position.Y + 20, 50, 65);
+                        attackRect = new Rectangle((int)Position.X + 10, (int)Position.Y + 20, 50, 65);
                         break;
                     case Direction.Up:
-                        attackRect = new Rectangle((int)position.X - 15, (int)position.Y - 5, 75, 50);
+                        attackRect = new Rectangle((int)Position.X - 15, (int)Position.Y - 5, 75, 50);
                         break;
                     case Direction.Down:
-                        attackRect = new Rectangle((int)position.X - 15, (int)position.Y + 50, 70, 50);
+                        attackRect = new Rectangle((int)Position.X - 15, (int)Position.Y + 50, 70, 50);
                         break;
                 }
                 for (int i = 0; i < enemies.Count; i++)
@@ -284,7 +285,7 @@ namespace DungeonGame
             }
             for (int i = 0; i < room.drops.Count; i++)
             {
-                if (room.drops[i].HitBox.Intersects(hitBox))
+                if (room.drops[i].HitBox.Intersects(HitBox))
                 {
                     if (room.drops[i].type == 1 && health < maxHealth)
                         health++;
@@ -297,7 +298,7 @@ namespace DungeonGame
             }
             if (isAttacking)
             {
-                velocity = new Vector2();
+                Velocity = new Vector2();
                 counter++;
                 if (counter > 18)
                 {
@@ -326,59 +327,59 @@ namespace DungeonGame
                 isHurtTimer = 0;
                 isHurt = false;
             }
-            position += velocity;
+            Position += Velocity;
             #region Collision
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (tiles[i].type > 2)
                 {
-                    if (velocity.X > 0)
+                    if (Velocity.X > 0)
                     {
-                        if (new Rectangle((int)position.X - 2, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
+                        if (new Rectangle((int)Position.X - 2, (int)Position.Y + (int)Velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
                         {
-                            position.Y -= velocity.Y;
-                            velocity.Y = 0;
+                            Position -= new Vector2(0,Velocity.Y);
+                            Velocity = new Vector2(Velocity.X,0);
                         }
                     }
-                    else if (velocity.X < 0)
+                    else if (Velocity.X < 0)
                     {
-                        if (new Rectangle((int)position.X + 2, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
+                        if (new Rectangle((int)Position.X + 2, (int)Position.Y + (int)Velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
                         {
-                            position.Y -= velocity.Y;
-                            velocity.Y = 0;
+                            Position -= new Vector2(0,Velocity.Y);
+                            Velocity = new Vector2(Velocity.X,0);
                         }
                     }
                     else
                     {
-                        if (new Rectangle((int)position.X, (int)position.Y + (int)velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
+                        if (new Rectangle((int)Position.X, (int)Position.Y + (int)Velocity.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
                         {
-                            position.Y -= velocity.Y;
-                            velocity.Y = 0;
+                            Position -= new Vector2(0,Velocity.Y);
+                            Velocity = new Vector2(Velocity.X,0);
                         }
                     }
 
-                    if (velocity.Y > 0)
+                    if (Velocity.Y > 0)
                     {
-                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55 - 2, 37, 15).Intersects(tiles[i].hitBox))
+                        if (new Rectangle((int)Position.X + (int)Velocity.X, (int)Position.Y + 55 - 2, 37, 15).Intersects(tiles[i].hitBox))
                         {
-                            position.X -= velocity.X;
-                            velocity.X = 0;
+                            Position -= new Vector2(Velocity.X,0);
+                            Velocity = new Vector2(0,Velocity.Y);
                         }
                     }
-                    else if (velocity.Y < 0)
+                    else if (Velocity.Y < 0)
                     {
-                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55 + 2, 37, 15).Intersects(tiles[i].hitBox))
+                        if (new Rectangle((int)Position.X + (int)Velocity.X, (int)Position.Y + 55 + 2, 37, 15).Intersects(tiles[i].hitBox))
                         {
-                            position.X -= velocity.X;
-                            velocity.X = 0;
+                            Position -= new Vector2(Velocity.X,0);
+                            Velocity = new Vector2(0,Velocity.Y);
                         }
                     }
                     else
                     {
-                        if (new Rectangle((int)position.X + (int)velocity.X, (int)position.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
+                        if (new Rectangle((int)Position.X + (int)Velocity.X, (int)Position.Y + 55, 37, 15).Intersects(tiles[i].hitBox))
                         {
-                            position.X -= velocity.X;
-                            velocity.X = 0;
+                            Position -= new Vector2(Velocity.X,0);
+                            Velocity = new Vector2(0,Velocity.Y);
                         }
                     }
 
@@ -398,7 +399,7 @@ namespace DungeonGame
         public void Draw(SpriteBatch spriteBatch)
         {
             if (currentRoomDark)
-                spriteBatch.Draw(tex, new Rectangle((int)position.X - 1870, (int)position.Y - 1950,4000,4000), Color.Black * 0.19f);
+                spriteBatch.Draw(tex, new Rectangle((int)Position.X - 1870, (int)Position.Y - 1950,4000,4000), Color.Black * 0.19f);
             Color color;
             if (isHurt)
             {
@@ -421,12 +422,12 @@ namespace DungeonGame
             if (direction == Direction.Left)
             {
                 if (isAttacking)
-                    currentAnimation.Draw(spriteBatch, new Vector2(position.X - 30, position.Y), color);
+                    currentAnimation.Draw(spriteBatch, new Vector2(Position.X - 30, Position.Y), color);
                 else
-                    currentAnimation.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+                    currentAnimation.Draw(spriteBatch, new Vector2(Position.X - 15, Position.Y), color);
             }
             else
-                currentAnimation.Draw(spriteBatch, new Vector2(position.X - 15, position.Y), color);
+                currentAnimation.Draw(spriteBatch, new Vector2(Position.X - 15, Position.Y), color);
           
         }
 
@@ -434,7 +435,7 @@ namespace DungeonGame
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                if (hitBox.Intersects(enemies[i].hitBox))
+                if (HitBox.Intersects(enemies[i].hitBox))
                 {
                     return true;
                 }
