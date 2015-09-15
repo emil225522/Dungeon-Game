@@ -379,6 +379,15 @@
       <Output>C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\swordEnemy.xnb</Output>
       <Time>2015-09-13T23:13:33.924929+02:00</Time>
     </Item>
+    <Item>
+      <Source>crack.png</Source>
+      <Name>crack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\crack.xnb</Output>
+      <Time>2015-09-15T16:36:07.5512138+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

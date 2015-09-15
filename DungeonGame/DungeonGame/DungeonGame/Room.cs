@@ -92,11 +92,11 @@ namespace DungeonGame
                 tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
             #endregion
 
-            //for (int i = 0; i < tiles.Count; i++)
-            //{
-            //    if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
-            //        tiles.Add(new Tile(Content.Load<Texture2D>("rock"), tiles[i].position, 4));
-            //}
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
+                    tiles.Add(new Tile(Content.Load<Texture2D>("crack"), tiles[i].position, 1));
+            }
             for (int i = 0; i < spawn.Count; i++)
             {
                 for (int j = 0; j < spawn[i].Item2; j++)
@@ -195,7 +195,7 @@ namespace DungeonGame
             }
                 foreach (Projectile p in blubaBall)
             {
-                p.Update();
+                p.Update(gameTime);
             }
             foreach (Tile t in tiles)
             {
@@ -222,7 +222,7 @@ namespace DungeonGame
                 e.Draw(spriteBatch);
             for (int i = 0; i < blubaBall.Count; i++)
             {
-                if (blubaBall[i].hitBox.Intersects(player.hitBox))
+                if (blubaBall[i].HitBox.Intersects(player.hitBox))
                 {
                     player.health--;
                     blubaBall.RemoveAt(i);
@@ -300,6 +300,7 @@ namespace DungeonGame
                 int[] doors = { 0 };
                 sbyte fromRoom = 0;
                 sbyte i = 3;
+
                 switch (side)
                 {
                     case Doors.Left:

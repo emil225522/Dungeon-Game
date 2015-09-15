@@ -11,30 +11,22 @@ using Microsoft.Xna.Framework.Media;
 
 namespace DungeonGame
 {
-    class Projectile
+    class Projectile : GameObject
     {
-        public Vector2 velocity;
-        public Vector2 position;
-        //public Animation animation; may be used later on
-        public Rectangle hitBox;
-        public Texture2D texture;
         float rotation;
 
         public Projectile(Texture2D texture, Vector2 position, Vector2 velocity)
+            : base (position,texture,1)
         {
-            this.texture = texture;
-            this.position = position;
-            this.velocity = velocity;
         }
-        public void Update()
+        public override void Update(GameTime gameTime)
         {
-            hitBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-            position += velocity;
+            Position += Velocity;
             rotation-= 0.2f;
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, rotation,new Vector2(texture.Width/2,texture.Height/2), 1.0f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Texture, Position, null, Color.White, rotation,new Vector2(Texture.Width/2,Texture.Height/2), 1.0f, SpriteEffects.None, 0f);
         }
     }
 }
