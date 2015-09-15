@@ -11,26 +11,20 @@ using Microsoft.Xna.Framework.Media;
 
 namespace DungeonGame
 {
-    class Drop
+    class Drop : GameObject
     {
-        public Texture2D texture;
-        public Vector2 position;
-        public Rectangle hitBox;
-        public sbyte type;
-
         public Drop(Texture2D texture, Vector2 position, sbyte type)
+            : base (position,texture,0)
         {
-            this.texture = texture;
-            this.position = position;
-            this.type = type;
         }
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Room room)
         {
-            hitBox = new Rectangle((int)position.X,(int)position.Y, texture.Width / 2,texture.Height / 2);
+            base.Update(gameTime, room);
         }
-        public void Draw(SpriteBatch spriteBatch)
+
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture,hitBox,Color.White);
+            base.Draw(spriteBatch);
         }
     }
 }

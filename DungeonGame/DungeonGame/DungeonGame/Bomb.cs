@@ -11,30 +11,26 @@ using Microsoft.Xna.Framework.Media;
 
 namespace DungeonGame
 {
-    class Bomb
+    class Bomb : GameObject
     {
-        public Animation animation;
-        public Vector2 position;
-        public bool willExplode;
-        int bombTick;
-
-        public Bomb(Animation animation,Vector2 position)
+        ContentManager content;
+        public Bomb(Animation animation,Vector2 position, ContentManager Content)
+            : base (position,animation,1)
         {
-            this.position = position;
-            this.animation = animation;
+            content = Content;
         }
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Room room)
         {
-            bombTick++;
-            animation.PlayAnim(gameTime);
-            if (bombTick > 90)
+            base.Update(gameTime, room);
+            if (Animation.currentFrame == Animation.numOffFrames - 1)
             {
-                willExplode = true;
+                room.gameObjectsToAdd.Add(new Explosion(new Vector2(Position.X - 65, Position.Y - 65), new Animation(content, "explosion", 130, 4, false)));
+                isDead = true;
             }
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            animation.Draw(spriteBatch,position,Color.White);
+            base.Draw(spriteBatch);
         }
     }
 }

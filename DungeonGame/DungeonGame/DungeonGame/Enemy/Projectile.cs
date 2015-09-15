@@ -16,13 +16,20 @@ namespace DungeonGame
         float rotation;
 
         public Projectile(Texture2D texture, Vector2 position, Vector2 velocity)
-            : base (position,texture,1)
+            : base (position,texture,0)
         {
+            Velocity = velocity;
         }
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Room room)
         {
             Position += Velocity;
-            rotation-= 0.2f;
+            rotation -= 0.2f;
+            if (HitBox.Intersects(room.player.hitBox))
+            {
+                room.player.isHurt = true;
+                //Room.gameObjectsToRemove.Add(this);
+                isDead = true;
+            }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

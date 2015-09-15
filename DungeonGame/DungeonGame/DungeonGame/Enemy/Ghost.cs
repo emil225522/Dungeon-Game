@@ -12,30 +12,24 @@ using Microsoft.Xna.Framework.Media;
 
 namespace DungeonGame
 {
-    class Ghost
+    class Ghost : GameObject
     {
-        Animation animation;
-        Vector2 position;
         int deathtimer;
-        public bool isdead;
         public Ghost(Animation animation, Vector2 position)
+            : base (position,animation,1)
         {
-            this.position = position;
-            this.animation = animation;
-
         }
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Room room)
         {
-            animation.PlayAnim(gameTime);
+            base.Update(gameTime, room);
             deathtimer++;
             if (deathtimer > 10)
-            {
-                isdead = true;
-            }
+                isDead = true;
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            animation.Draw(spriteBatch,position,Color.White);
+            base.Draw(spriteBatch);
+            Animation.Draw(spriteBatch, Position, Color.White);
         }
     }
 }

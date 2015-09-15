@@ -60,7 +60,7 @@ namespace DungeonGame
                         isAttacking = false;
 
 
-                        room.blubaBall.Add(new Projectile(balltexture, position, ballVelocity));
+                        room.gameObjects.Add(new Projectile(balltexture, position, ballVelocity));
                     }
                 }
                 walktimer++;

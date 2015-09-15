@@ -20,6 +20,7 @@ namespace DungeonGame
         public Animation Animation { get; set; }
         public Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height); } }
         public sbyte type { get; set; }
+        public bool isDead;
 
         public GameObject(Vector2 postion, Texture2D texture, sbyte type) 
         {
@@ -28,14 +29,25 @@ namespace DungeonGame
             this.type = type;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public GameObject(Vector2 postion, Animation animation, sbyte type)
         {
+            Position = postion;
+            Animation = animation;
+            this.type = type;
+        }
 
+        public virtual void Update(GameTime gameTime, Room room)
+        {
+            if (type == 1)
+                Animation.PlayAnim(gameTime);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, Color.White);
+            if (type == 0)
+                spriteBatch.Draw(Texture, Position, Color.White);
+            else if (type == 1)
+                Animation.Draw(spriteBatch, Position, Color.White);
         }
 
 

@@ -96,7 +96,7 @@ namespace DungeonGame
             #endregion
 
         }
-        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, Room room)
+        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, Room room, List<GameObject> gameObjects)
         {
             #region AutoSave
             {
@@ -159,7 +159,7 @@ namespace DungeonGame
                 {
                     bombPosition = new Vector2(position.X - 8, position.Y - 30);
                 }
-                room.bombs.Add(new Bomb(new Animation(Content, "bomb", 400, 4, false), bombPosition));
+                gameObjects.Add(new Bomb(new Animation(Content, "bomb", 400, 4, false), bombPosition,Content));
             }
             if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down) && (!isAttacking))
             {
@@ -284,7 +284,7 @@ namespace DungeonGame
             }
             for (int i = 0; i < room.drops.Count; i++)
             {
-                if (room.drops[i].hitBox.Intersects(hitBox))
+                if (room.drops[i].HitBox.Intersects(hitBox))
                 {
                     if (room.drops[i].type == 1 && health < maxHealth)
                         health++;

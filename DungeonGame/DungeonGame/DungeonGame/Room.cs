@@ -19,20 +19,19 @@ namespace DungeonGame
         }
         public int[] doors;
         Generation generation = new Generation();
-        List<GameObject> gameObject = new List<GameObject>();
+        public List<GameObject> gameObjectsToAdd = new List<GameObject>();
+        public List<GameObject> gameObjects = new List<GameObject>();
         List<Tile> tiles = new List<Tile>();
         List<LockedDoor> lockedDoors = new List<LockedDoor>();
         public List<Drop> drops = new List<Drop>();
         public List<Enemy> enemies = new List<Enemy>();
-        List<Ghost> ghosts = new List<Ghost>();
         public List<Bomb> bombs = new List<Bomb>();
         Random random = new Random();
-        List<Explosion> explosions = new List<Explosion>();
-        public List<Projectile> blubaBall = new List<Projectile>();
         Color color = Color.White;
         public bool isDark;
         Random rnd = new Random();
         ContentManager Content;
+        public Player player;
         Game1 game;
         public Vector2 roomPosition;
 
@@ -106,110 +105,64 @@ namespace DungeonGame
 
         public void Update(GameTime gameTime,Player player)
         {
+            this.player = player;
             #region doorfunction
             if (player.position.X < 0) 
             {
                 ExistOrCreate(Doors.Left);
                 player.position.X = 50 * 18;
-                explosions.Clear();
-                blubaBall.Clear();
             }
 
             if (player.position.X > (50 * 18))
             {
                 ExistOrCreate(Doors.Right);
                 player.position.X = 0;
-                explosions.Clear();
-                blubaBall.Clear();
             }
 
             if (player.position.Y < -20) 
             {
                 ExistOrCreate(Doors.Down);
                 player.position.Y = 50 * 11;
-                explosions.Clear();
-                blubaBall.Clear();
             }
 
             if (player.position.Y > (50 * 11)) 
             {
                 ExistOrCreate(Doors.Up);
                 player.position.Y = -20;
-                explosions.Clear();
-                blubaBall.Clear();
             }
             #endregion
             for (int i = 0; i < enemies.Count; i++)
             {
                 if (enemies[i].isdead)
                 {
-                    ghosts.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), enemies[i].position));
+                    gameObjects.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), enemies[i].position));
                     enemies.RemoveAt(i);
                 }
-            }
-            for (int i = 0; i < bombs.Count; i++)
-            {
-                if (bombs[i].willExplode)
-                {
-                    explosions.Add(new Explosion(new Vector2(bombs[i].position.X- 65,bombs[i].position.Y- 65), new Animation(Content, "explosion", 130, 4, false)));
-                    bombs.RemoveAt(i);
-                }
-            }
-            for (int i = 0; i < explosions.Count; i++)
-            {
-                if (explosions[i].Animation.currentFrame == 3)
-                    explosions.RemoveAt(i);
             }
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (tiles[i].isDeleted)
                     tiles.RemoveAt(i);
             }
-            for (int i = 0; i < explosions.Count; i++)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                explosions[i].Update(gameTime);
-                for (int j = 0; j < tiles.Count; j++)
-                {
-                    if (explosions[i].HitBox.Intersects(tiles[j].hitBox))
-                        if (tiles[j].type == 4)
-                            tiles.RemoveAt(j);
-                }
-                for (int j = 0; j < enemies.Count; j++)
-                {
-                    if (explosions[i].HitBox.Intersects(enemies[j].hitBox))
-                        enemies[j].hp -= 55;
-                }
+                if (gameObjects[i].isDead)
+                    gameObjects.RemoveAt(i);
             }
-            for (int i = 0; i < ghosts.Count; i++)
-            {
-                if (ghosts[i].isdead)
-                    ghosts.RemoveAt(i);
-            }
-            foreach (Ghost g in ghosts)
-            {
-                g.Update(gameTime);
-            }
-            foreach (Bomb b in bombs)
-            {
-                b.Update(gameTime);
-            }
-                foreach (Projectile p in blubaBall)
-            {
-                p.Update(gameTime);
-            }
+            foreach (GameObject g in gameObjects)
+                g.Update(gameTime,this);
+            foreach (GameObject go in gameObjectsToAdd)
+                gameObjects.Add(go);
+            gameObjectsToAdd.Clear();
             foreach (Tile t in tiles)
             {
                 t.Update(gameTime,player);
-            }
-            foreach (Drop d in drops)
-            {
-                d.Update(gameTime);
             }
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].Update(tiles, gameTime, this,player);
             }
-            player.Update(gameTime, tiles, enemies, Content,this);
+            player.Update(gameTime, tiles, enemies, Content,this,gameObjects);
         }
 
         public void Draw(SpriteBatch spriteBatch,Player player,GameTime gameTime)
@@ -218,38 +171,17 @@ namespace DungeonGame
             {
                 t.Draw(spriteBatch,color);
             }
-            foreach (Explosion e in explosions)
-                e.Draw(spriteBatch);
-            for (int i = 0; i < blubaBall.Count; i++)
-            {
-                if (blubaBall[i].HitBox.Intersects(player.hitBox))
-                {
-                    player.health--;
-                    blubaBall.RemoveAt(i);
-                    player.isHurt = true;
-                }
-            }
-            foreach (Ghost g in ghosts)
-            {
-                g.Draw(spriteBatch);
-            }
+
             foreach (Drop d in drops)
             {
                 d.Draw(spriteBatch);
-            }
-            foreach (Projectile p in blubaBall)
-            {
-                p.Draw(spriteBatch);
             }
             foreach (Enemy e in enemies)
             {
                 e.Draw(spriteBatch);
             }
-
-            foreach (Bomb b in bombs)
-            {
-                b.Draw(spriteBatch);
-            }
+            foreach (GameObject g in gameObjects)
+                g.Draw(spriteBatch);
             player.Draw(spriteBatch);
             foreach (LockedDoor l in lockedDoors)
                 l.Draw(spriteBatch,color);

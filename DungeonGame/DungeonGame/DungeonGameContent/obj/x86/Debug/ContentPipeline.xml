@@ -388,6 +388,15 @@
       <Output>C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\crack.xnb</Output>
       <Time>2015-09-15T16:36:07.5512138+02:00</Time>
     </Item>
+    <Item>
+      <Source>player\shootArrowLeft.png</Source>
+      <Name>player\shootArrowLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\shootArrowLeft.xnb</Output>
+      <Time>2015-09-15T19:51:58.290854+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

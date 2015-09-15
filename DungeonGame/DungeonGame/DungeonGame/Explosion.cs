@@ -2,34 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace DungeonGame
 {
-    class Explosion
+    class Explosion : GameObject
     {
-        public Vector2 Position { get; set; }
-        public Animation Animation { get; set; }
-        public Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); }}
-
         public Explosion(Vector2 position, Animation animation)
+            : base (position,animation,1)
         {
-            this.Position = position;
-            this.Animation = animation;
         }
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Room room)
         {
-            Animation.PlayAnim(gameTime);
-           
+            base.Update(gameTime, room);
+            if (Animation.currentFrame == Animation.numOffFrames - 1)
+                isDead = true;
+
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch, Position, Color.White);
+            base.Draw(spriteBatch);
         }
     }
 }
