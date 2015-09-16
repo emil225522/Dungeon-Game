@@ -58,7 +58,7 @@ namespace DungeonGame
                         isAttacking = false;
 
 
-                        room.gameObjects.Add(new Projectile(balltexture, position, ballVelocity));
+                        room.gameObjectsToAdd.Add(new Projectile(balltexture, position, ballVelocity));
                     }
                 }
                 walktimer++;

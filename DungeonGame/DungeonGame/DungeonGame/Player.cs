@@ -98,7 +98,7 @@ namespace DungeonGame
             #endregion
 
         }
-        public void Update(GameTime gameTime, List<Tile> tiles, List<Enemy> enemies,ContentManager Content, Room room, List<GameObject> gameObjects)
+        public void Update(GameTime gameTime, List<Tile> tiles,ContentManager Content, Room room, List<GameObject> gameObjects)
         {
             #region AutoSave
             {
@@ -248,14 +248,14 @@ namespace DungeonGame
                         attackRect = new Rectangle((int)Position.X - 15, (int)Position.Y + 50, 70, 50);
                         break;
                 }
-                for (int i = 0; i < enemies.Count; i++)
+                foreach(GameObject go in gameObjects.Where(item => item.GetType().Name == "Slime"))
                 {
-                    if (attackRect.Intersects(enemies[i].HitBox) && enemies[i].isHurt == false)
+                    if (attackRect.Intersects(go.HitBox) && go.isHurt == false)
                     {
-                        if (enemies[i].state == 0)
+                        if (go.state == 0)
                         {
-                            enemies[i].hp -= 20;
-                            enemies[i].isHurt = true;
+                            go.hp -= 20;
+                            go.isHurt = true;
                         }
                             if (enemies[i].type == 1)
                         {

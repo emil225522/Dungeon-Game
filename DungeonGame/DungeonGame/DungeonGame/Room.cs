@@ -23,7 +23,7 @@ namespace DungeonGame
         public List<GameObject> gameObjects = new List<GameObject>();
         public List<Tile> tiles = new List<Tile>();
         public List<Drop> drops = new List<Drop>();
-        public List<Enemy> enemies = new List<Enemy>();
+       // public List<Enemy> enemies = new List<Enemy>();
         Random random = new Random();
         Color color = Color.White;
         public bool isDark;
@@ -129,12 +129,12 @@ namespace DungeonGame
                 player.Position = new Vector2(player.Position.X,-20);
             }
             #endregion
-            for (int i = 0; i < enemies.Count; i++)
+            foreach(GameObject go in gameObjects.Where(item => item.GetType().Name == "Slime"))
             {
-                if (enemies[i].isdead)
+                if (go.isDead)
                 {
-                    gameObjects.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), enemies[i].position));
-                    enemies.RemoveAt(i);
+                    gameObjects.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), go.Position));
+                    gameObjects.Remove(go);
                 }
             }
             for (int i = 0; i < tiles.Count; i++)
@@ -156,11 +156,7 @@ namespace DungeonGame
             {
                 t.Update(gameTime,player);
             }
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                enemies[i].Update(gameTime, this);
-            }
-            player.Update(gameTime, tiles, enemies, Content,this,gameObjects);
+            player.Update(gameTime, tiles, Content,this,gameObjects);
         }
 
         public void Draw(SpriteBatch spriteBatch,Player player,GameTime gameTime)
@@ -173,10 +169,6 @@ namespace DungeonGame
             foreach (Drop d in drops)
             {
                 d.Draw(spriteBatch);
-            }
-            foreach (Enemy e in enemies)
-            {
-                e.Draw(spriteBatch);
             }
             foreach (GameObject g in gameObjects)
                 g.Draw(spriteBatch);
