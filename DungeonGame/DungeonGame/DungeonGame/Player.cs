@@ -48,7 +48,7 @@ namespace DungeonGame
         private Animation animationRight;
         private Animation animationUp;
         private Animation animationDown;
-        public Animation currentAnimation {get; set;};
+        public Animation currentAnimation {get; set;}
 
         Texture2D tex;
 

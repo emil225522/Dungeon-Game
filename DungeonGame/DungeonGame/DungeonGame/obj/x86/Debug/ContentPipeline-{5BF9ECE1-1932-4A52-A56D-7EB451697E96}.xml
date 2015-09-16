@@ -379,6 +379,24 @@
       <Output>C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\font1.xnb</Output>
       <Time>2015-09-13T04:55:59.8111624+02:00</Time>
     </Item>
+    <Item>
+      <Source>crack.png</Source>
+      <Name>crack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\crack.xnb</Output>
+      <Time>2015-09-16T08:40:29.0314979+02:00</Time>
+    </Item>
+    <Item>
+      <Source>player\shootArrowLeft.png</Source>
+      <Name>player\shootArrowLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\shootArrowLeft.xnb</Output>
+      <Time>2015-09-16T08:40:29.0394883+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{5BF9ECE1-1932-4A52-A56D-7EB451697E96}</ContentProjectGUID>
