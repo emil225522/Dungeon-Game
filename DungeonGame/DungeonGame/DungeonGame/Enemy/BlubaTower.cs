@@ -23,12 +23,10 @@ namespace DungeonGame
             underLayer = Content.Load<Texture2D>("towerUnder");
         }
 
-        public override void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
+        public override void Update(GameTime gameTime, Room room)
         {
-            base.Update(tiles, gameTime, room, player);
+            base.Update(gameTime, room);
             //changed hitbox because it must fit the enemy with it's rotation
-            hitBox.X -= 25;
-            hitBox.Y -= 25;
             if (!isdead)
             {
                 velocity *= 0.3f;
@@ -45,8 +43,8 @@ namespace DungeonGame
                 }
                 Vector2 ballVelocity = new Vector2();
                 //calculate the distance between the two objects
-                float XDistance = position.X - player.Position.X - 40;
-                float YDistance = position.Y - player.Position.Y - 40;
+                float XDistance = position.X - room.player.Position.X - 40;
+                float YDistance = position.Y - room.player.Position.Y - 40;
                 //sets the velocity to that with the right angle thanks to this function
                 ballVelocity.X -= 5 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
                 ballVelocity.Y -= 5 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));

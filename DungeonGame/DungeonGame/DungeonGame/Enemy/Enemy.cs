@@ -24,7 +24,7 @@ namespace DungeonGame
 
         public Vector2 position;
         public Vector2 velocity;
-        public Rectangle hitBox;
+        public override Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); } }
         public bool isdead;
         public int hp;
         public bool isHurt;
@@ -51,20 +51,19 @@ namespace DungeonGame
             this.type = type;
         }
 
-        public override void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
+        public override void Update(GameTime gameTime, Room room)
         {
             animation.PlayAnim(gameTime);
             if (hp < 1)
                 isdead = true;
-            hitBox = new Rectangle((int)position.X, (int)position.Y, animation.frameWidth, animation.frameHeight);
             if (isHurt == true)
                 isHurtTimer++;
              velocity *= 0.7f;
-             if (!IsCollidingMovingX(tiles))
+             if (!IsCollidingMovingX(room.tiles))
              {
                  position.X += velocity.X;
              }
-            if (!IsCollidingMovingY(tiles)) 
+            if (!IsCollidingMovingY(room.tiles)) 
             {
                 position.Y += velocity.Y;
             }
@@ -75,7 +74,7 @@ namespace DungeonGame
                 isHurt = false;
             }
             walktimer++;
-            if (walktimer > rnd.Next(50, 200) && !IsColliding(tiles)) {
+            if (walktimer > rnd.Next(50, 200) && !IsColliding(room.tiles)) {
                 walktimer = 0;
                 direction = (Direction)values.GetValue(rnd.Next(values.Length));
             }
@@ -96,7 +95,7 @@ namespace DungeonGame
         {
             for (int i = 0; i < tiles.Count; i++)
             {
-                if (hitBox.Intersects(tiles[i].hitBox) && tiles[i].type > 1)
+                if (HitBox.Intersects(tiles[i].hitBox) && tiles[i].type > 1)
                 {
                     return true;
                 }

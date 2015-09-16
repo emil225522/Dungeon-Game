@@ -19,9 +19,9 @@ namespace DungeonGame
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
-          public override void Update(List<Tile> tiles, GameTime gameTime, Room room,Player player)
+          public override void Update(GameTime gameTime, Room room)
           {
-              base.Update(tiles, gameTime, room,player);
+              base.Update(gameTime, room);
               jumptimer++;
               if (!isjumping)
               {
@@ -50,7 +50,7 @@ namespace DungeonGame
               if (isjumping == false)
               {
 
-                  if (!IsColliding(tiles))
+                  if (!IsColliding(room.tiles))
                   {
                       if (direction == Direction.Down)
                           position.Y += speed;

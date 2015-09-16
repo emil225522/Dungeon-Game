@@ -250,7 +250,7 @@ namespace DungeonGame
                 }
                 for (int i = 0; i < enemies.Count; i++)
                 {
-                    if (attackRect.Intersects(enemies[i].hitBox) && enemies[i].isHurt == false)
+                    if (attackRect.Intersects(enemies[i].HitBox) && enemies[i].isHurt == false)
                     {
                         if (enemies[i].state == 0)
                         {
@@ -435,7 +435,7 @@ namespace DungeonGame
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                if (HitBox.Intersects(enemies[i].hitBox))
+                if (HitBox.Intersects(enemies[i].HitBox))
                 {
                     return true;
                 }

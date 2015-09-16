@@ -26,11 +26,11 @@ namespace DungeonGame
             normalColor = new Color(rnd.Next(50, 255), rnd.Next(50, 255), rnd.Next(50, 255));
         }
 
-        public override void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
+        public override void Update(GameTime gameTime, Room room)
         {
-            base.Update(tiles, gameTime, room, player);
-                float XDistance = position.X - player.Position.X - 40;
-                float YDistance = position.Y - player.Position.Y - 40;
+            base.Update(gameTime, room);
+                float XDistance = position.X - room.player.Position.X - 40;
+                float YDistance = position.Y - room.player.Position.Y - 40;
                 //sets the velocity to that with the right angle thanks to this function
                 circelingPlace.X -= 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
                 circelingPlace.Y -= 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
@@ -40,7 +40,7 @@ namespace DungeonGame
                 angle += angleDirection;
             position = new Vector2((float)(Math.Cos(angle)) * 60 + circelingPlace.X, (float)(Math.Sin(angle)) * 60 + circelingPlace.Y);
 
-            if (!IsColliding(tiles))
+            if (!IsColliding(room.tiles))
             {
                 if (direction == Direction.Down)
                     position.Y += speed;

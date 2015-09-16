@@ -21,17 +21,17 @@ namespace DungeonGame
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
 
-        public override void Update(List<Tile> tiles, GameTime gameTime, Room room,Player player)
+        public override void Update(GameTime gameTime, Room room)
         {
-            base.Update(tiles, gameTime,room,player);
+            base.Update(gameTime,room);
             if (!isdead)
             {
                 velocity *= 0.3f;
-                if (!IsCollidingMovingX(tiles))
+                if (!IsCollidingMovingX(room.tiles))
                 {
                     position.X += velocity.X;
                 }
-                if (!IsCollidingMovingY(tiles))
+                if (!IsCollidingMovingY(room.tiles))
                 {
                     position.Y += velocity.Y;
                 }
@@ -69,7 +69,7 @@ namespace DungeonGame
                     }
                 }
                 walktimer++;
-                if (walktimer > rnd.Next(200, 400) && !IsColliding(tiles))
+                if (walktimer > rnd.Next(200, 400) && !IsColliding(room.tiles))
                 {
                     walktimer = 0;
                     direction = (Direction)values.GetValue(rnd.Next(values.Length));
@@ -77,7 +77,7 @@ namespace DungeonGame
 
                 if (!isAttacking)
                 {
-                    if (!IsColliding(tiles))
+                    if (!IsColliding(room.tiles))
                     {
                         if (direction == Direction.Down)
                             position.Y += speed;

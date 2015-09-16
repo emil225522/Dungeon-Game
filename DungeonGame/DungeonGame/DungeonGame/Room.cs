@@ -21,7 +21,7 @@ namespace DungeonGame
         Generation generation = new Generation();
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjects = new List<GameObject>();
-        List<Tile> tiles = new List<Tile>();
+        public List<Tile> tiles = new List<Tile>();
         public List<Drop> drops = new List<Drop>();
         public List<Enemy> enemies = new List<Enemy>();
         Random random = new Random();
@@ -97,7 +97,7 @@ namespace DungeonGame
             for (int i = 0; i < spawn.Count; i++)
             {
                 for (int j = 0; j < spawn[i].Item2; j++)
-                    enemies.Add(CreateMob(spawn[i].Item1));
+                    gameObjects.Add(CreateMob(spawn[i].Item1));
             }
         }
 
@@ -158,7 +158,7 @@ namespace DungeonGame
             }
             for (int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].Update(tiles, gameTime, this,player);
+                enemies[i].Update(gameTime, this);
             }
             player.Update(gameTime, tiles, enemies, Content,this,gameObjects);
         }
