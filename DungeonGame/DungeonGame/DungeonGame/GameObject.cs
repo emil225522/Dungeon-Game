@@ -18,7 +18,7 @@ namespace DungeonGame
         public Texture2D Texture { get; set; }
         public Vector2 Velocity { get; set; }
         public Animation Animation { get; set; }
-        public Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height); } }
+        public virtual Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height); } }
         public sbyte type { get; set; }
         public bool isDead;
 
@@ -39,7 +39,9 @@ namespace DungeonGame
         public virtual void Update(GameTime gameTime, Room room)
         {
             if (type == 1)
+            {
                 Animation.PlayAnim(gameTime);
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

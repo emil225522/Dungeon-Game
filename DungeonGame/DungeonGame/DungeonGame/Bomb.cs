@@ -13,6 +13,7 @@ namespace DungeonGame
 {
     class Bomb : GameObject
     {
+        public override Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); } }
         ContentManager content;
         public Bomb(Animation animation,Vector2 position, ContentManager Content)
             : base (position,animation,1)
@@ -22,7 +23,7 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime, room);
-            if (Animation.currentFrame == Animation.numOffFrames - 1)
+            if (Animation.currentFrame == Animation.numOffFrames-1)
             {
                 room.gameObjectsToAdd.Add(new Explosion(new Vector2(Position.X - 65, Position.Y - 65), new Animation(content, "explosion", 130, 4, false)));
                 isDead = true;

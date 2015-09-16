@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace DungeonGame
 {
-    class Enemy
+    class Enemy : GameObject
     {
 
         protected enum Direction {
@@ -40,6 +40,7 @@ namespace DungeonGame
         protected Direction direction;
 
         public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp,sbyte type)
+            : base (position,animation,1)
         {
             this.position = position;
             this.animation = animation;
@@ -50,7 +51,7 @@ namespace DungeonGame
             this.type = type;
         }
 
-        public virtual void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
+        public override void Update(List<Tile> tiles, GameTime gameTime, Room room, Player player)
         {
             animation.PlayAnim(gameTime);
             if (hp < 1)
@@ -80,7 +81,7 @@ namespace DungeonGame
             }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             Color color;
             if (isHurt)
