@@ -49,7 +49,6 @@ namespace DungeonGame
             this.speed = speed;
             this.hp = hp;
             this.type = type;
-
         }
 
         public override void Update(GameTime gameTime, Room room)
