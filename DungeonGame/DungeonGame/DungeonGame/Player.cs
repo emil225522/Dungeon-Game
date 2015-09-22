@@ -248,36 +248,37 @@ namespace DungeonGame
                         attackRect = new Rectangle((int)Position.X - 15, (int)Position.Y + 50, 70, 50);
                         break;
                 }
-                foreach(GameObject go in gameObjects.Where(item => item.GetType().Name == "Slime"))
+                foreach(GameObject go in gameObjects.Where(item => item is Enemy))
                 {
-                    if (attackRect.Intersects(go.HitBox) && go.isHurt == false)
+                    Enemy enemy = (Enemy)go;
+                    if (attackRect.Intersects(go.HitBox) && enemy.isHurt == false)
                     {
-                        if (go.state == 0)
+                        if (enemy.state == 0)
                         {
-                            go.hp -= 20;
-                            go.isHurt = true;
+                            enemy.hp -= 20;
+                            enemy.isHurt = true;
                         }
-                            if (enemies[i].type == 1)
+                            if (enemy.type == 1)
                         {
                             if (direction == Direction.Right)
-                                enemies[i].velocity.X = 30;
+                                enemy.velocity.X = 30;
                             else if (direction == Direction.Left)
-                                enemies[i].velocity.X = -30;
+                                enemy.velocity.X = -30;
                             else if (direction == Direction.Up)
-                                enemies[i].velocity.Y = -30;
+                                enemy.velocity.Y = -30;
                             else if (direction == Direction.Down)
-                                enemies[i].velocity.Y = 30;
+                                enemy.velocity.Y = 30;
                         }
-                        if (enemies[i].hp < 1)
+                        if (enemy.hp < 1)
                         {
                             int random = rnd.Next(10);
                             if (random == 1)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemies[i].position, 1));
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemy.position, 1));
                             if (random == 2)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("key"), enemies[i].position, 2));
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("key"), enemy.position, 2));
                             if (random == 3)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemies[i].position, 3));
-                            enemies[i].isdead = true;
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemy.position, 3));
+                            go.isDead = true;
                             xp += rnd.Next(20, 40);
                         }
                     }
@@ -315,7 +316,7 @@ namespace DungeonGame
                         currentAnimation = new Animation(Content, "player/runUp", 110, 8, false);
                 }
             }
-            if (IsColliding(enemies) && isHurt == false && !EnemiesIsHurt(enemies))
+            if (IsColliding(gameObjects) && isHurt == false && !EnemiesIsHurt(gameObjects))
             {
                 isHurt = true;
                 health--;
@@ -431,24 +432,23 @@ namespace DungeonGame
           
         }
 
-        public bool IsColliding(List<Enemy> enemies)
+        public bool IsColliding(List<GameObject> gameObjects)
         {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (HitBox.Intersects(enemies[i].HitBox))
+            foreach (GameObject go in gameObjects.Where(item => item is Enemy))
+                if (HitBox.Intersects(go.HitBox))
                 {
                     return true;
                 }
-            }
             return false;
         }
-        public bool EnemiesIsHurt(List<Enemy> enemies)
+        public bool EnemiesIsHurt(List<GameObject> gameObjects)
         {
-            for (int i = 0; i < enemies.Count; i++)
-			{
-			    if (enemies[i].isHurt)
+            foreach (GameObject go in gameObjects.Where(item => item is Enemy))
+            {
+                Enemy enemy = (Enemy)go;
+                if (enemy.isHurt)
                     return true;
-			}
+            }
             return false;
         }
     }
