@@ -18,6 +18,7 @@ namespace DungeonGame
         public Texture2D Texture { get; set; }
         public Vector2 Velocity { get; set; }
         public Animation Animation { get; set; }
+        public Rectangle hitBox;
         public virtual Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height); } }
         public sbyte type { get; set; }
         public bool isDead;
@@ -40,8 +41,12 @@ namespace DungeonGame
         {
             if (type == 1)
             {
+                hitBox = new Rectangle((int)Position.X, (int)Position.Y,Animation.frameWidth,Animation.frameHeight);
                 Animation.PlayAnim(gameTime);
             }
+            else
+                hitBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

@@ -279,6 +279,7 @@ namespace DungeonGame
                             if (random == 3)
                                 room.drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemy.position, 3));
                             go.isDead = true;
+                            enemy.isDead = true;
                             xp += rnd.Next(20, 40);
                         }
                     }
