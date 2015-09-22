@@ -129,12 +129,12 @@ namespace DungeonGame
                 player.Position = new Vector2(player.Position.X,-20);
             }
             #endregion
-            foreach(GameObject go in gameObjects.Where(item => item.GetType().Name == "Slime"))
+            foreach(GameObject go in gameObjects.Where(item => item is Enemy))
             {
                 if (go.isDead)
                 {
-                    gameObjects.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), go.Position));
-                    gameObjects.Remove(go);
+                    gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), go.Position));
+                    go.isDead = true;
                 }
             }
             for (int i = 0; i < tiles.Count; i++)

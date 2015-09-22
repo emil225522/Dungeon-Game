@@ -12,7 +12,7 @@ namespace DungeonGame
     {
         int timer;
         public SwordEnemy(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "swordEnemy", 100, 1, true), seed, 1.5F, 75, 1)
+            : base(position, new Animation(Content, "swordEnemy", 100,1, true), seed, 1.5F, 75,1)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
@@ -45,7 +45,9 @@ namespace DungeonGame
                 color = Color.Red;
             else
                 color = Color.White;
-            animation.Draw(spriteBatch, position, color);
+            //animation.Draw(spriteBatch, position, color);
+            Texture2D tex = animation.animation;
+            spriteBatch.Draw(tex, HitBox, color);
         }
 
     }

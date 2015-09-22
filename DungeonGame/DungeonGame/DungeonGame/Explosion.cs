@@ -19,7 +19,7 @@ namespace DungeonGame
             if (Animation.currentFrame == Animation.numOffFrames -1)
                 isDead = true;
             
-            foreach (GameObject go in room.gameObjects.Where(item => item.GetType().Name == "Slime"))
+            foreach (GameObject go in room.gameObjects.Where(item => item is Enemy))
             {
                 if (HitBox.Intersects(go.HitBox))
                     go.isDead = true;
