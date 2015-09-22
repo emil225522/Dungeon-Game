@@ -29,8 +29,8 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime, room);
-                float XDistance = position.X - room.player.Position.X - 40;
-                float YDistance = position.Y - room.player.Position.Y - 40;
+                float XDistance = Position.X - room.player.Position.X - 40;
+                float YDistance = Position.Y - room.player.Position.Y - 40;
                 //sets the velocity to that with the right angle thanks to this function
                 circelingPlace.X -= 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
                 circelingPlace.Y -= 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
@@ -38,18 +38,18 @@ namespace DungeonGame
                 angle -= angleDirection;
             else
                 angle += angleDirection;
-            position = new Vector2((float)(Math.Cos(angle)) * 60 + circelingPlace.X, (float)(Math.Sin(angle)) * 60 + circelingPlace.Y);
+            Position = new Vector2((float)(Math.Cos(angle)) * 60 + circelingPlace.X, (float)(Math.Sin(angle)) * 60 + circelingPlace.Y);
 
             if (!IsColliding(room.tiles))
             {
                 if (direction == Direction.Down)
-                    position.Y += speed;
+                    Position += new Vector2(0, speed);
                 else if (direction == Direction.Left)
-                    position.X -= speed;
+                    Position -= new Vector2(speed, 0);
                 else if (direction == Direction.Right)
-                    position.X += speed;
+                    Position += new Vector2(speed, 0);
                 else if (direction == Direction.Up)
-                    position.Y -= speed;
+                    Position -= new Vector2(0, speed);
             }
            
         }
@@ -60,7 +60,7 @@ namespace DungeonGame
                 color = Color.Red;
             else
                 color = normalColor;
-            animation.Draw(spriteBatch, position, color);
+            animation.Draw(spriteBatch, Position, color);
         }
 
     }

@@ -26,14 +26,14 @@ namespace DungeonGame
             base.Update(gameTime,room);
             if (!isdead)
             {
-                velocity *= 0.3f;
+                Velocity *= 0.3f;
                 if (!IsCollidingMovingX(room.tiles))
                 {
-                    position.X += velocity.X;
+                    Position += new Vector2(Velocity.X,0);
                 }
                 if (!IsCollidingMovingY(room.tiles))
                 {
-                    position.Y += velocity.Y;
+                    Position += new Vector2(0,Velocity.Y);
                 }
 
                 if (isHurtTimer > 30)
@@ -65,7 +65,7 @@ namespace DungeonGame
                         else if (direction == Direction.Up)
                             ballVelocity = new Vector2(0, -4);
 
-                        room.gameObjects.Add(new Projectile(balltexture, position, ballVelocity));
+                        room.gameObjects.Add(new Projectile(balltexture, Position, ballVelocity));
                     }
                 }
                 walktimer++;
@@ -80,34 +80,34 @@ namespace DungeonGame
                     if (!IsColliding(room.tiles))
                     {
                         if (direction == Direction.Down)
-                            position.Y += speed;
+                            Position += new Vector2(0, speed);
                         else if (direction == Direction.Left)
-                            position.X -= speed;
+                            Position -= new Vector2(speed, 0);
                         else if (direction == Direction.Right)
-                            position.X += speed;
+                            Position += new Vector2(speed, 0);
                         else if (direction == Direction.Up)
-                            position.Y -= speed;
+                            Position -= new Vector2(0, speed);
                     }
                     else
                     {
                         if (direction == Direction.Down)
                         {
-                            position.Y -= speed * 4;
+                            Position -= new Vector2(0, speed * 4);
                             direction = Direction.Up;
                         }
                         else if (direction == Direction.Left)
                         {
-                            position.X += speed * 4;
+                            Position -= new Vector2(speed * 4, 0);
                             direction = Direction.Right;
                         }
                         else if (direction == Direction.Right)
                         {
-                            position.X -= speed * 4;
+                            Position -= new Vector2(speed * 4, 0);
                             direction = Direction.Left;
                         }
                         else if (direction == Direction.Up)
                         {
-                            position.Y += speed * 4;
+                            Position += new Vector2(0, speed * 4);
                             direction = Direction.Down;
                         }
                     }
@@ -137,7 +137,7 @@ namespace DungeonGame
                     rotation = 0;
                     break;
             }
-            animation.Draw(spriteBatch, position, color, rotation);
+            animation.Draw(spriteBatch, Position, color, rotation);
         }
 
     }

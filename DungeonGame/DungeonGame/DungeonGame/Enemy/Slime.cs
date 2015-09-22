@@ -28,7 +28,7 @@ namespace DungeonGame
                   if (rnd.Next(100) == 5)
                   {
                       isjumping = true;
-                      ypos = position.Y;
+                      ypos = Position.Y;
                       yvel = -7;
                   }
                   else
@@ -38,11 +38,11 @@ namespace DungeonGame
               }
               if (jumptimer > 1)
               {
-                  position.Y += yvel;
+                  Position += new Vector2(0,yvel);
               }
               if (isjumping)
               {
-                  if (position.Y < ypos)
+                  if (Position.Y < ypos)
                       yvel+= 0.5f;
                   else
                       isjumping = false;
@@ -53,34 +53,34 @@ namespace DungeonGame
                   if (!IsColliding(room.tiles))
                   {
                       if (direction == Direction.Down)
-                          position.Y += speed;
+                          Position += new Vector2(0, speed);
                       else if (direction == Direction.Left)
-                          position.X -= speed;
+                          Position -= new Vector2(speed, 0);
                       else if (direction == Direction.Right)
-                          position.X += speed;
+                          Position += new Vector2(speed, 0);
                       else if (direction == Direction.Up)
-                          position.Y -= speed;
+                          Position -= new Vector2(0, speed);
                   }
                   else
                   {
                       if (direction == Direction.Down)
                       {
-                          position.Y -= speed * 4;
+                          Position -= new Vector2(0, speed * 4);
                           direction = Direction.Up;
                       }
                       else if (direction == Direction.Left)
                       {
-                          position.X += speed * 4;
+                          Position -= new Vector2(speed * 4, 0);
                           direction = Direction.Right;
                       }
                       else if (direction == Direction.Right)
                       {
-                          position.X -= speed * 4;
+                          Position -= new Vector2(speed * 4, 0);
                           direction = Direction.Left;
                       }
                       else if (direction == Direction.Up)
                       {
-                          position.Y += speed * 4;
+                          Position += new Vector2(0, speed * 4);
                           direction = Direction.Down;
                       }
                   }

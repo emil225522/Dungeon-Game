@@ -261,23 +261,23 @@ namespace DungeonGame
                             if (enemy.type == 1)
                         {
                             if (direction == Direction.Right)
-                                enemy.velocity.X = 30;
+                                enemy.Velocity = new Vector2(30,0);
                             else if (direction == Direction.Left)
-                                enemy.velocity.X = -30;
+                                enemy.Velocity = new Vector2(-30,0);
                             else if (direction == Direction.Up)
-                                enemy.velocity.Y = -30;
+                                enemy.Velocity = new Vector2(0,-30);
                             else if (direction == Direction.Down)
-                                enemy.velocity.Y = 30;
+                                enemy.Velocity = new Vector2(0,30);
                         }
                         if (enemy.hp < 1)
                         {
                             int random = rnd.Next(10);
                             if (random == 1)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemy.position, 1));
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemy.Position, 1));
                             if (random == 2)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("key"), enemy.position, 2));
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("key"), enemy.Position, 2));
                             if (random == 3)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemy.position, 3));
+                                room.drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemy.Position, 3));
                             go.isDead = true;
                             enemy.isDead = true;
                             xp += rnd.Next(20, 40);

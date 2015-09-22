@@ -22,8 +22,6 @@ namespace DungeonGame
             Down
         }
 
-        public Vector2 position;
-        public Vector2 velocity;
         public override Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); } }
         public bool isdead;
         public int hp;
@@ -42,7 +40,7 @@ namespace DungeonGame
         public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp,sbyte type)
             : base (position,animation,1)
         {
-            this.position = position;
+            this.Position = position;
             this.animation = animation;
             direction = Direction.Left;
             rnd = new Random(seed);
@@ -58,14 +56,14 @@ namespace DungeonGame
                 isdead = true;
             if (isHurt == true)
                 isHurtTimer++;
-             velocity *= 0.7f;
+             Velocity *= 0.7f;
              if (!IsCollidingMovingX(room.tiles))
              {
-                 position.X += velocity.X;
+                 Position += new Vector2(Velocity.X,0);
              }
             if (!IsCollidingMovingY(room.tiles)) 
             {
-                position.Y += velocity.Y;
+                Position += new Vector2(0,Velocity.Y);
             }
 
             if (isHurtTimer > 15) 
@@ -80,14 +78,14 @@ namespace DungeonGame
             }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             Color color;
             if (isHurt)
                 color = Color.Red;
             else
                 color = Color.White;
-            animation.Draw(spriteBatch,position, color);
+            animation.Draw(spriteBatch,Position, color);
             
         }
 
@@ -130,9 +128,9 @@ namespace DungeonGame
         private Rectangle GetNextFrameHitBox(bool isX) 
         {
             if(isX)
-                return new Rectangle((int)position.X + (int)velocity.X, (int)position.Y, animation.frameWidth, animation.frameHeight);
+                return new Rectangle((int)Position.X + (int)Velocity.X, (int)Position.Y, animation.frameWidth, animation.frameHeight);
             else
-                return new Rectangle((int)position.X, (int)position.Y + (int)velocity.Y, animation.frameWidth, animation.frameHeight);
+                return new Rectangle((int)Position.X, (int)Position.Y + (int)Velocity.Y, animation.frameWidth, animation.frameHeight);
         }
     }
 }

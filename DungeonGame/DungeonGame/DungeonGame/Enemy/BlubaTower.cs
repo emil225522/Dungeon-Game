@@ -29,7 +29,7 @@ namespace DungeonGame
             //changed hitbox because it must fit the enemy with it's rotation
             if (!isdead)
             {
-                velocity *= 0.3f;
+                Velocity *= 0.3f;
                 if (isHurtTimer > 30)
                 {
                     isHurtTimer = 0;
@@ -43,8 +43,8 @@ namespace DungeonGame
                 }
                 Vector2 ballVelocity = new Vector2();
                 //calculate the distance between the two objects
-                float XDistance = position.X - room.player.Position.X - 40;
-                float YDistance = position.Y - room.player.Position.Y - 40;
+                float XDistance = Position.X - room.player.Position.X - 40;
+                float YDistance = Position.Y - room.player.Position.Y - 40;
                 //sets the velocity to that with the right angle thanks to this function
                 ballVelocity.X -= 5 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
                 ballVelocity.Y -= 5 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
@@ -58,7 +58,7 @@ namespace DungeonGame
                         isAttacking = false;
 
 
-                        room.gameObjectsToAdd.Add(new Projectile(balltexture, position, ballVelocity));
+                        room.gameObjectsToAdd.Add(new Projectile(balltexture, Position, ballVelocity));
                     }
                 }
                 walktimer++;
@@ -72,8 +72,8 @@ namespace DungeonGame
             else
                 color = Color.White;
 
-            spriteBatch.Draw(underLayer, new Vector2(position.X - underLayer.Width / 2, position.Y - underLayer.Height / 2), Color.White);
-            animation.Draw(spriteBatch, position, color, rotation);
+            spriteBatch.Draw(underLayer, new Vector2(Position.X - underLayer.Width / 2, Position.Y - underLayer.Height / 2), Color.White);
+            animation.Draw(spriteBatch, Position, color, rotation);
         }
     }
 }

@@ -21,27 +21,27 @@ namespace DungeonGame
             base.Update(gameTime, room);
             if (!IsColliding(room.tiles)) {
                 if (direction == Direction.Down)
-                    position.Y += speed;
+                    Position += new Vector2(0,speed);
                 else if (direction == Direction.Left)
-                    position.X -= speed;
+                    Position -= new Vector2(speed,0);
                 else if (direction == Direction.Right)
-                    position.X += speed;
+                    Position += new Vector2(speed,0);
                 else if (direction == Direction.Up)
-                    position.Y -= speed;
+                    Position -= new Vector2(0,speed);
             }
             else 
             {
                 if (direction == Direction.Down) {
-                    position.Y -= speed * 4;
+                    Position -= new Vector2(0, speed*4);
                     direction = Direction.Up;
                 } else if (direction == Direction.Left) {
-                    position.X += speed * 4;
+                    Position -= new Vector2(speed*4, 0);
                     direction = Direction.Right;
                 } else if (direction == Direction.Right) {
-                    position.X -= speed * 4;
+                    Position -= new Vector2(speed*4, 0);
                     direction = Direction.Left;
                 } else if (direction == Direction.Up) {
-                    position.Y += speed * 4;
+                    Position += new Vector2(0, speed*4);
                     direction = Direction.Down;
                 }
             }
@@ -53,7 +53,7 @@ namespace DungeonGame
                 color = Color.Red;
             else
                 color = Color.Black;
-            animation.Draw(spriteBatch, position, color);
+            animation.Draw(spriteBatch, Position, color);
         }
 
     }
