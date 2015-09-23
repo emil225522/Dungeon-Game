@@ -38,7 +38,7 @@ namespace DungeonGame
                     Position -= new Vector2(speed*4, 0);
                     direction = Direction.Right;
                 } else if (direction == Direction.Right) {
-                    Position -= new Vector2(speed*4, 0);
+                    Position += new Vector2(speed*4, 0);
                     direction = Direction.Left;
                 } else if (direction == Direction.Up) {
                     Position += new Vector2(0, speed*4);

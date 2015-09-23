@@ -181,10 +181,9 @@ namespace DungeonGame
                     Velocity -= new Vector2(speed,0);
                     direction = Direction.Left;
                 }
-                if (ks.IsKeyDown(Keys.Right))
+                if (ks.IsKeyDown(Keys.Right) && ks.IsKeyUp(Keys.Up))
                 {
                     Velocity += new Vector2(speed,0);
-
                     direction = Direction.Right;
                 }
                 if (ks.IsKeyDown(Keys.Up))
@@ -199,6 +198,27 @@ namespace DungeonGame
 
                     Velocity += new Vector2(0,speed);
                     direction = Direction.Down;
+                }
+
+                if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Up))
+                {
+                    Velocity += new Vector2(speed / 2.5f + 0.3f, speed / 2.5f);
+                    direction = Direction.Right;
+                }
+                if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Up))
+                {
+                    Velocity += new Vector2(speed / 2.5f + 0.3f, speed / 2.5f);
+                    direction = Direction.Right;
+                }
+                if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Down))
+                {
+                    Velocity += new Vector2(speed / 2.5f + 0.3f, speed / 2.5f);
+                    direction = Direction.Right;
+                }
+                if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Down))
+                {
+                    Velocity += new Vector2(speed / 2.5f + 0.3f, speed / 2.5f);
+                    direction = Direction.Right;
                 }
             }
             Random rnd = new Random();
