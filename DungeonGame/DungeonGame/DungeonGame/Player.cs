@@ -25,7 +25,8 @@ namespace DungeonGame
 
         public float health {get; set;}
         public float maxHealth{get; set;}
-        public float speed {get; set;} 
+        public float speed {get; set;}
+        public float currentSpeed { get; set; }
         private sbyte isHurtTimer ;
         private sbyte timer = 0;
 
@@ -68,6 +69,7 @@ namespace DungeonGame
         {
             this.Position = position;
             speed = 1.4f;
+            currentSpeed = speed;
             direction = Direction.Down;
             maxHealth = 5;
             #region LoadContent
@@ -178,48 +180,46 @@ namespace DungeonGame
                 if (ks.IsKeyDown(Keys.Left))
                 {
 
-                    Velocity -= new Vector2(speed,0);
+                    Velocity -= new Vector2(currentSpeed,0);
                     direction = Direction.Left;
                 }
-                if (ks.IsKeyDown(Keys.Right) && ks.IsKeyUp(Keys.Up))
+                if (ks.IsKeyDown(Keys.Right))
                 {
-                    Velocity += new Vector2(speed,0);
+                    Velocity += new Vector2(currentSpeed,0);
                     direction = Direction.Right;
                 }
                 if (ks.IsKeyDown(Keys.Up))
                 {
 
-                    Velocity -= new Vector2(0,speed);
+                    Velocity -= new Vector2(0,currentSpeed);
                     direction = Direction.Up;
                 }
 
                 if (ks.IsKeyDown(Keys.Down))
                 {
 
-                    Velocity += new Vector2(0,speed);
+                    Velocity += new Vector2(0,currentSpeed);
                     direction = Direction.Down;
                 }
 
                 if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Up))
                 {
-                    Velocity += new Vector2(speed / 2.5f + 0.3f, speed / 2.5f);
-                    direction = Direction.Right;
+                    currentSpeed = speed/2;
                 }
-                if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Up))
+                else if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Up))
                 {
-                    Velocity += new Vector2(speed / 2.5f + 0.3f, speed / 2.5f);
-                    direction = Direction.Right;
+                    currentSpeed = speed / 2;
                 }
-                if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Down))
+                else if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Down))
                 {
-                    Velocity += new Vector2(speed / 2.5f + 0.3f, speed / 2.5f);
-                    direction = Direction.Right;
+                    currentSpeed = speed /2;
                 }
-                if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Down))
+                else if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Down))
                 {
-                    Velocity += new Vector2(speed / 2.5f + 0.3f, speed / 2.5f);
-                    direction = Direction.Right;
+                    currentSpeed = speed/ 2;
                 }
+                else
+                    currentSpeed = speed;
             }
             Random rnd = new Random();
             if (!isAttacking)
