@@ -23,7 +23,6 @@ namespace DungeonGame
         public List<GameObject> gameObjects = new List<GameObject>();
         public List<Tile> tiles = new List<Tile>();
         public List<Drop> drops = new List<Drop>();
-       // public List<Enemy> enemies = new List<Enemy>();
         Random random = new Random();
         Color color = Color.White;
         public bool isDark;
@@ -93,6 +92,16 @@ namespace DungeonGame
             {
                 if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
                     tiles.Add(new Tile(Content.Load<Texture2D>("crack"), tiles[i].position, 1));
+            }
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                int randomNumber = rnd.Next(-20,20);
+                if (randomNumber == 5 && tiles[i].type == 1)
+                {
+                    tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tiles[i].position, 3));
+                    tiles.RemoveAt(i);
+
+                }
             }
             for (int i = 0; i < spawn.Count; i++)
             {

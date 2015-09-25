@@ -143,3 +143,4 @@ C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin
 C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\shootArrowLeft.xnb
 C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\crack.xnb
 C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\shootArrowLeft.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\hole.xnb
