@@ -70,12 +70,12 @@ namespace DungeonGame
                       }
                       else if (direction == Direction.Left)
                       {
-                          Position -= new Vector2(speed * 4, 0);
+                          Position += new Vector2(speed * 4, 0);
                           direction = Direction.Right;
                       }
                       else if (direction == Direction.Right)
                       {
-                          Position += new Vector2(speed * 4, 0);
+                          Position -= new Vector2(speed * 4, 0);
                           direction = Direction.Left;
                       }
                       else if (direction == Direction.Up)

@@ -61,10 +61,14 @@ namespace DungeonGame
              {
                  Position += new Vector2(Velocity.X,0);
              }
+             else
+                 Position -= new Vector2(Velocity.X*2, 0);
             if (!IsCollidingMovingY(room.tiles)) 
             {
                 Position += new Vector2(0,Velocity.Y);
             }
+            else
+                Position -= new Vector2(0, Velocity.Y*2);
 
             if (isHurtTimer > 15) 
             {

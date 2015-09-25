@@ -65,7 +65,7 @@ namespace DungeonGame
                         else if (direction == Direction.Up)
                             ballVelocity = new Vector2(0, -4);
 
-                        room.gameObjects.Add(new Projectile(balltexture, Position, ballVelocity));
+                        room.gameObjectsToAdd.Add(new Projectile(balltexture, Position, ballVelocity));
                     }
                 }
                 walktimer++;
