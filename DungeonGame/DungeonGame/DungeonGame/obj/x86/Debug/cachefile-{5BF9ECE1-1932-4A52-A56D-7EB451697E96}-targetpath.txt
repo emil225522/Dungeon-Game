@@ -43,3 +43,4 @@ Content\swordEnemy.xnb
 Content\crack.xnb
 Content\player\shootArrowLeft.xnb
 Content\hole.xnb
+Content\snakebeta.xnb

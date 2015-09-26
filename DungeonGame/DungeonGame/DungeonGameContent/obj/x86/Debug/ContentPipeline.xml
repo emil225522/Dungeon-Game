@@ -406,6 +406,15 @@
       <Output>C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\hole.xnb</Output>
       <Time>2015-09-26T00:16:49.9932658+02:00</Time>
     </Item>
+    <Item>
+      <Source>snakebeta.png</Source>
+      <Name>snakebeta</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\snakebeta.xnb</Output>
+      <Time>2015-09-26T00:32:09.5700236+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

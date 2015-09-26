@@ -293,11 +293,11 @@ namespace DungeonGame
                         {
                             int random = rnd.Next(10);
                             if (random == 1)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("hearth"), enemy.Position, 1));
+                                room.gameObjectsToAdd.Add(new Drop(Content.Load<Texture2D>("hearth"), enemy.Position, 1));
                             if (random == 2)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("key"), enemy.Position, 2));
+                                room.gameObjectsToAdd.Add(new Drop(Content.Load<Texture2D>("key"), enemy.Position, 2));
                             if (random == 3)
-                                room.drops.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemy.Position, 3));
+                                room.gameObjectsToAdd.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemy.Position, 3));
                             go.isDead = true;
                             enemy.isDead = true;
                             xp += rnd.Next(20, 40);
@@ -305,17 +305,17 @@ namespace DungeonGame
                     }
                 }
             }
-            for (int i = 0; i < room.drops.Count; i++)
+            foreach(GameObject go in gameObjects.Where(item => item is Drop))
             {
-                if (room.drops[i].HitBox.Intersects(HitBox))
+                if (go.HitBox.Intersects(HitBox))
                 {
-                    if (room.drops[i].type == 1 && health < maxHealth)
+                    if (go.type == 1 && health < maxHealth)
                         health++;
-                    else if (room.drops[i].type == 2)
+                    else if (go.type == 2)
                         numberOfKeys++;
-                    else if (room.drops[i].type == 3)
+                    else if (go.type == 3)
                         numberOfBombs += rnd.Next(1, 4);
-                    room.drops.RemoveAt(i);
+                    go.isDead = true;
                 }
             }
             if (isAttacking)
