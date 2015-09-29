@@ -64,7 +64,7 @@ namespace DungeonGame
             mapTexture = Content.Load<Texture2D>("towerUnder");
             player = new Player(new Vector2(200, 300), Content);
 
-            spawn.Add(new Tuple<string,int>("slime", 3));
+            spawn.Add(new Tuple<string,int>("bluba", 3));
 
             CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3);
             currentRoom = rooms[new Vector2(0, 0)];

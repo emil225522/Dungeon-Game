@@ -15,7 +15,7 @@ namespace DungeonGame
         bool isAttacking;
         int attackingTimer;
         public Bluba(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed, 1.5F, 50,1)
+            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed,2, 50,1)
         {
             balltexture = Content.Load<Texture2D>("blubaball");
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
@@ -42,7 +42,7 @@ namespace DungeonGame
                     isHurt = false;
                 }
                 timeBetweenAttack++;
-                if (timeBetweenAttack > rnd.Next(40, 70))
+                if (timeBetweenAttack > rnd.Next(100, 150))
                 {
                     timeBetweenAttack = 0;
                     isAttacking = true;
@@ -69,7 +69,7 @@ namespace DungeonGame
                     }
                 }
                 walktimer++;
-                if (walktimer > rnd.Next(200, 400) && !IsColliding(room.tiles))
+                if (walktimer > rnd.Next(2000, 4000) && !IsColliding(room.tiles))
                 {
                     walktimer = 0;
                     direction = (Direction)values.GetValue(rnd.Next(values.Length));
