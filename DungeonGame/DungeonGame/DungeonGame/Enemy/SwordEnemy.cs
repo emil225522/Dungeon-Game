@@ -20,8 +20,8 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime, room);
-            float XDistance = Position.X - room.player.Position.X - 40;
-            float YDistance = Position.Y - room.player.Position.Y - 40;
+            float XDistance = Position.X - room.player.Position.X;
+            float YDistance = Position.Y - room.player.Position.Y - 20;
             //sets the velocity to that with the right angle thanks to this function
             Velocity -= new Vector2(0.5f * (float)Math.Cos(Math.Atan2(YDistance, XDistance)), 0.5f * (float)Math.Sin(Math.Atan2(YDistance, XDistance)));
             timer++;

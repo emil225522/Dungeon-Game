@@ -397,6 +397,24 @@
       <Output>C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\player\shootArrowLeft.xnb</Output>
       <Time>2015-09-16T08:40:29.0394883+02:00</Time>
     </Item>
+    <Item>
+      <Source>hole.png</Source>
+      <Name>hole</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\hole.xnb</Output>
+      <Time>2015-09-29T13:21:06.3162888+02:00</Time>
+    </Item>
+    <Item>
+      <Source>snakebeta.png</Source>
+      <Name>snakebeta</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\snakebeta.xnb</Output>
+      <Time>2015-09-29T13:21:06.3272899+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{5BF9ECE1-1932-4A52-A56D-7EB451697E96}</ContentProjectGUID>

@@ -57,13 +57,13 @@ namespace DungeonGame
                         isAttacking = false;
                         Vector2 ballVelocity = new Vector2();
                         if (direction == Direction.Down)
-                            ballVelocity = new Vector2(0, 4);
+                            ballVelocity = new Vector2(0, 8);
                         else if (direction == Direction.Left)
-                            ballVelocity = new Vector2(-4, 0);
+                            ballVelocity = new Vector2(-8, 0);
                         else if (direction == Direction.Right)
-                            ballVelocity = new Vector2(4, 0);
+                            ballVelocity = new Vector2(8, 0);
                         else if (direction == Direction.Up)
-                            ballVelocity = new Vector2(0, -4);
+                            ballVelocity = new Vector2(0, -8);
 
                         room.gameObjectsToAdd.Add(new Projectile(balltexture, Position, ballVelocity));
                     }
