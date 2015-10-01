@@ -15,6 +15,10 @@ namespace DungeonGame
         bool goingLeft;
         Color normalColor;
         Vector2 circelingPlace;
+        Vector2 circelingPlaceVel;
+        int timer;
+        int timer2;
+        bool foo;
         public Fly(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1)
         {
@@ -29,18 +33,46 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime, room);
-                float XDistance = Position.X - room.player.Position.X - 40;
-                float YDistance = Position.Y - room.player.Position.Y - 40;
-                //sets the velocity to that with the right angle thanks to this function
-                circelingPlace.X -= 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
-                circelingPlace.Y -= 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
+
+            float XDistance = Position.X - room.player.Position.X - 40;
+            float YDistance = Position.Y - room.player.Position.Y - 40;
+            //sets the velocity to that with the right angle thanks to this function
+            circelingPlaceVel.X -= 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
+            circelingPlaceVel.Y -= 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
+
+            circelingPlace += circelingPlaceVel;
             if (goingLeft)
                 angle -= angleDirection;
             else
                 angle += angleDirection;
-            Position = new Vector2((float)(Math.Cos(angle)) * 60 + circelingPlace.X, (float)(Math.Sin(angle)) * 60 + circelingPlace.Y);
-
-            if (!IsColliding(room.tiles))
+            Position = new Vector2((float)(Math.Cos(angle)) * 100 + circelingPlace.X, (float)(Math.Sin(angle)) * 100 + circelingPlace.Y);
+            timer++;
+            if (timer > 500)
+            {
+                timer = 0;
+                foo = true;
+                circelingPlaceVel.X += rnd.Next(-100, 100);
+                circelingPlaceVel.Y += rnd.Next(-100, 100);
+            }
+            circelingPlaceVel *= 0.6f;
+            if (foo)
+            {
+                timer2++;
+                if (timer2 > 200)
+                {
+                    timer2 = 0;
+                    foo = false;
+                }
+            }
+            if (foo)
+            {
+                float XDistancevel = Position.X - circelingPlace.X - 40;
+                float YDistancevel = Position.Y - circelingPlace.Y - 40;
+                //sets the velocity to that with the right angle thanks to this function
+                circelingPlaceVel.X += 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
+                circelingPlaceVel.Y += 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
+            }
+                if (!IsColliding(room.tiles))
             {
                 if (direction == Direction.Down)
                     Position += new Vector2(0, speed);

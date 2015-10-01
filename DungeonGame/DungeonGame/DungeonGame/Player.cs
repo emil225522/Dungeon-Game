@@ -204,19 +204,19 @@ namespace DungeonGame
 
                 if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Up))
                 {
-                    currentSpeed = speed/1.5f;
+                    currentSpeed = speed/2f;
                 }
                 else if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Up))
                 {
-                    currentSpeed = speed / 1.5f;
+                    currentSpeed = speed / 2f;
                 }
                 else if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Down))
                 {
-                    currentSpeed = speed / 1.5f;
+                    currentSpeed = speed / 2f;
                 }
                 else if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Down))
                 {
-                    currentSpeed = speed/ 1.5f;
+                    currentSpeed = speed/ 2f;
                 }
                 else
                     currentSpeed = speed;
