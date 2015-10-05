@@ -20,21 +20,25 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime, room);
-            float XDistance = Position.X - room.player.Position.X;
-            float YDistance = Position.Y - room.player.Position.Y - 20;
-            //sets the velocity to that with the right angle thanks to this function
-            Velocity -= new Vector2(0.5f * (float)Math.Cos(Math.Atan2(YDistance, XDistance)), 0.5f * (float)Math.Sin(Math.Atan2(YDistance, XDistance)));
-            timer++;
-            if (timer > 10)
+            if ((Position - room.player.Position).Length() < 200)
             {
-                timer = 0;
-                Velocity += new Vector2(rnd.Next(-2, 2), rnd.Next(-2, 2));
+                float XDistance = Position.X - room.player.Position.X;
+                float YDistance = Position.Y - room.player.Position.Y - 20;
+                //sets the velocity to that with the right angle thanks to this function
+                Velocity -= new Vector2(0.5f * (float)Math.Cos(Math.Atan2(YDistance, XDistance)), 0.5f * (float)Math.Sin(Math.Atan2(YDistance, XDistance)));
+                timer++;
+                if (timer > 10)
+                {
+                    timer = 0;
+                    Velocity += new Vector2(rnd.Next(-2, 2), rnd.Next(-2, 2));
+                }
             }
                 //this makes it so that the player can only attack the soldier from above 
             if (Position.Y < room.player.Position.Y + 50)
                 state = 1;
             else
                 state = 0;
+
 
         }
         public override void Draw(SpriteBatch spriteBatch)

@@ -15,8 +15,9 @@ namespace DungeonGame
         bool goingLeft;
         Color normalColor;
         Vector2 circelingPlace;
+        bool playerInRange;
         public Snake(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1)
+            : base(position, new Animation(Content, "snakebeta", 150, 2, true), seed, 1.5F, 15, 1)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
@@ -29,16 +30,17 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime, room);
-            float XDistance = Position.X - room.player.Position.X - 40;
-            float YDistance = Position.Y - room.player.Position.Y - 40;
-            //sets the velocity to that with the right angle thanks to this function
-            circelingPlace.X -= 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
-            circelingPlace.Y -= 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
-            if (goingLeft)
-                angle -= angleDirection;
+            if ((Position - room.player.Position).Length() < 200)
+            {
+                float XDistance = Position.X - room.player.Position.X - 40;
+                float YDistance = Position.Y - room.player.Position.Y - 40;
+                //sets the velocity to that with the right angle thanks to this function
+                circelingPlace.X -= 1 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
+                circelingPlace.Y -= 1 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
+                playerInRange = true;
+            }
             else
-                angle += angleDirection;
-            Position = new Vector2((float)(Math.Cos(angle)) * 60 + circelingPlace.X, (float)(Math.Sin(angle)) * 60 + circelingPlace.Y);
+                playerInRange = false;
 
             if (!IsColliding(room.tiles))
             {
@@ -55,13 +57,15 @@ namespace DungeonGame
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Color color;
-            if (isHurt)
-                color = Color.Red;
-            else
-                color = normalColor;
-            animation.Draw(spriteBatch, Position, color);
+            if (playerInRange)
+            {
+                Color color;
+                if (isHurt)
+                    color = Color.Red;
+                else
+                    color = normalColor;
+                animation.Draw(spriteBatch, Position, color);
+            }
         }
-
     }
 }
