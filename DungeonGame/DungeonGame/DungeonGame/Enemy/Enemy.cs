@@ -75,11 +75,7 @@ namespace DungeonGame
                 isHurtTimer = 0;
                 isHurt = false;
             }
-            walktimer++;
-            if (walktimer > rnd.Next(50, 200) && !IsColliding(room.tiles)) {
-                walktimer = 0;
-                direction = (Direction)values.GetValue(rnd.Next(values.Length));
-            }
+           
         }
 
         public override void Draw(SpriteBatch spriteBatch)
