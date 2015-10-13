@@ -166,17 +166,17 @@ namespace DungeonGame
                 }
                 gameObjects.Add(new Bomb(new Animation(Content, "bomb", 400, 4, false), bombPosition,Content));
             }
-            if (gps.IsButtonUp(Buttons.DPadLeft) && gps.IsButtonUp(Buttons.DPadRight) && gps.IsButtonUp(Buttons.DPadDown) && gps.IsButtonUp(Buttons.DPadUp) && (!isAttacking))
+            if ((gps.IsButtonUp(Buttons.DPadLeft) && gps.IsButtonUp(Buttons.DPadRight) && gps.IsButtonUp(Buttons.DPadDown) && gps.IsButtonUp(Buttons.DPadUp) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Down) && ks.IsKeyUp(Keys.Up) && !isAttacking))
             {
-                //makes sure the animation part where the player stops is when he is standing
-                if (currentAnimation.asset == "player/runRight")
-                    currentAnimation.currentFrame = 2;
-                else
-                    currentAnimation.currentFrame = 3;
+                    //makes sure the animation part where the player stops is when he is standing
+                    if (currentAnimation.asset == "player/runRight")
+                        currentAnimation.currentFrame = 2;
+                    else
+                        currentAnimation.currentFrame = 3;
             }
             else
                 currentAnimation.looping = true;
-            //GamePadState
+            
             #region walkInput
             if (!isAttacking)
             {
@@ -234,7 +234,7 @@ namespace DungeonGame
                 else if (direction == Direction.Right)
                     currentAnimation = animationRight;
             }
-            if ((gps.IsButtonDown(Buttons.RightTrigger) && oldgps.IsButtonUp(Buttons.RightTrigger)) || ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space) && !isAttacking)
+            if (gps.IsButtonDown(Buttons.RightTrigger) && oldgps.IsButtonUp(Buttons.RightTrigger) && !isAttacking || (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space)) && !isAttacking)
             {
                 if (direction == Direction.Right)
                 {
