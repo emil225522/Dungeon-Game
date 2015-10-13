@@ -22,7 +22,6 @@ namespace DungeonGame
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjects = new List<GameObject>();
         public List<Tile> tiles = new List<Tile>();
-        public List<Drop> drops = new List<Drop>();
         Random random = new Random();
         Color color = Color.White;
         public bool isDark;
@@ -146,6 +145,7 @@ namespace DungeonGame
                     go.isDead = true;
                 }
             }
+
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (tiles[i].isDeleted)
@@ -174,13 +174,10 @@ namespace DungeonGame
             {
                 t.Draw(spriteBatch,color);
             }
-
-            foreach (Drop d in drops)
+            foreach (GameObject go in gameObjects)
             {
-                d.Draw(spriteBatch);
+                go.Draw(spriteBatch);
             }
-            foreach (GameObject g in gameObjects)
-                g.Draw(spriteBatch);
             player.Draw(spriteBatch);
         }
 
