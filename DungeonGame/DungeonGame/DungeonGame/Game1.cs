@@ -20,6 +20,7 @@ namespace DungeonGame
         SpriteBatch spriteBatch;
         Dictionary<Vector2, Room> rooms = new Dictionary<Vector2, Room>();
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
+        public static bool isUsingGamePad;
         Room currentRoom;
         Texture2D blackBarTex;
         Texture2D hearthTex;

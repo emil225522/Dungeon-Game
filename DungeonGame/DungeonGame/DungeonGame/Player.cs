@@ -20,12 +20,13 @@ namespace DungeonGame
         public Vector2 Velocity {get; set;}
 
         KeyboardState oldKs = Keyboard.GetState();
+        GamePadState oldgps = GamePad.GetState(PlayerIndex.One);
         Rectangle attackRect;
         public Rectangle HitBox { get { return new Rectangle((int)Position.X + 10, (int)Position.Y + 55, 37, 15); } }
 
-        public float health {get; set;}
-        public float maxHealth{get; set;}
-        public float speed {get; set;}
+        public float health { get; set;}
+        public float maxHealth{ get; set;}
+        public float speed { get; set;}
         public float currentSpeed { get; set; }
         private sbyte isHurtTimer ;
         private sbyte timer = 0;
@@ -68,7 +69,7 @@ namespace DungeonGame
         public Player(Vector2 position, ContentManager Content)
         {
             this.Position = position;
-            speed = 1.4f;
+            speed = 1.2f;
             currentSpeed = speed;
             direction = Direction.Down;
             maxHealth = 5;
@@ -142,6 +143,7 @@ namespace DungeonGame
                 xp = 0;
             }
             KeyboardState ks = Keyboard.GetState();
+            GamePadState gps = GamePad.GetState(PlayerIndex.One);
             if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter) && numberOfBombs > 0)
             {
                 numberOfBombs--;
@@ -164,7 +166,7 @@ namespace DungeonGame
                 }
                 gameObjects.Add(new Bomb(new Animation(Content, "bomb", 400, 4, false), bombPosition,Content));
             }
-            if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down) && (!isAttacking))
+            if (gps.IsButtonUp(Buttons.DPadLeft) && gps.IsButtonUp(Buttons.DPadRight) && gps.IsButtonUp(Buttons.DPadDown) && gps.IsButtonUp(Buttons.DPadUp) && (!isAttacking))
             {
                 //makes sure the animation part where the player stops is when he is standing
                 if (currentAnimation.asset == "player/runRight")
@@ -174,53 +176,52 @@ namespace DungeonGame
             }
             else
                 currentAnimation.looping = true;
-
+            //GamePadState
+            #region walkInput
             if (!isAttacking)
             {
-                if (ks.IsKeyDown(Keys.Left))
+                if (gps.IsButtonDown(Buttons.DPadLeft) || ks.IsKeyDown(Keys.Left))
                 {
 
                     Velocity -= new Vector2(currentSpeed,0);
                     direction = Direction.Left;
                 }
-                if (ks.IsKeyDown(Keys.Right))
+                if (gps.IsButtonDown(Buttons.DPadRight) || ks.IsKeyDown(Keys.Right))
                 {
                     Velocity += new Vector2(currentSpeed,0);
                     direction = Direction.Right;
                 }
-                if (ks.IsKeyDown(Keys.Up))
+                if (gps.IsButtonDown(Buttons.DPadUp) || ks.IsKeyDown(Keys.Up))
                 {
-
                     Velocity -= new Vector2(0,currentSpeed);
                     direction = Direction.Up;
                 }
-
-                if (ks.IsKeyDown(Keys.Down))
+                if (gps.IsButtonDown(Buttons.DPadDown) || ks.IsKeyDown(Keys.Down))
                 {
-
                     Velocity += new Vector2(0,currentSpeed);
                     direction = Direction.Down;
                 }
 
-                if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Up))
-                {
-                    currentSpeed = speed/1.5f;
-                }
-                else if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Up))
+                if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Up) || gps.IsButtonDown(Buttons.DPadRight) && gps.IsButtonDown(Buttons.DPadUp))
                 {
                     currentSpeed = speed / 1.5f;
                 }
-                else if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Down))
+                else if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Up) || gps.IsButtonDown(Buttons.DPadLeft) && gps.IsButtonDown(Buttons.DPadUp))
                 {
                     currentSpeed = speed / 1.5f;
                 }
-                else if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Down))
+                else if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Down) || gps.IsButtonDown(Buttons.DPadRight) && gps.IsButtonDown(Buttons.DPadDown))
+                {
+                    currentSpeed = speed / 1.5f;
+                }
+                else if (ks.IsKeyDown(Keys.Left) && ks.IsKeyDown(Keys.Down) || gps.IsButtonDown(Buttons.DPadLeft) && gps.IsButtonDown(Buttons.DPadDown))
                 {
                     currentSpeed = speed/ 1.5f;
                 }
                 else
                     currentSpeed = speed;
             }
+            #endregion
             Random rnd = new Random();
             if (!isAttacking)
             {
@@ -233,7 +234,7 @@ namespace DungeonGame
                 else if (direction == Direction.Right)
                     currentAnimation = animationRight;
             }
-            if (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space) && !isAttacking)
+            if ((gps.IsButtonDown(Buttons.RightTrigger) && oldgps.IsButtonUp(Buttons.RightTrigger)) || ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space) && !isAttacking)
             {
                 if (direction == Direction.Right)
                 {
@@ -410,6 +411,7 @@ namespace DungeonGame
             }
             #endregion
             oldKs = ks;
+            oldgps = gps;
 
             currentAnimation.PlayAnim(gameTime);
             if (room.isDark)
@@ -469,6 +471,18 @@ namespace DungeonGame
                 Enemy enemy = (Enemy)go;
                 if (enemy.isHurt)
                     return true;
+            }
+            return false;
+        }
+        public bool ButtonDown(string button)
+        {
+            if (!Game1.isUsingGamePad)
+            {
+                if (button == "left")
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                        return true;
+                }
             }
             return false;
         }
