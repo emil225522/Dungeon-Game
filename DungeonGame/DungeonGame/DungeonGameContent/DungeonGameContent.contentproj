@@ -276,8 +276,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="snakebeta.png">
-      <Name>snakebeta</Name>
+    <Compile Include="snakeBall.png">
+      <Name>snakeBall</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -12,18 +12,16 @@ namespace DungeonGame
     {
         float angle;
         float angleDirection;
-        bool goingLeft;
+
         Color normalColor;
         Vector2 circelingPlace;
         bool playerInRange;
         public Snake(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "snakebeta", 150, 2, true), seed, 1.5F, 15, 1)
+            : base(position, new Animation(Content, "snakeBall", 150, 2, true), seed, 1.5F, 15, 1)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
             angleDirection = (float)rnd.Next(200, 500) / 10000;
-            if (rnd.Next(2) == 1)
-                goingLeft = true;
             normalColor = new Color(rnd.Next(50, 255), rnd.Next(50, 255), rnd.Next(50, 255));
         }
 

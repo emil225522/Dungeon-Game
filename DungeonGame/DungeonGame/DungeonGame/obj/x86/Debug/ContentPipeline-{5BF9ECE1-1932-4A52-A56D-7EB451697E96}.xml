@@ -407,13 +407,13 @@
       <Time>2015-09-29T13:21:06.3162888+02:00</Time>
     </Item>
     <Item>
-      <Source>snakebeta.png</Source>
-      <Name>snakebeta</Name>
+      <Source>snakeBall.png</Source>
+      <Name>snakeBall</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\snakebeta.xnb</Output>
-      <Time>2015-09-29T13:21:06.3272899+02:00</Time>
+      <Output>C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\snakeBall.xnb</Output>
+      <Time>2015-10-13T13:51:19.1925877+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
