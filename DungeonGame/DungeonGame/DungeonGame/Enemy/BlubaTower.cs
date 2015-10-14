@@ -36,33 +36,35 @@ namespace DungeonGame
                     isHurtTimer = 0;
                     isHurt = false;
                 }
-                timeBetweenAttack++;
-                if (timeBetweenAttack > rnd.Next(40, 70))
+                if ((Position - room.player.Position).Length() < 300)
                 {
-                    timeBetweenAttack = 0;
-                    isAttacking = true;
-                }
-                Vector2 ballVelocity = new Vector2();
-                //calculate the distance between the two objects
-                float XDistance = Position.X - room.player.Position.X - 40;
-                float YDistance = Position.Y - room.player.Position.Y - 40;
-                //sets the velocity to that with the right angle thanks to this function
-                ballVelocity.X -= 5 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
-                ballVelocity.Y -= 5 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
-                rotation = (float)Math.Atan2(ballVelocity.Y, ballVelocity.X);
-                if (isAttacking)
-                {
-                    attackingTimer++;
-                    if (attackingTimer > 60)
+                    timeBetweenAttack++;
+                    if (timeBetweenAttack > rnd.Next(40, 70))
                     {
-                        attackingTimer = 0;
-                        isAttacking = false;
+                        timeBetweenAttack = 0;
+                        isAttacking = true;
+                    }
+                    Vector2 ballVelocity = new Vector2();
+                    //calculate the distance between the two objects
+                    float XDistance = Position.X - room.player.Position.X - 40;
+                    float YDistance = Position.Y - room.player.Position.Y - 40;
+                    //sets the velocity to that with the right angle thanks to this function
+                    ballVelocity.X -= 5 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
+                    ballVelocity.Y -= 5 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
+                    rotation = (float)Math.Atan2(ballVelocity.Y, ballVelocity.X);
+                    if (isAttacking)
+                    {
+                        attackingTimer++;
+                        if (attackingTimer > 60)
+                        {
+                            attackingTimer = 0;
+                            isAttacking = false;
 
 
-                        room.gameObjectsToAdd.Add(new Projectile(balltexture, Position, ballVelocity));
+                            room.gameObjectsToAdd.Add(new Projectile(balltexture, Position, ballVelocity));
+                        }
                     }
                 }
-                walktimer++;
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

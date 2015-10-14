@@ -170,7 +170,7 @@ namespace DungeonGame
         {
 
             if (Math.Abs((int)position.X + (int)position.Y) < 6 && position.X != 0)
-                spawn.Add(new Tuple<string, int>("swordEnemy", Math.Abs((int)position.X + (int)position.Y)* 10));
+                spawn.Add(new Tuple<string, int>("swordEnemy", Math.Abs((int)position.X + (int)position.Y)* 20));
             else if (position.X == 0)
                 spawn.Add(new Tuple<string, int>("blubaTower", Math.Abs((int)position.X + (int)position.Y)));
             else if (position.X == 0)
