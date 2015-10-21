@@ -22,6 +22,7 @@ namespace DungeonGame
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
         public static bool isUsingGamePad;
         Room currentRoom;
+        bool menuIsOpen;
         Texture2D blackBarTex;
         Texture2D hearthTex;
         Player player;
@@ -96,6 +97,10 @@ namespace DungeonGame
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Escape))
                 this.Exit();
+            if (ks.IsKeyDown(Keys.Z))
+                menuIsOpen = true;
+            else
+                menuIsOpen = false;
 
             currentRoom.Update(gameTime, player);
             camera.Update(gameTime);
@@ -124,15 +129,17 @@ namespace DungeonGame
             spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(750, 10), Color.White);
             spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
             spriteBatch.DrawString(font1, "Level " + player.level, new Vector2(750, -20), Color.White);
-
-            foreach(KeyValuePair<Vector2,Room> room in rooms)
+            if (menuIsOpen)
             {
-                if (currentRoom == room.Value)
-                    spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X *17 + 200, (int)room.Key.Y *11 + 200,15,10), Color.BlueViolet);
-                else
-                    spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.LightGreen);
+                foreach (KeyValuePair<Vector2, Room> room in rooms)
+                {
+
+                    if (currentRoom == room.Value)
+                        spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.BlueViolet);
+                    else
+                        spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.LightGreen);
+                }
             }
-            
             for (int i = 0; i < player.health; i++)
                 spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 50, -50), Color.White);
 
@@ -169,8 +176,8 @@ namespace DungeonGame
         public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom)
         {
 
-            if (Math.Abs((int)position.X + (int)position.Y) < 6 && position.X != 0)
-                spawn.Add(new Tuple<string, int>("swordEnemy", Math.Abs((int)position.X + (int)position.Y)* 20));
+            if (position.X < 2 && position.Y > -2 && position.Y > -2 && position.Y < 2)
+                spawn.Add(new Tuple<string, int>("bat", Math.Abs((int)position.X + (int)position.Y)* 2));
             else if (position.X == 0)
                 spawn.Add(new Tuple<string, int>("blubaTower", Math.Abs((int)position.X + (int)position.Y)));
             else if (position.X == 0)
