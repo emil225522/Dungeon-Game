@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace DungeonGame
 {
@@ -25,6 +28,14 @@ namespace DungeonGame
         public List<Drop> drops = new List<Drop>();
         Random random = new Random();
         Color color = Color.White;
+        public enum TypeOfRoom
+        {
+            Normal,
+            Puzzle,
+            Boss,
+            Bonus
+        }
+        public TypeOfRoom typeOfRoom;
         public bool isDark;
         Random rnd = new Random();
         ContentManager Content;
@@ -39,6 +50,12 @@ namespace DungeonGame
             this.roomPosition = roomPosition;
             this.doors = doors;
             int randomValue = random.Next(1, 5);
+            Array values = Enum.GetValues(typeof(TypeOfRoom));
+            TypeOfRoom randomRoom = (TypeOfRoom)values.GetValue(random.Next(values.Length));
+            typeOfRoom = randomRoom;
+            if (typeOfRoom == TypeOfRoom.Boss && (Math.Abs(roomPosition.X + roomPosition.Y) < 20))
+                typeOfRoom = TypeOfRoom.Normal;
+            #region setColor
             if (randomValue == 1)
                 color = Color.Red;
             else if (randomValue == 2)
@@ -49,7 +66,8 @@ namespace DungeonGame
                 if (rnd.Next(1,2) == 1)
                     isDark = true;
                 color = new Color(random.Next(60, 255), random.Next(60, 255), random.Next(60, 255));
-            generation.Generate(Content, tiles, "map");
+            #endregion
+                generation.Generate(Content, tiles, "map");
             #region CreateDoorOrWall
             if (doors[0] == 1)
             {
@@ -103,10 +121,17 @@ namespace DungeonGame
 
                 }
             }
-            for (int i = 0; i < spawn.Count; i++)
+            if (typeOfRoom == TypeOfRoom.Normal)
             {
-                for (int j = 0; j < spawn[i].Item2; j++)
-                    gameObjects.Add(CreateMob(spawn[i].Item1));
+                for (int i = 0; i < spawn.Count; i++)
+                {
+                    for (int j = 0; j < spawn[i].Item2; j++)
+                        gameObjects.Add(CreateMob(spawn[i].Item1));
+                }
+            }
+            else if (typeOfRoom == TypeOfRoom.Bonus)
+            {
+                gameObjects.Add(new Drop(Content.Load<Texture2D>("hearth"), new Vector2(200, 200), 1));
             }
         }
 
@@ -192,13 +217,13 @@ namespace DungeonGame
                     return new Bat(Content, rnd.Next(), new Vector2(rnd.Next(100,700), rnd.Next(100, 450)));
                 case "bluba":
                     return new Bluba(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
-                case "blubaTower":
+                case "blubatower":
                     return new BlubaTower(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 case "slime":
                     return new Slime(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 case "fly":
                     return new Fly(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
-                case "swordEnemy":
+                case "swordenemy":
                     return new SwordEnemy(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 case "snake":
                     return new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));

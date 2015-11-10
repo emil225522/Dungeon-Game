@@ -280,16 +280,16 @@ namespace DungeonGame
                             enemy.hp -= 20;
                             enemy.isHurt = true;
                         }
-                            if (enemy.type == 1)
+                        if (enemy.type == 1)
                         {
                             if (direction == Direction.Right)
-                                enemy.Velocity = new Vector2(30,0);
+                                enemy.Velocity = new Vector2(40, 0);
                             else if (direction == Direction.Left)
-                                enemy.Velocity = new Vector2(-30,0);
+                                enemy.Velocity = new Vector2(-40, 0);
                             else if (direction == Direction.Up)
-                                enemy.Velocity = new Vector2(0,-30);
+                                enemy.Velocity = new Vector2(0, -40);
                             else if (direction == Direction.Down)
-                                enemy.Velocity = new Vector2(0,30);
+                                enemy.Velocity = new Vector2(0, 40);
                         }
                         if (enemy.hp < 1)
                         {

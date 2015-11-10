@@ -31,6 +31,7 @@ namespace DungeonGame
         public FrameCounter _frameCounter = new FrameCounter();
         Random rnd = new Random();
         Texture2D mapTexture;
+        Vector2 testposition;
 
         public Game1()
         {
@@ -65,7 +66,7 @@ namespace DungeonGame
             font1 = Content.Load<SpriteFont>("font1");
             mapTexture = Content.Load<Texture2D>("towerUnder");
             player = new Player(new Vector2(200, 300), Content);
-
+            testposition = new Vector2();
             spawn.Add(new Tuple<string,int>("snake", 10));
 
             CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3);
@@ -125,10 +126,10 @@ namespace DungeonGame
 
             currentRoom.Draw(spriteBatch,player,gameTime);
             spriteBatch.Draw(blackBarTex, new Vector2(50,-100), Color.White);
-            spriteBatch.DrawString(font1, "Keys: " + player.numberOfKeys, new Vector2(750, -100), Color.White);
+            spriteBatch.DrawString(font1, testposition + "Keys: " + player.numberOfKeys, new Vector2(750, -100), Color.White);
             spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(750, 10), Color.White);
             spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
-            spriteBatch.DrawString(font1, "Level " + player.level, new Vector2(750, -20), Color.White);
+            spriteBatch.DrawString(font1, "Level " + currentRoom.typeOfRoom, new Vector2(600, -20), Color.White);
             if (menuIsOpen)
             {
                 foreach (KeyValuePair<Vector2, Room> room in rooms)
@@ -176,14 +177,13 @@ namespace DungeonGame
         public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom)
         {
 
-            if (position.X < 2 && position.Y > -2 && position.Y > -2 && position.Y < 2)
-                spawn.Add(new Tuple<string, int>("bat", Math.Abs((int)position.X + (int)position.Y)* 2));
-            else if (position.X == 0)
-                spawn.Add(new Tuple<string, int>("blubaTower", Math.Abs((int)position.X + (int)position.Y)));
-            else if (position.X == 0)
-                spawn.Add(new Tuple<string, int>("bat", 2 * Math.Abs((int)position.X + (int)position.Y)));
-            else
-                spawn.Add(new Tuple<string, int>("bluba", Math.Abs((int)position.X + (int)position.Y)));
+            if (position.X < 5 && position.Y > -5 && position.Y > -5 && position.Y < 5)
+                spawn.Add(new Tuple<string, int>("bat", Math.Abs((int)position.X + (int)position.Y)* 4));
+            else if (position.X + position.Y > 10)
+                spawn.Add(new Tuple<string, int>("blubatower", Math.Abs((int)position.X + (int)position.Y)));
+            else if (position.X > 5 && position.Y > 10 && position.Y > 5 && position.Y < 10)
+                spawn.Add(new Tuple<string, int>("swordenemy", 2 * Math.Abs((int)position.X + (int)position.Y)));
+            
             //create a door where needded
             doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);
             doors = CheckDoor(new Vector2(position.X - 1, position.Y), 2, 0, doors);
