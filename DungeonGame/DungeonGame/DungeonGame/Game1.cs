@@ -190,7 +190,7 @@ namespace DungeonGame
             doors = CheckDoor(new Vector2(position.X, position.Y + 1), 1, 3, doors);
             doors = CheckDoor(new Vector2(position.X, position.Y - 1), 3, 1, doors);
 
-            rooms.Add(position, new Room(this, Content, spawn, position, doors, fromRoom));
+            rooms.Add(position, new Room(this, Content, spawn, position, doors, fromRoom,Room.TypeOfRoom.Normal));
             spawn.Clear();
         }
 

@@ -33,7 +33,8 @@ namespace DungeonGame
             Normal,
             Puzzle,
             Boss,
-            Bonus
+            Bonus,
+            Empty
         }
         public TypeOfRoom typeOfRoom;
         public bool isDark;
@@ -43,30 +44,32 @@ namespace DungeonGame
         Game1 game;
         public Vector2 roomPosition;
 
-        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom)
+        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom, TypeOfRoom typeofRoom)
         {
             this.game = game;
             this.Content = Content;
             this.roomPosition = roomPosition;
             this.doors = doors;
-            int randomValue = random.Next(1, 5);
-            Array values = Enum.GetValues(typeof(TypeOfRoom));
-            TypeOfRoom randomRoom = (TypeOfRoom)values.GetValue(random.Next(values.Length));
-            typeOfRoom = randomRoom;
-            if (typeOfRoom == TypeOfRoom.Boss && (Math.Abs(roomPosition.X + roomPosition.Y) < 20))
-                typeOfRoom = TypeOfRoom.Normal;
-            #region setColor
-            if (randomValue == 1)
-                color = Color.Red;
-            else if (randomValue == 2)
-                color = Color.Turquoise;
-            else if (randomValue == 3)
-                color = Color.Yellow;
-            else if (randomValue == 4)
-                if (rnd.Next(1,2) == 1)
-                    isDark = true;
-                color = new Color(random.Next(60, 255), random.Next(60, 255), random.Next(60, 255));
-            #endregion
+            //Array values = Enum.GetValues(typeof(TypeOfRoom));
+            //TypeOfRoom randomRoom = (TypeOfRoom)values.GetValue(random.Next(values.Length));
+            //typeOfRoom = randomRoom;
+            if (typeOfRoom == TypeOfRoom.Normal)
+            {
+                int randomNumber = rnd.Next(20);
+                if (randomNumber < 10)
+                    typeOfRoom = TypeOfRoom.Normal;
+                else if (randomNumber > 9 && randomNumber < 15)
+                    typeOfRoom = TypeOfRoom.Bonus;
+                else if (randomNumber > 14 && randomNumber < 18)
+                    typeOfRoom = TypeOfRoom.Puzzle;
+                else if (randomNumber > 17)
+                    typeOfRoom = TypeOfRoom.Boss;
+                if (typeOfRoom == TypeOfRoom.Boss && (Math.Abs(roomPosition.X + roomPosition.Y) < 20))
+                    typeOfRoom = TypeOfRoom.Normal;
+            }
+                if (typeOfRoom == TypeOfRoom.Bonus)
+                    color = Color.Yellow;
+            
                 generation.Generate(Content, tiles, "map");
             #region CreateDoorOrWall
             if (doors[0] == 1)
@@ -113,8 +116,8 @@ namespace DungeonGame
             }
             for (int i = 0; i < tiles.Count; i++)
             {
-                int randomNumber = rnd.Next(-20,20);
-                if (randomNumber == 5 && tiles[i].type == 1)
+                //removed random number value
+                if (rnd.Next(-20,20) == 5 && tiles[i].type == 1)
                 {
                     tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tiles[i].position, 3));
                     tiles.RemoveAt(i);
@@ -167,7 +170,7 @@ namespace DungeonGame
             {
                 if (go.isDead)
                 {
-                    gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), go.Position));
+                    gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), new Vector2(go.Position.X - go.Animation.frameWidth/2 ,go.Position.Y - go.Animation.frameHeight/2)));
                     go.isDead = true;
                 }
             }
