@@ -62,7 +62,7 @@ namespace DungeonGame
                     typeOfRoom = TypeOfRoom.Bonus;
                 else if (randomNumber > 12 && randomNumber < 18)
                     typeOfRoom = TypeOfRoom.Puzzle;
-                else if (randomNumber > 18 && (Math.Abs(roomPosition.X + roomPosition.Y) < 20))
+                else if (randomNumber > 18 && roomPosition.Length() > 5)
                     typeOfRoom = TypeOfRoom.Boss;
                 else
                     typeOfRoom = TypeOfRoom.Normal;
@@ -267,7 +267,7 @@ namespace DungeonGame
                 if (roomPosition.Length() < 5)
                     randomFactor = 2;
                 else
-                    randomFactor = 3;
+                    randomFactor = 2;
 
                 switch (side)
                 {
