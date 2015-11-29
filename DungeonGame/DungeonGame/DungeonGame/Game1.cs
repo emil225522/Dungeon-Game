@@ -67,7 +67,7 @@ namespace DungeonGame
             mapTexture = Content.Load<Texture2D>("towerUnder");
             player = new Player(new Vector2(200, 300), Content);
             testposition = new Vector2();
-            spawn.Add(new Tuple<string,int>("snake", 10));
+            spawn.Add(new Tuple<string,int>("bat", 10));
 
             CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3);
             currentRoom = rooms[new Vector2(0, 0)];
@@ -177,11 +177,13 @@ namespace DungeonGame
         public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom)
         {
 
-            if (position.X < 5 && position.Y > -5 && position.Y > -5 && position.Y < 5)
+            if (position.X < 2 && position.Y > -2 && position.Y > -2 && position.Y < 2)
                 spawn.Add(new Tuple<string, int>("bat", Math.Abs((int)position.X + (int)position.Y)* 4));
-            else if (position.X + position.Y > 10)
+            else if (position.X + position.Y > 2)
                 spawn.Add(new Tuple<string, int>("blubatower", Math.Abs((int)position.X + (int)position.Y)));
             else if (position.X > 5 && position.Y > 10 && position.Y > 5 && position.Y < 10)
+                spawn.Add(new Tuple<string, int>("swordenemy", 2 * Math.Abs((int)position.X + (int)position.Y)));
+            else
                 spawn.Add(new Tuple<string, int>("swordenemy", 2 * Math.Abs((int)position.X + (int)position.Y)));
             
             //create a door where needded

@@ -53,22 +53,24 @@ namespace DungeonGame
             //Array values = Enum.GetValues(typeof(TypeOfRoom));
             //TypeOfRoom randomRoom = (TypeOfRoom)values.GetValue(random.Next(values.Length));
             //typeOfRoom = randomRoom;
-            if (typeOfRoom == TypeOfRoom.Normal)
+            if (roomPosition != Vector2.Zero)
             {
                 int randomNumber = rnd.Next(20);
-                if (randomNumber < 10)
+                if (randomNumber < 12)
                     typeOfRoom = TypeOfRoom.Normal;
-                else if (randomNumber > 9 && randomNumber < 15)
+                else if (randomNumber > 11 && randomNumber < 13)
                     typeOfRoom = TypeOfRoom.Bonus;
-                else if (randomNumber > 14 && randomNumber < 18)
+                else if (randomNumber > 12 && randomNumber < 18)
                     typeOfRoom = TypeOfRoom.Puzzle;
-                else if (randomNumber > 17)
+                else if (randomNumber > 18 && (Math.Abs(roomPosition.X + roomPosition.Y) < 20))
                     typeOfRoom = TypeOfRoom.Boss;
-                if (typeOfRoom == TypeOfRoom.Boss && (Math.Abs(roomPosition.X + roomPosition.Y) < 20))
+                else
                     typeOfRoom = TypeOfRoom.Normal;
             }
                 if (typeOfRoom == TypeOfRoom.Bonus)
                     color = Color.Yellow;
+                if (typeOfRoom == TypeOfRoom.Puzzle)
+                    color = new Color(228, 0, 228);
             
                 generation.Generate(Content, tiles, "map");
             #region CreateDoorOrWall
@@ -109,20 +111,23 @@ namespace DungeonGame
                 tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
             #endregion
 
-            for (int i = 0; i < tiles.Count; i++)
-            {
-                if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
-                    tiles.Add(new Tile(Content.Load<Texture2D>("crack"), tiles[i].position, 1));
-            }
+           
             for (int i = 0; i < tiles.Count; i++)
             {
                 //removed random number value
                 if (rnd.Next(-20,20) == 5 && tiles[i].type == 1)
                 {
-                    tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tiles[i].position, 3));
+                    Vector2 tempPos = new Vector2();
+                    tempPos = tiles[i].position;
                     tiles.RemoveAt(i);
+                    tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tempPos, 3));
 
                 }
+            }
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
+                    tiles.Add(new Tile(Content.Load<Texture2D>("crack"), tiles[i].position, 1));
             }
             if (typeOfRoom == TypeOfRoom.Normal)
             {
@@ -258,25 +263,29 @@ namespace DungeonGame
             {
                 int[] doors = { 0 };
                 sbyte fromRoom = 0;
-                sbyte i = 3;
+                sbyte randomFactor;
+                if (roomPosition.Length() < 5)
+                    randomFactor = 2;
+                else
+                    randomFactor = 3;
 
                 switch (side)
                 {
                     case Doors.Left:
                         fromRoom = 0;
-                        doors = new int[] { rnd.Next(0, i), rnd.Next(0, i), 1, rnd.Next(0, i) };
+                        doors = new int[] { rnd.Next(0, randomFactor), rnd.Next(0, randomFactor), 1, rnd.Next(0, randomFactor) };
                         break;
                     case Doors.Up:
                         fromRoom = 1;
-                        doors = new int[] { rnd.Next(0, i), 1, rnd.Next(0,i), rnd.Next(0, i) };
+                        doors = new int[] { rnd.Next(0, randomFactor), 1, rnd.Next(0,randomFactor), rnd.Next(0, randomFactor) };
                         break;
                     case Doors.Right:
                         fromRoom = 2;
-                        doors = new int[] { 1, rnd.Next(0, i), rnd.Next(0, i), rnd.Next(0, i) };
+                        doors = new int[] { 1, rnd.Next(0, randomFactor), rnd.Next(0, randomFactor), rnd.Next(0, randomFactor) };
                         break;
                     case Doors.Down:
                         fromRoom = 3;
-                        doors = new int[] { rnd.Next(0, i), rnd.Next(0, i), rnd.Next(0, i), 1 };
+                        doors = new int[] { rnd.Next(0, randomFactor), rnd.Next(0, randomFactor), rnd.Next(0, randomFactor), 1 };
                         break;
 
                 }
