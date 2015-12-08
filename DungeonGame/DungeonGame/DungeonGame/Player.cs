@@ -166,6 +166,7 @@ namespace DungeonGame
                 }
                 gameObjects.Add(new Bomb(new Animation(Content, "bomb", 400, 4, false), bombPosition,Content));
             }
+            GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
             if ((gps.IsButtonUp(Buttons.DPadLeft) && gps.IsButtonUp(Buttons.DPadRight) && gps.IsButtonUp(Buttons.DPadDown) && gps.IsButtonUp(Buttons.DPadUp) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Down) && ks.IsKeyUp(Keys.Up) && !isAttacking))
             {
                     //makes sure the animation part where the player stops is when he is standing

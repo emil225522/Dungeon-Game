@@ -36,7 +36,6 @@ Content\skeletonEnemy.xnb
 Content\slimeEnemy.xnb
 Content\tower.xnb
 Content\towerUnder.xnb
-Content\font1.xnb
 Content\dark.xnb
 Content\fly.xnb
 Content\swordEnemy.xnb
@@ -44,3 +43,4 @@ Content\crack.xnb
 Content\player\shootArrowLeft.xnb
 Content\hole.xnb
 Content\snakebeta.xnb
+Content\font1.xnb
