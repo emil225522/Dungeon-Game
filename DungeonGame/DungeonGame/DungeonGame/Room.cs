@@ -58,9 +58,9 @@ namespace DungeonGame
                 int randomNumber = rnd.Next(20);
                 if (randomNumber < 12)
                     typeOfRoom = TypeOfRoom.Normal;
-                else if (randomNumber > 11 && randomNumber < 13)
+                else if (randomNumber > 14 && randomNumber < 16)
                     typeOfRoom = TypeOfRoom.Bonus;
-                else if (randomNumber > 12 && randomNumber < 18)
+                else if (randomNumber > 15 && randomNumber < 18)
                     typeOfRoom = TypeOfRoom.Puzzle;
                 else if (randomNumber > 18 && roomPosition.Length() > 5)
                     typeOfRoom = TypeOfRoom.Boss;

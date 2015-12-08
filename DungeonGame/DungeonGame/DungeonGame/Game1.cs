@@ -122,7 +122,7 @@ namespace DungeonGame
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
 
-            var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, currentRoom.roomPosition, player.Velocity);
+            var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, currentRoom.roomPosition, currentRoom.roomPosition.Length());
 
             currentRoom.Draw(spriteBatch,player,gameTime);
             spriteBatch.Draw(blackBarTex, new Vector2(50,-100), Color.White);
@@ -178,13 +178,13 @@ namespace DungeonGame
         {
 
             if (position.Length() < 2)
-                spawn.Add(new Tuple<string, int>("bat", Math.Abs((int)position.X + (int)position.Y)* 4));
+                spawn.Add(new Tuple<string, int>("bat", (int)(2 *position.Length())));
             else if (position.Length() > 2 && position.Length() < 4)
-                spawn.Add(new Tuple<string, int>("blubatower", Math.Abs((int)position.X + (int)position.Y)));
+                spawn.Add(new Tuple<string, int>("blubatower", (int)(position.Length())));
             else if (position.Length() > 3 && position.Length() < 6)
-                spawn.Add(new Tuple<string, int>("swordenemy", 2 * Math.Abs((int)position.X + (int)position.Y)));
+                spawn.Add(new Tuple<string, int>("swordenemy", (int)(2 *position.Length())));
             else
-                spawn.Add(new Tuple<string, int>("bluba", 2 * Math.Abs((int)position.X + (int)position.Y)));
+                spawn.Add(new Tuple<string, int>("bat", (int)(2 *position.Length())));
             
             //create a door where needded
             doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);
