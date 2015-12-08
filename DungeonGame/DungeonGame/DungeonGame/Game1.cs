@@ -126,8 +126,8 @@ namespace DungeonGame
 
             currentRoom.Draw(spriteBatch,player,gameTime);
             spriteBatch.Draw(blackBarTex, new Vector2(50,-100), Color.White);
-            spriteBatch.DrawString(font1, testposition + "Keys: " + player.numberOfKeys, new Vector2(750, -100), Color.White);
-            spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(750, 10), Color.White);
+            spriteBatch.DrawString(font1, testposition + "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
+            spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(700, 10), Color.White);
             spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
             spriteBatch.DrawString(font1, "Level " + currentRoom.typeOfRoom, new Vector2(600, -20), Color.White);
             if (menuIsOpen)
