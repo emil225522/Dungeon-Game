@@ -147,3 +147,4 @@ C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin
 C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\snakebeta.xnb
 C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\hole.xnb
 C:\Users\emil.jonsson1\Documents\GitHub\Dungeon-Game\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\snakebeta.xnb
+C:\Users\Emil\Desktop\Random\DungeonGame\DungeonGame\DungeonGame\DungeonGame\bin\x86\Debug\Content\snake.xnb

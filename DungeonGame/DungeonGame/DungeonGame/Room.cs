@@ -62,23 +62,22 @@ namespace DungeonGame
                     typeOfRoom = TypeOfRoom.Bonus;
                 else if (randomNumber > 15 && randomNumber < 18)
                     typeOfRoom = TypeOfRoom.Puzzle;
-                else if (randomNumber > 18 && roomPosition.Length() > 5)
+                else if (roomPosition.Length() > 4)
                     typeOfRoom = TypeOfRoom.Boss;
-                else
-                    typeOfRoom = TypeOfRoom.Normal;
+
             }
-                if (typeOfRoom == TypeOfRoom.Bonus)
-                    color = Color.Yellow;
-                if (typeOfRoom == TypeOfRoom.Puzzle)
-                    color = new Color(228, 0, 228);
-            
-                generation.Generate(Content, tiles, "map");
+            if (typeOfRoom == TypeOfRoom.Bonus)
+                color = Color.Yellow;
+            if (typeOfRoom == TypeOfRoom.Puzzle)
+                color = new Color(228, 0, 228);
+
+            generation.Generate(Content, tiles, "map");
             #region CreateDoorOrWall
             if (doors[0] == 1)
             {
                 tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 2));
                 if (fromRoom != 2)
-                tiles.Add(new LockedDoor(new Vector2(50, 300), Content,5));
+                    tiles.Add(new LockedDoor(new Vector2(50, 300), Content, 5));
             }
             else
                 tiles.Add(new Tile(generation.wallLeft, new Vector2(50, 300), 3));
@@ -87,7 +86,7 @@ namespace DungeonGame
             {
                 tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 2));
                 if (fromRoom != 1)
-                tiles.Add(new LockedDoor(new Vector2(450, 50), Content,6));
+                    tiles.Add(new LockedDoor(new Vector2(450, 50), Content, 6));
             }
             else
                 tiles.Add(new Tile(generation.wallUp, new Vector2(450, 50), 3));
@@ -96,7 +95,7 @@ namespace DungeonGame
             {
                 tiles.Add(new Tile(generation.doorRight, new Vector2(850, 300), 2));
                 if (fromRoom != 0)
-                tiles.Add(new LockedDoor(new Vector2(850, 300), Content,7));
+                    tiles.Add(new LockedDoor(new Vector2(850, 300), Content, 7));
             }
             else
                 tiles.Add(new Tile(generation.wallRight, new Vector2(850, 300), 3));
@@ -105,17 +104,17 @@ namespace DungeonGame
             {
                 tiles.Add(new Tile(generation.doorDown, new Vector2(450, 550), 2));
                 if (fromRoom != 3)
-                tiles.Add(new LockedDoor(new Vector2(450, 550), Content,8));
+                    tiles.Add(new LockedDoor(new Vector2(450, 550), Content, 8));
             }
             else
                 tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
             #endregion
 
-           
+
             for (int i = 0; i < tiles.Count; i++)
             {
                 //removed random number value
-                if (rnd.Next(-20,20) == 5 && tiles[i].type == 1)
+                if (rnd.Next(-20, 20) == 5 && tiles[i].type == 1)
                 {
                     Vector2 tempPos = new Vector2();
                     tempPos = tiles[i].position;
@@ -137,9 +136,14 @@ namespace DungeonGame
                         gameObjects.Add(CreateMob(spawn[i].Item1));
                 }
             }
-            else if (typeOfRoom == TypeOfRoom.Bonus)
+            if (typeOfRoom == TypeOfRoom.Bonus)
             {
                 gameObjects.Add(new Drop(Content.Load<Texture2D>("hearth"), new Vector2(200, 200), 1));
+            }
+            if (typeOfRoom == TypeOfRoom.Boss)
+            {
+                gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                color = Color.Red;
             }
         }
 
@@ -175,7 +179,7 @@ namespace DungeonGame
             {
                 if (go.isDead)
                 {
-                    gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true), new Vector2(go.Position.X - go.Animation.frameWidth/2 ,go.Position.Y - go.Animation.frameHeight/2)));
+                    gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true, new Vector2(go.Animation.frameWidth,go.Animation.frameHeight)), new Vector2(go.Position.X - go.Animation.frameWidth/2 ,go.Position.Y - go.Animation.frameHeight/2)));
                     go.isDead = true;
                 }
             }

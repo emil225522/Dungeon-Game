@@ -17,7 +17,7 @@ namespace DungeonGame
         Rectangle sourceRect;
         public Vector2 position;
         public string asset;
-
+        public Vector2 size;
         public float elapsed;
         public float frameTime;
         public int numOffFrames;
@@ -39,6 +39,17 @@ namespace DungeonGame
             this.looping = looping;
             this.asset = asset;
             this.animation = Content.Load<Texture2D>(asset);
+            frameWidth = (animation.Width / numOffFrames);
+            frameHeight = (animation.Height);
+        }
+        public Animation(ContentManager Content, string asset, float frameSpeed, int numOffFrames, bool looping, Vector2 size)
+        {
+            this.frameTime = frameSpeed;
+            this.numOffFrames = numOffFrames;
+            this.looping = looping;
+            this.asset = asset;
+            this.animation = Content.Load<Texture2D>(asset);
+            this.size = size;
             frameWidth = (animation.Width / numOffFrames);
             frameHeight = (animation.Height);
         }
