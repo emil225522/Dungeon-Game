@@ -47,9 +47,9 @@ Temporary Items
 *.exe
 *.pdb
 
-Random/RandomContent/obj/**
-Random/RandomContent/bin/**
-Random/Random/obj/**
-Random/Random/bin/**
-!Random/Random/bin/x86/Debug/*.txt
+DungeonGame/DungeonGame/DungeonGameContent/obj/**
+DungeonGame/DungeonGame/DungeonGameContent/bin/**
+DungeonGame/DungeonGame/DungeonGame/obj/**
+DungeonGame/DungeonGame/DungeonGame/bin/**
+!DungeonGame/DungeonGame/DungeonGame/bin/x86/Debug/*.txt
 !*/

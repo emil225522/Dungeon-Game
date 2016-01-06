@@ -15,8 +15,8 @@ namespace DungeonGame
     {
         float rotation;
 
-        public Projectile(Texture2D texture, Vector2 position, Vector2 velocity)
-            : base (position,texture,0)
+        public Projectile(Animation animation, Vector2 position, Vector2 velocity)
+            : base (position, animation, 0)
         {
             Velocity = velocity;
         }
@@ -33,7 +33,7 @@ namespace DungeonGame
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, null, Color.White, rotation,new Vector2(Texture.Width/2,Texture.Height/2), 1.0f, SpriteEffects.None, 0f);
+            Animation.Draw(spriteBatch, Position, Color.White, rotation);
         }
     }
 }
