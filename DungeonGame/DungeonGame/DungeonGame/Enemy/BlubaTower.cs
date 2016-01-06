@@ -18,7 +18,7 @@ namespace DungeonGame
         int attackingTimer;
         float rotation;
         public BlubaTower(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "tower", 100, 1, true), seed, 1.5F, 100, 3)
+            : base(position, new Animation(Content, "tower", 100, 1, true), seed, 1.5F, 100, 3,false,false)
         {
             balltexture = Content.Load<Texture2D>("blubaball");
             underLayer = Content.Load<Texture2D>("towerUnder");

@@ -15,7 +15,7 @@ namespace DungeonGame
         bool isAttacking;
         int attackingTimer;
         public Bluba(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed,2, 50,1)
+            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed,2, 50,1,true,false)
         {
             balltexture = Content.Load<Texture2D>("blubaball");
             direction = (Direction)values.GetValue(rnd.Next(values.Length));

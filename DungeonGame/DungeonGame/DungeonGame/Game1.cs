@@ -158,7 +158,12 @@ namespace DungeonGame
         {
             currentRoom = rooms[position];
         }
-
+        public void UpLevel()
+        {
+            rooms.Clear();
+            CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3);
+            currentRoom = rooms[new Vector2(0, 0)];
+        }
         public int[] CheckDoor(Vector2 roomPosition, int doorFrom, int doorToo, int[] doors)
         {
             if (rooms.ContainsKey(roomPosition))

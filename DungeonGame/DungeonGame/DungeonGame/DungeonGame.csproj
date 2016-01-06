@@ -98,6 +98,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Room.cs" />
+    <Compile Include="Stair.cs" />
     <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>

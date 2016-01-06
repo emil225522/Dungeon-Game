@@ -12,7 +12,7 @@ namespace DungeonGame
     {
         int timer;
         public SwordEnemy(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "swordEnemy", 100,1, true), seed, 1.5F, 75,1)
+            : base(position, new Animation(Content, "swordEnemy", 100,1, true), seed, 1.5F, 75,1,true,false)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }

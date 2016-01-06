@@ -281,7 +281,7 @@ namespace DungeonGame
                             enemy.hp -= 20;
                             enemy.isHurt = true;
                         }
-                        if (enemy.type == 1)
+                        if (enemy.canBeKnocked)
                         {
                             if (direction == Direction.Right)
                                 enemy.Velocity = new Vector2(40, 0);

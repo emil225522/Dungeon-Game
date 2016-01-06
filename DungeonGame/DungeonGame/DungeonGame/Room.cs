@@ -21,9 +21,11 @@ namespace DungeonGame
             Down
         }
         public int[] doors;
+        int test;
         Generation generation = new Generation();
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjects = new List<GameObject>();
+        List<Enemy> enemiesList = new List<Enemy>();
         public List<Tile> tiles = new List<Tile>();
         public List<Drop> drops = new List<Drop>();
         Random random = new Random();
@@ -145,6 +147,7 @@ namespace DungeonGame
                 gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 color = Color.Red;
             }
+            gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 350))));
         }
 
         public void Update(GameTime gameTime,Player player)
@@ -177,16 +180,26 @@ namespace DungeonGame
             #endregion
             foreach(GameObject go in gameObjects.Where(item => item is Enemy))
             {
+                enemiesList.Add((Enemy)go);
                 if (go.isDead)
                 {
                     gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true, new Vector2(go.Animation.frameWidth,go.Animation.frameHeight)), new Vector2(go.Position.X - go.Animation.frameWidth/2 ,go.Position.Y - go.Animation.frameHeight/2)));
-                    go.isDead = true;
+                    if (ObjectIs<Snake>(go))
+                        gameObjectsToAdd.Add(new Stair(Content.Load<Texture2D>("stair"), new Vector2(450, 300), 1));
                 }
             }
+
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (tiles[i].isDeleted)
                     tiles.RemoveAt(i);
+            }
+            foreach (GameObject go in gameObjects)
+            {
+                if (go != null && go.HitBox.Intersects(player.HitBox) && ObjectIs<Stair>(go))
+                {
+                    game.UpLevel();
+                }
             }
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -243,7 +256,13 @@ namespace DungeonGame
                     return null;
             }
         }
-
+        public bool ObjectIs <T>(object v)
+        {
+            if (v is T)
+                return true;
+            else
+                return false;
+        }
         private void ExistOrCreate(Doors side)
         {
             Vector2 nextRoom = new Vector2(roomPosition.X, roomPosition.Y);

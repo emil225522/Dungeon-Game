@@ -28,6 +28,8 @@ namespace DungeonGame
         public int walktimer;
         public sbyte type;
         public sbyte state;
+        public bool canBeKnocked;
+        public bool isBoss;
 
         protected Animation animation;
         protected Random rnd;
@@ -35,7 +37,7 @@ namespace DungeonGame
         protected Array values = Enum.GetValues(typeof(Direction));
         protected Direction direction;
 
-        public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp,sbyte type)
+        public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp,sbyte type, bool canBeKnocked, bool isBoss)
             : base (position,animation,1)
         {
             this.Position = position;
@@ -44,7 +46,9 @@ namespace DungeonGame
             rnd = new Random(seed);
             this.speed = speed;
             this.hp = hp;
+            this.canBeKnocked = canBeKnocked;
             this.type = type;
+            this.isBoss = isBoss;
         }
 
         public override void Update(GameTime gameTime, Room room)

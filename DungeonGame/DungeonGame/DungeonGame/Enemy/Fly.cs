@@ -20,7 +20,7 @@ namespace DungeonGame
         int timer2;
         bool foo;
         public Fly(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1)
+            : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1,true,false)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
