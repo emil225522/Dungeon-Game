@@ -13,8 +13,8 @@ namespace DungeonGame
 {
     class Drop : GameObject
     {
-        public Drop(Texture2D texture, Vector2 position, sbyte type)
-            : base (position,texture,0)
+        public Drop(Animation animation, Vector2 position, sbyte type)
+            : base (position,animation,1)
         {
         }
         public override void Update(GameTime gameTime, Room room)

@@ -140,7 +140,7 @@ namespace DungeonGame
             }
             if (typeOfRoom == TypeOfRoom.Bonus)
             {
-                gameObjects.Add(new Drop(Content.Load<Texture2D>("hearth"), new Vector2(200, 200), 1));
+                gameObjects.Add(new Drop(new Animation(Content,"hearth",0,1,false), new Vector2(200, 200), 1));
             }
             if (typeOfRoom == TypeOfRoom.Boss)
             {
@@ -183,9 +183,9 @@ namespace DungeonGame
                 enemiesList.Add((Enemy)go);
                 if (go.isDead)
                 {
-                    gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true, new Vector2(go.Animation.frameWidth,go.Animation.frameHeight)), new Vector2(go.Position.X - go.Animation.frameWidth/2 ,go.Position.Y - go.Animation.frameHeight/2)));
+                    gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true, new Vector2(go.Animation.frameWidth,go.Animation.frameHeight)), go.Position));
                     if (ObjectIs<Snake>(go))
-                        gameObjectsToAdd.Add(new Stair(Content.Load<Texture2D>("stair"), new Vector2(450, 300), 1));
+                        gameObjectsToAdd.Add(new Stair(new Animation(Content,"stair",0,1,false), new Vector2(450, 300), 1));
                 }
             }
 

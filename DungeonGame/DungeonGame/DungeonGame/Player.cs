@@ -296,11 +296,11 @@ namespace DungeonGame
                         {
                             int random = rnd.Next(10);
                             if (random == 1)
-                                room.gameObjectsToAdd.Add(new Drop(Content.Load<Texture2D>("hearth"), enemy.Position, 1));
+                                room.gameObjectsToAdd.Add(new Drop(new Animation(Content,"hearth",0,1,false), enemy.Position, 1));
                             if (random == 2)
-                                room.gameObjectsToAdd.Add(new Drop(Content.Load<Texture2D>("key"), enemy.Position, 2));
+                                room.gameObjectsToAdd.Add(new Drop(new Animation(Content,"key",0,1,false), enemy.Position, 2));
                             if (random == 3)
-                                room.gameObjectsToAdd.Add(new Drop(Content.Load<Texture2D>("bombDrop"), enemy.Position, 3));
+                                room.gameObjectsToAdd.Add(new Drop(new Animation(Content,"bombDrop",0,1,false), enemy.Position, 3));
                             go.isDead = true;
                             enemy.isDead = true;
                             xp += rnd.Next(20, 40);

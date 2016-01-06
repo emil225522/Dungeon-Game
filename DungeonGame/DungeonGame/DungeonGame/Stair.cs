@@ -13,8 +13,8 @@ namespace DungeonGame
 {
     class Stair : GameObject
     {
-        public Stair(Texture2D texture, Vector2 position, sbyte type)
-            : base(position, texture, 0)
+        public Stair(Animation animation, Vector2 position, sbyte type)
+            : base(position, animation, 0)
         {
         }
         public override void Update(GameTime gameTime, Room room)
