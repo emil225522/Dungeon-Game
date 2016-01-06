@@ -14,10 +14,12 @@ namespace DungeonGame
         int timeBetweenAttack;
         bool isAttacking;
         int attackingTimer;
+        ContentManager Content;
+
         public Bluba(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed,2, 50,1,true,false)
         {
-            balltexture = Content.Load<Texture2D>("blubaball");
+            this.Content = Content;
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
 
@@ -65,7 +67,7 @@ namespace DungeonGame
                         else if (direction == Direction.Up)
                             ballVelocity = new Vector2(0, -8);
 
-                        room.gameObjectsToAdd.Add(new Projectile(balltexture, Position, ballVelocity));
+                        room.gameObjectsToAdd.Add(new Projectile(new Animation(Content, "blubaball", 150, 1, false), Position, ballVelocity));
                     }
                 }
                 walktimer++;

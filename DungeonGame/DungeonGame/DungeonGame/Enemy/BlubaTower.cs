@@ -17,9 +17,12 @@ namespace DungeonGame
         bool isAttacking;
         int attackingTimer;
         float rotation;
+        ContentManager Content;
+
         public BlubaTower(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "tower", 100, 1, true), seed, 1.5F, 100, 3,false,false)
         {
+            this.Content = Content;
             balltexture = Content.Load<Texture2D>("blubaball");
             underLayer = Content.Load<Texture2D>("towerUnder");
         }
@@ -61,7 +64,7 @@ namespace DungeonGame
                             isAttacking = false;
 
 
-                            room.gameObjectsToAdd.Add(new Projectile(balltexture, Position, ballVelocity));
+                            room.gameObjectsToAdd.Add(new Projectile(new Animation(Content, "blubaball", 150, 1, false), Position, ballVelocity));
                         }
                     }
                 }
