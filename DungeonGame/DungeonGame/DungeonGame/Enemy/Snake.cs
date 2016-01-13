@@ -12,6 +12,7 @@ namespace DungeonGame
     {
         float angle;
         float angleDirection;
+        int timer;
 
         Color normalColor;
         Vector2 circelingPlace;
@@ -23,9 +24,10 @@ namespace DungeonGame
             angleDirection = (float)rnd.Next(200, 500) / 10000;
             normalColor = new Color(rnd.Next(50, 255), rnd.Next(50, 255), rnd.Next(50, 255));
         }
-
+        
         public override void Update(GameTime gameTime, Room room)
         {
+            timer++;
             base.Update(gameTime, room);
             if ((Position - room.player.Position).Length() < 200)
             {
@@ -36,6 +38,19 @@ namespace DungeonGame
             }
             else
                 playerInRange = false;
+
+            if (timer > 40)
+            {
+                timer = 0;
+                angle += 0.01f;
+                for (int i = 0; i < 5; i++)
+                {
+
+                    timer = 0;
+                    angle += 0.2f;
+                    room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "blubaball", 150, 1, false), Position, new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle))));
+                }
+            }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

@@ -32,6 +32,7 @@ namespace DungeonGame
         Random rnd = new Random();
         Texture2D mapTexture;
         Vector2 testposition;
+        public static ContentManager content;
 
         public Game1()
         {
@@ -39,6 +40,7 @@ namespace DungeonGame
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 50*14;
             graphics.PreferredBackBufferWidth = 50*17;
+            content = Content;
         }
 
         /// <summary>
