@@ -343,6 +343,7 @@ namespace DungeonGame
             if (IsColliding(gameObjects) && isHurt == false && !EnemiesIsHurt(gameObjects))
             {
                 isHurt = true;
+                if (health > 0)
                 health--;
             }
             if (isHurt == true)

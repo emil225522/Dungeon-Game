@@ -52,9 +52,6 @@ namespace DungeonGame
             this.Content = Content;
             this.roomPosition = roomPosition;
             this.doors = doors;
-            //Array values = Enum.GetValues(typeof(TypeOfRoom));
-            //TypeOfRoom randomRoom = (TypeOfRoom)values.GetValue(random.Next(values.Length));
-            //typeOfRoom = randomRoom;
             if (roomPosition != Vector2.Zero)
             {
                 int randomNumber = rnd.Next(20);
@@ -66,7 +63,6 @@ namespace DungeonGame
                     typeOfRoom = TypeOfRoom.Puzzle;
                 else if (roomPosition.Length() > 4)
                     typeOfRoom = TypeOfRoom.Boss;
-
             }
             if (typeOfRoom == TypeOfRoom.Bonus)
                 color = Color.Yellow;
