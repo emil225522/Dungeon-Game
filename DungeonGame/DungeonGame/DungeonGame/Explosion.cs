@@ -19,8 +19,14 @@ namespace DungeonGame
             
             foreach (GameObject go in room.gameObjects.Where(item => item is Enemy))
             {
+                Enemy gos = (Enemy)go;
                 if (HitBox.Intersects(go.HitBox))
-                    go.isDead = true;
+                {
+                    gos.hp -= 20;
+                    gos.isHurt = true;
+                    if (gos.hp < 0)
+                        go.isDead = true;
+                }
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

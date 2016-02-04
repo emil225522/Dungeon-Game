@@ -24,7 +24,7 @@ namespace DungeonGame
         public bool isdead;
         public int hp;
         public bool isHurt;
-        public sbyte isHurtTimer;
+        protected sbyte isHurtTimer;
         public int walktimer;
         public sbyte type;
         public sbyte state;
@@ -54,6 +54,7 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             animation.PlayAnim(gameTime);
+
             if (hp < 1)
                 isdead = true;
             if (isHurt == true)

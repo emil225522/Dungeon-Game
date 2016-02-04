@@ -69,8 +69,9 @@ namespace DungeonGame
                 Vector2 pos = room.player.Position;
                 points.Add(pos);
                 points.Add(new Vector2(100, 500));
-                points.Add(new Vector2(750, 500));
                 points.Add(pos);
+                points.Add(new Vector2(750, 500));
+               
             }
 
         }

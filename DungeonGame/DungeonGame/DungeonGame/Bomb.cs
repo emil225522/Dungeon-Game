@@ -25,7 +25,7 @@ namespace DungeonGame
             base.Update(gameTime, room);
             if (Animation.currentFrame == Animation.numOffFrames-1)
             {
-                room.gameObjectsToAdd.Add(new Explosion(new Vector2(Position.X - 65, Position.Y - 65), new Animation(content, "explosion", 130, 4, false)));
+                room.gameObjectsToAdd.Add(new Explosion(new Vector2(Position.X - 65, Position.Y - 65), new Animation(content, "explosion", 70, 4, false)));
                 isDead = true;
             }
         }
