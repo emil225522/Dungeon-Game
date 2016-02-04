@@ -36,6 +36,7 @@ namespace DungeonGame
         public bool currentRoomDark;
 
         private int counter;
+        public int roomlevel;
         public int xp;
         public int xpNeeded;
         public int level;

@@ -52,7 +52,7 @@ namespace DungeonGame
        
                     room.gameObjectsToAdd.Add(new Poison(new Animation(Game1.content, "poision", 150, 1, false)
                   , new Vector2((Position.X + Animation.frameWidth / 2) + (float)Math.Cos(angle) * 30 + rnd.Next(-40, 40),
-                      (Position.Y + Animation.frameHeight / 2) + (float)Math.Sin(angle) * 30 + + rnd.Next(-40, 40)), poisonVelocity * combVec.Length() / 100));
+                      (Position.Y + Animation.frameHeight / 2) + (float)Math.Sin(angle) * 30 + + rnd.Next(-40, 40)), poisonVelocity * combVec.Length() / 60));
                 }
             }
         }

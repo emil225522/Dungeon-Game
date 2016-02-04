@@ -79,6 +79,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="Enemy\Bat.cs" />
+    <Compile Include="Enemy\BatBoss.cs" />
     <Compile Include="Enemy\Bluba.cs" />
     <Compile Include="Enemy\BlubaTower.cs" />
     <Compile Include="Enemy\Enemy.cs" />

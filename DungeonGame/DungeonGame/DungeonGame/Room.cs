@@ -140,10 +140,10 @@ namespace DungeonGame
             }
             if (typeOfRoom == TypeOfRoom.Boss)
             {
-                gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                gameObjects.Add(new BatBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 color = Color.Red;
             }
-            gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 350))));
+            gameObjects.Add(new BatBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 350))));
         }
 
         public void Update(GameTime gameTime,Player player)
