@@ -23,7 +23,7 @@ namespace DungeonGame
         Vector2 circelingPlace;
         bool playerInRange;
         public BatBoss(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "batBoss",150, 3, true), seed,6,300, 1, false, true)
+            : base(position, new Animation(Content, "batBoss",150, 3, true), seed,6,400, 1, false, true)
         {
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
             angleDirection = (float)rnd.Next(200, 500) / 10000;
@@ -44,9 +44,8 @@ namespace DungeonGame
             //Position += new Vector2((float)Math.Cos(Math.Atan2(YDistance, XDistance)));
             //Position += new Vector2 ((float)Math.Sin(Math.Atan2(YDistance, XDistance)));
             //poisonVelocity = new Vector2(22,22);
-            if ((timer % 40) == 0 && numBatsSpawned < 20)
+            if (isHurt)
             {
-                numBatsSpawned++;
                 room.gameObjectsToAdd.Add(new Bat(Game1.content, rnd.Next(), new Vector2(Position.X + Animation.frameWidth / 2, Position.Y + Animation.frameHeight / 2)));
             }
             Vector2 direction = new Vector2(points[index].X, points[index].Y) - Position;
@@ -56,7 +55,7 @@ namespace DungeonGame
 
             for (int i = 0; i < points.Count; i++)
             {
-                if ((points[index] - Position).Length() < speed)
+                if ((points[index] - Position).Length() < rnd.Next(-4000,250))
                     index++;
                 if (index > points.Count - 1)
                     index = 0;
@@ -71,6 +70,7 @@ namespace DungeonGame
                 points.Add(new Vector2(100, 500));
                 points.Add(pos);
                 points.Add(new Vector2(750, 500));
+
                
             }
 

@@ -14,6 +14,7 @@ namespace DungeonGame
             : base(position, new Animation(Content, "bat", 100, 2, true), seed, 1.5F, 50,1,true,false)
         {
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
+            Texture = Content.Load<Texture2D>("dark");
         }
 
         public override void Update(GameTime gameTime, Room room)
@@ -45,6 +46,8 @@ namespace DungeonGame
                     direction = Direction.Down;
                 }
             }
+            if (rnd.Next(40) == 20)
+                direction = (Direction)values.GetValue(rnd.Next(values.Length));
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -54,6 +57,7 @@ namespace DungeonGame
             else
                 color = Color.Black;
             animation.Draw(spriteBatch, Position, color);
+            spriteBatch.Draw(Texture, hitBox, Color.Black);
         }
 
     }

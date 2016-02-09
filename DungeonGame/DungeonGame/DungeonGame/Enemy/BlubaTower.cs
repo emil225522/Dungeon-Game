@@ -13,7 +13,7 @@ namespace DungeonGame
         Texture2D balltexture;
         Texture2D underLayer;
         int timeBetweenAttack;
-        public override Rectangle HitBox { get { return new Rectangle((int)Position.X - underLayer.Width / 2, (int)Position.Y  - underLayer.Height/ 2, Animation.frameWidth, Animation.frameHeight); } }
+        public override Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); } }
         bool isAttacking;
         int attackingTimer;
         float rotation;
@@ -72,6 +72,7 @@ namespace DungeonGame
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+
             Color color;
             if (isHurt)
                 color = Color.Red;
@@ -79,7 +80,8 @@ namespace DungeonGame
                 color = Color.White;
 
             spriteBatch.Draw(underLayer, HitBox, Color.White);
-            animation.Draw(spriteBatch, Position, color, rotation);
+            animation.Draw(spriteBatch, new Vector2((int)Position.X + underLayer.Width/2, (int)Position.Y + underLayer.Height/2), color, rotation); 
+            spriteBatch.Draw(balltexture, new Rectangle((int)Position.X + underLayer.Width/2, (int)Position.Y + underLayer.Height/2, 10, 10), Color.White);
         }
     }
 }

@@ -20,9 +20,9 @@ namespace DungeonGame
             foreach (GameObject go in room.gameObjects.Where(item => item is Enemy))
             {
                 Enemy gos = (Enemy)go;
-                if (HitBox.Intersects(go.HitBox))
+                if (HitBox.Intersects(go.HitBox) && !gos.isHurt)
                 {
-                    gos.hp -= 20;
+                    gos.hp -= 30;
                     gos.isHurt = true;
                     if (gos.hp < 0)
                         go.isDead = true;

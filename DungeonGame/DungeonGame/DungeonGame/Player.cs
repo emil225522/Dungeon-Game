@@ -15,14 +15,14 @@ namespace DungeonGame
     class Player
     {
         #region Variables
-        public Vector2 Position {get; set;}
+        public Vector2 Position { get; set;}
         const float FRICTION = 0.68f;
-        public Vector2 Velocity {get; set;}
+        public Vector2 Velocity { get; set;}
 
         KeyboardState oldKs = Keyboard.GetState();
         GamePadState oldgps = GamePad.GetState(PlayerIndex.One);
         Rectangle attackRect;
-        public Rectangle HitBox { get { return new Rectangle((int)Position.X + 10, (int)Position.Y + 55, 37, 15); } }
+        public Rectangle HitBox { get { return new Rectangle((int)Position.X - 5 , (int)Position.Y + 25, 37, 40); } }
 
         public float health { get; set;}
         public float maxHealth{ get; set;}
@@ -341,15 +341,24 @@ namespace DungeonGame
                         currentAnimation = new Animation(Content, "player/runUp", 110, 8, false);
                 }
             }
-            if (IsColliding(gameObjects) && isHurt == false && !EnemiesIsHurt(gameObjects))
+            if (!isHurt && !EnemiesIsHurt(gameObjects))
             {
-                isHurt = true;
-                if (health > 0)
-                health--;
+                foreach (GameObject go in gameObjects.Where(item => item is Enemy))
+                    if (HitBox.Intersects(go.HitBox))
+                    {
+                        isHurt = true;
+                        float XDistance = (go.Position.X  + go.Animation.frameHeight/2) - (Position.X + currentAnimation.frameWidth/2);
+                        float YDistance = (go.Position.Y + go.Animation.frameHeight/2) - (Position.Y + currentAnimation.frameHeight/2);
+                        Velocity = new Vector2(20 *- (float)Math.Cos(Math.Atan2(YDistance, XDistance)), 20 * -(float)Math.Sin(Math.Atan2(YDistance, XDistance)));
+                        if (health > 0)
+                        {
+                            health--;
+                        }
+                    }
             }
             if (isHurt == true)
                 isHurtTimer++;
-            if (isHurtTimer > 45)
+            if (isHurtTimer > 80)
             {
                 isHurtTimer = 0;
                 isHurt = false;
@@ -456,6 +465,7 @@ namespace DungeonGame
             }
             else
                 currentAnimation.Draw(spriteBatch, new Vector2(Position.X - 15, Position.Y), color);
+            spriteBatch.Draw(tex, new Rectangle((int)Position.X + currentAnimation.frameWidth / 2 -20, (int)Position.Y + currentAnimation.frameHeight / 2,10,10), color);
           
         }
 

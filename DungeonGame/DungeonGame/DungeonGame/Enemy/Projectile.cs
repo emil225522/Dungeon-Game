@@ -27,6 +27,7 @@ namespace DungeonGame
             if (HitBox.Intersects(room.player.HitBox))
             {
                 room.player.isHurt = true;
+                //room.player.Velocity = Velocity;
                 //Room.gameObjectsToRemove.Add(this);
                 isDead = true;
             }

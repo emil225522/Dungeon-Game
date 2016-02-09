@@ -32,11 +32,11 @@ namespace DungeonGame
         Color color = Color.White;
         public enum TypeOfRoom
         {
-            Normal,
-            Puzzle,
-            Boss,
-            Bonus,
-            Empty
+            Normal = 0,
+            Puzzle = 1,
+            Boss = 2,
+            Bonus = 3,
+            Empty = 4
         }
         public TypeOfRoom typeOfRoom;
         public bool isDark;
@@ -46,7 +46,7 @@ namespace DungeonGame
         Game1 game;
         public Vector2 roomPosition;
 
-        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom, TypeOfRoom typeofRoom)
+        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom)
         {
             this.game = game;
             this.Content = Content;
@@ -69,7 +69,7 @@ namespace DungeonGame
             if (typeOfRoom == TypeOfRoom.Puzzle)
                 color = new Color(228, 0, 228);
 
-            generation.Generate(Content, tiles, "map");
+            generation.Generate(Content, tiles, "map",(int)typeOfRoom);
             #region CreateDoorOrWall
             if (doors[0] == 1)
             {
@@ -143,7 +143,7 @@ namespace DungeonGame
                 gameObjects.Add(new BatBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 color = Color.Red;
             }
-            gameObjects.Add(new BatBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 350))));
+            //gameObjects.Add(new BatBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 350))));
         }
 
         public void Update(GameTime gameTime,Player player)

@@ -69,7 +69,7 @@ namespace DungeonGame
             mapTexture = Content.Load<Texture2D>("towerUnder");
             player = new Player(new Vector2(200, 300), Content);
             testposition = new Vector2();
-            spawn.Add(new Tuple<string,int>("bat", 10));
+            spawn.Add(new Tuple<string,int>("blubatower", 2));
 
             CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3);
             currentRoom = rooms[new Vector2(0, 0)];
@@ -199,7 +199,7 @@ namespace DungeonGame
             doors = CheckDoor(new Vector2(position.X, position.Y + 1), 1, 3, doors);
             doors = CheckDoor(new Vector2(position.X, position.Y - 1), 3, 1, doors);
 
-            rooms.Add(position, new Room(this, Content, spawn, position, doors, fromRoom,Room.TypeOfRoom.Normal));
+            rooms.Add(position, new Room(this, Content, spawn, position, doors, fromRoom));
             spawn.Clear();
         }
 
