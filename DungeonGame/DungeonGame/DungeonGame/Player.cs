@@ -24,7 +24,7 @@ namespace DungeonGame
         public Rectangle attackRect;
         public Rectangle HitBox { get { return new Rectangle((int)Position.X - 5 , (int)Position.Y + 25, 37, 40); } }
 
-        public float health { get; set;}
+        public float hp { get; set;}
         public float maxHealth{ get; set;}
         public float speed { get; set;}
         public float currentSpeed { get; set; }
@@ -86,7 +86,7 @@ namespace DungeonGame
                 level = int.Parse(streamReader.ReadLine());
                 xp = int.Parse(streamReader.ReadLine());
                 numberOfKeys = int.Parse(streamReader.ReadLine());
-                health = int.Parse(streamReader.ReadLine());
+                hp = int.Parse(streamReader.ReadLine());
                 maxHealth = int.Parse(streamReader.ReadLine());
                 xpNeeded = int.Parse(streamReader.ReadLine());
                 numberOfBombs = int.Parse(streamReader.ReadLine());
@@ -125,7 +125,7 @@ namespace DungeonGame
                         writer.WriteLine();
                         writer.Write(numberOfKeys);
                         writer.WriteLine();
-                        writer.Write(health);
+                        writer.Write(hp);
                         writer.WriteLine();
                         writer.Write(maxHealth);
                         writer.WriteLine();
@@ -321,8 +321,8 @@ namespace DungeonGame
             {
                 if (go.HitBox.Intersects(HitBox))
                 {
-                    if (go.type == 1 && health < maxHealth)
-                        health++;
+                    if (go.type == 1 && hp < maxHealth)
+                        hp++;
                     else if (go.type == 2)
                         numberOfKeys++;
                     else if (go.type == 3)
@@ -358,9 +358,9 @@ namespace DungeonGame
                         float XDistance = (go.Position.X  + go.Animation.frameHeight/2) - (Position.X + currentAnimation.frameWidth/2);
                         float YDistance = (go.Position.Y + go.Animation.frameHeight/2) - (Position.Y + currentAnimation.frameHeight/2);
                         Velocity = new Vector2(20 *- (float)Math.Cos(Math.Atan2(YDistance, XDistance)), 20 * -(float)Math.Sin(Math.Atan2(YDistance, XDistance)));
-                        if (health > 0)
+                        if (hp > 0)
                         {
-                            health--;
+                            hp--;
                         }
                     }
             }

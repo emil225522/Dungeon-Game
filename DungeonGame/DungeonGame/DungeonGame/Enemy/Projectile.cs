@@ -31,6 +31,8 @@ namespace DungeonGame
                 type = 3;
                   Velocity = new Vector2(Velocity.X * -1, Velocity.Y);
             }
+            if (HitBox.Intersects(room.player.HitBox))
+                room.player.Velocity = Velocity*5;
             foreach (GameObject go in room.gameObjects.Where(item => item is CannonBoss))
             {
                 CannonBoss boss = (CannonBoss)go;

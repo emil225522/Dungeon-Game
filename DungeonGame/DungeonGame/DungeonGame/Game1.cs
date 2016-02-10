@@ -143,7 +143,7 @@ namespace DungeonGame
                         spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.LightGreen);
                 }
             }
-            for (int i = 0; i < player.health; i++)
+            for (int i = 0; i < player.hp; i++)
                 spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 50, -50), Color.White);
 
             spriteBatch.DrawString(font1, fps, new Vector2(51,-100), Color.White);
