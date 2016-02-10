@@ -31,7 +31,7 @@ namespace DungeonGame
         {
             base.Update(gameTime, room);
             //changed hitbox because it must fit the enemy with it's rotation
-            if (!isdead)
+            if (!isDead)
             {
                 Velocity *= 0.3f;
                 if (isHurtTimer > 30)
@@ -49,8 +49,8 @@ namespace DungeonGame
                     }
                     Vector2 ballVelocity = new Vector2();
                     //calculate the distance between the two objects
-                    float XDistance = Position.X - room.player.Position.X - 40;
-                    float YDistance = Position.Y - room.player.Position.Y - 40;
+                    float XDistance = Position.X - room.player.Position.X;
+                    float YDistance = Position.Y - room.player.Position.Y;
                     //sets the velocity to that with the right angle thanks to this function
                     ballVelocity.X -= 5 * (float)Math.Cos(Math.Atan2(YDistance, XDistance));
                     ballVelocity.Y -= 5 * (float)Math.Sin(Math.Atan2(YDistance, XDistance));
@@ -64,7 +64,7 @@ namespace DungeonGame
                             isAttacking = false;
 
 
-                            room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "blubaball", 150, 1, false), Position, ballVelocity));
+                            room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "blubaball", 150, 1, false), new Vector2((int)Position.X + underLayer.Width / 2, (int)Position.Y + underLayer.Height / 2), ballVelocity,1));
                         }
                     }
                 }

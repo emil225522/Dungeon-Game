@@ -14,16 +14,37 @@ namespace DungeonGame
     class Projectile : GameObject
     {
         float rotation;
+        sbyte type;
 
-        public Projectile(Animation animation, Vector2 position, Vector2 velocity)
+        public Projectile(Animation animation, Vector2 position, Vector2 velocity, sbyte type)
             : base (position, animation, 0)
         {
             Velocity = velocity;
+            this.type = type;
         }
         public override void Update(GameTime gameTime, Room room)
         {
             Position += Velocity;
             rotation -= 0.2f;
+            if (HitBox.Intersects(room.player.attackRect) && type == 2)
+            {
+                type = 3;
+                  Velocity = new Vector2(Velocity.X * -1, Velocity.Y);
+            }
+            foreach (GameObject go in room.gameObjects.Where(item => item is CannonBoss))
+            {
+                CannonBoss boss = (CannonBoss)go;
+                if (HitBox.Intersects(boss.HitBox) && type == 3)
+                {
+                    isDead = true;
+                    boss.hp -= 50;
+                    if (boss.hp < 1)
+                    {
+                        boss.isDead = true;
+                        go.isDead = true;
+                    }
+                }
+            }
             if (HitBox.Intersects(room.player.HitBox))
             {
                 room.player.isHurt = true;
@@ -34,7 +55,7 @@ namespace DungeonGame
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch, Position, Color.White, rotation);
+            Animation.Draw(spriteBatch, new Vector2(Position.X + Animation.frameWidth/2,Position.Y + Animation.frameHeight/2), Color.White, rotation);
         }
     }
 }

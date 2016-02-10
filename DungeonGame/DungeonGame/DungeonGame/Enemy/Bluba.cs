@@ -26,7 +26,7 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime,room);
-            if (!isdead)
+            if (!isDead)
             {
                 Velocity *= 0.3f;
                 if (!IsCollidingMovingX(room.tiles))
@@ -67,7 +67,7 @@ namespace DungeonGame
                         else if (direction == Direction.Up)
                             ballVelocity = new Vector2(0, -8);
 
-                        room.gameObjectsToAdd.Add(new Projectile(new Animation(Content, "blubaball", 150, 1, false), Position, ballVelocity));
+                        room.gameObjectsToAdd.Add(new Projectile(new Animation(Content, "blubaball", 150, 1, false), Position, ballVelocity,1));
                     }
                 }
                 walktimer++;

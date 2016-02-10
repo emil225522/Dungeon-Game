@@ -21,7 +21,7 @@ namespace DungeonGame
         }
 
         public override Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); } }
-        public bool isdead;
+
         public int hp;
         public bool isHurt;
         protected sbyte isHurtTimer;
@@ -56,7 +56,7 @@ namespace DungeonGame
             animation.PlayAnim(gameTime);
 
             if (hp < 1)
-                isdead = true;
+                isDead = true;
             if (isHurt == true)
                 isHurtTimer++;
              Velocity *= 0.7f;
@@ -134,6 +134,11 @@ namespace DungeonGame
                 return new Rectangle((int)Position.X + (int)Velocity.X, (int)Position.Y, animation.frameWidth, animation.frameHeight);
             else
                 return new Rectangle((int)Position.X, (int)Position.Y + (int)Velocity.Y, animation.frameWidth, animation.frameHeight);
+        }
+        public override void TakeDamage(int damage)
+        {
+            base.TakeDamage(damage);
+            hp -= damage;
         }
     }
 }

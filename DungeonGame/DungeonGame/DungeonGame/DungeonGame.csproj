@@ -76,6 +76,7 @@
     <Compile Include="Bar.cs" />
     <Compile Include="Bomb.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="CannonBoss.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="Enemy\Bat.cs" />

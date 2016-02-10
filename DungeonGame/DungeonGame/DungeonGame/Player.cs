@@ -21,27 +21,33 @@ namespace DungeonGame
 
         KeyboardState oldKs = Keyboard.GetState();
         GamePadState oldgps = GamePad.GetState(PlayerIndex.One);
-        Rectangle attackRect;
+        public Rectangle attackRect;
         public Rectangle HitBox { get { return new Rectangle((int)Position.X - 5 , (int)Position.Y + 25, 37, 40); } }
 
         public float health { get; set;}
         public float maxHealth{ get; set;}
         public float speed { get; set;}
         public float currentSpeed { get; set; }
-        private sbyte isHurtTimer ;
-        private sbyte timer = 0;
+        private sbyte isHurtTimer;
+        private sbyte timer;
 
         public bool isHurt;
         public bool isAttacking;
         public bool currentRoomDark;
-
+        public enum WeaponState
+        {
+           Bow,
+           Sword,
+           FireSpell
+        }
+        WeaponState weaponState;
         private int counter;
         public int roomlevel;
         public int xp;
         public int xpNeeded;
         public int level;
-        public int numberOfKeys {get; set;}
-        public int numberOfBombs {get; set;}
+        public int numberOfKeys { get; set;}
+        public int numberOfBombs { get; set;}
 
         private Animation attackRight;
         private Animation attackDown;
@@ -51,7 +57,7 @@ namespace DungeonGame
         private Animation animationRight;
         private Animation animationUp;
         private Animation animationDown;
-        public Animation currentAnimation {get; set;}
+        public Animation currentAnimation { get; set;}
 
         Texture2D tex;
 
@@ -236,6 +242,8 @@ namespace DungeonGame
                 else if (direction == Direction.Right)
                     currentAnimation = animationRight;
             }
+            if (ks.IsKeyDown(Keys.Q))
+                weaponState = WeaponState.Bow;
             if (gps.IsButtonDown(Buttons.RightTrigger) && oldgps.IsButtonUp(Buttons.RightTrigger) && !isAttacking 
                 || (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space)) && !isAttacking)
             {
