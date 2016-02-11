@@ -13,9 +13,11 @@ namespace DungeonGame
 {
     class Drop : GameObject
     {
-        public Drop(Animation animation, Vector2 position, sbyte type)
+        public sbyte typeOfDrop;
+        public Drop(Animation animation, Vector2 position, sbyte typeOfDrop)
             : base (position,animation,1)
         {
+            this.typeOfDrop = typeOfDrop;
         }
         public override void Update(GameTime gameTime, Room room)
         {

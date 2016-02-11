@@ -62,9 +62,7 @@ namespace DungeonGame
                         {
                             attackingTimer = 0;
                             isAttacking = false;
-
-
-                            room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "blubaball", 150, 1, false), new Vector2((int)Position.X + underLayer.Width / 2, (int)Position.Y + underLayer.Height / 2), ballVelocity,1));
+                            room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "blubaball", 150, 1, false), new Vector2((int)Position.X + underLayer.Width / 2, (int)Position.Y + underLayer.Height / 2), ballVelocity,1,1f));
                         }
                     }
                 }

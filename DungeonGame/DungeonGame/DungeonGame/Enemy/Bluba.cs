@@ -67,7 +67,7 @@ namespace DungeonGame
                         else if (direction == Direction.Up)
                             ballVelocity = new Vector2(0, -8);
 
-                        room.gameObjectsToAdd.Add(new Projectile(new Animation(Content, "blubaball", 150, 1, false), Position, ballVelocity,1));
+                        room.gameObjectsToAdd.Add(new Projectile(new Animation(Content, "blubaball", 150, 1, false), Position, ballVelocity,1,1));
                     }
                 }
                 walktimer++;

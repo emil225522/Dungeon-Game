@@ -46,7 +46,7 @@ namespace DungeonGame
             if (timer > 120)
             {
                 timer = 0;
-                room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "cannonball", 150, 1, false), new Vector2(Position.X, Position.Y + animation.frameHeight / 2), new Vector2(-4, 0), 2));
+                room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "cannonball", 150, 1, false), new Vector2(Position.X, Position.Y + animation.frameHeight / 2), new Vector2(-4, 0), 2,1.4f));
             }
             for (int i = 0; i < points.Count; i++)
             {
@@ -57,7 +57,6 @@ namespace DungeonGame
             }
             if (hp < 1)
                 isDead = true;
-            Console.WriteLine(hp);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

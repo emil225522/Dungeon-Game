@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Arrow.cs" />
     <Compile Include="Bar.cs" />
     <Compile Include="Bomb.cs" />
     <Compile Include="Camera.cs" />

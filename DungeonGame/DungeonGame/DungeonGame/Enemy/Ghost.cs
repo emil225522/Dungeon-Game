@@ -15,9 +15,11 @@ namespace DungeonGame
     class Ghost : GameObject
     {
         int deathtimer;
-        public Ghost(Animation animation, Vector2 position)
+        int size;
+        public Ghost(Animation animation, Vector2 position,int size)
             : base (position,animation,1)
         {
+            this.size = size;
         }
         public override void Update(GameTime gameTime, Room room)
         {
@@ -29,7 +31,7 @@ namespace DungeonGame
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            Animation.Draw(spriteBatch, Position, Color.White);
+            Animation.Draw(spriteBatch, Position, Color.White, size);
         }
     }
 }

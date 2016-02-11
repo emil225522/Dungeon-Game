@@ -15,12 +15,14 @@ namespace DungeonGame
     {
         float rotation;
         sbyte type;
+        float size;
 
-        public Projectile(Animation animation, Vector2 position, Vector2 velocity, sbyte type)
+        public Projectile(Animation animation, Vector2 position, Vector2 velocity, sbyte type,float size)
             : base (position, animation, 0)
         {
             Velocity = velocity;
             this.type = type;
+            this.size = size;
         }
         public override void Update(GameTime gameTime, Room room)
         {
@@ -57,7 +59,8 @@ namespace DungeonGame
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch, new Vector2(Position.X + Animation.frameWidth/2,Position.Y + Animation.frameHeight/2), Color.White, rotation);
+            Animation.Draw(spriteBatch, new Vector2(Position.X + Animation.frameWidth/2,Position.Y + Animation.frameHeight/2), Color.White, rotation,size);
         }
+
     }
 }
