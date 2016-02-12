@@ -45,6 +45,8 @@ namespace DungeonGame
         public Player player;
         Game1 game;
         public Vector2 roomPosition;
+        int bonusLower = 14;
+        int bonusUpper = 16;
 
         public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom)
         {
@@ -55,11 +57,11 @@ namespace DungeonGame
             if (roomPosition != Vector2.Zero)
             {
                 int randomNumber = rnd.Next(20);
-                if (randomNumber < 12)
+                if (randomNumber < bonusLower)
                     typeOfRoom = TypeOfRoom.Normal;
-                else if (randomNumber > 14 && randomNumber < 16)
+                else if (randomNumber > bonusLower && randomNumber < bonusUpper)
                     typeOfRoom = TypeOfRoom.Bonus;
-                else if (randomNumber > 15 && randomNumber < 18)
+                else if (randomNumber > (bonusUpper - 1) && randomNumber < bonusUpper + 2)
                     typeOfRoom = TypeOfRoom.Puzzle;
                 else if (roomPosition.Length() > 4)
                     typeOfRoom = TypeOfRoom.Boss;
@@ -294,9 +296,9 @@ namespace DungeonGame
                 sbyte fromRoom = 0;
                 sbyte randomFactor;
                 if (roomPosition.Length() < 5)
-                    randomFactor = 3;
+                    randomFactor = 2;
                 else
-                    randomFactor = 1;
+                    randomFactor = 6;
 
                 switch (side)
                 {
