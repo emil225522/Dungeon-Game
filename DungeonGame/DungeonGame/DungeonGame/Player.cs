@@ -34,6 +34,13 @@ namespace DungeonGame
         public bool isHurt;
         public bool isAttacking;
         public bool currentRoomDark;
+
+        #region hasWeaponBools
+        bool hasSword = true;
+        bool hasSpell;
+        bool hasBow;
+        #endregion
+
         public enum WeaponState
         {
            Bow = 0,
@@ -261,56 +268,62 @@ namespace DungeonGame
             }
             if (weaponState == WeaponState.Bow && ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space))
             {
-                Vector2 arrowVel = new Vector2();
-                string asset = "";
-                switch (direction)
+                if (hasBow)
                 {
-                    case Direction.Left:
-                        arrowVel = new Vector2(-5, 0);
-                        asset = "Left";
-                        break;
-                    case Direction.Right:
-                        arrowVel = new Vector2(5, 0);
-                        asset = "Right";
-                        break;
-                    case Direction.Up:
-                        arrowVel = new Vector2(0, -5);
-                        asset = "Up";
-                        break;
-                    case Direction.Down:
-                        arrowVel = new Vector2(0,5);
-                        asset = "Down";
-                        break;
+                    Vector2 arrowVel = new Vector2();
+                    string asset = "";
+                    switch (direction)
+                    {
+                        case Direction.Left:
+                            arrowVel = new Vector2(-10, 0);
+                            asset = "Left";
+                            break;
+                        case Direction.Right:
+                            arrowVel = new Vector2(10, 0);
+                            asset = "Right";
+                            break;
+                        case Direction.Up:
+                            arrowVel = new Vector2(0, -10);
+                            asset = "Up";
+                            break;
+                        case Direction.Down:
+                            arrowVel = new Vector2(0, 10);
+                            asset = "Down";
+                            break;
+                    }
+                    room.gameObjectsToAdd.Add(new Arrow(new Animation(Content, "arrow" + asset, 150, 1, false), Position, arrowVel, 2));
                 }
-                room.gameObjectsToAdd.Add(new Arrow(new Animation(Content, "arrow" + asset, 150, 1, false), Position,arrowVel,2));
             }
             if (weaponState == WeaponState.FireSpell && ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space) && mana > 0)
             {
-                Vector2 spellVel = new Vector2();
-                mana -= 20;
-                string asset = "";
-                switch (direction)
+                if (hasSpell)
                 {
-                    case Direction.Left:
-                        spellVel = new Vector2(-5, 0);
-                        asset = "";
-                        break;
-                    case Direction.Right:
-                        spellVel = new Vector2(5, 0);
-                        asset = "";
-                        break;
-                    case Direction.Up:
-                        spellVel = new Vector2(0, -5);
-                        asset = "";
-                        break;
-                    case Direction.Down:
-                        spellVel = new Vector2(0, 5);
-                        asset = "";
-                        break;
+                    Vector2 spellVel = new Vector2();
+                    mana -= 20;
+                    string asset = "";
+                    switch (direction)
+                    {
+                        case Direction.Left:
+                            spellVel = new Vector2(-7, 0);
+                            asset = "";
+                            break;
+                        case Direction.Right:
+                            spellVel = new Vector2(7, 0);
+                            asset = "";
+                            break;
+                        case Direction.Up:
+                            spellVel = new Vector2(0, -7);
+                            asset = "";
+                            break;
+                        case Direction.Down:
+                            spellVel = new Vector2(0, 7);
+                            asset = "";
+                            break;
+                    }
+                    room.gameObjectsToAdd.Add(new Arrow(new Animation(Content, "fireball" + asset, 150, 1, false), Position, spellVel, 1));
                 }
-                room.gameObjectsToAdd.Add(new Arrow(new Animation(Content, "fireball" + asset, 150, 1, false), Position, spellVel, 1));
             }
-            if (weaponState == WeaponState.Sword)
+            if (weaponState == WeaponState.Sword && hasSword)
             {
                 if (gps.IsButtonDown(Buttons.RightTrigger) && oldgps.IsButtonUp(Buttons.RightTrigger) && !isAttacking
                     || (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space)) && !isAttacking)
@@ -405,6 +418,20 @@ namespace DungeonGame
                         mana += 60;
                         if (mana > 200)
                             mana = 200;
+                    }
+                    else if (drop.typeOfDrop == 11)
+                    {
+                        hasBow = true;
+                    }
+
+                    else if (drop.typeOfDrop == 12)
+                    {
+                        hasSpell = true;
+                    }
+
+                    else if (drop.typeOfDrop == 13)
+                    {
+                        hasSword = true;
                     }
                     go.isDead = true;
                 }

@@ -137,6 +137,16 @@ namespace DungeonGame
             if (typeOfRoom == TypeOfRoom.Bonus)
             {
                 gameObjects.Add(new Drop(new Animation(Content,"hearth",0,1,false), new Vector2(rnd.Next(200,400), rnd.Next(200,400)), 1));
+                for (int i = 0; i < random.Next(1,5); i++)
+                {
+                    gameObjects.Add(new Drop(new Animation(Content, "manaBottle", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 4));
+                }
+                 if (random.Next(3) == 0)
+                     gameObjects.Add(new Drop(new Animation(Content, "bowPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)),11));
+                 else if (random.Next(3) == 1)
+                     gameObjects.Add(new Drop(new Animation(Content, "fireBallPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 12));
+                else
+                     gameObjects.Add(new Drop(new Animation(Content, "dark", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 12));
             }
             if (typeOfRoom == TypeOfRoom.Boss)
             {
@@ -284,9 +294,9 @@ namespace DungeonGame
                 sbyte fromRoom = 0;
                 sbyte randomFactor;
                 if (roomPosition.Length() < 5)
-                    randomFactor = 2;
+                    randomFactor = 3;
                 else
-                    randomFactor = 2;
+                    randomFactor = 1;
 
                 switch (side)
                 {
