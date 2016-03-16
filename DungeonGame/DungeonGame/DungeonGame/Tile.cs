@@ -28,7 +28,14 @@ namespace DungeonGame
         }
         internal virtual void Update(GameTime gameTime,Player player)
         {
-            hitBox = new Rectangle((int)position.X,(int)position.Y,texture.Width,texture.Height);
+            hitBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            if (type == 11)
+            {
+                if (player.HitBox.Intersects(hitBox))
+                {
+                    position += player.Velocity;
+                }
+            }
         }
         public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {

@@ -18,7 +18,7 @@ namespace DungeonGame
         public Vector2 Position { get; set;}
         const float FRICTION = 0.68f;
         public Vector2 Velocity { get; set;}
-
+        
         KeyboardState oldKs = Keyboard.GetState();
         GamePadState oldgps = GamePad.GetState(PlayerIndex.One);
         public Rectangle attackRect;
@@ -103,7 +103,6 @@ namespace DungeonGame
                 streamReader.Close();
                 weaponState = WeaponState.Sword;
                 tex = Content.Load<Texture2D>("dark");
-                manabarTex = Content.Load<Texture2D>("manaBar");
 
                 animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
                 animationRight = new Animation(Content, "player/runRight", 110, 6, true);
@@ -579,8 +578,6 @@ namespace DungeonGame
             }
             else
                 currentAnimation.Draw(spriteBatch, new Vector2(Position.X - 15, Position.Y), color);
-            spriteBatch.Draw(tex, new Rectangle((int)Position.X + currentAnimation.frameWidth / 2 -20, (int)Position.Y + currentAnimation.frameHeight / 2,10,10), color);
-            spriteBatch.Draw(manabarTex, new Rectangle(200, 200, mana, 10),Color.White);
         }
 
         public bool IsColliding(List<GameObject> gameObjects)

@@ -79,7 +79,6 @@ namespace DungeonGame
 
             spriteBatch.Draw(underLayer, HitBox, Color.White);
             animation.Draw(spriteBatch, new Vector2((int)Position.X + underLayer.Width/2, (int)Position.Y + underLayer.Height/2), color, rotation); 
-            spriteBatch.Draw(balltexture, new Rectangle((int)Position.X + underLayer.Width/2, (int)Position.Y + underLayer.Height/2, 10, 10), Color.White);
         }
     }
 }

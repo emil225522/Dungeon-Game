@@ -32,8 +32,8 @@ namespace DungeonGame
         Color color = Color.White;
         public enum TypeOfRoom
         {
-            Normal = 0,
-            Puzzle = 1,
+            Puzzle = 0,
+            Normal = 1,
             Boss = 2,
             Bonus = 3,
             Empty = 4
@@ -119,7 +119,7 @@ namespace DungeonGame
                     Vector2 tempPos = new Vector2();
                     tempPos = tiles[i].position;
                     tiles.RemoveAt(i);
-                    tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tempPos, 3));
+                    //tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tempPos, 3));
 
                 }
             }
@@ -148,14 +148,19 @@ namespace DungeonGame
                  else if (random.Next(3) == 1)
                      gameObjects.Add(new Drop(new Animation(Content, "fireBallPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 12));
                 else
-                     gameObjects.Add(new Drop(new Animation(Content, "dark", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 12));
+                     gameObjects.Add(new Drop(new Animation(Content, "cube", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 13));
             }
             if (typeOfRoom == TypeOfRoom.Boss)
             {
                 gameObjects.Add(new BatBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 color = Color.Red;
             }
-          gameObjects.Add(new CannonBoss (Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 350))));
+            if (typeOfRoom == TypeOfRoom.Puzzle)
+            {
+                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 11));
+
+                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 12));
+            }
         }
 
         public void Update(GameTime gameTime,Player player)
@@ -212,7 +217,9 @@ namespace DungeonGame
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 if (gameObjects[i].isDead)
+                {
                     gameObjects.RemoveAt(i);
+                }
             }
             foreach (GameObject g in gameObjects)
                 g.Update(gameTime,this);
@@ -273,6 +280,7 @@ namespace DungeonGame
         }
         private void ExistOrCreate(Doors side)
         {
+            
             Vector2 nextRoom = new Vector2(roomPosition.X, roomPosition.Y);
             switch (side)
             {

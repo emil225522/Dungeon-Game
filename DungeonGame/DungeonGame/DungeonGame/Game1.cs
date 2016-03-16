@@ -25,6 +25,7 @@ namespace DungeonGame
         bool menuIsOpen;
         Texture2D blackBarTex;
         Texture2D hearthTex;
+        Texture2D manaBarTex;
         Player player;
         Camera camera;
         SpriteFont font1;
@@ -65,11 +66,12 @@ namespace DungeonGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             blackBarTex = Content.Load<Texture2D>("blackBar");
             hearthTex = Content.Load<Texture2D>("hearth");
+            manaBarTex = content.Load<Texture2D>("manaBar");
             font1 = Content.Load<SpriteFont>("font1");
             mapTexture = Content.Load<Texture2D>("towerUnder");
             player = new Player(new Vector2(200, 300), Content);
             testposition = new Vector2();
-            spawn.Add(new Tuple<string,int>("blubatower", 2));
+            spawn.Add(new Tuple<string,int>("slime", 2));
 
             CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3);
             currentRoom = rooms[new Vector2(0, 0)];
@@ -132,6 +134,7 @@ namespace DungeonGame
             spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(700, 10), Color.White);
             spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
             spriteBatch.DrawString(font1, "Level " + currentRoom.typeOfRoom, new Vector2(600, -20), Color.White);
+            spriteBatch.Draw(manaBarTex,new Rectangle(100,-50,player.mana,25),Color.White);
             if (menuIsOpen)
             {
                 foreach (KeyValuePair<Vector2, Room> room in rooms)
