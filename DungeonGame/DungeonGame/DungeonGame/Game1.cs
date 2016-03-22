@@ -109,16 +109,26 @@ namespace DungeonGame
         {
             // Allows the game to exit
             KeyboardState ks = Keyboard.GetState();
-            if (ks.IsKeyDown(Keys.Escape))
-                this.Exit();
-            if (ks.IsKeyDown(Keys.Z))
-                menuIsOpen = true;
-            else
-                menuIsOpen = false;
             if (gameState == GameState.Play && ks.IsKeyDown(Keys.P) && oldKs.IsKeyUp(Keys.P))
                 gameState = GameState.Pause;
+            else if (gameState == GameState.Pause && ks.IsKeyDown(Keys.P) && oldKs.IsKeyUp(Keys.P))
+                gameState = GameState.Play;
+            if (ks.IsKeyDown(Keys.Escape))
+                this.Exit();
 
-            currentRoom.Update(gameTime, player);
+            if (gameState == GameState.Play)
+            {
+                if (ks.IsKeyDown(Keys.Z))
+                    menuIsOpen = true;
+                else
+                    menuIsOpen = false;
+                currentRoom.Update(gameTime, player);
+            }
+            else if (gameState == GameState.GameOver)
+            {
+                if (ks.IsKeyDown(Keys.Enter))
+                    gameState = GameState.Play;
+            }
             camera.Update(gameTime);
             oldKs = ks;
             base.Update(gameTime);
@@ -135,35 +145,43 @@ namespace DungeonGame
                    BlendState.AlphaBlend,
                    null, null, null, null,
                    camera.transform);
-            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _frameCounter.Update(deltaTime);
-
-            var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, currentRoom.roomPosition, currentRoom.roomPosition.Length());
-
-            currentRoom.Draw(spriteBatch,player,gameTime);
-            spriteBatch.Draw(blackBarTex, new Vector2(50,-100), Color.White);
-            spriteBatch.DrawString(font1, testposition + "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
-            spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(700, 10), Color.White);
-            spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
-            spriteBatch.DrawString(font1, "Level " + currentRoom.typeOfRoom, new Vector2(600, -20), Color.White);
-            spriteBatch.Draw(manaBarTex,new Rectangle(100,-50,player.mana,25),Color.White);
-            if (menuIsOpen)
-            {
-                foreach (KeyValuePair<Vector2, Room> room in rooms)
+          
+                var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _frameCounter.Update(deltaTime);
+                if (gameState == GameState.Play)
                 {
+                    var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, currentRoom.roomPosition, currentRoom.roomPosition.Length());
 
-                    if (currentRoom == room.Value)
-                        spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.BlueViolet);
-                    else
-                        spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.LightGreen);
+                    currentRoom.Draw(spriteBatch, player, gameTime);
+                    spriteBatch.Draw(blackBarTex, new Vector2(50, -100), Color.White);
+                    spriteBatch.DrawString(font1, testposition + "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
+                    spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(700, 10), Color.White);
+                    spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
+                    spriteBatch.DrawString(font1, "Level " + currentRoom.typeOfRoom, new Vector2(600, -20), Color.White);
+                    spriteBatch.Draw(manaBarTex, new Rectangle(100, -50, player.mana, 25), Color.White);
+                    if (menuIsOpen)
+                    {
+                        foreach (KeyValuePair<Vector2, Room> room in rooms)
+                        {
+
+                            if (currentRoom == room.Value)
+                                spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.BlueViolet);
+                            else
+                                spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.LightGreen);
+                        }
+                    }
+                    for (int i = 0; i < player.hp; i++)
+                        spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 50, -50), Color.White);
+
+                    spriteBatch.DrawString(font1, fps, new Vector2(51, -100), Color.White);
                 }
-            }
-            for (int i = 0; i < player.hp; i++)
-                spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 50, -50), Color.White);
 
-            spriteBatch.DrawString(font1, fps, new Vector2(51,-100), Color.White);
-            spriteBatch.End();
-
+                if (gameState == GameState.GameOver)
+                {
+                    spriteBatch.DrawString(font1, "GameOver!", new Vector2(200, 200), Color.White);
+                }
+                    spriteBatch.End();
+                
             base.Draw(gameTime);
         }
         public bool RoomExists(Vector2 pos) 
@@ -186,6 +204,7 @@ namespace DungeonGame
             player.hp = player.maxHealth;
             player.Position = new Vector2(300, 300);
             player.Velocity = new Vector2();
+            gameState = GameState.GameOver;
             player.mana = 200;
             player.isHurt = false;
             rooms.Clear();
