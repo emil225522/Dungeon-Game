@@ -22,6 +22,7 @@ namespace DungeonGame
         }
         public int[] doors;
         int test;
+        public int numOfEnemies;
         Generation generation = new Generation();
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjects = new List<GameObject>();
@@ -40,6 +41,7 @@ namespace DungeonGame
         }
         public TypeOfRoom typeOfRoom;
         public bool isDark;
+        bool hasDroppedKey;
         Random rnd = new Random();
         ContentManager Content;
         public Player player;
@@ -54,6 +56,7 @@ namespace DungeonGame
             this.Content = Content;
             this.roomPosition = roomPosition;
             this.doors = doors;
+            numOfEnemies = spawn[0].Item2;
             if (roomPosition != Vector2.Zero)
             {
                 int randomNumber = rnd.Next(20);
@@ -159,7 +162,9 @@ namespace DungeonGame
             {
                 tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),2,1));
 
-                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 11,1));
+                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 2,1));
+                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 2, 1));
+                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 2, 1));
             }
         }
 
@@ -196,12 +201,17 @@ namespace DungeonGame
                 enemiesList.Add((Enemy)go);
                 if (go.isDead)
                 {
+                    numOfEnemies--;
                     gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true, new Vector2(go.Animation.frameWidth,go.Animation.frameHeight)), go.Position, go.Animation.frameHeight));
                     if (ObjectIs<Snake>(go))
                         gameObjectsToAdd.Add(new Stair(new Animation(Content,"stair",0,1,false), new Vector2(450, 300), 1));
                 }
             }
-
+            if (numOfEnemies == 0 && !hasDroppedKey)
+            {
+                hasDroppedKey = true;
+                gameObjects.Add(new Drop(new Animation(Content, "key", 0, 1, false), new Vector2(500, 500), 2));
+            }
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (tiles[i].isDeleted)
@@ -214,6 +224,8 @@ namespace DungeonGame
                     game.UpLevel();
                 }
             }
+            if (player.hp <= 0)
+                game.GameOver();
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 if (gameObjects[i].isDead)

@@ -23,7 +23,7 @@ namespace DungeonGame
         }
         internal override void Update(GameTime gameTime, Player player)
         {
-            PushBlockHitBox = new Rectangle((int)position.X, (int)position.Y-5, texture.Width+50, texture.Height+20);
+            PushBlockHitBox = new Rectangle((int)position.X, (int)position.Y-5, texture.Width, texture.Height);
             if (player.HitBox.Intersects(PushBlockHitBox))
                 isDown = true;
             else

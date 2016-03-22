@@ -18,11 +18,20 @@ namespace DungeonGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        KeyboardState oldKs = Keyboard.GetState();
         Dictionary<Vector2, Room> rooms = new Dictionary<Vector2, Room>();
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
         public static bool isUsingGamePad;
         Room currentRoom;
         bool menuIsOpen;
+        enum GameState
+        {
+            Start,
+            Play,
+            Pause,
+            GameOver
+        }
+        GameState gameState;
         Texture2D blackBarTex;
         Texture2D hearthTex;
         Texture2D manaBarTex;
@@ -52,7 +61,7 @@ namespace DungeonGame
         /// </summary>
         protected override void Initialize()
         {
-
+            gameState = GameState.Play;
             base.Initialize();
         }
 
@@ -106,9 +115,12 @@ namespace DungeonGame
                 menuIsOpen = true;
             else
                 menuIsOpen = false;
+            if (gameState == GameState.Play && ks.IsKeyDown(Keys.P) && oldKs.IsKeyUp(Keys.P))
+                gameState = GameState.Pause;
 
             currentRoom.Update(gameTime, player);
             camera.Update(gameTime);
+            oldKs = ks;
             base.Update(gameTime);
         }
 
@@ -165,6 +177,17 @@ namespace DungeonGame
         }
         public void UpLevel()
         {
+            rooms.Clear();
+            CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3);
+            currentRoom = rooms[new Vector2(0, 0)];
+        }
+        public void GameOver()
+        {
+            player.hp = player.maxHealth;
+            player.Position = new Vector2(300, 300);
+            player.Velocity = new Vector2();
+            player.mana = 200;
+            player.isHurt = false;
             rooms.Clear();
             CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3);
             currentRoom = rooms[new Vector2(0, 0)];
