@@ -14,11 +14,29 @@ namespace DungeonGame
     class PuzzleBlock : Tile
     {
         public sbyte typeOfDrop;
+        public bool isDown;
+        public Rectangle PushBlockHitBox;
         public PuzzleBlock(Texture2D texture, Vector2 position, sbyte type, sbyte typeOfColor)
-            : base(Game1.content.Load<Texture2D>("cube"),position,11)
+            : base(Game1.content.Load<Texture2D>("cube"),position,type)
         {
-            this.typeOfDrop = typeOfDrop;
+        
         }
+        internal override void Update(GameTime gameTime, Player player)
+        {
+            PushBlockHitBox = new Rectangle((int)position.X, (int)position.Y-5, texture.Width+50, texture.Height+20);
+            if (player.HitBox.Intersects(PushBlockHitBox))
+                isDown = true;
+            else
+                isDown = false;
+            base.Update(gameTime, player);
+        }
+        public override void Draw(SpriteBatch spriteBatch, Color color)
+        {
+            if (isDown)
+                color = new Color(13, 37, 13, 37);
+ 	        base.Draw(spriteBatch, color);
+
+            }
 
     }
 }

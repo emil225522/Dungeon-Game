@@ -157,9 +157,9 @@ namespace DungeonGame
             }
             if (typeOfRoom == TypeOfRoom.Puzzle)
             {
-                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 11));
+                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),2,1));
 
-                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 12));
+                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 11,1));
             }
         }
 
