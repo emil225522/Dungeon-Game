@@ -17,7 +17,7 @@ namespace DungeonGame
 
         Color normalColor;
         Vector2 circelingPlace;
-        bool playerInRange;
+
         public Snake(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "snake", 150, 1, true), seed, 1.5F, 300, 1,false,true)
         {

@@ -23,6 +23,7 @@ namespace DungeonGame
         public int[] doors;
         int test;
         public int numOfEnemies;
+        public int level = 1;
         Generation generation = new Generation();
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjects = new List<GameObject>();
@@ -47,27 +48,28 @@ namespace DungeonGame
         public Player player;
         Game1 game;
         public Vector2 roomPosition;
-        int bonusLower = 14;
-        int bonusUpper = 16;
+        float rng = 0.1f;
+        int BONUS_LOWER = 14;
+        int BONUS_UPPER = 16;
 
-        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom)
+        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom, int level)
         {
             this.game = game;
             this.Content = Content;
             this.roomPosition = roomPosition;
             this.doors = doors;
+            this.level = level;
             numOfEnemies = spawn[0].Item2;
             if (roomPosition != Vector2.Zero)
             {
-                int randomNumber = rnd.Next(20);
-                if (randomNumber < bonusLower)
-                    typeOfRoom = TypeOfRoom.Normal;
-                else if (randomNumber > bonusLower && randomNumber < bonusUpper)
+                int num = rnd.Next(20);
+
+                if (num * rng > BONUS_LOWER && num * rng < BONUS_UPPER)
                     typeOfRoom = TypeOfRoom.Bonus;
-                else if (randomNumber > (bonusUpper - 1) && randomNumber < bonusUpper + 2)
-                    typeOfRoom = TypeOfRoom.Puzzle;
                 else if (roomPosition.Length() > 4)
                     typeOfRoom = TypeOfRoom.Boss;
+                else
+                    typeOfRoom = TypeOfRoom.Normal;
             }
             if (typeOfRoom == TypeOfRoom.Bonus)
                 color = Color.Yellow;
@@ -221,7 +223,7 @@ namespace DungeonGame
             {
                 if (go != null && go.HitBox.Intersects(player.HitBox) && ObjectIs<Stair>(go))
                 {
-                    game.UpLevel();
+                    game.UpLevel(level);
                 }
             }
             if (player.hp <= 0)
@@ -340,7 +342,7 @@ namespace DungeonGame
                         break;
 
                 }
-                game.CreateRoom(nextRoom, doors, fromRoom);
+                game.CreateRoom(nextRoom, doors, fromRoom,level);
             }
             game.SetCurrentRoom(nextRoom);
         }

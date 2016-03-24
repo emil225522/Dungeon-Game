@@ -84,7 +84,7 @@ namespace DungeonGame
             testposition = new Vector2();
             spawn.Add(new Tuple<string,int>("slime", 2));
 
-            CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3);
+            CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3,1);
             currentRoom = rooms[new Vector2(0, 0)];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
@@ -158,8 +158,7 @@ namespace DungeonGame
                     spriteBatch.Draw(blackBarTex, new Vector2(50, -100), Color.White);
                     spriteBatch.DrawString(font1, testposition + "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
                     spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(700, 10), Color.White);
-                    spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
-                    spriteBatch.DrawString(font1, "Level " + currentRoom.typeOfRoom, new Vector2(600, -20), Color.White);
+                    spriteBatch.DrawString(font1, "Level " + currentRoom.level, new Vector2(600, -20), Color.White);
                     spriteBatch.Draw(manaBarTex, new Rectangle(60, 0, player.mana, 25), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("equipBar"), new Vector2(400, -50), Color.White);
                     if (player.hasBow)
@@ -208,10 +207,10 @@ namespace DungeonGame
         {
             currentRoom = rooms[position];
         }
-        public void UpLevel()
+        public void UpLevel(int level)
         {
             rooms.Clear();
-            CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3);
+            CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3,level);
             currentRoom = rooms[new Vector2(0, 0)];
         }
         public void GameOver()
@@ -223,7 +222,7 @@ namespace DungeonGame
             player.mana = 200;
             player.isHurt = false;
             rooms.Clear();
-            CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3);
+            CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3,1);
             currentRoom = rooms[new Vector2(0, 0)];
         }
         public int[] CheckDoor(Vector2 roomPosition, int doorFrom, int doorToo, int[] doors)
@@ -241,7 +240,7 @@ namespace DungeonGame
             return doors;
         }
 
-        public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom)
+        public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom,int level)
         {
 
             if (position.Length() < 2)
@@ -259,7 +258,7 @@ namespace DungeonGame
             doors = CheckDoor(new Vector2(position.X, position.Y + 1), 1, 3, doors);
             doors = CheckDoor(new Vector2(position.X, position.Y - 1), 3, 1, doors);
 
-            rooms.Add(position, new Room(this, Content, spawn, position, doors, fromRoom));
+            rooms.Add(position, new Room(this, Content, spawn, position, doors, fromRoom,level));
             spawn.Clear();
         }
 

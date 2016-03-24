@@ -26,13 +26,11 @@ namespace DungeonGame
         public bool isHurt;
         protected sbyte isHurtTimer;
         public int walktimer;
-        public sbyte type;
         public sbyte state;
         public bool canBeKnocked;
         public bool isBoss;
 
         protected Animation animation;
-        protected Random rnd;
         protected float speed;
         protected Array values = Enum.GetValues(typeof(Direction));
         protected Direction direction;

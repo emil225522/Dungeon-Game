@@ -45,8 +45,6 @@ namespace DungeonGame
 
         private int counter;
         public int roomlevel;
-        public int xp;
-        public int xpNeeded;
         public int mana = 200;
         public int level;
         public int numberOfKeys { get; set;}
@@ -86,18 +84,10 @@ namespace DungeonGame
             maxHealth = 5;
             #region LoadContent
             {
-                StreamReader streamReader = new StreamReader("gameinfo.txt");
-                level = int.Parse(streamReader.ReadLine());
-                xp = int.Parse(streamReader.ReadLine());
-                numberOfKeys = int.Parse(streamReader.ReadLine());
-                hp = int.Parse(streamReader.ReadLine());
-                maxHealth = int.Parse(streamReader.ReadLine());
-                xpNeeded = int.Parse(streamReader.ReadLine());
-                numberOfBombs = int.Parse(streamReader.ReadLine());
-                streamReader.Close();
                 weaponState = WeaponState.Sword;
                 tex = Content.Load<Texture2D>("dark");
                 hp = 5;
+                numberOfKeys = 1;
 
                 animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
                 animationRight = new Animation(Content, "player/runRight", 110, 6, true);
@@ -126,7 +116,6 @@ namespace DungeonGame
                     {
                         writer.Write(level);
                         writer.WriteLine();
-                        writer.Write(xp);
                         writer.WriteLine();
                         writer.Write(numberOfKeys);
                         writer.WriteLine();
@@ -134,7 +123,6 @@ namespace DungeonGame
                         writer.WriteLine();
                         writer.Write(maxHealth);
                         writer.WriteLine();
-                        writer.Write(xpNeeded);
                         writer.WriteLine();
                         writer.Write(numberOfBombs);
                     }
@@ -147,13 +135,6 @@ namespace DungeonGame
                 Velocity = new Vector2(0,Velocity.Y);
             if (Math.Abs(Velocity.Y) < 0.1f)
                 Velocity = new Vector2(Velocity.X, 0);
-
-            if (xp >= xpNeeded)
-            {
-                level++;
-                xpNeeded *= (int)1.4f;
-                xp = 0;
-            }
             KeyboardState ks = Keyboard.GetState();
             GamePadState gps = GamePad.GetState(PlayerIndex.One);
             if (ks.IsKeyDown(Keys.B) && oldKs.IsKeyUp(Keys.B) && numberOfBombs > 0)
@@ -388,7 +369,6 @@ namespace DungeonGame
                                     room.gameObjectsToAdd.Add(new Drop(new Animation(Content, "manaBottle", 0, 1, false), enemy.Position,4));
                                 go.isDead = true;
                                 enemy.isDead = true;
-                                xp += rnd.Next(20, 40);
                             }
                         }
                     }

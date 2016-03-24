@@ -14,7 +14,6 @@ namespace DungeonGame
     class Arrow : GameObject
     {
         float rotation;
-        sbyte type;
         bool spinningLeft;
 
         public Arrow(Animation animation, Vector2 position, Vector2 velocity, sbyte type)
