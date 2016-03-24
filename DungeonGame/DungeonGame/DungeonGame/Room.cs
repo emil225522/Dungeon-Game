@@ -62,14 +62,24 @@ namespace DungeonGame
             numOfEnemies = spawn[0].Item2;
             if (roomPosition != Vector2.Zero)
             {
-                int num = rnd.Next(20);
+                int rand = rnd.Next(20);
 
-                if (num * rng > BONUS_LOWER && num * rng < BONUS_UPPER)
-                    typeOfRoom = TypeOfRoom.Bonus;
-                else if (roomPosition.Length() > 4)
-                    typeOfRoom = TypeOfRoom.Boss;
-                else
-                    typeOfRoom = TypeOfRoom.Normal;
+
+               float num = (float) (Math.Pow(1.08, Game1.normalRow) * Math.Pow(0.9969, Game1.bonus) * (0.043 * rand));
+               if (num < 1)
+               {
+                   Game1.normalRow++;
+                   typeOfRoom = TypeOfRoom.Normal;
+               }
+               else if (num > 1)
+               {
+                   Game1.bonus++;
+                   typeOfRoom = TypeOfRoom.Bonus;
+               }
+               else
+                   typeOfRoom = TypeOfRoom.Boss;
+
+               Console.WriteLine(num);
             }
             if (typeOfRoom == TypeOfRoom.Bonus)
                 color = Color.Yellow;

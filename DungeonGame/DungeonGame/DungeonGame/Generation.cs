@@ -50,7 +50,7 @@ namespace DungeonGame
             doorRight = Content.Load<Texture2D>("doors/doorRight");
             doorLeft = Content.Load<Texture2D>("doors/doorLeft");
 
-            Console.WriteLine(roomType);
+
             if (roomType == 2)
             groundTile1 = Content.Load<Texture2D>("floor2");
             else
