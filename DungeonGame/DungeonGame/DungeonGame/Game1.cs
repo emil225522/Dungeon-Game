@@ -34,6 +34,7 @@ namespace DungeonGame
         GameState gameState;
         Texture2D blackBarTex;
         Texture2D hearthTex;
+        Texture2D yellowHighlight;
         Texture2D manaBarTex;
         Player player;
         Camera camera;
@@ -78,6 +79,7 @@ namespace DungeonGame
             manaBarTex = content.Load<Texture2D>("manaBar");
             font1 = Content.Load<SpriteFont>("font1");
             mapTexture = Content.Load<Texture2D>("towerUnder");
+            yellowHighlight = Content.Load<Texture2D>("yellowHighlight");
             player = new Player(new Vector2(200, 300), Content);
             testposition = new Vector2();
             spawn.Add(new Tuple<string,int>("slime", 2));
@@ -158,7 +160,16 @@ namespace DungeonGame
                     spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(700, 10), Color.White);
                     spriteBatch.DrawString(font1, "Xp " + player.xp, new Vector2(750, -60), Color.White);
                     spriteBatch.DrawString(font1, "Level " + currentRoom.typeOfRoom, new Vector2(600, -20), Color.White);
-                    spriteBatch.Draw(manaBarTex, new Rectangle(100, -50, player.mana, 25), Color.White);
+                    spriteBatch.Draw(manaBarTex, new Rectangle(60, 0, player.mana, 25), Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("equipBar"), new Vector2(400, -50), Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("bowPower"), new Vector2(401, -49), Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("FireBallPower"), new Vector2(472, -49), Color.White);
+                    if (player.weaponState == WeaponState.Bow)
+                        spriteBatch.Draw(yellowHighlight, new Vector2(400, -50), Color.White);
+                    else if (player.weaponState == WeaponState.FireSpell)
+                        spriteBatch.Draw(yellowHighlight, new Vector2(470, -50), Color.White);
+                    else if(player.weaponState == WeaponState.Sword)
+                        spriteBatch.Draw(yellowHighlight, new Vector2(435, -50), Color.White);
                     if (menuIsOpen)
                     {
                         foreach (KeyValuePair<Vector2, Room> room in rooms)
@@ -171,7 +182,7 @@ namespace DungeonGame
                         }
                     }
                     for (int i = 0; i < player.hp; i++)
-                        spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 50, -50), Color.White);
+                        spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 60, -50), Color.White);
 
                     spriteBatch.DrawString(font1, fps, new Vector2(51, -100), Color.White);
                 }

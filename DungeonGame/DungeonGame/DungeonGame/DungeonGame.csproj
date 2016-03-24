@@ -106,6 +106,7 @@
     <Compile Include="Room.cs" />
     <Compile Include="Stair.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="WeaponState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

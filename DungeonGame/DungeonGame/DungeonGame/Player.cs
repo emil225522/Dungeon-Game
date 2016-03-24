@@ -37,17 +37,11 @@ namespace DungeonGame
 
         #region hasWeaponBools
         bool hasSword = true;
-        bool hasSpell;
+        bool hasSpell = true;
         bool hasBow;
         #endregion
 
-        public enum WeaponState
-        {
-           Bow = 0,
-           Sword = 1,
-           FireSpell = 2
-        }
-        WeaponState weaponState = WeaponState.Sword;
+        public WeaponState weaponState = WeaponState.Sword;
 
         private int counter;
         public int roomlevel;
