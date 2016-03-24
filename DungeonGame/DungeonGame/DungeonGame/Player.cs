@@ -36,9 +36,9 @@ namespace DungeonGame
         public bool currentRoomDark;
 
         #region hasWeaponBools
-        bool hasSword = true;
-        bool hasSpell = true;
-        bool hasBow;
+        public bool hasSword = true;
+        public bool hasSpell;
+        public bool hasBow;
         #endregion
 
         public WeaponState weaponState = WeaponState.Sword;
@@ -156,7 +156,7 @@ namespace DungeonGame
             }
             KeyboardState ks = Keyboard.GetState();
             GamePadState gps = GamePad.GetState(PlayerIndex.One);
-            if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter) && numberOfBombs > 0)
+            if (ks.IsKeyDown(Keys.B) && oldKs.IsKeyUp(Keys.B) && numberOfBombs > 0)
             {
                 numberOfBombs--;
                 Vector2 bombPosition = new Vector2();
@@ -383,8 +383,6 @@ namespace DungeonGame
                                 if (random == 1)
                                     room.gameObjectsToAdd.Add(new Drop(new Animation(Content, "hearth", 0, 1, false), enemy.Position, 1));
                                 if (random == 2)
-                                    room.gameObjectsToAdd.Add(new Drop(new Animation(Content, "key", 0, 1, false), enemy.Position, 2));
-                                if (random == 3)
                                     room.gameObjectsToAdd.Add(new Drop(new Animation(Content, "bombDrop", 0, 1, false), enemy.Position, 3));
                                 if (random > 3)
                                     room.gameObjectsToAdd.Add(new Drop(new Animation(Content, "manaBottle", 0, 1, false), enemy.Position,4));
