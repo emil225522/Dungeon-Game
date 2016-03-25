@@ -71,13 +71,17 @@ namespace DungeonGame
                    Game1.normalRow++;
                    typeOfRoom = TypeOfRoom.Normal;
                }
-               else if (num > 1)
+               else if (num > 1 && roomPosition.Length() < 5)
                {
-                   Game1.bonus++;
+                   Game1.bonus += 5;
+                   Game1.normalRow = 0;
                    typeOfRoom = TypeOfRoom.Bonus;
                }
                else
-                   typeOfRoom = TypeOfRoom.Boss;
+               {
+                   if (rnd.Next(1, 5) == 2)
+                       typeOfRoom = TypeOfRoom.Boss;
+               }
 
                Console.WriteLine(num);
             }
@@ -153,11 +157,19 @@ namespace DungeonGame
             }
             if (typeOfRoom == TypeOfRoom.Bonus)
             {
-                gameObjects.Add(new Drop(new Animation(Content,"hearth",0,1,false), new Vector2(rnd.Next(200,400), rnd.Next(200,400)), 1));
-                for (int i = 0; i < random.Next(1,5); i++)
-                {
-                    gameObjects.Add(new Drop(new Animation(Content, "manaBottle", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 4));
-                }
+               
+                    int randomNumber = rnd.Next(2);
+                    if (randomNumber == 1)
+                    {
+                        for (int i = 0; i < random.Next(1, 5); i++)
+                        {
+                            gameObjects.Add(new Drop(new Animation(Content, "hearth", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 1));
+                        }
+                    }
+                    else
+                    {
+                        gameObjects.Add(new Drop(new Animation(Content, "hearthPlusOne", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 5));
+                    }
                  if (random.Next(3) == 0)
                      gameObjects.Add(new Drop(new Animation(Content, "bowPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)),11));
                  else if (random.Next(3) == 1)
