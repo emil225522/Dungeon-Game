@@ -388,10 +388,12 @@ namespace DungeonGame
                     else if (drop.typeOfDrop == 4)
                     {
                         if (mana < 200)
-                        mana += 60;
+                            mana += 60;
                         if (mana > 200)
                             mana = 200;
                     }
+                    else if (drop.typeOfDrop == 5)
+                        maxHealth++;
                     else if (drop.typeOfDrop == 11)
                     {
                         hasBow = true;
