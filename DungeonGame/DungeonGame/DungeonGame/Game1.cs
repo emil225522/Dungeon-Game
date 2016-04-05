@@ -21,6 +21,7 @@ namespace DungeonGame
         KeyboardState oldKs = Keyboard.GetState();
         static public int bonus;
         static public int normalRow;
+        int menuSelectedOption;
         Dictionary<Vector2, Room> rooms = new Dictionary<Vector2, Room>();
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
         public static bool isUsingGamePad;
@@ -64,7 +65,7 @@ namespace DungeonGame
         /// </summary>
         protected override void Initialize()
         {
-            gameState = GameState.Play;
+            gameState = GameState.Start;
             base.Initialize();
         }
 
@@ -133,6 +134,28 @@ namespace DungeonGame
                 if (ks.IsKeyDown(Keys.Enter) || ks.IsKeyDown(Keys.Space))
                     gameState = GameState.Play;
             }
+            else if (gameState == GameState.Start)
+            {
+                if (ks.IsKeyDown(Keys.Down) && oldKs.IsKeyUp(Keys.Down))
+                    menuSelectedOption++;
+                if (ks.IsKeyDown(Keys.Up) && oldKs.IsKeyUp(Keys.Up))
+                    menuSelectedOption--;
+
+                if (menuSelectedOption < 0)
+                    menuSelectedOption = 3;
+                if (menuSelectedOption > 3)
+                    menuSelectedOption = 0;
+
+
+                if (ks.IsKeyDown(Keys.Enter))
+                {
+                    if (menuSelectedOption == 0)
+                        gameState = GameState.Play;
+                    else if (menuSelectedOption == 3)
+                        Environment.Exit(1);
+                }
+                    
+            }
             camera.Update(gameTime);
             oldKs = ks;
             base.Update(gameTime);
@@ -191,10 +214,29 @@ namespace DungeonGame
 
                     spriteBatch.DrawString(font1, fps, new Vector2(51, -100), Color.White);
                 }
-
-                if (gameState == GameState.GameOver)
+                else if (gameState == GameState.GameOver)
                 {
-                    spriteBatch.DrawString(font1, "GameOver!", new Vector2(200, 200), Color.White);
+                    spriteBatch.DrawString(font1, "GameOver!", new Vector2(400, 200), Color.White);
+                }
+                else if (gameState == GameState.Start)
+                {
+                    spriteBatch.DrawString(font1, "Binding of Zelda", new Vector2(300, 200), Color.BlueViolet);
+                    if (menuSelectedOption == 0)
+                    spriteBatch.DrawString(font1, "Play", new Vector2(360, 250), Color.Yellow);
+                    else
+                        spriteBatch.DrawString(font1, "Play", new Vector2(360, 250), Color.White);
+                    if (menuSelectedOption == 1)
+                    spriteBatch.DrawString(font1, "Options", new Vector2(360, 300), Color.Yellow);
+                    else
+                        spriteBatch.DrawString(font1, "Options", new Vector2(360, 300), Color.White);
+                    if (menuSelectedOption == 2)
+                    spriteBatch.DrawString(font1, "Help", new Vector2(360, 350), Color.Yellow);
+                    else
+                        spriteBatch.DrawString(font1, "Help", new Vector2(360, 350), Color.White);
+                    if (menuSelectedOption == 3)
+                    spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.Yellow);
+                    else
+                        spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.White);
                 }
                     spriteBatch.End();
                 
