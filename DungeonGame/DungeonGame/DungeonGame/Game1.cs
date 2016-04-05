@@ -220,6 +220,7 @@ namespace DungeonGame
                 }
                 else if (gameState == GameState.Start)
                 {
+                    #region menuText
                     spriteBatch.DrawString(font1, "Binding of Zelda", new Vector2(300, 200), Color.BlueViolet);
                     if (menuSelectedOption == 0)
                     spriteBatch.DrawString(font1, "Play", new Vector2(360, 250), Color.Yellow);
@@ -237,6 +238,7 @@ namespace DungeonGame
                     spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.Yellow);
                     else
                         spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.White);
+                    #endregion
                 }
                     spriteBatch.End();
                 
@@ -287,14 +289,14 @@ namespace DungeonGame
         public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom,int level)
         {
 
-            if (position.Length() < 2)
+            if (position.Length() < 1.5f)
                 spawn.Add(new Tuple<string, int>("bat", (int)(2 *position.Length())));
             else if (position.Length() > 2 && position.Length() < 4)
                 spawn.Add(new Tuple<string, int>("blubatower", (int)(position.Length())));
             else if (position.Length() > 3 && position.Length() < 6)
                 spawn.Add(new Tuple<string, int>("swordenemy", (int)(2 *position.Length())));
             else
-                spawn.Add(new Tuple<string, int>("bat", (int)(2 *position.Length())));
+                spawn.Add(new Tuple<string, int>("fly", (int)(2 *position.Length())));
             
             //create a door where needded
             doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);
