@@ -41,6 +41,7 @@ namespace DungeonGame
         public virtual void Update(GameTime gameTime, Room room)
         {
                 Animation.PlayAnim(gameTime);
+                Position += Velocity;
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
