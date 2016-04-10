@@ -16,6 +16,8 @@ namespace DungeonGame
         float rotation;
         sbyte type;
         float size;
+        int health = 100;
+        bool canBeHurt;
 
         public Projectile(Animation animation, Vector2 position, Vector2 velocity, sbyte type,float size)
             : base (position, animation, 0)
@@ -23,6 +25,9 @@ namespace DungeonGame
             Velocity = velocity;
             this.type = type;
             this.size = size;
+            if (type == 4)
+                Velocity *= rnd.Next(1, 5);
+ 
         }
         public override void Update(GameTime gameTime, Room room)
         {
@@ -48,6 +53,17 @@ namespace DungeonGame
                         go.isDead = true;
                     }
                 }
+            }
+            if (type == 4)
+            {
+                Velocity *= 0.99f;
+                rotation *= 0.99f;
+                if (room.player.attackRect.Intersects(HitBox))
+                {
+                    health -= 25;
+                }
+                if (health < 1)
+                    isDead = true;
             }
             if (HitBox.Intersects(room.player.HitBox))
             {

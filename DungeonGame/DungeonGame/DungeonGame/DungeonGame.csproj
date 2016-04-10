@@ -77,13 +77,14 @@
     <Compile Include="Bar.cs" />
     <Compile Include="Bomb.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="CannonBoss.cs" />
+    <Compile Include="Enemy\CannonBoss.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="Enemy\Bat.cs" />
     <Compile Include="Enemy\BatBoss.cs" />
     <Compile Include="Enemy\Bluba.cs" />
     <Compile Include="Enemy\BlubaTower.cs" />
+    <Compile Include="Enemy\Egg.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="Enemy\Fly.cs" />
     <Compile Include="Enemy\FrogBoss.cs" />

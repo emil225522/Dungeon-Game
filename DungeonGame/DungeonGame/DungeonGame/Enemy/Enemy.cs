@@ -48,15 +48,30 @@ namespace DungeonGame
             this.type = type;
             this.isBoss = isBoss;
         }
+        public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp, sbyte type, bool canBeKnocked, bool isBoss,Vector2 velocity)
+            : base(position, animation, 1)
+        {
+            this.Position = position;
+            this.animation = animation;
+            direction = Direction.Left;
+            rnd = new Random(seed);
+            this.speed = speed;
+            this.hp = hp;
+            this.canBeKnocked = canBeKnocked;
+            this.type = type;
+            this.isBoss = isBoss;
+            Velocity = velocity;
+        }
 
         public override void Update(GameTime gameTime, Room room)
         {
             animation.PlayAnim(gameTime);
-
+            Position += Velocity;
             if (hp < 1)
                 isDead = true;
             if (isHurt == true)
                 isHurtTimer++;
+            if (type != 9)
              Velocity *= 0.7f;
              if (!IsCollidingMovingX(room.tiles))
              {

@@ -267,6 +267,8 @@ namespace DungeonGame
             gameState = GameState.GameOver;
             player.mana = 200;
             player.isHurt = false;
+            player.hasBow = false;
+            player.hasSpell = false;
             rooms.Clear();
             CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3,1);
             currentRoom = rooms[new Vector2(0, 0)];

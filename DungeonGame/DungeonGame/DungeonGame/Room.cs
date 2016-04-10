@@ -34,11 +34,12 @@ namespace DungeonGame
         Color color = Color.White;
         public enum TypeOfRoom
         {
-            Puzzle = 0,
+            Boss = 0,
             Normal = 1,
-            Boss = 2,
-            Bonus = 3,
-            Empty = 4
+            Bonus = 2,
+            Empty = 3,
+            Puzzle = 4
+
         }
         public TypeOfRoom typeOfRoom;
         public bool isDark;
@@ -178,8 +179,14 @@ namespace DungeonGame
                      gameObjects.Add(new Drop(new Animation(Content, "cube", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 13));
             }
             if (typeOfRoom == TypeOfRoom.Boss)
-            {
-                gameObjects.Add(new BatBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+            { 
+                if (level == 1)
+                    gameObjects.Add(new FrogBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                else if (level == 2)
+                    gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                else if (level == 3)
+                    gameObjects.Add(new FrogBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+
                 color = Color.Red;
             }
             if (typeOfRoom == TypeOfRoom.Puzzle)
