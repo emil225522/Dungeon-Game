@@ -86,6 +86,7 @@
     <Compile Include="Enemy\BlubaTower.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="Enemy\Fly.cs" />
+    <Compile Include="Enemy\FrogBoss.cs" />
     <Compile Include="Enemy\Ghost.cs" />
     <Compile Include="Enemy\Poison.cs" />
     <Compile Include="Enemy\Projectile.cs" />

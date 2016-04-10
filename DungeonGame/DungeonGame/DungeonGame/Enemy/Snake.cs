@@ -45,7 +45,6 @@ namespace DungeonGame
                 //angle += 0.01f;
                 for (int i = 0; i < 100; i++)
                 {
-
                     timer = 0;
                     angle += (float)Math.PI/5;
                     //angle *= i * 10;
