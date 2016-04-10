@@ -48,6 +48,10 @@ namespace DungeonGame
         {
             Animation.Draw(spriteBatch, Position, Color.White);
         }
+        public virtual void Draw(SpriteBatch spriteBatch, int useless)
+        {
+            spriteBatch.Draw(Texture, Position, Color.White);
+        }
         public virtual void TakeDamage(int damage)
         {
 

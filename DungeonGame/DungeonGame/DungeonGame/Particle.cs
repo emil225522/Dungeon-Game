@@ -14,20 +14,25 @@ namespace DungeonGame
     class Particle : GameObject
     {
         public sbyte typeOfDrop;
-        public Particle(Texture2D texture, Vector2 position)
-            : base(position, texture,1)
+        Vector2 originalPos;
+        public Particle(Animation animation, Vector2 position, Vector2 velocity)
+            : base(position, animation,1)
         {
-
+            Velocity = velocity;
+            originalPos = position;
         }
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime, room);
-            Velocity = new Vector2(0,4);
+            Velocity += new Vector2(0,0.2f);
+            if (Position.Y - originalPos.Y > 50)
+                isDead = true;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+
         }
     }
 }

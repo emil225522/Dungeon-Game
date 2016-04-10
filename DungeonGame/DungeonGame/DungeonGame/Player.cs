@@ -346,6 +346,13 @@ namespace DungeonGame
                             {
                                 enemy.hp -= 20;
                                 enemy.isHurt = true;
+                                for (int i = 0; i < rnd.Next(20, 50); i++)
+                                {
+                                    float angle = i + 1 * (float)Math.PI / 5;
+                                    Vector2 givenVelocity = 2 * new Vector2((float)Math.Cos(angle) * rnd.Next(1, 3), (float)Math.Sin(angle) * rnd.Next(1, 3));
+                                    room.gameObjectsToAdd.Add(new Particle(new Animation(Game1.content, "Blood", 0, 1, false),
+                                        new Vector2(enemy.Position.X, enemy.Position.Y),givenVelocity));
+                                }
                             }
                             if (enemy.canBeKnocked)
                             {
