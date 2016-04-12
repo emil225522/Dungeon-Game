@@ -38,6 +38,7 @@ namespace DungeonGame
             direction = (Direction)values.GetValue(rnd.Next(values.Length));
             ypos = Position.Y;
             originalPosition = Position;
+            Position = new Vector2(originalPosition.X + 30, Position.Y);
         }
         public override void Update(GameTime gameTime, Room room)
         {
