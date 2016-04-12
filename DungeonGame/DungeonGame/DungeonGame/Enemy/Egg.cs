@@ -26,19 +26,21 @@ namespace DungeonGame
             timer++;
             if (timer > 200)
             {
-                for (int i = 0; i < rnd.Next(20, 50); i++)
+                for (int i = 0; i < rnd.Next(10,20 ); i++)
                 {
                     float angle = i + 1 * (float)Math.PI / 5;
                     Vector2 givenVelocity = 2 * new Vector2((float)Math.Cos(angle) * rnd.Next(1, 3), (float)Math.Sin(angle) * rnd.Next(1, 3));
-                    room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "blubaball", 0, 1, false), Position, givenVelocity, 1, 1));
+                    room.gameObjectsToAdd.Add(new Projectile(new Animation(Game1.content, "frogBall", 0, 1, false), Position, givenVelocity, 1, 1));
                 }
                 isDead = true;
             }
+            rotation+= 0.2f;
             Velocity *= 0.99f;
             rotation *= 0.99f;
             if (room.player.attackRect.Intersects(HitBox) && !isHurt)
             {
                 hp -= 25;
+                Velocity = new Vector2();
                 isHurt = true;
             }
             if (hp < 1)

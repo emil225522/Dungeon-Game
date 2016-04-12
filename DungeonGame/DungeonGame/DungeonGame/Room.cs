@@ -181,7 +181,7 @@ namespace DungeonGame
             if (typeOfRoom == TypeOfRoom.Boss)
             { 
                 if (level == 1)
-                    gameObjects.Add(new FrogBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 else if (level == 2)
                     gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 else if (level == 3)

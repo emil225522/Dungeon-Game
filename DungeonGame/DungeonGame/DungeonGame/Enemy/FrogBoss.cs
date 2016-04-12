@@ -31,6 +31,7 @@ namespace DungeonGame
             normalColor = new Color(rnd.Next(50, 255), rnd.Next(50, 255), rnd.Next(50, 255));
             points.Add(new Vector2(100, 200));
             points.Add(new Vector2(750, 200));
+            Texture = animation.animation;
         }
         public override void Update(GameTime gameTime, Room room)
         {
@@ -79,7 +80,8 @@ namespace DungeonGame
             else
                 color = Color.White;
 
-            animation.Draw(spriteBatch, new Vector2((int)Position.X, (int)Position.Y), color, rotation); 
+            animation.Draw(spriteBatch, new Vector2(Position.X + 70,Position.Y + 80), color, rotation);
+            spriteBatch.Draw(Texture, Position, color);
         }
     }
 }

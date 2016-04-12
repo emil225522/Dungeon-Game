@@ -14,7 +14,6 @@ namespace DungeonGame
     class Projectile : GameObject
     {
         float rotation;
-        sbyte type;
         float size;
         int health = 100;
         bool canBeHurt;
@@ -65,12 +64,16 @@ namespace DungeonGame
                 if (health < 1)
                     isDead = true;
             }
-            if (HitBox.Intersects(room.player.HitBox))
+            if (HitBox.Intersects(room.player.HitBox) && !room.player.isHurt)
             {
                 room.player.isHurt = true;
                 room.player.hp--;
                 isDead = true;
             }
+            foreach (Tile t in room.tiles)
+                if (HitBox.Intersects(t.hitBox) && t.type > 2)
+                    isDead = true;
+
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
