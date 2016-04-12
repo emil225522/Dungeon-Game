@@ -38,12 +38,6 @@ namespace DungeonGame
         {
             timer++;
             base.Update(gameTime, room);
-            //float XDistance = (Position.X + Animation.frameWidth / 2) - points[0].X;
-            //float YDistance = (Position.Y + Animation.frameHeight / 2) - points[0].Y;
-            ////sets the velocity to that with the right angle thanks to this function
-            //Position += new Vector2((float)Math.Cos(Math.Atan2(YDistance, XDistance)));
-            //Position += new Vector2 ((float)Math.Sin(Math.Atan2(YDistance, XDistance)));
-            //poisonVelocity = new Vector2(22,22);
             if (isHurt)
             {
                 room.gameObjectsToAdd.Add(new Bat(Game1.content, rnd.Next(), new Vector2(Position.X + Animation.frameWidth / 2, Position.Y + Animation.frameHeight / 2)));
@@ -70,10 +64,7 @@ namespace DungeonGame
                 points.Add(new Vector2(100, 500));
                 points.Add(pos);
                 points.Add(new Vector2(750, 500));
-
-               
             }
-
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -83,6 +74,7 @@ namespace DungeonGame
             else
                 color = normalColor;
             animation.Draw(spriteBatch, Position, color);
+            spriteBatch.Draw(Game1.content.Load<Texture2D>("dark"), HitBox, color);
         }
     }
 }

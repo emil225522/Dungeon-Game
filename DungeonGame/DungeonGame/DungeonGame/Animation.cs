@@ -77,7 +77,6 @@ namespace DungeonGame
             sourceRect = new Rectangle((int)Math.Cos(rotation) * (currentFrame * frameWidth), (int)Math.Sin(rotation) * (currentFrame * frameWidth), frameWidth, frameHeight);
             spriteBatch.Draw(animation, position, sourceRect, color, rotation, new Vector2(frameWidth / 2, frameHeight / 2), 1f, SpriteEffects.None, 1f);
         }
-
         public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
         {
             spriteBatch.Draw(animation, position, sourceRect, color, 0f, new Vector2(0), 1f, SpriteEffects.None, 1f);

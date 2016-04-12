@@ -19,12 +19,13 @@ namespace DungeonGame
         int chargeTimer;
         sbyte numBatsSpawned;
         float rotation;
+        public override Rectangle HitBox { get { return new Rectangle((int)Position.X - Animation.frameWidth / 2, (int)Position.Y - Animation.frameHeight / 2, Animation.frameWidth, Animation.frameHeight); } }
 
         Color normalColor;
         Vector2 circelingPlace;
         bool playerInRange;
         public FrogBoss(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "Frog", 150,1, true), seed, 6, 400, 1, false, true)
+            : base(position, new Animation(Content, "Frog", 150,1, true), seed, 6, 400, 1,false, true)
         {
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
             angleDirection = (float)rnd.Next(200, 500) / 10000;
@@ -80,8 +81,8 @@ namespace DungeonGame
             else
                 color = Color.White;
 
-            animation.Draw(spriteBatch, new Vector2(Position.X + 70,Position.Y + 80), color, rotation);
-            spriteBatch.Draw(Texture, Position, color);
+            animation.Draw(spriteBatch, new Vector2(Position.X,Position.Y), color, rotation);
+            spriteBatch.Draw(Game1.content.Load<Texture2D>("dark"),HitBox, color);
         }
     }
 }

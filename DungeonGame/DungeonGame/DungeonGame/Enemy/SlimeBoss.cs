@@ -23,6 +23,7 @@ namespace DungeonGame
         float ypos;
         float yvel;
         bool isjumping;
+        public override Rectangle HitBox { get { return new Rectangle((int)Position.X - Animation.frameWidth / 2, (int)Position.Y - Animation.frameHeight / 2, Animation.frameWidth, Animation.frameHeight); } }
 
         Color normalColor;
         Vector2 circelingPlace;
@@ -112,7 +113,6 @@ namespace DungeonGame
                 color = Color.White;
 
             animation.Draw(spriteBatch, new Vector2((int)Position.X, (int)Position.Y), color, rotation);
-            spriteBatch.Draw(Game1.content.Load<Texture2D>("dark"), HitBox, color);
         }
     }
 }
