@@ -345,6 +345,7 @@ namespace DungeonGame
                             if (enemy.state == 0)
                             {
                                 enemy.hp -= 20;
+                                enemy.OnHit();
                                 enemy.isHurt = true;
                                 for (int i = 0; i < rnd.Next(20, 50); i++)
                                 {

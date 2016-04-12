@@ -74,7 +74,6 @@ namespace DungeonGame
             else
                 color = normalColor;
             animation.Draw(spriteBatch, Position, color);
-            spriteBatch.Draw(Game1.content.Load<Texture2D>("dark"), HitBox, color);
         }
     }
 }

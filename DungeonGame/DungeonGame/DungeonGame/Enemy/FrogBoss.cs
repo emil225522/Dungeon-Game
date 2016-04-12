@@ -82,7 +82,6 @@ namespace DungeonGame
                 color = Color.White;
 
             animation.Draw(spriteBatch, new Vector2(Position.X,Position.Y), color, rotation);
-            spriteBatch.Draw(Game1.content.Load<Texture2D>("dark"),HitBox, color);
         }
     }
 }

@@ -181,7 +181,7 @@ namespace DungeonGame
             if (typeOfRoom == TypeOfRoom.Boss)
             { 
                 if (level == 1)
-                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(475,300)));
                 else if (level == 2)
                     gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 else if (level == 3)
@@ -254,7 +254,12 @@ namespace DungeonGame
             {
                 if (go != null && go.HitBox.Intersects(player.HitBox) && ObjectIs<Stair>(go))
                 {
-                    game.UpLevel(level);
+                    if (level < 4)
+                        game.UpLevel(level);
+                    else
+                    {
+                        game.Win();
+                    }
                 }
             }
             if (player.hp <= 0)

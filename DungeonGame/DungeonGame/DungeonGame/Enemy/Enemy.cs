@@ -153,5 +153,9 @@ namespace DungeonGame
             base.TakeDamage(damage);
             hp -= damage;
         }
+        virtual public void OnHit()
+        {
+
+        }
     }
 }

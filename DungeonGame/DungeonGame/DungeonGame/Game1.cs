@@ -32,7 +32,8 @@ namespace DungeonGame
             Start,
             Play,
             Pause,
-            GameOver
+            GameOver,
+            Win
         }
         GameState gameState;
         Texture2D blackBarTex;
@@ -258,6 +259,10 @@ namespace DungeonGame
             rooms.Clear();
             CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3,level);
             currentRoom = rooms[new Vector2(0, 0)];
+        }
+        public void Win()
+        {
+            gameState = GameState.Win;
         }
         public void GameOver()
         {

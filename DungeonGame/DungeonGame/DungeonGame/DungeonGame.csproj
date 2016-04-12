@@ -78,7 +78,6 @@
     <Compile Include="Bomb.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Enemy\CannonBoss.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="Enemy\Bat.cs" />
     <Compile Include="Enemy\BatBoss.cs" />
