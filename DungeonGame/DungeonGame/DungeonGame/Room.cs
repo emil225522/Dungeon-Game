@@ -34,11 +34,12 @@ namespace DungeonGame
         Color color = Color.White;
         public enum TypeOfRoom
         {
-            Boss = 0,
-            Normal = 1,
-            Bonus = 2,
-            Empty = 3,
-            Puzzle = 4
+
+            Normal = 0,
+            Bonus = 1,
+            Empty = 2,
+            Puzzle = 3,
+            Boss = 4,
 
         }
         public TypeOfRoom typeOfRoom;
@@ -131,18 +132,18 @@ namespace DungeonGame
             #endregion
 
 
-            for (int i = 0; i < tiles.Count; i++)
-            {
-                //removed random number value
-                if (rnd.Next(-20, 20) == 5 && tiles[i].type == 1)
-                {
-                    Vector2 tempPos = new Vector2();
-                    tempPos = tiles[i].position;
-                    tiles.RemoveAt(i);
-                    //tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tempPos, 3));
+            //for (int i = 0; i < tiles.Count; i++)
+            //{
+            //    //removed random number value
+            //    if (rnd.Next(-20, 20) == 5 && tiles[i].type == 1)
+            //    {
+            //        Vector2 tempPos = new Vector2();
+            //        tempPos = tiles[i].position;
+            //        tiles.RemoveAt(i);
+            //        //tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tempPos, 3));
 
-                }
-            }
+            //    }
+            //}
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
@@ -317,6 +318,8 @@ namespace DungeonGame
                     return new SwordEnemy(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 case "snake":
                     return new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                case "swordFlower":
+                    return new SwordFlower(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
                 default:
                     return null;
             }

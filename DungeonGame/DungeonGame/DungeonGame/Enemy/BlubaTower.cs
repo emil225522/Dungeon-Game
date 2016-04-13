@@ -70,7 +70,6 @@ namespace DungeonGame
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-
             Color color;
             if (isHurt)
                 color = Color.Red;

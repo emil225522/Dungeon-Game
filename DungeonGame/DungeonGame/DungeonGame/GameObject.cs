@@ -18,7 +18,6 @@ namespace DungeonGame
         public Texture2D Texture { get; set; }
         public Vector2 Velocity { get; set; }
         public Animation Animation { get; set; }
-        public Rectangle hitBox;
         public Random rnd = new Random();
         public virtual Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); } }
         public sbyte type { get; set; }

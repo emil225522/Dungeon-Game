@@ -20,6 +20,7 @@ namespace DungeonGame
         public override void Update(GameTime gameTime, Room room)
         {
             base.Update(gameTime, room);
+            Velocity *= 0.7f;
             if (!IsColliding(room.tiles)) {
                 if (direction == Direction.Down)
                     Position += new Vector2(0,speed);
@@ -57,7 +58,6 @@ namespace DungeonGame
             else
                 color = Color.Black;
             animation.Draw(spriteBatch, Position, color);
-            spriteBatch.Draw(Texture, hitBox, Color.Black);
         }
 
     }

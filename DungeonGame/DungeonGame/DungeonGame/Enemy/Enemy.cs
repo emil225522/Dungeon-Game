@@ -72,7 +72,7 @@ namespace DungeonGame
             if (isHurt == true)
                 isHurtTimer++;
             if (type != 9)
-             Velocity *= 0.7f;
+             Velocity *= 0.4f;
              if (!IsCollidingMovingX(room.tiles))
              {
                  Position += new Vector2(Velocity.X,0);
@@ -91,7 +91,6 @@ namespace DungeonGame
                 isHurtTimer = 0;
                 isHurt = false;
             }
-           
         }
 
         public override void Draw(SpriteBatch spriteBatch)

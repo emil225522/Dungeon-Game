@@ -86,7 +86,7 @@ namespace DungeonGame
             yellowHighlight = Content.Load<Texture2D>("yellowHighlight");
             player = new Player(new Vector2(200, 300), Content);
             testposition = new Vector2();
-            spawn.Add(new Tuple<string,int>("slime", 2));
+            spawn.Add(new Tuple<string,int>("swordFlower", 2));
 
             CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3,1);
             currentRoom = rooms[new Vector2(0, 0)];
@@ -135,6 +135,11 @@ namespace DungeonGame
                 if (ks.IsKeyDown(Keys.Enter) || ks.IsKeyDown(Keys.Space))
                     gameState = GameState.Play;
             }
+            else if (gameState == GameState.Win)
+            {
+                if (ks.IsKeyDown(Keys.Enter))
+                    GameOver();
+            }
             else if (gameState == GameState.Start)
             {
                 if (ks.IsKeyDown(Keys.Down) && oldKs.IsKeyUp(Keys.Down))
@@ -155,7 +160,7 @@ namespace DungeonGame
                     else if (menuSelectedOption == 3)
                         Environment.Exit(1);
                 }
-                    
+
             }
             camera.Update(gameTime);
             oldKs = ks;
@@ -182,8 +187,8 @@ namespace DungeonGame
 
                     currentRoom.Draw(spriteBatch, player, gameTime);
                     spriteBatch.Draw(blackBarTex, new Vector2(50, -100), Color.White);
-                    spriteBatch.DrawString(font1, testposition + "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
-                    spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(700, 10), Color.White);
+                    spriteBatch.DrawString(font1, "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
+                    spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(600, -60), Color.White);
                     spriteBatch.DrawString(font1, "Level " + currentRoom.level, new Vector2(600, -20), Color.White);
                     spriteBatch.Draw(manaBarTex, new Rectangle(60, 0, player.mana, 25), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("equipBar"), new Vector2(400, -50), Color.White);
@@ -240,6 +245,10 @@ namespace DungeonGame
                     else
                         spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.White);
                     #endregion
+                }
+                else if (gameState == GameState.Win)
+                {
+                    spriteBatch.DrawString(font1, "You are winner!", new Vector2(400, 200), Color.White);
                 }
                     spriteBatch.End();
                 
