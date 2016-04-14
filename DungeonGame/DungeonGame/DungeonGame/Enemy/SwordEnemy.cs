@@ -14,7 +14,7 @@ namespace DungeonGame
         public SwordEnemy(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "swordEnemy", 100,1, true), seed, 1.5F, 75,1,true,false)
         {
-            direction = (Direction)values.GetValue(rnd.Next(values.Length));
+            direction = (RoomConstants.Direction) values.GetValue(rnd.Next(values.Length));
         }
 
         public override void Update(GameTime gameTime, Room room)

@@ -20,7 +20,7 @@ namespace DungeonGame
             : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed,2, 50,1,true,false)
         {
             this.Content = Content;
-            direction = (Direction)values.GetValue(rnd.Next(values.Length));
+            direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
         }
 
         public override void Update(GameTime gameTime, Room room)
@@ -58,13 +58,13 @@ namespace DungeonGame
                         attackingTimer = 0;
                         isAttacking = false;
                         Vector2 ballVelocity = new Vector2();
-                        if (direction == Direction.Down)
+                        if (direction == RoomConstants.Direction.Down)
                             ballVelocity = new Vector2(0, 8);
-                        else if (direction == Direction.Left)
+                        else if (direction == RoomConstants.Direction.Left)
                             ballVelocity = new Vector2(-8, 0);
-                        else if (direction == Direction.Right)
+                        else if (direction == RoomConstants.Direction.Right)
                             ballVelocity = new Vector2(8, 0);
-                        else if (direction == Direction.Up)
+                        else if (direction == RoomConstants.Direction.Up)
                             ballVelocity = new Vector2(0, -8);
 
                         room.gameObjectsToAdd.Add(new Projectile(new Animation(Content, "blubaball", 150, 1, false), Position, ballVelocity,1,1));
@@ -74,43 +74,43 @@ namespace DungeonGame
                 if (walktimer > rnd.Next(2000, 4000) && !IsColliding(room.tiles))
                 {
                     walktimer = 0;
-                    direction = (Direction)values.GetValue(rnd.Next(values.Length));
+                    direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
                 }
 
                 if (!isAttacking)
                 {
                     if (!IsColliding(room.tiles))
                     {
-                        if (direction == Direction.Down)
+                        if (direction == RoomConstants.Direction.Down)
                             Position += new Vector2(0, speed);
-                        else if (direction == Direction.Left)
+                        else if (direction == RoomConstants.Direction.Left)
                             Position -= new Vector2(speed, 0);
-                        else if (direction == Direction.Right)
+                        else if (direction == RoomConstants.Direction.Right)
                             Position += new Vector2(speed, 0);
-                        else if (direction == Direction.Up)
+                        else if (direction == RoomConstants.Direction.Up)
                             Position -= new Vector2(0, speed);
                     }
                     else
                     {
-                        if (direction == Direction.Down)
+                        if (direction == RoomConstants.Direction.Down)
                         {
                             Position -= new Vector2(0, speed * 4);
-                            direction = Direction.Up;
+                            direction = RoomConstants.Direction.Up;
                         }
-                        else if (direction == Direction.Left)
+                        else if (direction == RoomConstants.Direction.Left)
                         {
                             Position += new Vector2(speed * 4, 0);
-                            direction = Direction.Right;
+                            direction = RoomConstants.Direction.Right;
                         }
-                        else if (direction == Direction.Right)
+                        else if (direction == RoomConstants.Direction.Right)
                         {
                             Position -= new Vector2(speed * 4, 0);
-                            direction = Direction.Left;
+                            direction = RoomConstants.Direction.Left;
                         }
-                        else if (direction == Direction.Up)
+                        else if (direction == RoomConstants.Direction.Up)
                         {
                             Position += new Vector2(0, speed * 4);
-                            direction = Direction.Down;
+                            direction =RoomConstants.Direction.Down;
                         }
                     }
                 }
@@ -126,16 +126,16 @@ namespace DungeonGame
             float rotation = 0f;
             switch (direction)
             {
-                case Direction.Down:
+                case RoomConstants.Direction.Down:
                     rotation = (float)Math.PI;
                     break;
-                case Direction.Left:
+                case RoomConstants.Direction.Left:
                     rotation = 3*(float)Math.PI / 2;
                     break;
-                case Direction.Right:
+                case RoomConstants.Direction.Right:
                     rotation = (float)Math.PI / 2;
                     break;
-                case Direction.Up:
+                case RoomConstants.Direction.Up:
                     rotation = 0;
                     break;
             }

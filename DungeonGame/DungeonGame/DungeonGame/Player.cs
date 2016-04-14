@@ -62,14 +62,9 @@ namespace DungeonGame
 
         Texture2D tex;
 
-        public enum Direction
-        {
-            Up,
-            Down,
-            Left,
-            Right
-        };
-        Direction direction;
+        RoomConstants.Direction direction;
+        int saveTick;
+
         public sbyte state = 1;
         #endregion
         public Player(Vector2 position, ContentManager Content)
@@ -77,7 +72,7 @@ namespace DungeonGame
             this.Position = position;
             speed = 1.1f;
             currentSpeed = speed;
-            direction = Direction.Down;
+            direction = RoomConstants.Direction.Down;
             maxHealth = 5;
             #region LoadContent
             {
@@ -112,19 +107,19 @@ namespace DungeonGame
             {
                 numberOfBombs--;
                 Vector2 bombPosition = new Vector2();
-                if (direction == Direction.Down)
+                if (direction == RoomConstants.Direction.Down)
                 {
                     bombPosition = new Vector2(Position.X - 8, Position.Y + 60);
                 }
-                if (direction == Direction.Left)
+                if (direction == RoomConstants.Direction.Left)
                 {
                     bombPosition = new Vector2(Position.X - 50, Position.Y + 15);
                 }
-                if (direction == Direction.Right)
+                if (direction == RoomConstants.Direction.Right)
                 {
                     bombPosition = new Vector2(Position.X + 20, Position.Y + 20);
                 }
-                if (direction == Direction.Up)
+                if (direction == RoomConstants.Direction.Up)
                 {
                     bombPosition = new Vector2(Position.X - 8, Position.Y - 30);
                 }
@@ -150,22 +145,22 @@ namespace DungeonGame
                 {
 
                     Velocity -= new Vector2(currentSpeed,0);
-                    direction = Direction.Left;
+                    direction = RoomConstants.Direction.Left;
                 }
                 if (gps.IsButtonDown(Buttons.DPadRight) || ks.IsKeyDown(Keys.Right))
                 {
                     Velocity += new Vector2(currentSpeed,0);
-                    direction = Direction.Right;
+                    direction = RoomConstants.Direction.Right;
                 }
                 if (gps.IsButtonDown(Buttons.DPadUp) || ks.IsKeyDown(Keys.Up))
                 {
                     Velocity -= new Vector2(0,currentSpeed);
-                    direction = Direction.Up;
+                    direction = RoomConstants.Direction.Up;
                 }
                 if (gps.IsButtonDown(Buttons.DPadDown) || ks.IsKeyDown(Keys.Down))
                 {
                     Velocity += new Vector2(0,currentSpeed);
-                    direction = Direction.Down;
+                    direction = RoomConstants.Direction.Down;
                 }
 
                 if (ks.IsKeyDown(Keys.Right) && ks.IsKeyDown(Keys.Up) || gps.IsButtonDown(Buttons.DPadRight) && gps.IsButtonDown(Buttons.DPadUp))
@@ -191,13 +186,13 @@ namespace DungeonGame
             Random rnd = new Random();
             if (!isAttacking)
             {
-                if (direction == Direction.Down)
+                if (direction == RoomConstants.Direction.Down)
                     currentAnimation = animationDown;
-                else if (direction == Direction.Up)
+                else if (direction == RoomConstants.Direction.Up)
                     currentAnimation = animationUp;
-                else if (direction == Direction.Left)
+                else if (direction == RoomConstants.Direction.Left)
                     currentAnimation = animationLeft;
-                else if (direction == Direction.Right)
+                else if (direction == RoomConstants.Direction.Right)
                     currentAnimation = animationRight;
             }
             if (ks.IsKeyDown(Keys.Q) && oldKs.IsKeyUp(Keys.Q))
@@ -221,19 +216,19 @@ namespace DungeonGame
                     string asset = "";
                     switch (direction)
                     {
-                        case Direction.Left:
+                        case RoomConstants.Direction.Left:
                             arrowVel = new Vector2(-10, 0);
                             asset = "Left";
                             break;
-                        case Direction.Right:
+                        case RoomConstants.Direction.Right:
                             arrowVel = new Vector2(10, 0);
                             asset = "Right";
                             break;
-                        case Direction.Up:
+                        case RoomConstants.Direction.Up:
                             arrowVel = new Vector2(0, -10);
                             asset = "Up";
                             break;
-                        case Direction.Down:
+                        case RoomConstants.Direction.Down:
                             arrowVel = new Vector2(0, 10);
                             asset = "Down";
                             break;
@@ -250,19 +245,19 @@ namespace DungeonGame
                     string asset = "";
                     switch (direction)
                     {
-                        case Direction.Left:
+                        case RoomConstants.Direction.Left:
                             spellVel = new Vector2(-7, 0);
                             asset = "";
                             break;
-                        case Direction.Right:
+                        case RoomConstants.Direction.Right:
                             spellVel = new Vector2(7, 0);
                             asset = "";
                             break;
-                        case Direction.Up:
+                        case RoomConstants.Direction.Up:
                             spellVel = new Vector2(0, -7);
                             asset = "";
                             break;
-                        case Direction.Down:
+                        case RoomConstants.Direction.Down:
                             spellVel = new Vector2(0, 7);
                             asset = "";
                             break;
@@ -275,19 +270,19 @@ namespace DungeonGame
                 if (gps.IsButtonDown(Buttons.RightTrigger) && oldgps.IsButtonUp(Buttons.RightTrigger) && !isAttacking
                     || (ks.IsKeyDown(Keys.Space) && oldKs.IsKeyUp(Keys.Space)) && !isAttacking)
                 {
-                    if (direction == Direction.Right)
+                    if (direction == RoomConstants.Direction.Right)
                     {
                         currentAnimation = attackRight;
                     }
-                    else if (direction == Direction.Left)
+                    else if (direction == RoomConstants.Direction.Left)
                     {
                         currentAnimation = attackLeft;
                     }
-                    else if (direction == Direction.Down)
+                    else if (direction == RoomConstants.Direction.Down)
                     {
                         currentAnimation = attackDown;
                     }
-                    else if (direction == Direction.Up)
+                    else if (direction == RoomConstants.Direction.Up)
                     {
                         currentAnimation = attackUp;
                     }
@@ -295,16 +290,16 @@ namespace DungeonGame
                     isAttacking = true;
                     switch (direction)
                     {
-                        case Direction.Left:
+                        case RoomConstants.Direction.Left:
                             attackRect = new Rectangle((int)Position.X - 30, (int)Position.Y + 20, 50, 65);
                             break;
-                        case Direction.Right:
+                        case RoomConstants.Direction.Right:
                             attackRect = new Rectangle((int)Position.X + 10, (int)Position.Y + 20, 50, 65);
                             break;
-                        case Direction.Up:
+                        case RoomConstants.Direction.Up:
                             attackRect = new Rectangle((int)Position.X - 15, (int)Position.Y - 5, 75, 50);
                             break;
-                        case Direction.Down:
+                        case RoomConstants.Direction.Down:
                             attackRect = new Rectangle((int)Position.X - 15, (int)Position.Y + 50, 70, 50);
                             break;
                     }
@@ -328,13 +323,13 @@ namespace DungeonGame
                             }
                             if (enemy.canBeKnocked)
                             {
-                                if (direction == Direction.Right)
+                                if (direction == RoomConstants.Direction.Right)
                                     enemy.Velocity = new Vector2(40, 0);
-                                else if (direction == Direction.Left)
+                                else if (direction == RoomConstants.Direction.Left)
                                     enemy.Velocity = new Vector2(-40, 0);
-                                else if (direction == Direction.Up)
+                                else if (direction == RoomConstants.Direction.Up)
                                     enemy.Velocity = new Vector2(0, -40);
-                                else if (direction == Direction.Down)
+                                else if (direction == RoomConstants.Direction.Down)
                                     enemy.Velocity = new Vector2(0, 40);
                             }
                             if (enemy.hp < 1)
@@ -398,14 +393,14 @@ namespace DungeonGame
                 {
                     counter = 0;
                     attackRect = new Rectangle(0, 0, 0, 0);
-                    isAttacking = false;
-                    if (direction == Direction.Down)
+isAttacking = false;
+                    if (direction ==RoomConstants.Direction.Down)
                         currentAnimation = new Animation(Content, "player/runDown", 110, 7, false);
-                    else if (direction == Direction.Left)
+                    else if (direction ==RoomConstants.Direction.Left)
                         currentAnimation = new Animation(Content, "player/runLeft", 110, 6, false);
-                    else if (direction == Direction.Right)
+                    else if (direction==RoomConstants.Direction.Right)
                         currentAnimation = new Animation(Content, "player/runRight", 110, 6, false);
-                    else if (direction == Direction.Up)
+                    else if (direction ==RoomConstants.Direction.Up)
                         currentAnimation = new Animation(Content, "player/runUp", 110, 8, false);
                 }
             }
@@ -522,7 +517,7 @@ namespace DungeonGame
                 color = Color.White;
             }
 
-            if (direction == Direction.Left)
+            if (direction == RoomConstants.Direction.Left)
             {
                 if (isAttacking)
                     currentAnimation.Draw(spriteBatch, new Vector2(Position.X - 30, Position.Y), color);

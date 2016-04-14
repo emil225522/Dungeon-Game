@@ -13,48 +13,33 @@ namespace DungeonGame
 {
     class Room
     {
-        public enum Doors 
-        {
-            Left,
-            Up,
-            Right,
-            Down
-        }
         public int[] doors;
         int test;
         public int numOfEnemies;
         public int level = 1;
-        Generation generation = new Generation();
+
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjects = new List<GameObject>();
-        List<Enemy> enemiesList = new List<Enemy>();
         public List<Tile> tiles = new List<Tile>();
         public List<Drop> drops = new List<Drop>();
-        Random random = new Random();
         Color color = Color.White;
-        public enum TypeOfRoom
-        {
 
-            Normal = 0,
-            Bonus = 1,
-            Empty = 2,
-            Puzzle = 3,
-            Boss = 4,
-
-        }
-        public TypeOfRoom typeOfRoom;
+        public RoomConstants.TypeOfRoom typeOfRoom;
+        Player player;
         public bool isDark;
         bool hasDroppedKey;
+
+        Generation generation = new Generation();
         Random rnd = new Random();
         ContentManager Content;
-        public Player player;
         Game1 game;
+
         public Vector2 roomPosition;
         float rng = 0.1f;
         int BONUS_LOWER = 14;
         int BONUS_UPPER = 16;
 
-        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, sbyte fromRoom, int level)
+        public Room(Game1 game, ContentManager Content, List<Tuple<String, int>> spawn, Vector2 roomPosition, int[] doors, int level)
         {
             this.game = game;
             this.Content = Content;
@@ -67,83 +52,73 @@ namespace DungeonGame
                 int rand = rnd.Next(20);
 
 
-               float num = (float) (Math.Pow(1.08, Game1.normalRow) * Math.Pow(0.9969, Game1.bonus) * (0.043 * rand));
-               if (num < 1 && roomPosition.Length() < 5)
-               {
-                   Game1.normalRow++;
-                   typeOfRoom = TypeOfRoom.Normal;
-               }
-               else if (num > 1 && roomPosition.Length() < 5)
-               {
-                   Game1.bonus += 5;
-                   Game1.normalRow = 0;
-                   typeOfRoom = TypeOfRoom.Bonus;
-               }
-               else
-               {
-                   int chance = 10;
-                   chance -= (int)roomPosition.Length();
-                   if (rnd.Next(chance) == 2)
-                       typeOfRoom = TypeOfRoom.Boss;
-                   else
-                   {
-                       if (roomPosition.Length() > 8)
-                           typeOfRoom = TypeOfRoom.Boss;
-                   }
-               }
+                float num = (float)(Math.Pow(1.08, Game1.normalRow) * Math.Pow(0.9969, Game1.bonus) * (0.043 * rand));
+                if (num < 1 && roomPosition.Length() < 5)
+                {
+                    Game1.normalRow++;
+                    typeOfRoom = RoomConstants.TypeOfRoom.Normal;
+                }
+                else if (num > 1 && roomPosition.Length() < 5)
+                {
+                    Game1.bonus += 5;
+                    Game1.normalRow = 0;
+                    typeOfRoom = RoomConstants.TypeOfRoom.Bonus;
+                }
+                else
+                {
+                    int chance = 10;
+                    chance -= (int)roomPosition.Length();
+                    if (rnd.Next(chance) == 2)
+                        typeOfRoom = RoomConstants.TypeOfRoom.Boss;
+                    else
+                    {
+                        if (roomPosition.Length() > 8)
+                            typeOfRoom = RoomConstants.TypeOfRoom.Boss;
+                    }
+                }
 
-               Console.WriteLine(num);
+                Console.WriteLine(num);
             }
-            if (typeOfRoom == TypeOfRoom.Bonus)
+            if (typeOfRoom == RoomConstants.TypeOfRoom.Bonus)
                 color = Color.Yellow;
-            if (typeOfRoom == TypeOfRoom.Puzzle)
+            if (typeOfRoom == RoomConstants.TypeOfRoom.Puzzle)
                 color = new Color(228, 0, 228);
 
-            generation.Generate(Content, tiles, "map",(int)typeOfRoom);
-            #region CreateDoorOrWall
-            if (doors[0] == 1)
+            generation.Generate(Content, tiles, "map", (int)typeOfRoom);
+            for (int i = 0; i < doors.Length; i++)
             {
-                tiles.Add(new Tile(generation.doorLeft, new Vector2(50, 300), 2));
-                if (fromRoom != 2)
-                    tiles.Add(new LockedDoor(new Vector2(50, 300), Content, 5));
+                int door = doors[i];
+                if (door > 0)
+                {
+                    tiles.Add(new Archway(RoomConstants.DOOR_POSITIONS[i], Content, 2, (sbyte)i));
+                    if (door == 1)
+                        tiles.Add(new LockedDoor(RoomConstants.DOOR_POSITIONS[i], Content, 5, (sbyte)i));
+                }
+                else
+                {
+                    tiles.Add(new Wall(RoomConstants.DOOR_POSITIONS[i], Content, 3, (sbyte)i));
+                }
             }
-            else
-                tiles.Add(new Tile(generation.wallLeft, new Vector2(50, 300), 3));
 
-            if (doors[1] == 1)
+            for (int i = 0; i < tiles.Count; i++)
             {
-                tiles.Add(new Tile(generation.doorUp, new Vector2(450, 50), 2));
-                if (fromRoom != 1)
-                    tiles.Add(new LockedDoor(new Vector2(450, 50), Content, 6));
-            }
-            else
-                tiles.Add(new Tile(generation.wallUp, new Vector2(450, 50), 3));
+                //removed random number value
+                if (rnd.Next(-20, 20) == 5 && tiles[i].type == 1)
+                {
+                    Vector2 tempPos = new Vector2();
+                    tempPos = tiles[i].position;
+                    tiles.RemoveAt(i);
+                    tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tempPos, 3, 0));
 
-            if (doors[2] == 1)
-            {
-                tiles.Add(new Tile(generation.doorRight, new Vector2(850, 300), 2));
-                if (fromRoom != 0)
-                    tiles.Add(new LockedDoor(new Vector2(850, 300), Content, 7));
+                }
             }
-            else
-                tiles.Add(new Tile(generation.wallRight, new Vector2(850, 300), 3));
-
-            if (doors[3] == 1)
-            {
-                tiles.Add(new Tile(generation.doorDown, new Vector2(450, 550), 2));
-                if (fromRoom != 3)
-                    tiles.Add(new LockedDoor(new Vector2(450, 550), Content, 8));
-            }
-            else
-                tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
-            #endregion
 
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
-                    tiles.Add(new Tile(Content.Load<Texture2D>("crack"), tiles[i].position, 1));
+                    tiles.Add(new Tile(Content.Load<Texture2D>("crack"), tiles[i].position, 1, 0));
             }
-            if (typeOfRoom == TypeOfRoom.Normal)
+            if (typeOfRoom == RoomConstants.TypeOfRoom.Normal)
             {
                 for (int i = 0; i < spawn.Count; i++)
                 {
@@ -151,48 +126,39 @@ namespace DungeonGame
                         gameObjects.Add(CreateMob(spawn[i].Item1));
                 }
             }
-            if (typeOfRoom == TypeOfRoom.Bonus)
+            if (typeOfRoom == RoomConstants.TypeOfRoom.Bonus)
             {
-               
-                    int randomNumber = rnd.Next(2);
-                    if (randomNumber == 1)
+
+                int randomNumber = rnd.Next(2);
+                if (randomNumber == 1)
+                {
+                    for (int i = 0; i < rnd.Next(1, 5); i++)
                     {
-                        for (int i = 0; i < random.Next(1, 5); i++)
-                        {
-                            gameObjects.Add(new Drop(new Animation(Content, "hearth", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 1));
-                        }
+                        gameObjects.Add(new Drop(new Animation(Content, "hearth", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 1));
                     }
-                    else
-                    {
-                        gameObjects.Add(new Drop(new Animation(Content, "hearthPlusOne", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 5));
-                    }
-                    randomNumber = rnd.Next(3);
-                 if (randomNumber == 0)
-                     gameObjects.Add(new Drop(new Animation(Content, "bowPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)),11));
-                 else if (randomNumber == 1)
-                     gameObjects.Add(new Drop(new Animation(Content, "fireBallPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 12));
-                
+                }
+                else
+                {
+                    gameObjects.Add(new Drop(new Animation(Content, "hearthPlusOne", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 5));
+                }
+                randomNumber = rnd.Next(3);
+                if (randomNumber == 0)
+                    gameObjects.Add(new Drop(new Animation(Content, "bowPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 11));
+                else if (randomNumber == 1)
+                    gameObjects.Add(new Drop(new Animation(Content, "fireBallPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 12));
+
             }
-            if (typeOfRoom == TypeOfRoom.Boss)
-            { 
+
+            if (typeOfRoom == RoomConstants.TypeOfRoom.Boss)
+            {
                 if (level == 1)
-                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(475,300)));
+                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(475, 300)));
                 else if (level == 2)
                     gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 else if (level == 3)
                     gameObjects.Add(new FrogBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
                 else if (level == 4)
                     gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
-
-                color = Color.Red;
-            }
-            if (typeOfRoom == TypeOfRoom.Puzzle)
-            {
-                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),2,1));
-
-                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 2,1));
-                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 2, 1));
-                tiles.Add(new PuzzleBlock(Content.Load<Texture2D>("cube"), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)), 2, 1));
             }
         }
 
@@ -202,35 +168,34 @@ namespace DungeonGame
             #region doorfunction
             if (player.Position.X < 0) 
             {
-                ExistOrCreate(Doors.Left);
+                ExistOrCreate(RoomConstants.Direction.Left);
                 CleanUpProjectiles();
                 player.Position = new Vector2(50 * 18,player.Position.Y);
             }
 
             if (player.Position.X > (50 * 18))
             {
-                ExistOrCreate(Doors.Right);
+                ExistOrCreate(RoomConstants.Direction.Right);
                 CleanUpProjectiles();
                 player.Position = new Vector2(0,player.Position.Y);
             }
 
             if (player.Position.Y < -20) 
             {
-                ExistOrCreate(Doors.Down);
+                ExistOrCreate(RoomConstants.Direction.Up);
                 CleanUpProjectiles();
                 player.Position = new Vector2(player.Position.X,50 * 11);
             }
 
             if (player.Position.Y > (50 * 11)) 
             {
-                ExistOrCreate(Doors.Up);
+                ExistOrCreate(RoomConstants.Direction.Down);
                 CleanUpProjectiles();
                 player.Position = new Vector2(player.Position.X,-20);
             }
             #endregion
             foreach(GameObject go in gameObjects.Where(item => item is Enemy))
             {
-                enemiesList.Add((Enemy)go);
                 if (go.isDead)
                 {
                     numOfEnemies--;
@@ -261,8 +226,15 @@ namespace DungeonGame
                     }
                 }
             }
+
             if (player.hp <= 0)
                 game.GameOver();
+
+            foreach(LockedDoor tile in tiles.Where(item => item is LockedDoor))
+            {
+                tile.isDeleted = doors[tile.direction] == RoomConstants.DOOR_OPEN;
+            }
+
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 if (gameObjects[i].isDead)
@@ -274,10 +246,14 @@ namespace DungeonGame
                 g.Update(gameTime,this);
             foreach (GameObject go in gameObjectsToAdd)
                 gameObjects.Add(go);
+
             gameObjectsToAdd.Clear();
             foreach (Tile t in tiles)
             {
                 t.Update(gameTime,player);
+
+                if (ObjectIs<LockedDoor>(t))
+                    doors[t.direction] = t.isDeleted ? RoomConstants.DOOR_OPEN : RoomConstants.DOOR_CLOSED;
             }
             player.Update(gameTime, tiles, Content,this,gameObjects);
         }
@@ -329,59 +305,43 @@ namespace DungeonGame
             else
                 return false;
         }
-        private void ExistOrCreate(Doors side)
+        private void ExistOrCreate(RoomConstants.Direction side)
         {
+            int door = (int)side + 2;
+            if (door > 3)
+                door = door - 4;
+
             Vector2 nextRoom = new Vector2(roomPosition.X, roomPosition.Y);
             switch (side)
             {
-                case Doors.Down:
+                case RoomConstants.Direction.Down:
                     nextRoom.Y--;
                     break;
-                case Doors.Up:
+                case RoomConstants.Direction.Up:
                     nextRoom.Y++;
                     break;
-                case Doors.Left:
+                case RoomConstants.Direction.Left:
                     nextRoom.X--;
                     break;
-                case Doors.Right:
+                case RoomConstants.Direction.Right:
                     nextRoom.X++;
                     break;
             }
 
             if (!game.RoomExists(nextRoom))
             {
-                int[] doors = { 0 };
-                sbyte fromRoom = 0;
-                sbyte randomFactor;
-                if (roomPosition.Length() < 5)
-                    randomFactor = 2;
-                else
-                    randomFactor = 6;
+                game.CreateRoom(nextRoom, new int[] { rnd.Next(2), rnd.Next(2), rnd.Next(2), rnd.Next(2) }, door, level);
+            }
+            else
+            {
+                Room room = game.GetRoom(nextRoom);
 
-                switch (side)
-                {
-                    case Doors.Left:
-                        fromRoom = 0;
-                        doors = new int[] { rnd.Next(0, randomFactor), rnd.Next(0, randomFactor), 1, rnd.Next(0, randomFactor) };
-                        break;
-                    case Doors.Up:
-                        fromRoom = 1;
-                        doors = new int[] { rnd.Next(0, randomFactor), 1, rnd.Next(0,randomFactor), rnd.Next(0, randomFactor) };
-                        break;
-                    case Doors.Right:
-                        fromRoom = 2;
-                        doors = new int[] { 1, rnd.Next(0, randomFactor), rnd.Next(0, randomFactor), rnd.Next(0, randomFactor) };
-                        break;
-                    case Doors.Down:
-                        fromRoom = 3;
-                        doors = new int[] { rnd.Next(0, randomFactor), rnd.Next(0, randomFactor), rnd.Next(0, randomFactor), 1 };
-                        break;
-
-                }
-                game.CreateRoom(nextRoom, doors, fromRoom,level);
+                room.doors[door] = RoomConstants.DOOR_OPEN;
+                game.SetRoom(nextRoom, room);
             }
             game.SetCurrentRoom(nextRoom);
         }
+
         public void CleanUpProjectiles()
         {
             foreach (GameObject go in gameObjects.Where(item => item is Projectile))
