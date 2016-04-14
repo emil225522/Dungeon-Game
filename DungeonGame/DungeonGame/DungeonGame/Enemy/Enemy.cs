@@ -47,7 +47,7 @@ namespace DungeonGame
         {
             this.Position = position;
             this.animation = animation;
-            direction = Direction.Left;
+            direction = RoomConstants.Direction.Left;
             rnd = new Random(seed);
             this.speed = speed;
             this.hp = hp;

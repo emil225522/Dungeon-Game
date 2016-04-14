@@ -14,7 +14,6 @@ namespace DungeonGame
     class Room
     {
         public int[] doors;
-        int test;
         public int numOfEnemies;
         public int level = 1;
 
@@ -25,7 +24,7 @@ namespace DungeonGame
         Color color = Color.White;
 
         public RoomConstants.TypeOfRoom typeOfRoom;
-        Player player;
+        public Player player;
         public bool isDark;
         bool hasDroppedKey;
 

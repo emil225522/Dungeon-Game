@@ -35,7 +35,7 @@ namespace DungeonGame
             : base(position, new Animation(Content, "slimeBoss", 150, 2, true), seed, 6, 400, 1, false, true)
         {
             shadowTexture = Content.Load<Texture2D>("shadow");
-            direction = (Direction)values.GetValue(rnd.Next(values.Length));
+            direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
             ypos = Position.Y;
             originalPosition = Position;
             Position = new Vector2(originalPosition.X + 30, Position.Y);
@@ -59,7 +59,7 @@ namespace DungeonGame
                 }
             }
             if (rnd.Next(50) == 5)
-                direction = (Direction)values.GetValue(rnd.Next(values.Length));
+                direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
             if (jumptimer > 1)
             {
                 Position += new Vector2(0, yvel);
