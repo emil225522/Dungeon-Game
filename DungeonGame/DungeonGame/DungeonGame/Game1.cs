@@ -86,7 +86,7 @@ namespace DungeonGame
             yellowHighlight = Content.Load<Texture2D>("yellowHighlight");
             player = new Player(new Vector2(200, 300), Content);
             testposition = new Vector2();
-            spawn.Add(new Tuple<string,int>("swordFlower", 2));
+            spawn.Add(new Tuple<string,int>("fly", 2));
 
             CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3,1);
             currentRoom = rooms[new Vector2(0, 0)];
@@ -304,16 +304,19 @@ namespace DungeonGame
 
         public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom,int level)
         {
-
-            if (position.Length() < 1.5f)
+            if (position.Length() < 2f)
                 spawn.Add(new Tuple<string, int>("bat", (int)(2 *position.Length())));
-            else if (position.Length() > 2 && position.Length() < 4)
+            else if (position.Length() >= 2 && position.Length() < 3)
+                spawn.Add(new Tuple<string, int>("slime", (int)(position.Length())));
+            else if (position.Length() >= 3 && position.Length() < 4)
                 spawn.Add(new Tuple<string, int>("blubatower", (int)(position.Length())));
-            else if (position.Length() > 3 && position.Length() < 6)
+            else if (position.Length() >= 4 && position.Length() < 5)
                 spawn.Add(new Tuple<string, int>("swordenemy", (int)(2 *position.Length())));
             else
+                if (rnd.Next(2) == 1)
                 spawn.Add(new Tuple<string, int>("fly", (int)(2 *position.Length())));
-            
+                else
+                    spawn.Add(new Tuple<string, int>("bluba", (int)(2 * position.Length())));
             //create a door where needded
             doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);
             doors = CheckDoor(new Vector2(position.X - 1, position.Y), 2, 0, doors);

@@ -46,7 +46,6 @@ namespace DungeonGame
         private int counter;
         public int roomlevel;
         public int mana = 200;
-        public int level;
         public int numberOfKeys { get; set;}
         public int numberOfBombs { get; set;}
 
@@ -62,8 +61,6 @@ namespace DungeonGame
         public Animation currentAnimation { get; set;}
 
         Texture2D tex;
-
-        int saveTick;
 
         public enum Direction
         {
@@ -86,7 +83,7 @@ namespace DungeonGame
             {
                 weaponState = WeaponState.Sword;
                 tex = Content.Load<Texture2D>("dark");
-                hp = 5;
+                hp = 50;
                 numberOfKeys = 100;
 
                 animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
@@ -105,31 +102,6 @@ namespace DungeonGame
         }
         public void Update(GameTime gameTime, List<Tile> tiles,ContentManager Content, Room room, List<GameObject> gameObjects)
         {
-            #region AutoSave
-            {
-                saveTick++;
-                if (saveTick > 200)
-                {
-                    saveTick = 0;
-                    using (StreamWriter writer =
-                new StreamWriter("gameinfo.txt"))
-                    {
-                        writer.Write(level);
-                        writer.WriteLine();
-                        writer.WriteLine();
-                        writer.Write(numberOfKeys);
-                        writer.WriteLine();
-                        writer.Write(hp);
-                        writer.WriteLine();
-                        writer.Write(maxHealth);
-                        writer.WriteLine();
-                        writer.WriteLine();
-                        writer.Write(numberOfBombs);
-                    }
-                }
-            }
-            #endregion
-           
             Velocity = Velocity * FRICTION;
             if (Math.Abs(Velocity.X) < 0.1f)
                 Velocity = new Vector2(0,Velocity.Y);
@@ -373,7 +345,7 @@ namespace DungeonGame
                                     room.gameObjectsToAdd.Add(new Drop(new Animation(Content, "hearth", 0, 1, false), enemy.Position, 1));
                                 if (random == 2)
                                     room.gameObjectsToAdd.Add(new Drop(new Animation(Content, "bombDrop", 0, 1, false), enemy.Position, 3));
-                                if (random > 3)
+                                if (random == 3)
                                     room.gameObjectsToAdd.Add(new Drop(new Animation(Content, "manaBottle", 0, 1, false), enemy.Position,4));
                                 go.isDead = true;
                                 enemy.isDead = true;
@@ -532,8 +504,6 @@ namespace DungeonGame
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (currentRoomDark)
-                spriteBatch.Draw(tex, new Rectangle((int)Position.X - 1870, (int)Position.Y - 1950,4000,4000), Color.Black * 0.19f);
             Color color;
             if (isHurt)
             {

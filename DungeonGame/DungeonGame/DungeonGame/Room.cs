@@ -68,7 +68,7 @@ namespace DungeonGame
 
 
                float num = (float) (Math.Pow(1.08, Game1.normalRow) * Math.Pow(0.9969, Game1.bonus) * (0.043 * rand));
-               if (num < 1)
+               if (num < 1 && roomPosition.Length() < 5)
                {
                    Game1.normalRow++;
                    typeOfRoom = TypeOfRoom.Normal;
@@ -81,8 +81,8 @@ namespace DungeonGame
                }
                else
                {
-                   if (rnd.Next(1, 5) == 2)
-                       typeOfRoom = TypeOfRoom.Boss;
+                   if (rnd.Next((int)roomPosition.Length())== 2)
+                   typeOfRoom = TypeOfRoom.Boss;
                }
 
                Console.WriteLine(num);
@@ -131,19 +131,6 @@ namespace DungeonGame
                 tiles.Add(new Tile(generation.wallDown, new Vector2(450, 550), 3));
             #endregion
 
-
-            //for (int i = 0; i < tiles.Count; i++)
-            //{
-            //    //removed random number value
-            //    if (rnd.Next(-20, 20) == 5 && tiles[i].type == 1)
-            //    {
-            //        Vector2 tempPos = new Vector2();
-            //        tempPos = tiles[i].position;
-            //        tiles.RemoveAt(i);
-            //        //tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tempPos, 3));
-
-            //    }
-            //}
             for (int i = 0; i < tiles.Count; i++)
             {
                 if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
@@ -172,12 +159,12 @@ namespace DungeonGame
                     {
                         gameObjects.Add(new Drop(new Animation(Content, "hearthPlusOne", 0, 1, false), new Vector2(rnd.Next(200, 400), rnd.Next(200, 400)), 5));
                     }
-                 if (random.Next(3) == 0)
+                    randomNumber = rnd.Next(3);
+                 if (randomNumber == 0)
                      gameObjects.Add(new Drop(new Animation(Content, "bowPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)),11));
-                 else if (random.Next(3) == 1)
+                 else if (randomNumber == 1)
                      gameObjects.Add(new Drop(new Animation(Content, "fireBallPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 12));
-                else
-                     gameObjects.Add(new Drop(new Animation(Content, "cube", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 13));
+                
             }
             if (typeOfRoom == TypeOfRoom.Boss)
             { 
@@ -209,24 +196,28 @@ namespace DungeonGame
             if (player.Position.X < 0) 
             {
                 ExistOrCreate(Doors.Left);
+                CleanUpProjectiles();
                 player.Position = new Vector2(50 * 18,player.Position.Y);
             }
 
             if (player.Position.X > (50 * 18))
             {
                 ExistOrCreate(Doors.Right);
+                CleanUpProjectiles();
                 player.Position = new Vector2(0,player.Position.Y);
             }
 
             if (player.Position.Y < -20) 
             {
                 ExistOrCreate(Doors.Down);
+                CleanUpProjectiles();
                 player.Position = new Vector2(player.Position.X,50 * 11);
             }
 
             if (player.Position.Y > (50 * 11)) 
             {
                 ExistOrCreate(Doors.Up);
+                CleanUpProjectiles();
                 player.Position = new Vector2(player.Position.X,-20);
             }
             #endregion
@@ -384,6 +375,13 @@ namespace DungeonGame
                 game.CreateRoom(nextRoom, doors, fromRoom,level);
             }
             game.SetCurrentRoom(nextRoom);
+        }
+        public void CleanUpProjectiles()
+        {
+            foreach (GameObject go in gameObjects.Where(item => item is Projectile))
+            {
+                go.isDead = true;
+            }
         }
     }
 }

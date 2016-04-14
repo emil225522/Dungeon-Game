@@ -45,7 +45,7 @@ namespace DungeonGame
                 angle -= angleDirection;
             else
                 angle += angleDirection;
-            Position = new Vector2((float)(Math.Cos(angle)) * 100 + circelingPlace.X, (float)(Math.Sin(angle)) * 100 + circelingPlace.Y);
+            Position = new Vector2((float)(Math.Cos(angle)) * 50 + circelingPlace.X, (float)(Math.Sin(angle)) * 50 + circelingPlace.Y);
             timer++;
             if (timer > 500)
             {
@@ -54,7 +54,7 @@ namespace DungeonGame
                 circelingPlaceVel.X += rnd.Next(-100, 100);
                 circelingPlaceVel.Y += rnd.Next(-100, 100);
             }
-            circelingPlaceVel *= 0.6f;
+            circelingPlaceVel *= 0.3f;
             if (foo)
             {
                 timer2++;
