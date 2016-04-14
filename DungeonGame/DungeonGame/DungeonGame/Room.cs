@@ -101,19 +101,6 @@ namespace DungeonGame
 
             for (int i = 0; i < tiles.Count; i++)
             {
-                //removed random number value
-                if (rnd.Next(-20, 20) == 5 && tiles[i].type == 1)
-                {
-                    Vector2 tempPos = new Vector2();
-                    tempPos = tiles[i].position;
-                    tiles.RemoveAt(i);
-                    tiles.Add(new Tile(Content.Load<Texture2D>("hole"), tempPos, 3, 0));
-
-                }
-            }
-
-            for (int i = 0; i < tiles.Count; i++)
-            {
                 if (rnd.Next(-5, 5) == 2 && tiles[i].type == 1)
                     tiles.Add(new Tile(Content.Load<Texture2D>("crack"), tiles[i].position, 1, 0));
             }
