@@ -81,8 +81,15 @@ namespace DungeonGame
                }
                else
                {
-                   if (rnd.Next((int)roomPosition.Length())== 2)
-                   typeOfRoom = TypeOfRoom.Boss;
+                   int chance = 10;
+                   chance -= (int)roomPosition.Length();
+                   if (rnd.Next(chance) == 2)
+                       typeOfRoom = TypeOfRoom.Boss;
+                   else
+                   {
+                       if (roomPosition.Length() > 8)
+                           typeOfRoom = TypeOfRoom.Boss;
+                   }
                }
 
                Console.WriteLine(num);
@@ -324,7 +331,6 @@ namespace DungeonGame
         }
         private void ExistOrCreate(Doors side)
         {
-            
             Vector2 nextRoom = new Vector2(roomPosition.X, roomPosition.Y);
             switch (side)
             {

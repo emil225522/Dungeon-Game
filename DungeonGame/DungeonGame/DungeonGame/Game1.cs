@@ -248,7 +248,8 @@ namespace DungeonGame
                 }
                 else if (gameState == GameState.Win)
                 {
-                    spriteBatch.DrawString(font1, "You are winner!", new Vector2(400, 200), Color.White);
+                    spriteBatch.DrawString(font1, "You Win!", new Vector2(400, 200), Color.White);
+                    spriteBatch.DrawString(font1, "Press enter to exit to main menu...", new Vector2(200, 200), Color.White);
                 }
                     spriteBatch.End();
                 
@@ -275,10 +276,10 @@ namespace DungeonGame
         }
         public void GameOver()
         {
+            gameState = GameState.GameOver;
             player.hp = player.maxHealth;
             player.Position = new Vector2(300, 300);
             player.Velocity = new Vector2();
-            gameState = GameState.GameOver;
             player.mana = 200;
             player.isHurt = false;
             player.hasBow = false;
@@ -307,11 +308,11 @@ namespace DungeonGame
             if (position.Length() < 2f)
                 spawn.Add(new Tuple<string, int>("bat", (int)(2 *position.Length())));
             else if (position.Length() >= 2 && position.Length() < 3)
-                spawn.Add(new Tuple<string, int>("slime", (int)(position.Length())));
+                spawn.Add(new Tuple<string, int>("slime", (int)(2* position.Length())));
             else if (position.Length() >= 3 && position.Length() < 4)
                 spawn.Add(new Tuple<string, int>("blubatower", (int)(position.Length())));
             else if (position.Length() >= 4 && position.Length() < 5)
-                spawn.Add(new Tuple<string, int>("swordenemy", (int)(2 *position.Length())));
+                spawn.Add(new Tuple<string, int>("swordenemy", (int)(1 *position.Length())));
             else
                 if (rnd.Next(2) == 1)
                 spawn.Add(new Tuple<string, int>("fly", (int)(2 *position.Length())));

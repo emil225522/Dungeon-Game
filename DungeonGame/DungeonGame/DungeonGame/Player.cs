@@ -75,14 +75,13 @@ namespace DungeonGame
         public Player(Vector2 position, ContentManager Content)
         {
             this.Position = position;
-            speed = 1.2f;
+            speed = 1.1f;
             currentSpeed = speed;
             direction = Direction.Down;
             maxHealth = 5;
             #region LoadContent
             {
                 weaponState = WeaponState.Sword;
-                tex = Content.Load<Texture2D>("dark");
                 hp = 50;
                 numberOfKeys = 100;
 
