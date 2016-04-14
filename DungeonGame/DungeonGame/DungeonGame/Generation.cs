@@ -87,36 +87,36 @@ namespace DungeonGame
                         {
                             #region AddTiles
                             if (tileNo[x] == ("11"))
-                                tiles.Add(new Tile(groundTile1, new Vector2(x * 50, y * 50), 1));
+                                tiles.Add(new Tile(groundTile1, new Vector2(x * 50, y * 50), 1, 0));
 
                             else if (tileNo[x] == ("4"))
-                                tiles.Add(new Tile(wallDown, new Vector2(x * 50, y * 50), 3));
+                                tiles.Add(new Wall(new Vector2(x * 50, y * 50), Content, 3, 3));
                             else if (tileNo[x] == ("3"))
-                                tiles.Add(new Tile(wallUp, new Vector2(x * 50, y * 50), 3));
+                                tiles.Add(new Wall(new Vector2(x * 50, y * 50), Content, 3, 1));
                             else if (tileNo[x] == ("8"))
-                                tiles.Add(new Tile(wallRight, new Vector2(x * 50, y * 50), 3));
+                                tiles.Add(new Wall(new Vector2(x * 50, y * 50), Content, 3, 2));
                             else if (tileNo[x] == ("7"))
-                                tiles.Add(new Tile(wallLeft, new Vector2(x * 50, y * 50), 3));
+                                tiles.Add(new Wall(new Vector2(x * 50, y * 50), Content, 3, 0));
 
 
                             else if (tileNo[x] == ("10"))
-                                tiles.Add(new Tile(doorLeft, new Vector2(x * 50, y * 50), 2));
+                                tiles.Add(new Tile(doorLeft, new Vector2(x * 50, y * 50), 2, 0));
                             else if (tileNo[x] == ("13"))
-                                tiles.Add(new Tile(doorUp, new Vector2(x * 50, y * 50), 2));
+                                tiles.Add(new Tile(doorUp, new Vector2(x * 50, y * 50), 2, 0));
                             else if (tileNo[x] == ("14"))
-                                tiles.Add(new Tile(doorDown, new Vector2(x * 50, y * 50), 2));
+                                tiles.Add(new Tile(doorDown, new Vector2(x * 50, y * 50), 2, 0));
                             else if (tileNo[x] == ("9"))
-                                tiles.Add(new Tile(doorRight, new Vector2(x * 50, y * 50), 2));
+                                tiles.Add(new Tile(doorRight, new Vector2(x * 50, y * 50), 2, 0));
 
 
                             else if (tileNo[x] == ("1"))
-                                tiles.Add(new Tile(cornerUp, new Vector2(x * 50, y * 50), 3));
+                                tiles.Add(new Tile(cornerUp, new Vector2(x * 50, y * 50), 3, 0));
                             else if (tileNo[x] == ("2"))
-                                tiles.Add(new Tile(cornerLeft, new Vector2(x * 50, y * 50), 3));
+                                tiles.Add(new Tile(cornerLeft, new Vector2(x * 50, y * 50), 3, 0));
                             else if (tileNo[x] == ("6"))
-                                tiles.Add(new Tile(cornerRight, new Vector2(x * 50, y * 50), 3));
+                                tiles.Add(new Tile(cornerRight, new Vector2(x * 50, y * 50), 3, 0));
                             else if (tileNo[x] == ("5"))
-                                tiles.Add(new Tile(cornerDown, new Vector2(x * 50, y * 50), 3));
+                                tiles.Add(new Tile(cornerDown, new Vector2(x * 50, y * 50), 3, 0));
                             #endregion
                         }
                     }

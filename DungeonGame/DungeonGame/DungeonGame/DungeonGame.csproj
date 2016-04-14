@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="Arrow.cs" />
+    <Compile Include="Archway.cs" />
     <Compile Include="Bar.cs" />
     <Compile Include="Bomb.cs" />
     <Compile Include="Camera.cs" />
@@ -106,11 +107,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="PuzzleBlock.cs" />
     <Compile Include="Room.cs" />
+    <Compile Include="RoomConstants.cs" />
     <Compile Include="Stair.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="WeaponState.cs" />
+    <Compile Include="Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

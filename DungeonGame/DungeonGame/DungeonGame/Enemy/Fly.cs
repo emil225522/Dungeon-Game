@@ -22,7 +22,7 @@ namespace DungeonGame
         public Fly(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1,true,false)
         {
-            direction = (Direction)values.GetValue(rnd.Next(values.Length));
+            direction = (RoomConstants.Direction) values.GetValue(rnd.Next(values.Length));
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
             angleDirection = (float)rnd.Next(200, 500) / 10000;
             if (rnd.Next(2) == 1)
@@ -74,13 +74,13 @@ namespace DungeonGame
             }
                 if (!IsColliding(room.tiles))
             {
-                if (direction == Direction.Down)
+                if (direction == RoomConstants.Direction.Down)
                     Position += new Vector2(0, speed);
-                else if (direction == Direction.Left)
+                else if (direction == RoomConstants.Direction.Left)
                     Position -= new Vector2(speed, 0);
-                else if (direction == Direction.Right)
+                else if (direction == RoomConstants.Direction.Right)
                     Position += new Vector2(speed, 0);
-                else if (direction == Direction.Up)
+                else if (direction == RoomConstants.Direction.Up)
                     Position -= new Vector2(0, speed);
             }
            

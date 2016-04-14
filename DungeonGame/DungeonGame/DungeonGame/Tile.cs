@@ -17,13 +17,19 @@ namespace DungeonGame
         public Vector2 position;
         public Rectangle hitBox;
         public bool isDeleted;
+
         public sbyte type;
+        public sbyte direction;
+        public float rotation;
+
         public bool isSelected;
-        public Tile(Texture2D texture, Vector2 position, sbyte type)
+
+        public Tile(Texture2D texture, Vector2 position, sbyte type, sbyte direction)
         {
             this.texture = texture;
             this.position = position;
             this.type = type;
+            this.direction = direction;
             hitBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
         internal virtual void Update(GameTime gameTime,Player player)

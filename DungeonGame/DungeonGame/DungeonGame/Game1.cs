@@ -44,7 +44,7 @@ namespace DungeonGame
         Camera camera;
         SpriteFont font1;
         public FrameCounter _frameCounter = new FrameCounter();
-        Random rnd = new Random();
+        public Random rnd = new Random();
         Texture2D mapTexture;
         Vector2 testposition;
         public static ContentManager content;
@@ -88,7 +88,7 @@ namespace DungeonGame
             testposition = new Vector2();
             spawn.Add(new Tuple<string,int>("fly", 2));
 
-            CreateRoom(new Vector2(0, 0),new int[] {1,1,1,0},3,1);
+            CreateRoom(new Vector2(0, 0), new int[] {RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_NONE}, -1, 1);
             currentRoom = rooms[new Vector2(0, 0)];
 
             camera = new Camera(GraphicsDevice.Viewport, player);
@@ -178,83 +178,83 @@ namespace DungeonGame
                    BlendState.AlphaBlend,
                    null, null, null, null,
                    camera.transform);
-          
-                var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                _frameCounter.Update(deltaTime);
-                if (gameState == GameState.Play)
-                {
-                    var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, currentRoom.roomPosition, currentRoom.roomPosition.Length());
 
-                    currentRoom.Draw(spriteBatch, player, gameTime);
-                    spriteBatch.Draw(blackBarTex, new Vector2(50, -100), Color.White);
-                    spriteBatch.DrawString(font1, "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
-                    spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(600, -60), Color.White);
-                    spriteBatch.DrawString(font1, "Level " + currentRoom.level, new Vector2(600, -20), Color.White);
-                    spriteBatch.Draw(manaBarTex, new Rectangle(60, 0, player.mana, 25), Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("equipBar"), new Vector2(400, -50), Color.White);
-                    if (player.hasBow)
+            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _frameCounter.Update(deltaTime);
+            if (gameState == GameState.Play)
+            {
+                var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, currentRoom.roomPosition, currentRoom.roomPosition.Length());
+
+                currentRoom.Draw(spriteBatch, player, gameTime);
+                spriteBatch.Draw(blackBarTex, new Vector2(50, -100), Color.White);
+                spriteBatch.DrawString(font1, "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
+                spriteBatch.DrawString(font1, "Bombs: " + player.numberOfBombs, new Vector2(600, -60), Color.White);
+                spriteBatch.DrawString(font1, "Level " + currentRoom.level, new Vector2(600, -20), Color.White);
+                spriteBatch.Draw(manaBarTex, new Rectangle(60, 0, player.mana, 25), Color.White);
+                spriteBatch.Draw(Content.Load<Texture2D>("equipBar"), new Vector2(400, -50), Color.White);
+                if (player.hasBow)
                     spriteBatch.Draw(Content.Load<Texture2D>("bowPower"), new Vector2(435, -49), Color.White);
-                    if (player.hasSpell)
+                if (player.hasSpell)
                     spriteBatch.Draw(Content.Load<Texture2D>("FireBallPower"), new Vector2(472, -49), Color.White);
-                    if (player.hasSword)
-                        spriteBatch.Draw(Content.Load<Texture2D>("swordPower"), new Vector2(401, -49), Color.White);
-                    if (player.weaponState == WeaponState.Bow)
-                        spriteBatch.Draw(yellowHighlight, new Vector2(435, -50), Color.White);
-                    else if (player.weaponState == WeaponState.FireSpell)
-                        spriteBatch.Draw(yellowHighlight, new Vector2(470, -50), Color.White);
-                    else if(player.weaponState == WeaponState.Sword)
-                        spriteBatch.Draw(yellowHighlight, new Vector2(400, -50), Color.White);
-                    if (menuIsOpen)
+                if (player.hasSword)
+                    spriteBatch.Draw(Content.Load<Texture2D>("swordPower"), new Vector2(401, -49), Color.White);
+                if (player.weaponState == WeaponState.Bow)
+                    spriteBatch.Draw(yellowHighlight, new Vector2(435, -50), Color.White);
+                else if (player.weaponState == WeaponState.FireSpell)
+                    spriteBatch.Draw(yellowHighlight, new Vector2(470, -50), Color.White);
+                else if (player.weaponState == WeaponState.Sword)
+                    spriteBatch.Draw(yellowHighlight, new Vector2(400, -50), Color.White);
+                if (menuIsOpen)
+                {
+                    foreach (KeyValuePair<Vector2, Room> room in rooms)
                     {
-                        foreach (KeyValuePair<Vector2, Room> room in rooms)
-                        {
-
-                            if (currentRoom == room.Value)
-                                spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.BlueViolet);
-                            else
-                                spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * 11 + 200, 15, 10), Color.LightGreen);
-                        }
+                        if (currentRoom == room.Value)
+                            spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * -11 + 200, 15, 10), Color.BlueViolet);
+                        else
+                            spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * -11 + 200, 15, 10), Color.LightGreen);
                     }
-                    for (int i = 0; i < player.hp; i++)
-                        spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 60, -50), Color.White);
+                }
+                for (int i = 0; i < player.hp; i++)
+                    spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 60, -50), Color.White);
 
-                    spriteBatch.DrawString(font1, fps, new Vector2(51, -100), Color.White);
-                }
-                else if (gameState == GameState.GameOver)
-                {
-                    spriteBatch.DrawString(font1, "GameOver!", new Vector2(400, 200), Color.White);
-                }
-                else if (gameState == GameState.Start)
-                {
-                    #region menuText
-                    spriteBatch.DrawString(font1, "Binding of Zelda", new Vector2(300, 200), Color.BlueViolet);
-                    if (menuSelectedOption == 0)
+                spriteBatch.DrawString(font1, fps, new Vector2(51, -100), Color.White);
+            }
+            else if (gameState == GameState.GameOver)
+            {
+                spriteBatch.DrawString(font1, "GameOver!", new Vector2(400, 200), Color.White);
+            }
+            else if (gameState == GameState.Start)
+            {
+                #region menuText
+                spriteBatch.DrawString(font1, "Binding of Zelda", new Vector2(300, 200), Color.BlueViolet);
+                if (menuSelectedOption == 0)
                     spriteBatch.DrawString(font1, "Play", new Vector2(360, 250), Color.Yellow);
-                    else
-                        spriteBatch.DrawString(font1, "Play", new Vector2(360, 250), Color.White);
-                    if (menuSelectedOption == 1)
+                else
+                    spriteBatch.DrawString(font1, "Play", new Vector2(360, 250), Color.White);
+                if (menuSelectedOption == 1)
                     spriteBatch.DrawString(font1, "Options", new Vector2(360, 300), Color.Yellow);
-                    else
-                        spriteBatch.DrawString(font1, "Options", new Vector2(360, 300), Color.White);
-                    if (menuSelectedOption == 2)
+                else
+                    spriteBatch.DrawString(font1, "Options", new Vector2(360, 300), Color.White);
+                if (menuSelectedOption == 2)
                     spriteBatch.DrawString(font1, "Help", new Vector2(360, 350), Color.Yellow);
-                    else
-                        spriteBatch.DrawString(font1, "Help", new Vector2(360, 350), Color.White);
-                    if (menuSelectedOption == 3)
+                else
+                    spriteBatch.DrawString(font1, "Help", new Vector2(360, 350), Color.White);
+                if (menuSelectedOption == 3)
                     spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.Yellow);
-                    else
-                        spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.White);
-                    #endregion
-                }
-                else if (gameState == GameState.Win)
-                {
-                    spriteBatch.DrawString(font1, "You Win!", new Vector2(400, 200), Color.White);
-                    spriteBatch.DrawString(font1, "Press enter to exit to main menu...", new Vector2(200, 200), Color.White);
-                }
-                    spriteBatch.End();
-                
+                else
+                    spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.White);
+                #endregion
+            }
+            else if (gameState == GameState.Win)
+            {
+                spriteBatch.DrawString(font1, "You Win!", new Vector2(400, 200), Color.White);
+                spriteBatch.DrawString(font1, "Press enter to exit to main menu...", new Vector2(200, 200), Color.White);
+            }
+            spriteBatch.End();
+
             base.Draw(gameTime);
         }
+
         public bool RoomExists(Vector2 pos) 
         {
             return rooms.ContainsKey(pos);
@@ -264,6 +264,17 @@ namespace DungeonGame
         {
             currentRoom = rooms[position];
         }
+
+        internal Room GetRoom(Vector2 position)
+        {
+            return rooms[position];
+        }
+
+        internal void SetRoom(Vector2 position, Room room)
+        {
+            rooms[position] = room;
+        }
+
         public void UpLevel(int level)
         {
             rooms.Clear();
@@ -285,25 +296,25 @@ namespace DungeonGame
             player.hasBow = false;
             player.hasSpell = false;
             rooms.Clear();
-            CreateRoom(new Vector2(0, 0), new int[] { 1, 1, 1, 0 }, 3,1);
+            CreateRoom(new Vector2(0, 0), new int[] { RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_NONE }, -1, 1);
             currentRoom = rooms[new Vector2(0, 0)];
         }
         public int[] CheckDoor(Vector2 roomPosition, int doorFrom, int doorToo, int[] doors)
         {
             if (rooms.ContainsKey(roomPosition))
             {
-                Room roomNextdoor = rooms[roomPosition];
+                Room roomNextdoor = GetRoom(roomPosition);
 
-                if (roomNextdoor.doors[doorFrom] == 1)
-                    doors[doorToo] = 1;
+                if (roomNextdoor.doors[doorFrom] > RoomConstants.DOOR_NONE)
+                    doors[doorToo] = RoomConstants.DOOR_CLOSED;
                 else
-                    doors[doorToo] = 0;
+                    doors[doorToo] = RoomConstants.DOOR_NONE;
                 return doors;
             }
             return doors;
         }
-
-        public void CreateRoom(Vector2 position, int[] doors, sbyte fromRoom,int level)
+        
+        public void CreateRoom(Vector2 position, int[] doors, int door, int level)
         {
             if (position.Length() < 2f)
                 spawn.Add(new Tuple<string, int>("bat", (int)(2 *position.Length())));
@@ -313,18 +324,21 @@ namespace DungeonGame
                 spawn.Add(new Tuple<string, int>("blubatower", (int)(position.Length())));
             else if (position.Length() >= 4 && position.Length() < 5)
                 spawn.Add(new Tuple<string, int>("swordenemy", (int)(1 *position.Length())));
-            else
-                if (rnd.Next(2) == 1)
+            else if (rnd.Next(2) == 1)
                 spawn.Add(new Tuple<string, int>("fly", (int)(2 *position.Length())));
                 else
                     spawn.Add(new Tuple<string, int>("bluba", (int)(2 * position.Length())));
+
             //create a door where needded
             doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);
             doors = CheckDoor(new Vector2(position.X - 1, position.Y), 2, 0, doors);
-            doors = CheckDoor(new Vector2(position.X, position.Y + 1), 1, 3, doors);
-            doors = CheckDoor(new Vector2(position.X, position.Y - 1), 3, 1, doors);
+            doors = CheckDoor(new Vector2(position.X, position.Y + 1), 3, 1, doors);
+            doors = CheckDoor(new Vector2(position.X, position.Y - 1), 1, 3, doors);
 
-            rooms.Add(position, new Room(this, Content, spawn, position, doors, fromRoom,level));
+            if (door != -1)
+                doors[door] = RoomConstants.DOOR_OPEN;
+
+            rooms.Add(position, new Room(this, Content, spawn, position, doors,level));
             spawn.Clear();
         }
 

@@ -13,12 +13,6 @@ namespace DungeonGame
 {
     class Enemy : GameObject
     {
-        protected enum Direction {
-            Left,
-            Right,
-            Up,
-            Down
-        }
 
         public override Rectangle HitBox { get { return new Rectangle((int)Position.X, (int)Position.Y, Animation.frameWidth, Animation.frameHeight); } }
 
@@ -32,15 +26,15 @@ namespace DungeonGame
 
         protected Animation animation;
         protected float speed;
-        protected Array values = Enum.GetValues(typeof(Direction));
-        protected Direction direction;
+        protected Array values = Enum.GetValues(typeof(RoomConstants.Direction));
+        protected RoomConstants.Direction direction;
 
         public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp,sbyte type, bool canBeKnocked, bool isBoss)
             : base (position,animation,1)
         {
             this.Position = position;
             this.animation = animation;
-            direction = Direction.Left;
+            direction = RoomConstants.Direction.Left;
             rnd = new Random(seed);
             this.speed = speed;
             this.hp = hp;
@@ -53,7 +47,7 @@ namespace DungeonGame
         {
             this.Position = position;
             this.animation = animation;
-            direction = Direction.Left;
+            direction = RoomConstants.Direction.Left;
             rnd = new Random(seed);
             this.speed = speed;
             this.hp = hp;

@@ -19,7 +19,7 @@ namespace DungeonGame
         public SwordFlower(ContentManager Content, int seed, Vector2 position)
             : base(position, new Animation(Content, "SwordFlower", 0, 1, false), seed, 1.5F, 50, 1, false, false)
         {
-            direction = (Direction)values.GetValue(rnd.Next(values.Length));
+            direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
             spearTexture = Content.Load<Texture2D>("spear");
         }
         public override void Update(GameTime gameTime, Room room)
