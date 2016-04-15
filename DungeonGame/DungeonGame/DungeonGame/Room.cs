@@ -210,7 +210,10 @@ namespace DungeonGame
                 if (go != null && go.HitBox.Intersects(player.HitBox) && ObjectIs<Stair>(go))
                 {
                     if (level < 4)
+                    {
+                        SoundFiles.portalSound.Play();
                         game.UpLevel(level);
+                    }
                     else
                     {
                         game.Win();

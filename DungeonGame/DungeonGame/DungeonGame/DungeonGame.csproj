@@ -109,6 +109,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="RoomConstants.cs" />
+    <Compile Include="SoundFiles.cs" />
     <Compile Include="Stair.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="WeaponState.cs" />

@@ -19,6 +19,7 @@ namespace DungeonGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         KeyboardState oldKs = Keyboard.GetState();
+        public static SoundEffect sound;
         static public int bonus;
         static public int normalRow;
         int menuSelectedOption;
@@ -27,7 +28,6 @@ namespace DungeonGame
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
         public static bool isUsingGamePad;
         Room currentRoom;
-        bool menuIsOpen;
         enum GameState
         {
             Start,
@@ -45,6 +45,7 @@ namespace DungeonGame
         Player player;
         Camera camera;
         SpriteFont font1;
+        SoundFiles soundfiles;
         public FrameCounter _frameCounter = new FrameCounter();
         public Random rnd = new Random();
         Texture2D mapTexture;
@@ -88,7 +89,9 @@ namespace DungeonGame
             yellowHighlight = Content.Load<Texture2D>("yellowHighlight");
             player = new Player(new Vector2(200, 300), Content);
             testposition = new Vector2();
+            soundfiles = new SoundFiles(Content);
             spawn.Add(new Tuple<string,int>("slime", 2));
+            sound = Content.Load<SoundEffect>("swordslash");
 
             CreateRoom(new Vector2(0, 0), new int[] {RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_NONE}, -1, 1);
             currentRoom = rooms[new Vector2(0, 0)];
@@ -134,6 +137,7 @@ namespace DungeonGame
 
                 if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
                 {
+                    sound.Play();
                     if (pauseSelectedOption == 0)
                         gameState = GameState.Play;
                     else if (pauseSelectedOption == 1)
@@ -160,6 +164,7 @@ namespace DungeonGame
             }
             else if (gameState == GameState.Win)
             {
+                SoundFiles.winSound.Play();
                 if (ks.IsKeyDown(Keys.Enter))
                     GameOver();
             }
@@ -340,6 +345,7 @@ namespace DungeonGame
         }
         public void GameOver()
         {
+            SoundFiles.gameOverSound.Play();
             gameState = GameState.GameOver;
             player.hp = player.maxHealth;
             player.Position = new Vector2(300, 300);

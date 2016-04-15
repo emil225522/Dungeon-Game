@@ -212,6 +212,7 @@ namespace DungeonGame
             {
                 if (hasBow)
                 {
+                    SoundFiles.shootArrow.Play();
                     Vector2 arrowVel = new Vector2();
                     string asset = "";
                     switch (direction)
@@ -240,6 +241,7 @@ namespace DungeonGame
             {
                 if (hasSpell)
                 {
+                    SoundFiles.shootFireBall.Play();
                     Vector2 spellVel = new Vector2();
                     mana -= 20;
                     switch (direction)
@@ -298,6 +300,7 @@ namespace DungeonGame
                             attackRect = new Rectangle((int)Position.X - 15, (int)Position.Y + 50, 70, 50);
                             break;
                     }
+                    SoundFiles.swordSlash.Play();
                     foreach (GameObject go in gameObjects.Where(item => item is Enemy))
                     {
                         Enemy enemy = (Enemy)go;
