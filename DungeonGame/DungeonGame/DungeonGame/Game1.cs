@@ -22,6 +22,7 @@ namespace DungeonGame
         static public int bonus;
         static public int normalRow;
         int menuSelectedOption;
+        int pauseSelectedOption;
         Dictionary<Vector2, Room> rooms = new Dictionary<Vector2, Room>();
         List<Tuple<String, int>> spawn = new List<Tuple<String, int>>();
         public static bool isUsingGamePad;
@@ -116,19 +117,35 @@ namespace DungeonGame
         {
             // Allows the game to exit
             KeyboardState ks = Keyboard.GetState();
-            if (gameState == GameState.Play && ks.IsKeyDown(Keys.P) && oldKs.IsKeyUp(Keys.P))
+            if (gameState == GameState.Play && ks.IsKeyDown(Keys.Escape) && oldKs.IsKeyUp(Keys.Escape))
                 gameState = GameState.Pause;
-            else if (gameState == GameState.Pause && ks.IsKeyDown(Keys.P) && oldKs.IsKeyUp(Keys.P))
-                gameState = GameState.Play;
-            if (ks.IsKeyDown(Keys.Escape))
-                this.Exit();
+            else if (gameState == GameState.Pause)
+            { 
+                //controlls the pause menu options
+                if (ks.IsKeyDown(Keys.Down) && oldKs.IsKeyUp(Keys.Down))
+                    pauseSelectedOption++;
+                if (ks.IsKeyDown(Keys.Up) && oldKs.IsKeyUp(Keys.Up))
+                    pauseSelectedOption--;
 
+                if (pauseSelectedOption < 0)
+                    pauseSelectedOption = 2;
+                if (pauseSelectedOption > 2)
+                    pauseSelectedOption = 0;
+                Console.WriteLine(pauseSelectedOption);
+                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
+                {
+                    if (pauseSelectedOption == 0)
+                        gameState = GameState.Play;
+                    else if (pauseSelectedOption == 1)
+                        gameState = GameState.Help;
+                    else if (pauseSelectedOption == 2)
+                        Environment.Exit(1);
+                }
+                if (ks.IsKeyDown(Keys.Escape) && oldKs.IsKeyUp(Keys.Escape))
+                gameState = GameState.Play;
+            }
             if (gameState == GameState.Play)
             {
-                if (ks.IsKeyDown(Keys.Z))
-                    menuIsOpen = true;
-                else
-                    menuIsOpen = false;
                 currentRoom.Update(gameTime, player);
             }
             else if (gameState == GameState.GameOver)
@@ -212,20 +229,36 @@ namespace DungeonGame
                     spriteBatch.Draw(yellowHighlight, new Vector2(470, -50), Color.White);
                 else if (player.weaponState == WeaponState.Sword)
                     spriteBatch.Draw(yellowHighlight, new Vector2(400, -50), Color.White);
-                if (menuIsOpen)
-                {
-                    foreach (KeyValuePair<Vector2, Room> room in rooms)
-                    {
-                        if (currentRoom == room.Value)
-                            spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * -11 + 200, 15, 10), Color.BlueViolet);
-                        else
-                            spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 200, (int)room.Key.Y * -11 + 200, 15, 10), Color.LightGreen);
-                    }
-                }
+
                 for (int i = 0; i < player.hp; i++)
                     spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 60, -50), Color.White);
 
                 spriteBatch.DrawString(font1, fps, new Vector2(51, -100), Color.White);
+            }
+            else if (gameState == GameState.Pause)
+            {
+                spriteBatch.DrawString(font1, "Game is paused...", new Vector2(300, 0), Color.White);
+                if (pauseSelectedOption == 0)
+                spriteBatch.DrawString(font1, "Continue", new Vector2(300, 50), Color.Yellow);
+                else
+                    spriteBatch.DrawString(font1, "Continue", new Vector2(300, 50), Color.White);
+                if (pauseSelectedOption == 1)
+                spriteBatch.DrawString(font1, "Quit to main menu", new Vector2(300, 100), Color.Yellow);
+                else
+                    spriteBatch.DrawString(font1, "Quit to main menu", new Vector2(300, 100), Color.White);
+                    if (pauseSelectedOption == 2)
+                spriteBatch.DrawString(font1, "Quit game", new Vector2(300, 150), Color.Yellow);
+                    else
+                        spriteBatch.DrawString(font1, "Quit game", new Vector2(300, 150), Color.White);
+
+                spriteBatch.DrawString(font1, "MAP:", new Vector2(400, 200), Color.Green);
+                foreach (KeyValuePair<Vector2, Room> room in rooms)
+                {
+                    if (currentRoom == room.Value)
+                        spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 400, (int)room.Key.Y * -11 + 400, 15, 10), Color.BlueViolet);
+                    else
+                        spriteBatch.Draw(mapTexture, new Rectangle((int)room.Key.X * 17 + 400, (int)room.Key.Y * -11 + 400, 15, 10), Color.LightGreen);
+                }
             }
             else if (gameState == GameState.GameOver)
             {
