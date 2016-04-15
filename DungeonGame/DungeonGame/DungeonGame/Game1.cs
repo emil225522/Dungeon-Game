@@ -131,7 +131,7 @@ namespace DungeonGame
                     pauseSelectedOption = 2;
                 if (pauseSelectedOption > 2)
                     pauseSelectedOption = 0;
-                Console.WriteLine(pauseSelectedOption);
+
                 if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
                 {
                     if (pauseSelectedOption == 0)
@@ -251,7 +251,7 @@ namespace DungeonGame
                     else
                         spriteBatch.DrawString(font1, "Quit game", new Vector2(300, 150), Color.White);
 
-                spriteBatch.DrawString(font1, "MAP:", new Vector2(400, 200), Color.Green);
+                spriteBatch.DrawString(font1, "MAP:", new Vector2(370, 250), Color.Green);
                 foreach (KeyValuePair<Vector2, Room> room in rooms)
                 {
                     if (currentRoom == room.Value)
