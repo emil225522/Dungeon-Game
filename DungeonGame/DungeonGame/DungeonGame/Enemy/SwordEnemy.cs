@@ -11,10 +11,11 @@ namespace DungeonGame
     class SwordEnemy : Enemy
     {
         int timer;
-        public SwordEnemy(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "swordEnemy", 100,1, true), seed, 1.5F, 75,1,true,false)
+        public SwordEnemy(ContentManager Content, int seed, Vector2 position, int level)
+            : base(position, new Animation(Content, "swordEnemy", 100,1, true), seed, 1.5F, 75,1,true,false,level)
         {
             direction = (RoomConstants.Direction) values.GetValue(rnd.Next(values.Length));
+            hp *= level;
         }
 
         public override void Update(GameTime gameTime, Room room)
@@ -30,7 +31,7 @@ namespace DungeonGame
                 if (timer > 10)
                 {
                     timer = 0;
-                    Velocity += new Vector2(rnd.Next(-2,2), rnd.Next(-2, 2));
+                    Velocity += new Vector2(rnd.Next(-1,2), rnd.Next(-1, 2));
                 }
             }
                 //this makes it so that the player can only attack the soldier from above 

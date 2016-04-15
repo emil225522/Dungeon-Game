@@ -16,11 +16,12 @@ namespace DungeonGame
         bool isjumping;
         float spearRotation;
         Texture2D spearTexture;
-        public SwordFlower(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "SwordFlower", 0, 1, false), seed, 1.5F, 50, 1, false, false)
+        public SwordFlower(ContentManager Content, int seed, Vector2 position, int level)
+            : base(position, new Animation(Content, "SwordFlower", 0, 1, false), seed, 1.5F, 50, 1, false, false,level)
         {
             direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
             spearTexture = Content.Load<Texture2D>("spear");
+            hp *= level;
         }
         public override void Update(GameTime gameTime, Room room)
         {

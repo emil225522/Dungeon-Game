@@ -19,13 +19,14 @@ namespace DungeonGame
         int chargeTimer;
         sbyte numBatsSpawned;
         float rotation;
+        int roomLevel;
         public override Rectangle HitBox { get { return new Rectangle((int)Position.X - Animation.frameWidth / 2, (int)Position.Y - Animation.frameHeight / 2, Animation.frameWidth, Animation.frameHeight); } }
 
         Color normalColor;
         Vector2 circelingPlace;
         bool playerInRange;
-        public FrogBoss(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "Frog", 150,1, true), seed, 6, 400, 1,false, true)
+        public FrogBoss(ContentManager Content, int seed, Vector2 position, int level)
+            : base(position, new Animation(Content, "Frog", 150,1, true), seed, 6, 400, 1,false, true,level)
         {
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
             angleDirection = (float)rnd.Next(200, 500) / 10000;
@@ -33,6 +34,8 @@ namespace DungeonGame
             points.Add(new Vector2(100, 200));
             points.Add(new Vector2(750, 200));
             Texture = animation.animation;
+            roomLevel = level;
+            hp *= level;
         }
         public override void Update(GameTime gameTime, Room room)
         {
@@ -47,7 +50,7 @@ namespace DungeonGame
             ballVelocity.Y -= (float)Math.Sin(Math.Atan2(YDistance, XDistance));
             rotation = (float)Math.Atan2(ballVelocity.Y, ballVelocity.X);
             if (rnd.Next(200) == 50)
-            room.gameObjectsToAdd.Add(new Egg(Game1.content,rnd.Next(),Position,ballVelocity));
+            room.gameObjectsToAdd.Add(new Egg(Game1.content,rnd.Next(),Position,ballVelocity,roomLevel));
             //Vector2 direction = new Vector2(points[index].X, points[index].Y) - Position;
             //direction.Normalize();
 

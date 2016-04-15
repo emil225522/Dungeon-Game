@@ -29,7 +29,7 @@ namespace DungeonGame
         protected Array values = Enum.GetValues(typeof(RoomConstants.Direction));
         protected RoomConstants.Direction direction;
 
-        public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp,sbyte type, bool canBeKnocked, bool isBoss)
+        public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp,sbyte type, bool canBeKnocked, bool isBoss,int level)
             : base (position,animation,1)
         {
             this.Position = position;
@@ -41,8 +41,9 @@ namespace DungeonGame
             this.canBeKnocked = canBeKnocked;
             this.type = type;
             this.isBoss = isBoss;
+            hp *= level;
         }
-        public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp, sbyte type, bool canBeKnocked, bool isBoss,Vector2 velocity)
+        public Enemy(Vector2 position, Animation animation, int seed, float speed, int hp, sbyte type, bool canBeKnocked, bool isBoss,Vector2 velocity,int level)
             : base(position, animation, 1)
         {
             this.Position = position;
@@ -55,6 +56,7 @@ namespace DungeonGame
             this.type = type;
             this.isBoss = isBoss;
             Velocity = velocity;
+            hp *= level;
         }
 
         public override void Update(GameTime gameTime, Room room)

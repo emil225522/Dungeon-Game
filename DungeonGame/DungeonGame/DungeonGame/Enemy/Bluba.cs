@@ -16,11 +16,12 @@ namespace DungeonGame
         int attackingTimer;
         ContentManager Content;
 
-        public Bluba(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed,2, 50,1,true,false)
+        public Bluba(ContentManager Content, int seed, Vector2 position, int level)
+            : base(position, new Animation(Content, "shootingEnemyUp", 100, 2, true), seed,2, 50,1,true,false,level)
         {
             this.Content = Content;
             direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
+            hp *= level;
         }
 
         public override void Update(GameTime gameTime, Room room)

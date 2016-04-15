@@ -18,12 +18,12 @@ namespace DungeonGame
         int index;
         int chargeTimer;
         sbyte numBatsSpawned;
-
+        int roomLevel;
         Color normalColor;
         Vector2 circelingPlace;
         bool playerInRange;
-        public BatBoss(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "batBoss",150, 3, true), seed,6,400, 1, false, true)
+        public BatBoss(ContentManager Content, int seed, Vector2 position,int level)
+            : base(position, new Animation(Content, "batBoss",150, 3, true), seed,6,400, 1, false, true,level)
         {
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
             angleDirection = (float)rnd.Next(200, 500) / 10000;
@@ -32,6 +32,8 @@ namespace DungeonGame
             points.Add(new Vector2(100, 500));
             points.Add(new Vector2(750, 500));
             points.Add(new Vector2(750, 100));
+            roomLevel = level;
+            hp *= level;
         }
 
         public override void Update(GameTime gameTime, Room room)
@@ -40,7 +42,7 @@ namespace DungeonGame
             base.Update(gameTime, room);
             if (isHurt)
             {
-                room.gameObjectsToAdd.Add(new Bat(Game1.content, rnd.Next(), new Vector2(Position.X + Animation.frameWidth / 2, Position.Y + Animation.frameHeight / 2)));
+                room.gameObjectsToAdd.Add(new Bat(Game1.content, rnd.Next(), new Vector2(Position.X + Animation.frameWidth / 2, Position.Y + Animation.frameHeight / 2),roomLevel));
             }
             Vector2 direction = new Vector2(points[index].X, points[index].Y) - Position;
             direction.Normalize();

@@ -22,14 +22,15 @@ namespace DungeonGame
         Color normalColor;
         Vector2 circelingPlace;
         bool playerInRange;
-        public CannonBoss(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "towerboss", 150, 1, true), seed, 6, 400, 1, false, true)
+        public CannonBoss(ContentManager Content, int seed, Vector2 position, int level)
+            : base(position, new Animation(Content, "towerboss", 150, 1, true), seed, 6, 400, 1, false, true, level)
         {
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
             angleDirection = (float)rnd.Next(200, 500) / 10000;
             normalColor = new Color(rnd.Next(50, 255), rnd.Next(50, 255), rnd.Next(50, 255));
             points.Add(new Vector2(550, 400));
             points.Add(new Vector2(550, 0));
+            hp *= level;
         }
 
         public override void Update(GameTime gameTime, Room room)

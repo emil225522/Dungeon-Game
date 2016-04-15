@@ -141,13 +141,13 @@ namespace DungeonGame
             if (typeOfRoom == RoomConstants.TypeOfRoom.Boss)
             {
                 if (level == 1)
-                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(475, 300)));
+                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(475, 300),level));
                 else if (level == 2)
-                    gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                    gameObjects.Add(new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level));
                 else if (level == 3)
-                    gameObjects.Add(new FrogBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                    gameObjects.Add(new FrogBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level));
                 else if (level == 4)
-                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450))));
+                    gameObjects.Add(new SlimeBoss(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level));
             }
         }
 
@@ -270,21 +270,21 @@ namespace DungeonGame
             switch(mob)
             {
                 case "bat":
-                    return new Bat(Content, rnd.Next(), new Vector2(rnd.Next(100,700), rnd.Next(100, 450)));
+                    return new Bat(Content, rnd.Next(), new Vector2(rnd.Next(100,700), rnd.Next(100, 450)),level);
                 case "bluba":
-                    return new Bluba(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                    return new Bluba(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level);
                 case "blubatower":
-                    return new BlubaTower(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                    return new BlubaTower(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level);
                 case "slime":
-                    return new Slime(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                    return new Slime(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level);
                 case "fly":
-                    return new Fly(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                    return new Fly(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level);
                 case "swordenemy":
-                    return new SwordEnemy(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                    return new SwordEnemy(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level);
                 case "snake":
-                    return new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                    return new Snake(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level);
                 case "swordFlower":
-                    return new SwordFlower(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)));
+                    return new SwordFlower(Content, rnd.Next(), new Vector2(rnd.Next(100, 700), rnd.Next(100, 450)),level);
                 default:
                     return null;
             }

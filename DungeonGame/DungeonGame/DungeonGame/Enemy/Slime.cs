@@ -14,10 +14,11 @@ namespace DungeonGame
         float ypos;
         float yvel;
         bool isjumping;
-          public Slime(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "slimeEnemy", 100, 2, true), seed, 1.5F, 50,1,true,false)
+          public Slime(ContentManager Content, int seed, Vector2 position, int level)
+            : base(position, new Animation(Content, "slimeEnemy", 100, 2, true), seed, 1.5F, 50,1,true,false,level)
         {
             direction = (RoomConstants.Direction) values.GetValue(rnd.Next(values.Length));
+            hp *= level;
         }
           public override void Update(GameTime gameTime, Room room)
           {

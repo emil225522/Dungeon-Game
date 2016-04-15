@@ -10,8 +10,8 @@ namespace DungeonGame
 {
     class Bat : Enemy 
     {
-        public Bat(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "bat", 100, 2, true), seed, 1.5F, 50,1,true,false)
+        public Bat(ContentManager Content, int seed, Vector2 position,int level)
+            : base(position, new Animation(Content, "bat", 100, 2, true), seed, 1.5F,50,1,true,false,level)
         {
             direction = (RoomConstants.Direction) values.GetValue(rnd.Next(values.Length));
             Texture = Content.Load<Texture2D>("dark");

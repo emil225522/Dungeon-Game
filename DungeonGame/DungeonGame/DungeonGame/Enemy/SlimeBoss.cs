@@ -31,14 +31,15 @@ namespace DungeonGame
         Color normalColor;
         Vector2 circelingPlace;
         bool playerInRange;
-        public SlimeBoss(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "slimeBoss", 150, 2, true), seed, 6, 400, 1, false, true)
+        public SlimeBoss(ContentManager Content, int seed, Vector2 position, int level)
+            : base(position, new Animation(Content, "slimeBoss", 150, 2, true), seed, 6, 400, 1, false, true, level)
         {
             shadowTexture = Content.Load<Texture2D>("shadow");
             direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
             ypos = Position.Y;
             originalPosition = Position;
             Position = new Vector2(originalPosition.X + 30, Position.Y);
+            hp *= level;
         }
         public override void Update(GameTime gameTime, Room room)
         {

@@ -12,8 +12,8 @@ namespace DungeonGame
     {
         float rotation;
         int timer;
-        public Egg(ContentManager Content, int seed, Vector2 position,Vector2 velocity)
-            : base(position, new Animation(Content, "egg", 0, 1, false), seed, 1.5F, 90,9,false, false,velocity)
+        public Egg(ContentManager Content, int seed, Vector2 position,Vector2 velocity,int level)
+            : base(position, new Animation(Content, "egg", 0, 1, false), seed, 1.5F, 90,9,false, false,velocity,level)
         {
             direction = (RoomConstants.Direction)values.GetValue(rnd.Next(values.Length));
             Velocity = velocity;

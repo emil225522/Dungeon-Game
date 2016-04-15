@@ -19,14 +19,15 @@ namespace DungeonGame
         int timer;
         int timer2;
         bool foo;
-        public Fly(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1,true,false)
+        public Fly(ContentManager Content, int seed, Vector2 position, int level)
+            : base(position, new Animation(Content, "fly", 150, 2, true), seed, 1.5F, 15, 1,true,false, level)
         {
             direction = (RoomConstants.Direction) values.GetValue(rnd.Next(values.Length));
             circelingPlace = new Vector2(rnd.Next(50, 800), rnd.Next(50, 600));
             angleDirection = (float)rnd.Next(200, 500) / 10000;
             if (rnd.Next(2) == 1)
                 goingLeft = true;
+            hp *= level;
             normalColor = new Color(rnd.Next(50, 255), rnd.Next(50, 255), rnd.Next(50, 255));
         }
 

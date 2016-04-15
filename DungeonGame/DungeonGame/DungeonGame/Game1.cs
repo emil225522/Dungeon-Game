@@ -87,7 +87,7 @@ namespace DungeonGame
             yellowHighlight = Content.Load<Texture2D>("yellowHighlight");
             player = new Player(new Vector2(200, 300), Content);
             testposition = new Vector2();
-            spawn.Add(new Tuple<string,int>("fly", 2));
+            spawn.Add(new Tuple<string,int>("slime", 2));
 
             CreateRoom(new Vector2(0, 0), new int[] {RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_NONE}, -1, 1);
             currentRoom = rooms[new Vector2(0, 0)];

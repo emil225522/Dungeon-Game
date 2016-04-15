@@ -242,27 +242,22 @@ namespace DungeonGame
                 {
                     Vector2 spellVel = new Vector2();
                     mana -= 20;
-                    string asset = "";
                     switch (direction)
                     {
                         case RoomConstants.Direction.Left:
                             spellVel = new Vector2(-7, 0);
-                            asset = "";
                             break;
                         case RoomConstants.Direction.Right:
                             spellVel = new Vector2(7, 0);
-                            asset = "";
                             break;
                         case RoomConstants.Direction.Up:
                             spellVel = new Vector2(0, -7);
-                            asset = "";
                             break;
                         case RoomConstants.Direction.Down:
                             spellVel = new Vector2(0, 7);
-                            asset = "";
                             break;
                     }
-                    room.gameObjectsToAdd.Add(new Arrow(new Animation(Content, "fireball" + asset, 150, 1, false), Position, spellVel, 1));
+                    room.gameObjectsToAdd.Add(new Arrow(new Animation(Content, "fireball", 150, 1, false), Position, spellVel, 1));
                 }
             }
             if (weaponState == WeaponState.Sword && hasSword)

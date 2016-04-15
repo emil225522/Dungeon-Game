@@ -19,12 +19,13 @@ namespace DungeonGame
         float rotation;
         ContentManager Content;
 
-        public BlubaTower(ContentManager Content, int seed, Vector2 position)
-            : base(position, new Animation(Content, "tower", 100, 1, true), seed, 1.5F, 100, 3,false,false)
+        public BlubaTower(ContentManager Content, int seed, Vector2 position,int level)
+            : base(position, new Animation(Content, "tower", 100, 1, true), seed, 1.5F, 100, 3,false,false,level)
         {
             this.Content = Content;
             balltexture = Content.Load<Texture2D>("blubaball");
             underLayer = Content.Load<Texture2D>("towerUnder");
+            hp *= level;
         }
 
         public override void Update(GameTime gameTime, Room room)

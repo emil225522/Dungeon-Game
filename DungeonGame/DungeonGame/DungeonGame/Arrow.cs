@@ -39,6 +39,7 @@ namespace DungeonGame
                 Enemy enemy = (Enemy)go;
                 if (go.HitBox.Intersects(HitBox))
                 {
+                    enemy.OnHit();
                     enemy.hp -= 20;
                     if (enemy.hp < 1)
                     {
