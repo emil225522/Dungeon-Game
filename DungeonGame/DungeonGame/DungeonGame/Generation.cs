@@ -32,7 +32,7 @@ namespace DungeonGame
         Texture2D cornerRight; 
         Texture2D cornerLeft; 
 
-        public void Generate(ContentManager Content,List<Tile> tiles, string mapName, int roomType)
+        public void Generate(ContentManager Content,List<Tile> tiles, string mapName)
         {
             #region textures
             wallDown = Content.Load<Texture2D>("walls/wall1");
@@ -49,11 +49,6 @@ namespace DungeonGame
             doorUp = Content.Load<Texture2D>("doors/doorUp");
             doorRight = Content.Load<Texture2D>("doors/doorRight");
             doorLeft = Content.Load<Texture2D>("doors/doorLeft");
-
-
-            if (roomType == 2)
-            groundTile1 = Content.Load<Texture2D>("floor2");
-            else
             groundTile1 = Content.Load<Texture2D>("floor1");
             #endregion
             Random rnd = new Random();

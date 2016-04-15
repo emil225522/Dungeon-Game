@@ -71,7 +71,7 @@ namespace DungeonGame
                         typeOfRoom = RoomConstants.TypeOfRoom.Boss;
                     else
                     {
-                        if (roomPosition.Length() > 8)
+                        if (roomPosition.Length() > 10)
                             typeOfRoom = RoomConstants.TypeOfRoom.Boss;
                     }
                 }
@@ -82,8 +82,10 @@ namespace DungeonGame
                 color = Color.Yellow;
             if (typeOfRoom == RoomConstants.TypeOfRoom.Puzzle)
                 color = new Color(228, 0, 228);
+            if (typeOfRoom == RoomConstants.TypeOfRoom.Boss)
+                color = Color.Red; ;
 
-            generation.Generate(Content, tiles, "map", (int)typeOfRoom);
+            generation.Generate(Content, tiles, "map");
             for (int i = 0; i < doors.Length; i++)
             {
                 int door = doors[i];
@@ -132,6 +134,7 @@ namespace DungeonGame
                     gameObjects.Add(new Drop(new Animation(Content, "bowPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 11));
                 else if (randomNumber == 1)
                     gameObjects.Add(new Drop(new Animation(Content, "fireBallPower", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 12));
+                gameObjects.Add(new Drop(new Animation(Content, "key", 0, 1, false), new Vector2(rnd.Next(200, 650), rnd.Next(200, 400)), 2));
 
             }
 
@@ -182,11 +185,13 @@ namespace DungeonGame
             #endregion
             foreach(GameObject go in gameObjects.Where(item => item is Enemy))
             {
+                Enemy enemy;
+                enemy = (Enemy)go;
                 if (go.isDead)
                 {
                     numOfEnemies--;
                     gameObjectsToAdd.Add(new Ghost(new Animation(Content, "ghost", 100, 2, true, new Vector2(go.Animation.frameWidth,go.Animation.frameHeight)), go.Position, go.Animation.frameHeight));
-                    if (ObjectIs<Snake>(go))
+                    if (enemy.isBoss)
                         gameObjectsToAdd.Add(new Stair(new Animation(Content,"stair",0,1,false), new Vector2(450, 300), 1));
                 }
             }

@@ -30,6 +30,7 @@ namespace DungeonGame
         enum GameState
         {
             Start,
+            Help,
             Play,
             Pause,
             GameOver,
@@ -132,8 +133,13 @@ namespace DungeonGame
             }
             else if (gameState == GameState.GameOver)
             {
-                if (ks.IsKeyDown(Keys.Enter) || ks.IsKeyDown(Keys.Space))
-                    gameState = GameState.Play;
+                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
+                    gameState = GameState.Start;
+            }
+            else if (gameState == GameState.Help)
+            {
+                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
+                    gameState = GameState.Start;
             }
             else if (gameState == GameState.Win)
             {
@@ -153,10 +159,12 @@ namespace DungeonGame
                     menuSelectedOption = 0;
 
 
-                if (ks.IsKeyDown(Keys.Enter))
+                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
                 {
                     if (menuSelectedOption == 0)
                         gameState = GameState.Play;
+                    else if (menuSelectedOption == 2)
+                        gameState = GameState.Help;
                     else if (menuSelectedOption == 3)
                         Environment.Exit(1);
                 }
@@ -245,10 +253,22 @@ namespace DungeonGame
                     spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.White);
                 #endregion
             }
+            else if (gameState == GameState.Help)
+            {
+                #region helpText
+                spriteBatch.DrawString(font1, "Controls:", new Vector2(400, 50), Color.White);
+                spriteBatch.DrawString(font1, "Walk = Arrowkeys", new Vector2(400, 100), Color.White);
+                spriteBatch.DrawString(font1, "Attack = Space", new Vector2(400, 140), Color.White);
+                spriteBatch.DrawString(font1, "Use Bomb = B", new Vector2(400, 180), Color.White);
+                spriteBatch.DrawString(font1, "Pause screen = ESC", new Vector2(400, 220), Color.White);
+                spriteBatch.DrawString(font1, "Press enter to exit to main menu...", new Vector2(200, 500), Color.White);
+
+                #endregion
+            }
             else if (gameState == GameState.Win)
             {
                 spriteBatch.DrawString(font1, "You Win!", new Vector2(400, 200), Color.White);
-                spriteBatch.DrawString(font1, "Press enter to exit to main menu...", new Vector2(200, 200), Color.White);
+                spriteBatch.DrawString(font1, "Press enter to exit to main menu...", new Vector2(200, 300), Color.White);
             }
             spriteBatch.End();
 
