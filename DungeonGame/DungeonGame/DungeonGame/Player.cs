@@ -77,8 +77,7 @@ namespace DungeonGame
             #region LoadContent
             {
                 weaponState = WeaponState.Sword;
-                hp = 50;
-                numberOfKeys = 100;
+                hp = 5;
 
                 animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
                 animationRight = new Animation(Content, "player/runRight", 110, 6, true);

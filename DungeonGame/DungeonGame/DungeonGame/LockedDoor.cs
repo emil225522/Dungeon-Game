@@ -12,7 +12,7 @@ namespace DungeonGame
     {
         //public Animation animation;
         public Rectangle OwnHitBox { get { return new Rectangle((int)position.X, (int)position.Y-4, 63, 60); } }
-        public int test;
+        public int framesToUnlockDoor;
 
 
         public LockedDoor(Vector2 position, ContentManager Content, sbyte type, sbyte direction)
@@ -24,11 +24,11 @@ namespace DungeonGame
         {
 
             if (player.HitBox.Intersects(OwnHitBox))
-                test++;
+                framesToUnlockDoor++;
             else
-                test = 0;
+                framesToUnlockDoor = 0;
 
-            if (test > 20 && player.numberOfKeys > 0)
+            if (framesToUnlockDoor > 20 && player.numberOfKeys > 0)
             {
                 isDeleted = true;
                 player.numberOfKeys--;

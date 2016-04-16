@@ -49,7 +49,6 @@ namespace DungeonGame
         public FrameCounter _frameCounter = new FrameCounter();
         public Random rnd = new Random();
         Texture2D mapTexture;
-        Vector2 testposition;
         public static ContentManager content;
 
         public Game1()
@@ -88,10 +87,8 @@ namespace DungeonGame
             mapTexture = Content.Load<Texture2D>("towerUnder");
             yellowHighlight = Content.Load<Texture2D>("yellowHighlight");
             player = new Player(new Vector2(200, 300), Content);
-            testposition = new Vector2();
             soundfiles = new SoundFiles(Content);
             spawn.Add(new Tuple<string,int>("slime", 2));
-            sound = Content.Load<SoundEffect>("swordslash");
 
             CreateRoom(new Vector2(0, 0), new int[] {RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_NONE}, -1, 1);
             currentRoom = rooms[new Vector2(0, 0)];
@@ -122,52 +119,6 @@ namespace DungeonGame
             KeyboardState ks = Keyboard.GetState();
             if (gameState == GameState.Play && ks.IsKeyDown(Keys.Escape) && oldKs.IsKeyUp(Keys.Escape))
                 gameState = GameState.Pause;
-            else if (gameState == GameState.Pause)
-            { 
-                //controlls the pause menu options
-                if (ks.IsKeyDown(Keys.Down) && oldKs.IsKeyUp(Keys.Down))
-                    pauseSelectedOption++;
-                if (ks.IsKeyDown(Keys.Up) && oldKs.IsKeyUp(Keys.Up))
-                    pauseSelectedOption--;
-
-                if (pauseSelectedOption < 0)
-                    pauseSelectedOption = 2;
-                if (pauseSelectedOption > 2)
-                    pauseSelectedOption = 0;
-
-                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
-                {
-                    sound.Play();
-                    if (pauseSelectedOption == 0)
-                        gameState = GameState.Play;
-                    else if (pauseSelectedOption == 1)
-                        gameState = GameState.Help;
-                    else if (pauseSelectedOption == 2)
-                        Environment.Exit(1);
-                }
-                if (ks.IsKeyDown(Keys.Escape) && oldKs.IsKeyUp(Keys.Escape))
-                gameState = GameState.Play;
-            }
-            if (gameState == GameState.Play)
-            {
-                currentRoom.Update(gameTime, player);
-            }
-            else if (gameState == GameState.GameOver)
-            {
-                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
-                    gameState = GameState.Start;
-            }
-            else if (gameState == GameState.Help)
-            {
-                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
-                    gameState = GameState.Start;
-            }
-            else if (gameState == GameState.Win)
-            {
-                SoundFiles.winSound.Play();
-                if (ks.IsKeyDown(Keys.Enter))
-                    GameOver();
-            }
             else if (gameState == GameState.Start)
             {
                 if (ks.IsKeyDown(Keys.Down) && oldKs.IsKeyUp(Keys.Down))
@@ -192,6 +143,60 @@ namespace DungeonGame
                 }
 
             }
+            else if (gameState == GameState.Pause)
+            { 
+                //controlls the pause menu options
+                if (ks.IsKeyDown(Keys.Down) && oldKs.IsKeyUp(Keys.Down))
+                    pauseSelectedOption++;
+                if (ks.IsKeyDown(Keys.Up) && oldKs.IsKeyUp(Keys.Up))
+                    pauseSelectedOption--;
+
+                if (pauseSelectedOption < 0)
+                    pauseSelectedOption = 2;
+                if (pauseSelectedOption > 2)
+                    pauseSelectedOption = 0;
+
+                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
+                {
+
+                    if (pauseSelectedOption == 0)
+                        gameState = GameState.Play;
+                    else if (pauseSelectedOption == 1)
+                    {
+                        ClearVariables();
+                        gameState = GameState.Start;
+                    }
+
+                    else if (pauseSelectedOption == 2)
+                        Environment.Exit(1);
+                }
+                if (ks.IsKeyDown(Keys.Escape) && oldKs.IsKeyUp(Keys.Escape))
+                gameState = GameState.Play;
+            }
+            if (gameState == GameState.Play)
+            {
+                currentRoom.Update(gameTime, player);
+            }
+            else if (gameState == GameState.GameOver)
+            {
+                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
+                    gameState = GameState.Start;
+            }
+            else if (gameState == GameState.Help)
+            {
+                if (ks.IsKeyDown(Keys.Enter) && oldKs.IsKeyUp(Keys.Enter))
+                    gameState = GameState.Start;
+            }
+            else if (gameState == GameState.Win)
+            {
+                SoundFiles.winSound.Play();
+                if (ks.IsKeyDown(Keys.Enter))
+                {
+                    ClearVariables();
+                    gameState = GameState.Start;
+                }
+            }
+            
             camera.Update(gameTime);
             oldKs = ks;
             base.Update(gameTime);
@@ -213,7 +218,6 @@ namespace DungeonGame
             _frameCounter.Update(deltaTime);
             if (gameState == GameState.Play)
             {
-                var fps = string.Format("FPS: {0} {1} {2}", _frameCounter.AverageFramesPerSecond, currentRoom.roomPosition, currentRoom.roomPosition.Length());
 
                 currentRoom.Draw(spriteBatch, player, gameTime);
                 spriteBatch.Draw(blackBarTex, new Vector2(50, -100), Color.White);
@@ -237,8 +241,6 @@ namespace DungeonGame
 
                 for (int i = 0; i < player.hp; i++)
                     spriteBatch.Draw(hearthTex, new Vector2(200 * i / 5 + 60, -50), Color.White);
-
-                spriteBatch.DrawString(font1, fps, new Vector2(51, -100), Color.White);
             }
             else if (gameState == GameState.Pause)
             {
@@ -299,6 +301,7 @@ namespace DungeonGame
                 spriteBatch.DrawString(font1, "Attack = Space", new Vector2(400, 140), Color.White);
                 spriteBatch.DrawString(font1, "Use Bomb = B", new Vector2(400, 180), Color.White);
                 spriteBatch.DrawString(font1, "Pause screen = ESC", new Vector2(400, 220), Color.White);
+                spriteBatch.DrawString(font1, "Scroll through weapons = Q", new Vector2(400, 260), Color.White);
                 spriteBatch.DrawString(font1, "Press enter to exit to main menu...", new Vector2(200, 500), Color.White);
 
                 #endregion
@@ -342,21 +345,13 @@ namespace DungeonGame
         public void Win()
         {
             gameState = GameState.Win;
+            ClearVariables();
         }
         public void GameOver()
         {
             SoundFiles.gameOverSound.Play();
             gameState = GameState.GameOver;
-            player.hp = player.maxHealth;
-            player.Position = new Vector2(300, 300);
-            player.Velocity = new Vector2();
-            player.mana = 200;
-            player.isHurt = false;
-            player.hasBow = false;
-            player.hasSpell = false;
-            rooms.Clear();
-            CreateRoom(new Vector2(0, 0), new int[] { RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_NONE }, -1, 1);
-            currentRoom = rooms[new Vector2(0, 0)];
+            ClearVariables();
         }
         public int[] CheckDoor(Vector2 roomPosition, int doorFrom, int doorToo, int[] doors)
         {
@@ -399,6 +394,22 @@ namespace DungeonGame
 
             rooms.Add(position, new Room(this, Content, spawn, position, doors,level));
             spawn.Clear();
+        }
+        public void ClearVariables()
+        {
+            player.maxHealth = 5;
+            player.hp = player.maxHealth;
+            player.Position = new Vector2(300, 300);
+            player.Velocity = new Vector2();
+            player.mana = 200;
+            player.numberOfKeys = 0;
+            player.isHurt = false;
+            player.hasBow = false;
+            player.hasSpell = false;
+            rooms.Clear();
+            spawn.Add(new Tuple<string, int>("slime", 2));
+            CreateRoom(new Vector2(0, 0), new int[] { RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_CLOSED, RoomConstants.DOOR_NONE }, -1, 1);
+            currentRoom = rooms[new Vector2(0, 0)];
         }
 
     }
