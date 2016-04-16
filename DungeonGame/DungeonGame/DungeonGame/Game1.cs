@@ -127,8 +127,8 @@ namespace DungeonGame
                     menuSelectedOption--;
 
                 if (menuSelectedOption < 0)
-                    menuSelectedOption = 3;
-                if (menuSelectedOption > 3)
+                    menuSelectedOption = 2;
+                if (menuSelectedOption > 2)
                     menuSelectedOption = 0;
 
 
@@ -136,9 +136,9 @@ namespace DungeonGame
                 {
                     if (menuSelectedOption == 0)
                         gameState = GameState.Play;
-                    else if (menuSelectedOption == 2)
+                    else if (menuSelectedOption == 1)
                         gameState = GameState.Help;
-                    else if (menuSelectedOption == 3)
+                    else if (menuSelectedOption == 2)
                         Environment.Exit(1);
                 }
 
@@ -173,7 +173,7 @@ namespace DungeonGame
                 if (ks.IsKeyDown(Keys.Escape) && oldKs.IsKeyUp(Keys.Escape))
                 gameState = GameState.Play;
             }
-            if (gameState == GameState.Play)
+            else if (gameState == GameState.Play)
             {
                 currentRoom.Update(gameTime, player);
             }
@@ -276,21 +276,17 @@ namespace DungeonGame
                 #region menuText
                 spriteBatch.DrawString(font1, "Binding of Zelda", new Vector2(300, 200), Color.BlueViolet);
                 if (menuSelectedOption == 0)
-                    spriteBatch.DrawString(font1, "Play", new Vector2(360, 250), Color.Yellow);
+                    spriteBatch.DrawString(font1, "Play", new Vector2(400, 250), Color.Yellow);
                 else
-                    spriteBatch.DrawString(font1, "Play", new Vector2(360, 250), Color.White);
+                    spriteBatch.DrawString(font1, "Play", new Vector2(400, 250), Color.White);
                 if (menuSelectedOption == 1)
-                    spriteBatch.DrawString(font1, "Options", new Vector2(360, 300), Color.Yellow);
+                    spriteBatch.DrawString(font1, "Help", new Vector2(400, 300), Color.Yellow);
                 else
-                    spriteBatch.DrawString(font1, "Options", new Vector2(360, 300), Color.White);
+                    spriteBatch.DrawString(font1, "Help", new Vector2(400, 300), Color.White);
                 if (menuSelectedOption == 2)
-                    spriteBatch.DrawString(font1, "Help", new Vector2(360, 350), Color.Yellow);
+                    spriteBatch.DrawString(font1, "Quit", new Vector2(400, 350), Color.Yellow);
                 else
-                    spriteBatch.DrawString(font1, "Help", new Vector2(360, 350), Color.White);
-                if (menuSelectedOption == 3)
-                    spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.Yellow);
-                else
-                    spriteBatch.DrawString(font1, "Quit", new Vector2(360, 400), Color.White);
+                    spriteBatch.DrawString(font1, "Quit", new Vector2(400, 350), Color.White);
                 #endregion
             }
             else if (gameState == GameState.Help)
