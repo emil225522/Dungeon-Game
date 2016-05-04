@@ -73,11 +73,11 @@ namespace DungeonGame
             speed = 1.1f;
             currentSpeed = speed;
             direction = RoomConstants.Direction.Down;
-            maxHealth = 5;
+            maxHealth = 10;
             #region LoadContent
             {
                 weaponState = WeaponState.Sword;
-                hp = 5;
+                hp = maxHealth;
 
                 animationLeft = new Animation(Content, "player/runLeft", 110, 6, true);
                 animationRight = new Animation(Content, "player/runRight", 110, 6, true);
@@ -364,7 +364,10 @@ namespace DungeonGame
                             mana = 200;
                     }
                     else if (drop.typeOfDrop == 5)
+                    {
                         maxHealth++;
+                        hp = maxHealth;
+                    }
                     else if (drop.typeOfDrop == 11)
                     {
                         hasBow = true;
