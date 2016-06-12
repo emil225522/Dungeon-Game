@@ -366,18 +366,27 @@ namespace DungeonGame
         
         public void CreateRoom(Vector2 position, int[] doors, int door, int level)
         {
-            if (position.Length() < 2f)
-                spawn.Add(new Tuple<string, int>("bat", (int)(2 *position.Length())));
-            else if (position.Length() >= 2 && position.Length() < 3)
-                spawn.Add(new Tuple<string, int>("slime", (int)(2* position.Length())));
-            else if (position.Length() >= 3 && position.Length() < 4)
-                spawn.Add(new Tuple<string, int>("blubatower", (int)(position.Length())));
-            else if (position.Length() >= 4 && position.Length() < 5)
-                spawn.Add(new Tuple<string, int>("swordenemy", (int)(1 *position.Length())));
-            else if (rnd.Next(2) == 1)
-                spawn.Add(new Tuple<string, int>("fly", (int)(2 *position.Length())));
+            if (position.Length() < 3)
+            {
+                if (rnd.Next(2) == 1)
+                    spawn.Add(new Tuple<string, int>("bat", (int)(2 * position.Length())));
                 else
-                    spawn.Add(new Tuple<string, int>("bluba", (int)(2 * position.Length())));
+                    spawn.Add(new Tuple<string, int>("slime", (int)(2 * position.Length())));
+            }
+            else if (position.Length() >= 3 && position.Length() < 4)
+            {
+                spawn.Add(new Tuple<string, int>("blubatower", (int)(position.Length())));
+            }
+            else if (position.Length() >= 4 && position.Length() < 5)
+            {
+                spawn.Add(new Tuple<string, int>("swordenemy", (int)(1 * position.Length())));
+            }
+            else if (rnd.Next(2) == 1)
+            {
+                spawn.Add(new Tuple<string, int>("fly", (int)(2 * position.Length())));
+            }
+            else
+                spawn.Add(new Tuple<string, int>("bluba", (int)(2 * position.Length())));
 
             //create a door where needded
             doors = CheckDoor(new Vector2(position.X + 1, position.Y), 0, 2, doors);

@@ -22,7 +22,7 @@ namespace DungeonGame
         KeyboardState oldKs = Keyboard.GetState();
         GamePadState oldgps = GamePad.GetState(PlayerIndex.One);
         public Rectangle attackRect;
-        public Rectangle HitBox { get { return new Rectangle((int)Position.X  +5, (int)Position.Y + 25, 40, 42); } }
+        public Rectangle HitBox { get { return new Rectangle((int)Position.X  -5, (int)Position.Y + 30, 35, 35); } }
 
         public float hp { get; set;}
         public float maxHealth{ get; set;}
@@ -526,6 +526,8 @@ isAttacking = false;
             }
             else
                 currentAnimation.Draw(spriteBatch, new Vector2(Position.X - 15, Position.Y), color);
+
+            spriteBatch.Draw(Game1.content.Load<Texture2D>("dark"),HitBox,Color.Black);
         }
 
         public bool IsColliding(List<GameObject> gameObjects)
