@@ -44,12 +44,10 @@ namespace DungeonGame
         public WeaponState weaponState = WeaponState.Sword;
 
         private int counter;
-        public int roomlevel;
         public int mana = 200;
         public int numberOfKeys { get; set;}
         public int numberOfBombs { get; set;}
 
-        private Texture2D manabarTex;
         private Animation attackRight;
         private Animation attackDown;
         private Animation attackLeft;
@@ -73,7 +71,7 @@ namespace DungeonGame
             speed = 1.1f;
             currentSpeed = speed;
             direction = RoomConstants.Direction.Down;
-            maxHealth = 10;
+            maxHealth = 5;
             #region LoadContent
             {
                 weaponState = WeaponState.Sword;
@@ -393,7 +391,7 @@ namespace DungeonGame
                 {
                     counter = 0;
                     attackRect = new Rectangle(0, 0, 0, 0);
-isAttacking = false;
+                    isAttacking = false;
                     if (direction ==RoomConstants.Direction.Down)
                         currentAnimation = new Animation(Content, "player/runDown", 110, 7, false);
                     else if (direction ==RoomConstants.Direction.Left)
@@ -526,8 +524,6 @@ isAttacking = false;
             }
             else
                 currentAnimation.Draw(spriteBatch, new Vector2(Position.X - 15, Position.Y), color);
-
-            spriteBatch.Draw(Game1.content.Load<Texture2D>("dark"),HitBox,Color.Black);
         }
 
         public bool IsColliding(List<GameObject> gameObjects)

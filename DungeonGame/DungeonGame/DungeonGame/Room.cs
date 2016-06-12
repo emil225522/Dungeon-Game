@@ -198,7 +198,7 @@ namespace DungeonGame
             if (numOfEnemies == 0 && !hasDroppedKey)
             {
                 hasDroppedKey = true;
-                gameObjects.Add(new Drop(new Animation(Content, "key", 0, 1, false), new Vector2(500, 500), 2));
+                gameObjects.Add(new Drop(new Animation(Content, "key", 0, 1, false), new Vector2(500, 250), 2));
             }
             for (int i = 0; i < tiles.Count; i++)
             {

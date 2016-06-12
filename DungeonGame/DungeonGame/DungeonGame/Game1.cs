@@ -175,6 +175,8 @@ namespace DungeonGame
             }
             else if (gameState == GameState.Play)
             {
+                if (ks.IsKeyDown(Keys.Escape))
+                    Environment.Exit(1);
                 currentRoom.Update(gameTime, player);
             }
             else if (gameState == GameState.GameOver)
@@ -218,7 +220,6 @@ namespace DungeonGame
             _frameCounter.Update(deltaTime);
             if (gameState == GameState.Play)
             {
-
                 currentRoom.Draw(spriteBatch, player, gameTime);
                 spriteBatch.Draw(blackBarTex, new Vector2(50, -100), Color.White);
                 spriteBatch.DrawString(font1, "Keys: " + player.numberOfKeys, new Vector2(600, -100), Color.White);
@@ -369,9 +370,9 @@ namespace DungeonGame
             if (position.Length() < 3)
             {
                 if (rnd.Next(2) == 1)
-                    spawn.Add(new Tuple<string, int>("bat", (int)(2 * position.Length())));
+                    spawn.Add(new Tuple<string, int>("bat", (int)(2 * position.Length() + rnd.Next(2))));
                 else
-                    spawn.Add(new Tuple<string, int>("slime", (int)(2 * position.Length())));
+                    spawn.Add(new Tuple<string, int>("slime", (int)(2 * position.Length() + rnd.Next(2))));
             }
             else if (position.Length() >= 3 && position.Length() < 4)
             {
@@ -402,7 +403,7 @@ namespace DungeonGame
         }
         public void ClearVariables()
         {
-            player.maxHealth = 10;
+            player.maxHealth = 5;
             player.hp = player.maxHealth;
             player.Position = new Vector2(300, 300);
             player.Velocity = new Vector2();
